@@ -1,15 +1,16 @@
 ﻿  pch.cpp
   Chaos.cpp
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(28,39): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(35,41): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(48,38): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(55,40): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(70,38): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(78,40): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(185,26): warning C4244: '=': conversion from 'int' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(191,26): warning C4244: '=': conversion from 'int' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(196,26): warning C4244: '=': conversion from 'int' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(297,49): warning C4267: '=': conversion from 'size_t' to 'char', possible loss of data
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(40,39): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(47,41): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(60,38): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(67,40): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(82,38): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(90,40): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(166,14): warning C4129: 'm': unrecognized character escape sequence
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(200,26): warning C4244: '=': conversion from 'int' to 'Float', possible loss of data
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(206,26): warning C4244: '=': conversion from 'int' to 'Float', possible loss of data
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(211,26): warning C4244: '=': conversion from 'int' to 'Float', possible loss of data
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(320,49): warning C4267: '=': conversion from 'size_t' to 'char', possible loss of data
   dllmain.cpp
   Generating Code...
      Creating library C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.lib and object C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.exp

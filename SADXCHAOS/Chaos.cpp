@@ -18,7 +18,7 @@
 //added invincibility
 char oldRand = -1;
 int Chaos_Timer = 0;
-
+int Debug_Timer = 0;
 extern "C"
 {
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
@@ -160,26 +160,28 @@ extern "C"
 		SpawnDroppedRings(EntityData1Ptrs[0]->Position.x, EntityData1Ptrs[0]->Position.y, EntityData1Ptrs[0]->Position.z, rand() % 254); //spawns random ammount of rings 0-255 at the player
 		PrintDebug("Random Dropped Rings\n");
 	}
-	void RandomClipLevel()
+	void RandomClipLevel()//currently disabled, may be removed.
 	{
 		ClipLevel = rand() % 3;
-		PrintDebug("Clip Level Set To " + ClipLevel);
+		PrintDebug("Clip Level Set \m");
 	}
-	void RandomPause()
+	void RandomPause() //randomly pauses the game LOL get good
 	{
-		DisplayPauseMenu();
+		GameState = 16;
 		PrintDebug("Random Pause\n");
 	}
-	void RandomChar()
+	void RandomChar()//works but disabled
 	{
 		SetCharacter(rand() % 7);
 		PrintDebug("Random Char\n");
 	}
+
+
 	//DisablePause
 	//Fast Pause Unpase
 	//Set Debug Mode?
 	//
-	void RandomCamera()
+	void RandomCamera()//not sure if works 
 	{
 		FreeCam = rand() % 1;
 		PrintDebug("Random Camera\n");
@@ -188,6 +190,7 @@ extern "C"
 	void RandomDebug() //debug mode need a way to turn this off after maybe  10? seconds
 	{
 		DebugMode = 1;
+		Debug_Timer = 50;
 		PrintDebug("Debug Mode\n");
 		
 	}
@@ -268,7 +271,7 @@ extern "C"
 		ChaosNull func3;
 	};
 
-	ChaosS ChaosArray[20]{
+	ChaosS ChaosArray[18]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpeedPad, nullptr, nullptr, },
@@ -282,21 +285,29 @@ extern "C"
 	{ nullptr, nullptr, ChaosPlayVoice_rng},
 	{ nullptr, nullptr, RandomHurt },
 	{ nullptr, nullptr, RandomTimeOfDay },
-	{ nullptr, nullptr, RandomClipLevel },
 	{ nullptr, nullptr, RandomPause },
-	{ nullptr, nullptr, RandomChar },
 	{ nullptr, nullptr, RandomCamera },
 	{ nullptr, nullptr, RandomBarrier },
 	{ nullptr, nullptr, RandomMagneticBarrier },
 	{ nullptr, nullptr, RandomInvincibility },
-
+	{ nullptr, nullptr, RandomDebug },
 	};
 
 	__declspec(dllexport) void __cdecl OnFrame()
 	{
+		
 		// Executed every running frame of SADX
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
+
+		if (Debug_Timer <= 50 && Debug_Timer != 0)
+			Debug_Timer--;
+
+		if (DebugMode == 1 && Debug_Timer <= 10)
+		{
+			DebugMode = 0;
+			Debug_Timer = 0;
+		}
 
 		if (Chaos_Timer < 50)
 			Chaos_Timer++;
