@@ -16,6 +16,13 @@
 //added random barrier
 //added random mag barrier
 //added invincibility
+//added random debug
+//random powerup was crashing due to bomb power up? havent fixed
+//sometimes the other give powerup codes i have kill the player depending on the state? 
+//
+
+
+
 char oldRand = -1;
 int Chaos_Timer = 0;
 int Debug_Timer = 0;
@@ -123,20 +130,18 @@ extern "C"
 		
 	}
 
-	void RandomPowerUP(EntityData1* P1) {
+	void RandomPowerUP(EntityData1* P1) { // this crashes when bomb power up is picked? idk 
 
 		int randomUp = rand() % 9;
 
 		if (!randomUp)
-		{
 			GiveSpeedShoes(0); //fix funny crash
-			PrintDebug("Give SpeedShoes?\n");
-		}
 		else
-			ItemBoxPowerups[randomUp].Function(0);
-		PrintDebug("Random PowerUp\n");
+			ItemBoxPowerups[randomUp].Function(P1);
+
 
 		DoThingWithItemBoxPowerupIndex(randomUp);
+
 	}
 
 	void MGiantScale(EntityData1* p1) {
@@ -190,8 +195,8 @@ extern "C"
 	void RandomDebug() //debug mode need a way to turn this off after maybe  10? seconds
 	{
 		DebugMode = 1;
-		Debug_Timer = 50;
-		PrintDebug("Debug Mode\n");
+		Debug_Timer = 75;
+		PrintDebug("Debug Mode on \n");
 		
 	}
 
@@ -221,7 +226,7 @@ extern "C"
 		GiveMagneticBarrier(0);
 		PrintDebug("Give Magnetic Barrier\n");
 	}
-	void RandomInvincibility()
+	void RandomInvincibility()//currently disabled, might be killing the player? lol
 	{
 		GiveInvincibility(0);
 		PrintDebug("Give Invincibility\n");
@@ -271,7 +276,7 @@ extern "C"
 		ChaosNull func3;
 	};
 
-	ChaosS ChaosArray[18]{
+	ChaosS ChaosArray[17]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpeedPad, nullptr, nullptr, },
@@ -289,7 +294,7 @@ extern "C"
 	{ nullptr, nullptr, RandomCamera },
 	{ nullptr, nullptr, RandomBarrier },
 	{ nullptr, nullptr, RandomMagneticBarrier },
-	{ nullptr, nullptr, RandomInvincibility },
+	//{ nullptr, nullptr, RandomInvincibility },
 	{ nullptr, nullptr, RandomDebug },
 	};
 
@@ -300,13 +305,15 @@ extern "C"
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
 
-		if (Debug_Timer <= 50 && Debug_Timer != 0)
+		if (Debug_Timer <= 75 && Debug_Timer != 0)
 			Debug_Timer--;
 
-		if (DebugMode == 1 && Debug_Timer <= 10)
+		if (DebugMode == 1 && Debug_Timer <= 5)
 		{
 			DebugMode = 0;
 			Debug_Timer = 0;
+			EntityData1Ptrs[0]->Action = 1;
+			PrintDebug("Debug turned Off Action Set\n");
 		}
 
 		if (Chaos_Timer < 50)
