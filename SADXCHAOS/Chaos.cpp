@@ -19,13 +19,18 @@
 //added random debug
 //random powerup was crashing due to bomb power up? havent fixed
 //sometimes the other give powerup codes i have kill the player depending on the state? 
+//fixed random power up crash, by taking soras random power up code form sadxvschat
+//updated random pause to make you unpause a few times, (currently 10 frames) idk how i would make it pause, unpause, automaticly cuz setting gamestate in ONFrame just makes it happen so fast you dont even see it, 
+//removed set scale
+//removed my own random powerups, (still in code, just unused)
+//made debug last a set amount of frames (75 currently) and force the player out of debug movement.
 //
-
 
 
 char oldRand = -1;
 int Chaos_Timer = 0;
 int Debug_Timer = 0;
+int Pause_Timer = 0;
 extern "C"
 {
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
@@ -34,12 +39,8 @@ extern "C"
 		// This is where we override functions, replace static data, etc.
 	}
 
-	__declspec(dllexport) void __cdecl OnInitEnd()
+	void RandomSpring(EntityData1* p1) 
 	{
-		// Executed after every mod has been initialized, mainly used to check if a specific mod is also enabled.
-	}
-
-	void RandomSpring(EntityData1* p1) {
 		int number = rand() % 2;
 
 		ObjectMaster* spring = LoadObject((LoadObj)2, 2, SpringB_Main);
@@ -60,7 +61,8 @@ extern "C"
 		return;
 	}
 
-	void RandomSpeedPad(EntityData1* p1) {
+	void RandomSpeedPad(EntityData1* p1) 
+	{
 		int number = rand() % 2;
 
 		ObjectMaster* speed = LoadObject((LoadObj)3, 3, DashPanel_Main);
@@ -80,7 +82,8 @@ extern "C"
 		return;
 	}
 
-	void RandomSpikeBall(EntityData1* p1) {
+	void RandomSpikeBall(EntityData1* p1) 
+	{
 		int number = rand() % 2;
 
 
@@ -91,7 +94,8 @@ extern "C"
 		spike->Data1->Position.y += 2;
 		spike->Data1->Position.x += 80;
 
-		if (number) {
+		if (number) 
+		{
 			ObjectMaster* spike2 = LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
 			spike2->Data1->Rotation.y = rand() % 80 + 1000;
 			spike2->Data1->Scale.x = rand() % 5 + 10 * 2.5;
@@ -102,13 +106,15 @@ extern "C"
 		PrintDebug("Random Spike Balls\n");
 		return;
 	}
-	void RandomKillMomentum(CharObj2* p1) {
+	void RandomKillMomentum(CharObj2* p1) 
+	{
 		p1->Speed = { 0, 0, 0 };
 		PrintDebug("Kill Momentum\n");
 		return;
 	}
 
-	void RandomVSpeed(CharObj2* p1) {
+	void RandomVSpeed(CharObj2* p1) 
+	{
 		p1->Speed.y = p1->PhysicsData.VSpeedCap;
 		PrintDebug("Random VSpeed\n");
 		return;
@@ -117,34 +123,32 @@ extern "C"
 
 
 
-	void RandomHSpeed(CharObj2* p1) {
+	void RandomHSpeed(CharObj2* p1) 
+	{
 		p1->Speed.x = p1->PhysicsData.HSpeedCap;
 		PrintDebug("Random HSpeed\n");
 		return;
 	}
 
-	void RandomHurt() {
+	void RandomHurt() 
+	{
 		if (Rings > 0)
 			PrintDebug("Hurt\n");
 			return HurtCharacter(0);
 		
 	}
 
-	void RandomPowerUP(EntityData1* P1) { // this crashes when bomb power up is picked? idk 
-
-		int randomUp = rand() % 9;
-
-		if (!randomUp)
-			GiveSpeedShoes(0); //fix funny crash
-		else
-			ItemBoxPowerups[randomUp].Function(P1);
-
-
-		DoThingWithItemBoxPowerupIndex(randomUp);
-
+	void RandomPowerUP(EntityData1* p1)
+	{
+		int id = 0;
+		if (id < 0 || id > 8) //failsafe
+			id = rand() % 9;
+		DoThingWithItemBoxPowerupIndex(id);
+		PrintDebug("Random PowerUp\n");
 	}
 
-	void MGiantScale(EntityData1* p1) {
+	void MGiantScale(EntityData1* p1) 
+	{
 		for (int i = 0; i < 21; i++) {
 			SONIC_OBJECTS[i]->scl[0] = 4;
 			SONIC_OBJECTS[i]->scl[1] = 4;
@@ -170,9 +174,10 @@ extern "C"
 		ClipLevel = rand() % 3;
 		PrintDebug("Clip Level Set \m");
 	}
-	void RandomPause() //randomly pauses the game LOL get good
+	void RandomPause() //randomly pauses the game LOL get good, time
 	{
-		GameState = 16;
+		//GameState = 16; //pauses game, keeps music running, oh well. 
+		Pause_Timer = 10; //how long in frames? to pause unpause?
 		PrintDebug("Random Pause\n");
 	}
 	void RandomChar()//works but disabled
@@ -183,16 +188,16 @@ extern "C"
 
 
 	//DisablePause
-	//Fast Pause Unpase
-	//Set Debug Mode?
-	//
-	void RandomCamera()//not sure if works 
+	//Disable input? lol
+	//Fast Pause Unpase // kinda have this? it forces you to unpause a few times, lol 
+
+	void RandomCamera()//not sure if works //maybe ill make it always swap it LOL,
 	{
-		FreeCam = rand() % 1;
+		SetCameraMode(rand() % 1);
 		PrintDebug("Random Camera\n");
 	}
 
-	void RandomDebug() //debug mode need a way to turn this off after maybe  10? seconds
+	void RandomDebug() //debug mode currently lasts for 75ish? frames
 	{
 		DebugMode = 1;
 		Debug_Timer = 75;
@@ -200,28 +205,28 @@ extern "C"
 		
 	}
 
-	void  RandomXGravity()
+	void  RandomXGravity()//currently disabled,
 	{
 		Gravity.x = rand() % 5 + (-5);
 		PrintDebug("Random X Gravity\n");
 
 	}
-	void  RandomYGravity()
+	void  RandomYGravity()//currently disabled,
 	{
 		Gravity.y = rand() % 5 + (-5);
 		PrintDebug("Random Y Gravity\n");
 	}
-	void  RandomZGravity()
+	void  RandomZGravity()//currently disabled,
 	{
 		Gravity.z = rand() % 5 + (-5);
 		PrintDebug("Random Z Gravity\n");
 	}
-	void RandomBarrier()
+	void RandomBarrier()//currently disabled, might be killing the player? lol
 	{
 		GiveBarrier(0);
 		PrintDebug("Give Barrier\n");
 	}
-	void RandomMagneticBarrier()
+	void RandomMagneticBarrier()//currently disabled, might be killing the player? lol
 	{
 		GiveMagneticBarrier(0);
 		PrintDebug("Give Magnetic Barrier\n");
@@ -232,7 +237,10 @@ extern "C"
 		PrintDebug("Give Invincibility\n");
 	}
 
-	void MSmallScale(EntityData1* p1) {
+	
+
+	void MSmallScale(EntityData1* p1)//disabled this?
+	{
 		for (int i = 0; i < 21; i++) {
 			SONIC_OBJECTS[i]->scl[0] = 0.5;
 			SONIC_OBJECTS[i]->scl[1] = 0.5;
@@ -242,7 +250,8 @@ extern "C"
 		return;
 	}
 
-	void RandomSwapMusic() {
+	void RandomSwapMusic() 
+	{
 
 		do {
 			CurrentSong = rand() % 125;
@@ -253,7 +262,8 @@ extern "C"
 		return;
 	}
 
-	void ChaosPlayVoice_rng() {
+	void ChaosPlayVoice_rng() 
+	{
 		int a1 = rand() % 2043;
 		PlayVoice(a1);
 		PrintDebug("Random Voice\n");
@@ -276,13 +286,13 @@ extern "C"
 		ChaosNull func3;
 	};
 
-	ChaosS ChaosArray[17]{
+	ChaosS ChaosArray[15]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpeedPad, nullptr, nullptr, },
 	{ RandomSpikeBall, nullptr, nullptr, },
-	{ RandomPowerUP, nullptr, nullptr, },
 	{ RandomDroppedRings, nullptr, nullptr },
+	{ RandomPowerUP, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomHSpeed, nullptr, },
@@ -292,10 +302,8 @@ extern "C"
 	{ nullptr, nullptr, RandomTimeOfDay },
 	{ nullptr, nullptr, RandomPause },
 	{ nullptr, nullptr, RandomCamera },
-	{ nullptr, nullptr, RandomBarrier },
-	{ nullptr, nullptr, RandomMagneticBarrier },
-	//{ nullptr, nullptr, RandomInvincibility },
 	{ nullptr, nullptr, RandomDebug },
+
 	};
 
 	__declspec(dllexport) void __cdecl OnFrame()
@@ -304,6 +312,14 @@ extern "C"
 		// Executed every running frame of SADX
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
+		if (Pause_Timer <= 10 && Pause_Timer != 0)
+		{
+			GameState = 16;
+			Pause_Timer--;
+		}
+
+
+
 
 		if (Debug_Timer <= 75 && Debug_Timer != 0)
 			Debug_Timer--;
@@ -342,36 +358,12 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnInput()
 	{
 		// Executed before the game processes input
+
 	}
 
 	__declspec(dllexport) void __cdecl OnControl()
 	{
 		// Executed when the game processes input
-	}
-
-	__declspec(dllexport) void __cdecl OnRenderDeviceReset()
-	{
-		// Executed when the window size changes
-	}
-
-	__declspec(dllexport) void __cdecl OnRenderDeviceLost()
-	{
-		// Executed when the game fails to render the scene
-	}
-
-	__declspec(dllexport) void __cdecl OnRenderSceneStart()
-	{
-		// Executed before the game starts rendering the scene
-	}
-
-	__declspec(dllexport) void __cdecl OnRenderSceneEnd()
-	{
-		// Executed when the game finishes rendering the scene
-	}
-
-	__declspec(dllexport) void __cdecl OnExit()
-	{
-		// Executed when the game is about to terminate
 	}
 
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
