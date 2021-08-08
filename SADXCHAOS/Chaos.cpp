@@ -29,6 +29,14 @@
 //added random control disable 
 //added Random Y Gravity
 //added Random NoClip
+//fixed Random NoClip Crash?
+//made debug mode work again
+//made debug mod last longer might make shorter
+//fixed Camera Swap Code
+//made Control Disable look better
+//made Control Disable last longer? might shorten
+
+
 
 
 char oldRand = -1;
@@ -41,6 +49,7 @@ int DisableControl_Timer = 0;
 int Gravity_Timer = 0;
 int NoClip = 0;
 int NoClip_Timer = 0;
+int ClipTest = 0;
 
 extern "C"
 {
@@ -71,8 +80,6 @@ extern "C"
 		PrintDebug("Random Spring\n");
 		return;
 	}
-
-
 
 	void RandomSpeedPad(EntityData1* p1) 
 	{
@@ -120,6 +127,7 @@ extern "C"
 	}
 	void RandomKillMomentum(CharObj2* p1) 
 	{
+
 		p1->Speed = { 0, 0, 0 };
 		PrintDebug("Kill Momentum\n");
 		return;
@@ -133,13 +141,11 @@ extern "C"
 		
 	}
 
-
-
 	void RandomHSpeed(CharObj2* p1) 
 	{
-		p1->Speed.x = p1->PhysicsData.HSpeedCap;
-		PrintDebug("Random HSpeed\n");
-		return;
+			p1->Speed.x = p1->PhysicsData.HSpeedCap;
+			PrintDebug("Random HSpeed\n");
+			return;
 	}
 
 	void RandomHurt() 
@@ -172,8 +178,17 @@ extern "C"
 
 	void RandomTimeOfDay() //sets time of day to a random time,
 	{
-		SetTimeOfDay(rand() % 3);
-		PrintDebug("Random Time Of Day\n");
+		if (GameMode == GameModes_Adventure_Field)//made it so it only changes if you are in adventure field
+		{
+			SetTimeOfDay(rand() % 3);
+			PrintDebug("Random Time Of Day\n");
+			
+		}
+		else
+		{
+			Chaos_Timer = 1800;//forces another Chaos mod if not in Adventure 
+		}
+
 	}
 
 	void RandomDroppedRings(EntityData1* p1)
@@ -181,10 +196,11 @@ extern "C"
 		SpawnDroppedRings(EntityData1Ptrs[0]->Position.x, EntityData1Ptrs[0]->Position.y, EntityData1Ptrs[0]->Position.z, rand() % 254); //spawns random ammount of rings 0-255 at the player
 		PrintDebug("Random Dropped Rings\n");
 	}
-	void RandomClipLevel()//currently disabled, may be removed.
+	void RandomClipLevel()//currently disabled, may be removed. updated to only change 
 	{
-		ClipLevel = rand() % 3;
-		PrintDebug("Clip Level Set \n");
+			ClipLevel = rand() % 3;
+			PrintDebug("Clip Level Set \n");
+
 	}
 	void RandomPause() //randomly pauses the game LOL get good, time
 	{
@@ -205,21 +221,29 @@ extern "C"
 
 	void SwapCamera()//Swaps Camera lmfao
 	{
-		if (camera_flags == 0x8000000C)
+		if (GetCameraMode_() == 0)
 		{
-			camera_flags = 0x8000000D;
+			SetCameraMode_(1);
 		}
-		else if (camera_flags == 0x8000000D || camera_flags == 0x00000007)
+		else if (GetCameraMode_() == 1 ) //new code
 		{
-			camera_flags = 0x8000000C;
+			SetCameraMode_(0);
 		}
+		//if (camera_flags == 0x8000000C)
+		//{
+		//	camera_flags = 0x8000000D;
+		//}
+		//else if (camera_flags == 0x8000000D || camera_flags == 0x00000007)
+		//{
+		//	camera_flags = 0x8000000C;
+		//}
 		PrintDebug("Camera Swapped\n");
 	}
 
 	void RandomDebug() //debug mode currently lasts for 75ish? frames
 	{
 		DebugMode = 1;
-		Debug_Timer = 55;
+		Debug_Timer = 333;
 		PrintDebug("Debug Mode on \n");
 		
 	}
@@ -232,13 +256,13 @@ extern "C"
 	}
 	void  RandomYGravity()//currently disabled,
 	{
-		Gravity_Timer = 150;
-		Gravity.y = rand() % 5 + (-5);
+		Gravity_Timer = 222;
+		Gravity.y = rand() % 3 + (-6);
 		PrintDebug("Random Y Gravity\n");
 	}
 	void  RandomZGravity()//currently disabled,
 	{
-		Gravity.z = rand() % 5 + (-5);
+		Gravity.z = rand() % 3 + (-4);
 		PrintDebug("Random Z Gravity\n");
 	}
 	void RandomBarrier()//currently disabled, might be killing the player? lol
@@ -259,7 +283,7 @@ extern "C"
 
 	void RandomControlDisable()
 	{
-		DisableControl_Timer = 25;
+		DisableControl_Timer = 90;
 		PrintDebug("Disabled Controller\n");
 	}
 
@@ -297,16 +321,16 @@ extern "C"
 	void RandomDPadDownCheck()
 	{
 		//enable dpaddown check timer
-		DPadDown_Timer = 75; //75 frames?
+		DPadDown_Timer = 90; //90 frames?
 		DpadDown = 0;
-		PrintDebug("Timer set to 75 \n");
+		PrintDebug("Timer set to 90 \n");
 	}
 
 
 	void RandomNoClip()
 	{
 		NoClip = 1;
-		NoClip_Timer = 75;
+		NoClip_Timer = 400;
 		PrintDebug("NoClip Enabled\n");
 	}
 	typedef void(__cdecl* ChaosEnt)(EntityData1*);
@@ -317,7 +341,7 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-	ChaosS ChaosArray[15]{
+	ChaosS ChaosArray[16]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpeedPad, nullptr, nullptr, },
@@ -333,6 +357,7 @@ extern "C"
 	{ nullptr, nullptr, RandomTimeOfDay },
 	{ nullptr, nullptr, RandomPause },
 	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, RandomDebug },
 	{ nullptr, nullptr, RandomYGravity },
 	{ nullptr, nullptr, RandomDPadDownCheck },
 	{ nullptr, nullptr, RandomControlDisable },
@@ -345,33 +370,35 @@ extern "C"
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
 		
-		if (NoClip_Timer <= 75 && NoClip_Timer != 0)
+		if (NoClip_Timer <= 400 && NoClip_Timer != 0)
 		{
 			NoClip_Timer--;
-			if (NoClip == 1)
+			if (NoClip == 1 && ClipTest == 0)
 			{
-				WriteData<1>((char*)0x00444C1D, 0x90909090);
-				WriteData<1>((char*)0x00444C21, 0x10C48390);
-				WriteData<1>((char*)0x0044A66B, 0x90909090);
-				WriteData<1>((char*)0x0044A66F, 0x14C48390);
-				WriteData<1>((char*)0x007887D9, 0x90909090);
-				WriteData<1>((char*)0x007887DD, 0x74C08590);
+				WriteData((int*)0x00444C1D, (int)0x90909090);
+				WriteData((int*)0x00444C21, (int)0x10C48390);
+				WriteData((int*)0x0044A66B, (int)0x90909090);
+				WriteData((int*)0x0044A66F, (int)0x14C48390);
+				WriteData((int*)0x007887D9, (int)0x90909090);
+				WriteData((int*)0x007887DD, (int)0x74C08590);
+				ClipTest = 1;
 			}
 			if (NoClip_Timer == 1 && NoClip_Timer != 0)
 			{
 				PrintDebug("NoClip Disabled\n");
-				WriteData<1>((char*)0x00444C1D, 0xFF37EEE8);
-				WriteData<1>((char*)0x00444C21, 0x10C483FF);
-				WriteData<1>((char*)0x0044A66B, 0xFFA430E8);
-				WriteData<1>((char*)0x0044A66F, 0x14C483FF);
-				WriteData<1>((char*)0x007887D9, 0x00D042E8);
-				WriteData<1>((char*)0x007887DD, 0x74C08500);
+				WriteData((int*)0x00444C1D, (int)0xFF37EEE8);
+				WriteData((int*)0x00444C21, (int)0x10C483FF);
+				WriteData((int*)0x0044A66B, (int)0xFFA430E8);
+				WriteData((int*)0x0044A66F, (int)0x14C483FF);
+				WriteData((int*)0x007887D9, (int)0x00D042E8);
+				WriteData((int*)0x007887DD, (int)0x74C08500);
 				NoClip_Timer = 0;
 				NoClip = 0;
+				ClipTest = 0;
 			}
 		}
 
-		if (Gravity_Timer <= 150 && Gravity_Timer != 0)
+		if (Gravity_Timer <= 222 && Gravity_Timer != 0)
 		{
 			Gravity_Timer--;
 		}
@@ -381,25 +408,27 @@ extern "C"
 			Gravity_Timer = 0;
 		}
 
-		if (DisableControl_Timer <= 25 && DisableControl_Timer != 0)
+		if (DisableControl_Timer <= 90 && DisableControl_Timer != 0)
 		{
-			
+			ControlEnabled = 0;
+			//WriteData((int*)0x00909FB0, 0x00);
 			DisableControl_Timer--;
 			
 		}
 		if (DisableControl_Timer == 1 && DisableControl_Timer != 0)
 		{
 			PrintDebug("Enabled Control\n");
-			WriteData((int*)0x00909FB0, 0x01);
+			ControlEnabled = 1;
+			//WriteData((int*)0x00909FB0, 0x01);
 			DisableControl_Timer = 0;
 		}
 
-		if (DPadDown_Timer <= 75 && DPadDown_Timer != 0)
+		if (DPadDown_Timer <= 90 && DPadDown_Timer != 0)
 		{
 
 			SetDebugFontColor(0xFFFF0000);
-			//SetDebugFontSize(1);
-			DisplayDebugString(NJM_LOCATION(30, 60), "- PRESS DPAD DOWN OR DIE!!! -");
+			SetDebugFontSize(18);
+			DisplayDebugString(NJM_LOCATION(15, 40), "- PRESS DPAD DOWN OR DIE!!! -");
 			if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
 			{
 				DpadDown = 1; // sets dpadcheck to 1
@@ -422,7 +451,7 @@ extern "C"
 
 
 
-		if (Debug_Timer <= 55 && Debug_Timer != 0)
+		if (Debug_Timer <= 333 && Debug_Timer != 0)
 			Debug_Timer--;
 
 		if (DebugMode == 1 && Debug_Timer <= 5)
@@ -433,10 +462,10 @@ extern "C"
 			PrintDebug("Debug turned Off Action Set\n");
 		}
 
-		if (Chaos_Timer < 50)
+		if (Chaos_Timer < 180)
 			Chaos_Timer++;
 
-		if (Chaos_Timer >= 50)
+		if (Chaos_Timer >= 180)
 		{
 			char curRand = 0;
 
@@ -459,16 +488,16 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnInput()
 	{
 		// Executed before the game processes input
-		//if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
-		//{
-		//	SetDebugFontColor(0xFFFF0000);
-		//	DisplayDebugString(NJM_LOCATION(30, 60), "- PRESS DPAD DOWN OR DIE!!! -");
-		//}
+
 	}
 
 	__declspec(dllexport) void __cdecl OnControl()
 	{
 		// Executed when the game processes input
+		if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
+		{
+
+		}
 	}
 
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
