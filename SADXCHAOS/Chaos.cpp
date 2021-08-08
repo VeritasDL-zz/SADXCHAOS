@@ -24,13 +24,19 @@
 //removed set scale
 //removed my own random powerups, (still in code, just unused)
 //made debug last a set amount of frames (75 currently) and force the player out of debug movement.
-//
+//added press Dpad Down or die
+//changed random camera to Swap Camera lol
+//added random control disable 
 
 
 char oldRand = -1;
 int Chaos_Timer = 0;
 int Debug_Timer = 0;
 int Pause_Timer = 0;
+int DPadDown_Timer = 0;
+int DpadDown = 0;
+int DisableControl_Timer = 0;
+
 extern "C"
 {
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
@@ -81,7 +87,6 @@ extern "C"
 		PrintDebug("Random SpeedPad\n");
 		return;
 	}
-
 	void RandomSpikeBall(EntityData1* p1) 
 	{
 		int number = rand() % 2;
@@ -172,12 +177,12 @@ extern "C"
 	void RandomClipLevel()//currently disabled, may be removed.
 	{
 		ClipLevel = rand() % 3;
-		PrintDebug("Clip Level Set \m");
+		PrintDebug("Clip Level Set \n");
 	}
 	void RandomPause() //randomly pauses the game LOL get good, time
 	{
 		//GameState = 16; //pauses game, keeps music running, oh well. 
-		Pause_Timer = 10; //how long in frames? to pause unpause?
+		Pause_Timer = 5; //how long in frames? to pause unpause?
 		PrintDebug("Random Pause\n");
 	}
 	void RandomChar()//works but disabled
@@ -191,16 +196,23 @@ extern "C"
 	//Disable input? lol
 	//Fast Pause Unpase // kinda have this? it forces you to unpause a few times, lol 
 
-	void RandomCamera()//not sure if works //maybe ill make it always swap it LOL,
+	void SwapCamera()//Swaps Camera lmfao
 	{
-		SetCameraMode(rand() % 1);
-		PrintDebug("Random Camera\n");
+		if (camera_flags == 0x8000000C)
+		{
+			camera_flags = 0x8000000D;
+		}
+		else if (camera_flags == 0x8000000D || camera_flags == 0x00000007)
+		{
+			camera_flags = 0x8000000C;
+		}
+		PrintDebug("Camera Swapped\n");
 	}
 
 	void RandomDebug() //debug mode currently lasts for 75ish? frames
 	{
 		DebugMode = 1;
-		Debug_Timer = 75;
+		Debug_Timer = 55;
 		PrintDebug("Debug Mode on \n");
 		
 	}
@@ -237,7 +249,11 @@ extern "C"
 		PrintDebug("Give Invincibility\n");
 	}
 
-	
+	void RandomControlDisable()
+	{
+		DisableControl_Timer = 25;
+		PrintDebug("Disabled Controller\n");
+	}
 
 	void MSmallScale(EntityData1* p1)//disabled this?
 	{
@@ -270,7 +286,13 @@ extern "C"
 		return;
 	}
 
-
+	void RandomDPadDownCheck()
+	{
+		//enable dpaddown check timer
+		DPadDown_Timer = 75; //75 frames?
+		DpadDown = 0;
+		PrintDebug("Timer set to 75 \n");
+	}
 
 
 
@@ -286,23 +308,25 @@ extern "C"
 		ChaosNull func3;
 	};
 
-	ChaosS ChaosArray[15]{
+	ChaosS ChaosArray[13]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpeedPad, nullptr, nullptr, },
 	{ RandomSpikeBall, nullptr, nullptr, },
-	{ RandomDroppedRings, nullptr, nullptr },
-	{ RandomPowerUP, nullptr, nullptr },
+	//{ RandomDroppedRings, nullptr, nullptr },
+	//{ RandomPowerUP, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomHSpeed, nullptr, },
 	{ nullptr, nullptr, RandomSwapMusic },
 	{ nullptr, nullptr, ChaosPlayVoice_rng},
-	{ nullptr, nullptr, RandomHurt },
+	//{ nullptr, nullptr, RandomHurt },
 	{ nullptr, nullptr, RandomTimeOfDay },
 	{ nullptr, nullptr, RandomPause },
-	{ nullptr, nullptr, RandomCamera },
-	{ nullptr, nullptr, RandomDebug },
+	{ nullptr, nullptr, SwapCamera },
+	//{ nullptr, nullptr, RandomDebug },
+	{ nullptr, nullptr, RandomDPadDownCheck },
+	{ nullptr, nullptr, RandomControlDisable },
 
 	};
 
@@ -312,7 +336,40 @@ extern "C"
 		// Executed every running frame of SADX
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
-		if (Pause_Timer <= 10 && Pause_Timer != 0)
+		
+		if (DisableControl_Timer <= 25 && DisableControl_Timer != 0)
+		{
+			
+			DisableControl_Timer--;
+			WriteData((int*)0x00909FB0, 0x00);
+
+		}
+		if (DisableControl_Timer == 1 && DisableControl_Timer != 0)
+		{
+			PrintDebug("Enabled Control\n");
+			WriteData((int*)0x00909FB0, 0x01);
+			DisableControl_Timer = 0;
+		}
+
+		if (DPadDown_Timer <= 75 && DPadDown_Timer != 0)
+		{
+
+			SetDebugFontColor(0xFFFF0000);
+			DisplayDebugString(NJM_LOCATION(30, 60), "- PRESS DPAD DOWN OR DIE!!! -");
+			if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
+			{
+				DpadDown = 1; // sets dpadcheck to 1
+			}
+			DPadDown_Timer--;
+		}
+		if (DPadDown_Timer == 1 && DpadDown != 1)//if timer is less then or 1 and DPadDown is not 1 
+		{
+			PrintDebug("Failed Button Check \n");
+			KillPlayer(0);
+			DPadDown_Timer = 0;
+		}
+		
+		if (Pause_Timer <= 5 && Pause_Timer != 0)
 		{
 			GameState = 16;
 			Pause_Timer--;
@@ -321,7 +378,7 @@ extern "C"
 
 
 
-		if (Debug_Timer <= 75 && Debug_Timer != 0)
+		if (Debug_Timer <= 55 && Debug_Timer != 0)
 			Debug_Timer--;
 
 		if (DebugMode == 1 && Debug_Timer <= 5)
@@ -358,7 +415,11 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnInput()
 	{
 		// Executed before the game processes input
-
+		//if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
+		//{
+		//	SetDebugFontColor(0xFFFF0000);
+		//	DisplayDebugString(NJM_LOCATION(30, 60), "- PRESS DPAD DOWN OR DIE!!! -");
+		//}
 	}
 
 	__declspec(dllexport) void __cdecl OnControl()

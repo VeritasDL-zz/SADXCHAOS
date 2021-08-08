@@ -1,16 +1,5 @@
 ﻿  pch.cpp
   Chaos.cpp
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(48,39): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(55,41): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(69,38): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(76,40): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(92,38): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(101,40): warning C4244: '=': conversion from 'double' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(175,14): warning C4129: 'm': unrecognized character escape sequence
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(210,26): warning C4244: '=': conversion from 'int' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(216,26): warning C4244: '=': conversion from 'int' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(221,26): warning C4244: '=': conversion from 'int' to 'Float', possible loss of data
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(343,49): warning C4267: '=': conversion from 'size_t' to 'char', possible loss of data
   dllmain.cpp
   Generating Code...
      Creating library C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.lib and object C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.exp

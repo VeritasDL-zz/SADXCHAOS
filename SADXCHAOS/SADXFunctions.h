@@ -35,6 +35,7 @@ VoidFunc(Direct3D_ResetZFunc, 0x401420);
 FunctionPointer(int, DrawModel_ResetRenderFlags_, (NJS_MODEL_SADX *model), 0x401430);
 FunctionPointer(void, SetCurrentLightType_Copy, (char a1), 0x401440);
 VoidFunc(InitializeSomeStuff, 0x401830);
+FunctionPointer(void, KillPlayer, (uint8_t ID), 0x440CD0);
 StdcallFunctionPointer(LRESULT, WndProc_B, (HWND handle, UINT Msg, WPARAM wParam, LPARAM a4), 0x401900);
 ThiscallFunctionPointer(void, LoadDLLFiles, (HMODULE *_this), 0x401AC0);
 VoidFunc(CheckSettings, 0x4025B0);
