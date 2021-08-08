@@ -1,5 +1,29 @@
 ﻿  pch.cpp
   Chaos.cpp
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(353,47): warning C4305: 'argument': truncation from 'unsigned int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(353,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(354,47): warning C4305: 'argument': truncation from 'int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(354,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(355,47): warning C4305: 'argument': truncation from 'unsigned int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(355,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(356,47): warning C4305: 'argument': truncation from 'int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(356,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(357,47): warning C4305: 'argument': truncation from 'unsigned int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(357,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(358,47): warning C4305: 'argument': truncation from 'int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(358,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(363,47): warning C4305: 'argument': truncation from 'unsigned int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(363,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(364,47): warning C4305: 'argument': truncation from 'int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(364,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(365,47): warning C4305: 'argument': truncation from 'unsigned int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(365,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(366,47): warning C4305: 'argument': truncation from 'int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(366,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(367,47): warning C4305: 'argument': truncation from 'int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(367,37): warning C4309: 'argument': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(368,47): warning C4305: 'argument': truncation from 'int' to 'uint8_t'
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(368,37): warning C4309: 'argument': truncation of constant value
   dllmain.cpp
   Generating Code...
      Creating library C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.lib and object C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.exp

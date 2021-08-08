@@ -27,6 +27,8 @@
 //added press Dpad Down or die
 //changed random camera to Swap Camera lol
 //added random control disable 
+//added Random Y Gravity
+//added Random NoClip
 
 
 char oldRand = -1;
@@ -36,6 +38,9 @@ int Pause_Timer = 0;
 int DPadDown_Timer = 0;
 int DpadDown = 0;
 int DisableControl_Timer = 0;
+int Gravity_Timer = 0;
+int NoClip = 0;
+int NoClip_Timer = 0;
 
 extern "C"
 {
@@ -66,6 +71,8 @@ extern "C"
 		PrintDebug("Random Spring\n");
 		return;
 	}
+
+
 
 	void RandomSpeedPad(EntityData1* p1) 
 	{
@@ -225,6 +232,7 @@ extern "C"
 	}
 	void  RandomYGravity()//currently disabled,
 	{
+		Gravity_Timer = 150;
 		Gravity.y = rand() % 5 + (-5);
 		PrintDebug("Random Y Gravity\n");
 	}
@@ -295,20 +303,21 @@ extern "C"
 	}
 
 
-
-
-
+	void RandomNoClip()
+	{
+		NoClip = 1;
+		NoClip_Timer = 75;
+		PrintDebug("NoClip Enabled\n");
+	}
 	typedef void(__cdecl* ChaosEnt)(EntityData1*);
 	typedef void(__cdecl* ChaosCharObj)(CharObj2*);
 	typedef void(__cdecl* ChaosNull)();
-
 	struct ChaosS {
 		ChaosEnt func;
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-
-	ChaosS ChaosArray[13]{
+	ChaosS ChaosArray[15]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpeedPad, nullptr, nullptr, },
@@ -324,25 +333,59 @@ extern "C"
 	{ nullptr, nullptr, RandomTimeOfDay },
 	{ nullptr, nullptr, RandomPause },
 	{ nullptr, nullptr, SwapCamera },
-	//{ nullptr, nullptr, RandomDebug },
+	{ nullptr, nullptr, RandomYGravity },
 	{ nullptr, nullptr, RandomDPadDownCheck },
 	{ nullptr, nullptr, RandomControlDisable },
+	{ nullptr, nullptr, RandomNoClip },
 
 	};
-
 	__declspec(dllexport) void __cdecl OnFrame()
 	{
-		
 		// Executed every running frame of SADX
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
 		
+		if (NoClip_Timer <= 75 && NoClip_Timer != 0)
+		{
+			NoClip_Timer--;
+			if (NoClip == 1)
+			{
+				WriteData<1>((char*)0x00444C1D, 0x90909090);
+				WriteData<1>((char*)0x00444C21, 0x10C48390);
+				WriteData<1>((char*)0x0044A66B, 0x90909090);
+				WriteData<1>((char*)0x0044A66F, 0x14C48390);
+				WriteData<1>((char*)0x007887D9, 0x90909090);
+				WriteData<1>((char*)0x007887DD, 0x74C08590);
+			}
+			if (NoClip_Timer == 1 && NoClip_Timer != 0)
+			{
+				PrintDebug("NoClip Disabled\n");
+				WriteData<1>((char*)0x00444C1D, 0xFF37EEE8);
+				WriteData<1>((char*)0x00444C21, 0x10C483FF);
+				WriteData<1>((char*)0x0044A66B, 0xFFA430E8);
+				WriteData<1>((char*)0x0044A66F, 0x14C483FF);
+				WriteData<1>((char*)0x007887D9, 0x00D042E8);
+				WriteData<1>((char*)0x007887DD, 0x74C08500);
+				NoClip_Timer = 0;
+				NoClip = 0;
+			}
+		}
+
+		if (Gravity_Timer <= 150 && Gravity_Timer != 0)
+		{
+			Gravity_Timer--;
+		}
+		if (Gravity_Timer == 1 && Gravity_Timer != 0)
+		{
+			ResetGravity();
+			Gravity_Timer = 0;
+		}
+
 		if (DisableControl_Timer <= 25 && DisableControl_Timer != 0)
 		{
 			
 			DisableControl_Timer--;
-			WriteData((int*)0x00909FB0, 0x00);
-
+			
 		}
 		if (DisableControl_Timer == 1 && DisableControl_Timer != 0)
 		{
@@ -355,6 +398,7 @@ extern "C"
 		{
 
 			SetDebugFontColor(0xFFFF0000);
+			//SetDebugFontSize(1);
 			DisplayDebugString(NJM_LOCATION(30, 60), "- PRESS DPAD DOWN OR DIE!!! -");
 			if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
 			{
