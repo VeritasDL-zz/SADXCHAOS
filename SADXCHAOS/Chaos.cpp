@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <iostream>
+#include <string>
+#include <unordered_map>
 //changelog
 //started Mod 8/5/2021
 //added code base from Soar's scrapped "mania" mode
@@ -339,23 +342,48 @@ extern "C"
 		ChaosNull func3;
 	};
 
-	FunctionPointer(ObjectMaster*, LoadAutoHint, (const char** textes, int voice), 0x7A1BE0);
+	FunctionPointer(ObjectMaster*, LoadAutoHint, (const HintText_Text* texts, int voice), 0x7A1BE0);
 
-
-
-	const char* Texts[]
-	{
-		"The frog you are looking for\nis up ahead.",
-		"TestTestTest",
-		nullptr
+	const HintText_Text Hint1[] = {
+		{ "The frog you are looking for Test OBAMA1\nSecond line", 120 }, // text, time
+		{ "Second page", 120 },
+		{ 0 }
 	};
+	const HintText_Text Hint2[] = {
+	{ "First line\nSecond line", 120 },
+	{ "Second page", 120 },
+	{ 0 }
+	};
+
+	const HintText_Text* const Hints[] = {
+	Hint1,
+	Hint2
+	};
+
+	std::unordered_map<int, std::string> test =
+	{
+	{0,"The frog you are looking for Test 123456 is up ahead Testing How 123456789abcde"},
+	{1,"The frog you are looking for Test 123456\nis up ahead Testing How123456789abcdefg"},
+	{2,"#0000FF"}
+	};
+
+	//const char* Texts[]
+	//{
+	//	//"The frog you are looking for Test 123456 is up ahead Testing How 123456789abcde", //max char for entire text box without new line can be 79 characters 
+	//	"The frog you are looking for Test 123456\nis up ahead Testing How123456789abcdefg", //max char for each line with new line can be up to 81 characters (counting the new line)
+	//	"testing page 2",
+	//	nullptr
+	//};
 
 	void AnyFunction()
 	{
-		//int RandomText = rand() % 3 + 1;
-		LoadAutoHint(Texts, 1596);
-		PrintDebug("Random Hint Test\n");
-		fuckt = 1;
+		int hintrand = rand() % 1;
+		LoadAutoHint(Hints[hintrand], 9999);
+		//LoadAutoHint(random[rand()%3], 9999);
+		//LoadAutoHint(Texts, 1596);
+
+	    PrintDebug("%i Random Hint Test\n", hintrand);
+		fuckt = 0;
 	}
 
 
@@ -466,9 +494,13 @@ extern "C"
 			Pause_Timer--;
 		}
 
-		if (bstimer <= 200 && bstimer != 0)
+		if (bstimer <= 100 && bstimer != 0)
 		{
 			bstimer--;
+		}
+		if (bstimer == 0 && fuckt == 1)
+		{
+			fuckt = 0;
 		}
 
 
@@ -517,15 +549,14 @@ extern "C"
 		// Executed when the game processes input
 		if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
 		{
-			bstimer = 200;
+			bstimer = 100;
 			
-			if (bstimer == 200 && fuckt ==0)
+			if (bstimer == 100 && fuckt == 0)
 			{
 				AnyFunction();
 				fuckt = 1;
 				
 			}
-			bstimer--;
 		}
 	}
 
