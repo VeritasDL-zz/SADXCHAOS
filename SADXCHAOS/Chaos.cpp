@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 //changelog
 //started Mod 8/5/2021
 //added code base from Soar's scrapped "mania" mode
@@ -35,7 +36,7 @@
 //fixed Camera Swap Code
 //made Control Disable look better
 //made Control Disable last longer? might shorten
-
+//fixed random Gavity values maybe?
 
 
 
@@ -50,6 +51,8 @@ int Gravity_Timer = 0;
 int NoClip = 0;
 int NoClip_Timer = 0;
 int ClipTest = 0;
+int bstimer = 0;
+int fuckt = 0;
 
 extern "C"
 {
@@ -57,6 +60,8 @@ extern "C"
 	{
 		// Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
 		// This is where we override functions, replace static data, etc.
+
+		srand((unsigned)time(nullptr));
 	}
 
 	void RandomSpring(EntityData1* p1) 
@@ -229,14 +234,6 @@ extern "C"
 		{
 			SetCameraMode_(0);
 		}
-		//if (camera_flags == 0x8000000C)
-		//{
-		//	camera_flags = 0x8000000D;
-		//}
-		//else if (camera_flags == 0x8000000D || camera_flags == 0x00000007)
-		//{
-		//	camera_flags = 0x8000000C;
-		//}
 		PrintDebug("Camera Swapped\n");
 	}
 
@@ -250,19 +247,19 @@ extern "C"
 
 	void  RandomXGravity()//currently disabled,
 	{
-		Gravity.x = rand() % 5 + (-5);
+		Gravity.x = rand() % 2 + (1.5);
 		PrintDebug("Random X Gravity\n");
 
 	}
 	void  RandomYGravity()//currently disabled,
 	{
 		Gravity_Timer = 222;
-		Gravity.y = rand() % 3 + (-6);
+		Gravity.y = rand() % 2 + (-1.5);
 		PrintDebug("Random Y Gravity\n");
 	}
 	void  RandomZGravity()//currently disabled,
 	{
-		Gravity.z = rand() % 3 + (-4);
+		Gravity.z = rand() % 2 + (-1.5);
 		PrintDebug("Random Z Gravity\n");
 	}
 	void RandomBarrier()//currently disabled, might be killing the player? lol
@@ -341,6 +338,27 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
+
+	FunctionPointer(ObjectMaster*, LoadAutoHint, (const char** textes, int voice), 0x7A1BE0);
+
+
+
+	const char* Texts[]
+	{
+		"The frog you are looking for\nis up ahead.",
+		"TestTestTest",
+		nullptr
+	};
+
+	void AnyFunction()
+	{
+		//int RandomText = rand() % 3 + 1;
+		LoadAutoHint(Texts, 1596);
+		PrintDebug("Random Hint Test\n");
+		fuckt = 1;
+	}
+
+
 	ChaosS ChaosArray[16]{
 
 	{ RandomSpring, nullptr, nullptr, },
@@ -448,7 +466,10 @@ extern "C"
 			Pause_Timer--;
 		}
 
-
+		if (bstimer <= 200 && bstimer != 0)
+		{
+			bstimer--;
+		}
 
 
 		if (Debug_Timer <= 333 && Debug_Timer != 0)
@@ -496,7 +517,15 @@ extern "C"
 		// Executed when the game processes input
 		if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
 		{
-
+			bstimer = 200;
+			
+			if (bstimer == 200 && fuckt ==0)
+			{
+				AnyFunction();
+				fuckt = 1;
+				
+			}
+			bstimer--;
 		}
 	}
 
