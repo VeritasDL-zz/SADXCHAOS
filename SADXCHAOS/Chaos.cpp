@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <algorithm>
+#include <vector>
 //changelog
 //started Mod 8/5/2021
 //added code base from Soar's scrapped "mania" mode
@@ -40,7 +42,7 @@
 //made Control Disable look better
 //made Control Disable last longer? might shorten
 //fixed random Gavity values maybe?
-
+//started working on random tikal hints - thanks for the help kell, main and refrag, 
 
 
 char oldRand = -1;
@@ -344,46 +346,50 @@ extern "C"
 
 	FunctionPointer(ObjectMaster*, LoadAutoHint, (const HintText_Text* texts, int voice), 0x7A1BE0);
 
+
 	const HintText_Text Hint1[] = {
-		{ "The frog you are looking for Test OBAMA1\nSecond line", 120 }, // text, time
-		{ "Second page", 120 },
-		{ 0 }
+	{ "Aim for the weak spot on his head.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
 	};
 	const HintText_Text Hint2[] = {
-	{ "First line\nSecond line", 120 },
-	{ "Second page", 120 },
-	{ 0 }
+	{ "Aim for Chaos' head when he's off guard.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	};
+	const HintText_Text Hint3[] = {
+	{ "You can punch the small bubbles of water.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	};
+	const HintText_Text Hint4[] = {
+	{ "Jump on panel number one. It will take\nyou to panels two and three. Jump as", 120 }, // text, time
+	{ "soon as you land on a panel\nor else you'll fall.", 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
 	};
 
 	const HintText_Text* const Hints[] = {
 	Hint1,
-	Hint2
+	Hint2,
+	Hint3,
+	Hint4
 	};
 
-	std::unordered_map<int, std::string> test =
-	{
-	{0,"The frog you are looking for Test 123456 is up ahead Testing How 123456789abcde"},
-	{1,"The frog you are looking for Test 123456\nis up ahead Testing How123456789abcdefg"},
-	{2,"#0000FF"}
+	int Voices[] = {
+	180,
+	181,
+	182,
+	1550
 	};
-
-	//const char* Texts[]
-	//{
-	//	//"The frog you are looking for Test 123456 is up ahead Testing How 123456789abcde", //max char for entire text box without new line can be 79 characters 
-	//	"The frog you are looking for Test 123456\nis up ahead Testing How123456789abcdefg", //max char for each line with new line can be up to 81 characters (counting the new line)
-	//	"testing page 2",
-	//	nullptr
-	//};
-
 	void AnyFunction()
 	{
-		int hintrand = rand() % 1;
-		LoadAutoHint(Hints[hintrand], 9999);
-		//LoadAutoHint(random[rand()%3], 9999);
-		//LoadAutoHint(Texts, 1596);
-
+		int hintrand = rand() % 3;
+		PrintDebug("%i\n", hintrand);
+		LoadAutoHint(Hints[hintrand], Voices[hintrand]);
+		//LoadAutoHint(Hint, );
+		////LoadAutoHint(Hints[hintrand], 9999);
 	    PrintDebug("%i Random Hint Test\n", hintrand);
-		fuckt = 0;
+		fuckt = 1;
 	}
 
 
@@ -413,7 +419,8 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnFrame()
 	{
 		// Executed every running frame of SADX
-		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
+
+			if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
 		
 		if (NoClip_Timer <= 400 && NoClip_Timer != 0)
@@ -547,7 +554,7 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnControl()
 	{
 		// Executed when the game processes input
-		if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
+		if (ControllerPointers[0]->HeldButtons & Buttons_Y) //checks if dpad pressed down?
 		{
 			bstimer = 100;
 			
@@ -557,6 +564,7 @@ extern "C"
 				fuckt = 1;
 				
 			}
+
 		}
 	}
 
