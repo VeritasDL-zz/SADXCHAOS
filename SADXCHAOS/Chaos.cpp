@@ -43,6 +43,7 @@
 //made Control Disable last longer? might shorten
 //fixed random Gavity values maybe?
 //started working on random tikal hints - thanks for the help kell, main and refrag, 
+//finished random tikal hint, just need to add more hints, 
 
 
 char oldRand = -1;
@@ -345,43 +346,66 @@ extern "C"
 	};
 
 	FunctionPointer(ObjectMaster*, LoadAutoHint, (const HintText_Text* texts, int voice), 0x7A1BE0);
+	//"The frog you are looking for Test 123456 is up ahead Testing How 123456789abcde", //max char for entire text box without new line can be 79 characters 
+	//	"The frog you are looking for Test 123456\nis up ahead Testing How123456789abcdefg", //max char for each line with new line can be up to 81 characters (counting the new line)
 
-
-	const HintText_Text Hint1[] = {
+	const HintText_Text Hint0[] = {
 	{ "Aim for the weak spot on his head.", 120 }, // text, time
 	{ 0 }, //Second page
 	{ 0 } //idk 3rd page or always null?
 	};
-	const HintText_Text Hint2[] = {
+	const HintText_Text Hint1[] = {
 	{ "Aim for Chaos' head when he's off guard.", 120 }, // text, time
 	{ 0 }, //Second page
 	{ 0 } //idk 3rd page or always null?
 	};
-	const HintText_Text Hint3[] = {
+	const HintText_Text Hint2[] = {
 	{ "You can punch the small bubbles of water.", 120 }, // text, time
 	{ 0 }, //Second page
 	{ 0 } //idk 3rd page or always null?
 	};
-	const HintText_Text Hint4[] = {
+	const HintText_Text Hint3[] = {
 	{ "Jump on panel number one. It will take\nyou to panels two and three. Jump as", 120 }, // text, time
 	{ "soon as you land on a panel\nor else you'll fall.", 0 }, //Second page
 	{ 0 } //idk 3rd page or always null?
 	};
+	const HintText_Text Hint4[] = {
+	{ "Insert the plug in the\nopening next to the door.", 120 }, // text, time
+	{ "You need to grab hold of\nthe end of the plug.", 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	};
+	const HintText_Text Hint5[] = {
+	{ "If you're hanging from a cord;\nuse the directional pad to sway.", 120 }, // text, time
+	{ "By touching the cord next to you;\nyou will be able to switch cords.", 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	};
+	const HintText_Text Hint6[] = {
+	{ "To pull out a plug; hold it and shake it.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	};
+
 
 	const HintText_Text* const Hints[] = {
+	Hint0,
 	Hint1,
 	Hint2,
 	Hint3,
-	Hint4
+	Hint4,
+	Hint5,
+	Hint6
 	};
 
 	int Voices[] = {
 	180,
 	181,
 	182,
-	1550
+	1550,
+	1595,
+	1596,
+	1597
 	};
-	void AnyFunction()
+	void RandomTikalHint()
 	{
 		int hintrand = rand() % 3;
 		PrintDebug("%i\n", hintrand);
@@ -393,7 +417,7 @@ extern "C"
 	}
 
 
-	ChaosS ChaosArray[16]{
+	ChaosS ChaosArray[17]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpeedPad, nullptr, nullptr, },
@@ -414,6 +438,7 @@ extern "C"
 	{ nullptr, nullptr, RandomDPadDownCheck },
 	{ nullptr, nullptr, RandomControlDisable },
 	{ nullptr, nullptr, RandomNoClip },
+	{ nullptr, nullptr, RandomTikalHint },
 
 	};
 	__declspec(dllexport) void __cdecl OnFrame()
@@ -498,6 +523,7 @@ extern "C"
 		if (Pause_Timer <= 5 && Pause_Timer != 0)
 		{
 			GameState = 16;
+			GameState = 15;
 			Pause_Timer--;
 		}
 
@@ -560,7 +586,7 @@ extern "C"
 			
 			if (bstimer == 100 && fuckt == 0)
 			{
-				AnyFunction();
+				RandomPause();
 				fuckt = 1;
 				
 			}
