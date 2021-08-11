@@ -405,6 +405,11 @@ extern "C"
 	{ 0 }, //Second page
 	{ 0 } //idk 3rd page or always null?
 	};
+	const HintText_Text Hint10[] = {
+	{ "You can break through the wall if you use dynamite.", 180 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	};
 	const HintText_Text CustomHint1[] = {
 	{ "OOF", 69 }, // text, time
 	{ 0 }, //Second page
@@ -437,11 +442,12 @@ extern "C"
 	1606,
 	2043,
 	174, //Get a load of this!
+	1955,
 	55555 //Custom OOF Voice
 	};
 	void RandomTikalHint()
 	{
-		int hintrand = rand() % 10;
+		int hintrand = rand() % 11;
 		int oldhint = hintrand;
 		//PrintDebug("%i\n", hintrand);
 		LoadAutoHint(Hints[hintrand], Voices[hintrand]);
@@ -614,14 +620,14 @@ extern "C"
 		// Executed when the game processes input
 		if (ControllerPointers[0]->HeldButtons & Buttons_Y) //checks if dpad pressed down?
 		{
-			bstimer = 100;
-			
-			if (bstimer == 100 && fuckt == 0)
-			{
-				RandomTikalHint();
-				fuckt = 1;
-				
-			}
+			//bstimer = 100;
+			//
+			//if (bstimer == 100 && fuckt == 0)
+			//{
+			//	RandomTikalHint();
+			//	fuckt = 1;
+			//	
+			//}//
 
 		}
 	}
