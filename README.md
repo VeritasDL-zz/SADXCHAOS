@@ -11,7 +11,7 @@ Currently this Mod has
 - Random Kill Momentum - Sets your momentum to 0
 - Random VSpeed - Sets your Y Speed to the Y speed Cap?
 - Random HSpeed -  Sets your H Speed to the H speed Cap?
-- Random Hurt -  Randomly Hurts the player is they have rings
+- Random Hurt -  Randomly Hurts the player if they have rings
 - Random PowerUP -  Randomly Gives you a PowerUP
 - Random Time Of Day -  Randomly Sets The Time Of Day only when in Adventure fields
 - Random Dropped Rings -  Drops a Random Amount of rings from 0 -  255
@@ -40,5 +40,5 @@ Currently this Mod has
 
 
 Thanks to Sora for the code base and helping me with dumb questions  
-Thanks to MainMemory, Kell for all the help  
+Thanks to MainMemory and Kell for all the help  
 Thank to the entire SA-1 X-Hax community for everything they continue to do for this game :)
