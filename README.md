@@ -5,8 +5,8 @@ which allows it to automatically activate and deactivate random codes at random 
 This mod is made to challenge players to play through SADX while the random codes either impedes or helps with any progress through the game.
 
 Currently this Mod has
-*Random Spring - Spawns 1 or 2 random Springs which have random Rotation, Scale, and Position
-*Random SpeedPad - Spawns 1 or 2 random SpeedPad which have random Rotation, Scale, and Position
+- Random Spring - Spawns 1 or 2 random Springs which have random Rotation, Scale, and Position
+- Random SpeedPad - Spawns 1 or 2 random SpeedPad which have random Rotation, Scale, and Position
 - Random SpikeBall - Spawns 1 or 2 random SpikeBalls which have random Rotation, Scale, and Position
 - Random Kill Momentum - Sets your momentum to 0
 - Random VSpeed - Sets your Y Speed to the Y speed Cap?
