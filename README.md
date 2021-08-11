@@ -1,6 +1,6 @@
 # SADXCHAOS
 SADX Chaos Edition
-This hack doesn't change anything in any of the games levels is uses the SADX ModLoader
+This mod doesn't change anything in any of the games levels is uses the SADX ModLoader
 which allows it to automatically activate and deactivate random codes at random times. 
 This mod is made to challenge players to play through SADX while the random codes either impedes or helps with any progress through the game.
 
