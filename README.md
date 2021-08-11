@@ -39,6 +39,8 @@ Currently this Mod has
 
 
 
-Thanks to Sora for the code base and helping me with dumb questions\n
-Thanks to MainMemory, Kell for all the help\n
+Thanks to Sora for the code base and helping me with dumb questions  
+
+Thanks to MainMemory, Kell for all the help  
+
 Thank to the entire SA-1 X-Hax community for everything they continue to do for this game :)
