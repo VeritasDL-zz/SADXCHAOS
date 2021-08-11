@@ -259,7 +259,7 @@ extern "C"
 		PrintDebug("Random X Gravity\n");
 
 	}
-	void  RandomYGravity()//currently disabled,
+	void  RandomYGravity()
 	{
 		Gravity_Timer = 222;
 		Gravity.y = rand() % 2 + (-1.5);
@@ -400,6 +400,11 @@ extern "C"
 	{ 0 }, //Second page
 	{ 0 } //idk 3rd page or always null?
 	};
+	const HintText_Text Hint9[] = {
+	{ "Get a load of this!", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	};
 	const HintText_Text CustomHint1[] = {
 	{ "OOF", 69 }, // text, time
 	{ 0 }, //Second page
@@ -417,7 +422,8 @@ extern "C"
 	Hint6,
 	Hint7,
 	Hint8,
-	CustomHint1
+	Hint9,
+	CustomHint1 //OOF
 	};
 
 	int Voices[] = {
@@ -430,11 +436,12 @@ extern "C"
 	1597,
 	1606,
 	2043,
+	174, //Get a load of this!
 	55555 //Custom OOF Voice
 	};
 	void RandomTikalHint()
 	{
-		int hintrand = rand() % 9;
+		int hintrand = rand() % 10;
 		int oldhint = hintrand;
 		//PrintDebug("%i\n", hintrand);
 		LoadAutoHint(Hints[hintrand], Voices[hintrand]);
