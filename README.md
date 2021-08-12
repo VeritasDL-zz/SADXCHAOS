@@ -33,6 +33,7 @@ Currently this Mod has
 - Dpad Down Or Die -  Player must press Dpad down within 90 frames or they will be killed
 - Random NoClip -  Enabled NoClip for 400 Frames
 - Random Tikal Hint -  Spawns a Tikal Hint orb with random text/voice
+- Random Snowboard Credits to MainMemory for the Snowboard spawn Code, https://github.com/MainMemory/SADXBoardSpawner
 
 
 
