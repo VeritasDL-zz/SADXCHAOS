@@ -1,5 +1,6 @@
 ﻿  pch.cpp
   Chaos.cpp
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(461,22): warning C4114: same type qualifier used more than once
   dllmain.cpp
   Generating Code...
      Creating library C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.lib and object C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.exp

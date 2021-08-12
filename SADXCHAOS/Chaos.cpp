@@ -45,7 +45,15 @@
 //started working on random tikal hints - thanks for the help kell, main and refrag, 
 //finished random tikal hint, just need to add more hints, 
 //added more hints and the first custom hint with custom voice file!
-
+//Re-Enabled Random Dropped Rings (8/11/2021)
+//fixed a bug with RandomTimeOfDay setting the chao timer to 1800
+//fixed debug mode crash, gg 
+//Credits to MainMemory for the Snowboard spawn Code, https://github.com/MainMemory/SADXBoardSpawner
+//cleaned up no clip code
+//cleaned up control disable code
+//changed y grav rand math
+//cleaned up ints
+//
 
 
 char oldRand = -1;
@@ -56,11 +64,32 @@ int DPadDown_Timer = 0;
 int DpadDown = 0;
 int DisableControl_Timer = 0;
 int Gravity_Timer = 0;
-int NoClip = 0;
 int NoClip_Timer = 0;
-int ClipTest = 0;
 int bstimer = 0;
 int fuckt = 0;
+int SnowboardTimer = 0;
+int IssSowboarding = 0;
+
+//that should reverse some direction of the stick
+//WriteData<1>((int*)0x40F2A2, 0xC6);
+//WriteData<1>((int*)0x40F2A1, 0x1);
+//will restore them
+//WriteData<1>((int*)0x40F2A2, 0xF0);
+//WriteData<1>((int*)0x40F2A1, 0x2B);
+
+ObjectMaster* snowboard;
+
+ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
+{
+	return snowboard = LoadObject(flags, index, loadSub);
+}
+
+void __cdecl Snowboard_Delete_r(ObjectMaster* obj)
+{
+	njReleaseTexture((NJS_TEXLIST*)obj->Data1->LoopData);
+	if (obj == snowboard)
+		snowboard = nullptr;
+}
 
 extern "C"
 {
@@ -68,6 +97,13 @@ extern "C"
 	{
 		// Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
 		// This is where we override functions, replace static data, etc.
+		WriteCall((void*)0x4E9423, LoadSnowboardObject);
+		WriteCall((void*)0x4E967E, LoadSnowboardObject);
+		WriteCall((void*)0x4E9698, LoadSnowboardObject);
+		WriteCall((void*)0x597B34, LoadSnowboardObject);
+		WriteCall((void*)0x597B46, LoadSnowboardObject);
+		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
+
 
 		srand((unsigned)time(nullptr));
 	}
@@ -143,6 +179,7 @@ extern "C"
 
 		p1->Speed = { 0, 0, 0 };
 		PrintDebug("Kill Momentum\n");
+		PlayVoice(55555);//OOF
 		return;
 	}
 
@@ -199,7 +236,7 @@ extern "C"
 		}
 		else
 		{
-			Chaos_Timer = 1800;//forces another Chaos mod if not in Adventure 
+			Chaos_Timer = 180;//forces another Chaos mod if not in Adventure 
 		}
 
 	}
@@ -229,7 +266,6 @@ extern "C"
 
 
 	//DisablePause
-	//Disable input? lol
 	//Fast Pause Unpase // kinda have this? it forces you to unpause a few times, lol 
 
 	void SwapCamera()//Swaps Camera lmfao
@@ -247,7 +283,7 @@ extern "C"
 
 	void RandomDebug() //debug mode currently lasts for 75ish? frames
 	{
-		DebugMode = 1;
+		EntityData1Ptrs[0]->Action = 87;
 		Debug_Timer = 333;
 		PrintDebug("Debug Mode on \n");
 		
@@ -267,7 +303,7 @@ extern "C"
 	}
 	void  RandomZGravity()//currently disabled,
 	{
-		Gravity.z = rand() % 2 + (-1.5);
+		Gravity.z = rand() % 2 + (-1.0);
 		PrintDebug("Random Z Gravity\n");
 	}
 	void RandomBarrier()//currently disabled, might be killing the player? lol
@@ -289,10 +325,11 @@ extern "C"
 	void RandomControlDisable()
 	{
 		DisableControl_Timer = 90;
+		ControlEnabled = 0;
 		PrintDebug("Disabled Controller\n");
 	}
 
-	void MSmallScale(EntityData1* p1)//disabled this?
+	void MSmallScale(EntityData1* p1)//disabled this
 	{
 		for (int i = 0; i < 21; i++) {
 			SONIC_OBJECTS[i]->scl[0] = 0.5;
@@ -334,8 +371,13 @@ extern "C"
 
 	void RandomNoClip()
 	{
-		NoClip = 1;
 		NoClip_Timer = 400;
+		WriteData((int*)0x00444C1D, (int)0x90909090);
+		WriteData((int*)0x00444C21, (int)0x10C48390);
+		WriteData((int*)0x0044A66B, (int)0x90909090);
+		WriteData((int*)0x0044A66F, (int)0x14C48390);
+		WriteData((int*)0x007887D9, (int)0x90909090);
+		WriteData((int*)0x007887DD, (int)0x74C08590);
 		PrintDebug("NoClip Enabled\n");
 	}
 	typedef void(__cdecl* ChaosEnt)(EntityData1*);
@@ -354,7 +396,6 @@ extern "C"
 	//A hint with no new line can be 79 charaters
 
 	const HintText_Text Hint0[] = {
-	
 	{ "Watch out for the cars!.", 120 }, // text, time
 	{ 0 }, //Second page
 	{ 0 } //idk 3rd page or always null?
@@ -417,20 +458,71 @@ extern "C"
 	};
 
 
-	const HintText_Text* const Hints[] = {
-	Hint0,
-	Hint1,
-	Hint2,
-	Hint3,
-	Hint4,
-	Hint5,
-	Hint6,
-	Hint7,
-	Hint8,
-	Hint9,
-	CustomHint1 //OOF
-	};
+	const HintText_Text const Hints[12][3] = {
+	{
+	{ "Watch out for the cars!.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Aim for Chaos' head when he's off guard.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "You can punch the small bubbles of\nwater.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Jump on panel number one. It will take\nyou to panels two and three. Jump as", 260 }, // text, time
+	{ "soon as you land on a panel\nor else you'll fall.", 120 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Insert the plug in the\nopening next to the door.", 130 }, // text, time
+	{ "You need to grab hold of\nthe end of the plug.", 140 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},//if you read this
+	  //you mom gay
+	{
+	{ "If you're hanging from a cord,\nuse the directional pad to sway.", 180 }, // text, time
+	{ "By touching the cord next to you,\nyou will be able to switch cords.", 180 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "To pull out a plug, hold it and shake it.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Even if you're frozen, jump a couple of\ntimes.", 160 }, // text, time
+	{ "and you should be able to crack through.",140 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Try and find places\nwhere it's not windy.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Get a load of this!", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "You can break through the wall if you use dynamite.", 180 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "OOF", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
 
+	};
+	size_t HintSize = LengthOfArray(Hints);
 	int Voices[] = {
 	1857,
 	181,
@@ -447,28 +539,86 @@ extern "C"
 	};
 	void RandomTikalHint()
 	{
-		int hintrand = rand() % 11;
-		int oldhint = hintrand;
+		int hintrand = rand() % HintSize;
 		//PrintDebug("%i\n", hintrand);
+		//LoadAutoHint(Hints[0], Voices[0]);
 		LoadAutoHint(Hints[hintrand], Voices[hintrand]);
 	    PrintDebug("%i Random Hint Test\n", hintrand);
 		fuckt = 1;
 	}
 
+	void RandomSnowboard()
+	{
+		if (IssSowboarding == 0)
+		{
+			SnowboardTimer = 333;
+			IssSowboarding = 1;
+			if (GameMode == GameModes_Menu || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || !GetCharacterObject(0)) //Credits to MainMemory for the Code, https://github.com/MainMemory/SADXBoardSpawner
+				return;
+			ObjectMaster* obj = GetCharacterObject(0);
+			switch (obj->Data1->CharID)
+			{
+			case Characters_Sonic:
+				if (obj->Data1->Action >= 62 && obj->Data1->Action <= 68)
+					ForcePlayerAction(0, 24);
+				else
+				{
+					ForcePlayerAction(0, 44);
+					if (!snowboard)
+						snowboard = LoadObject((LoadObj)(LoadObj_Data1 | LoadObj_Data2), 2, Snowboard_Sonic_Load);
+				}
+				break;
+			case Characters_Tails:
+				if (obj->Data1->Action >= 48 && obj->Data1->Action <= 54)
+				{
+					ForcePlayerAction(0, 24);
+					// fix a bug where Tails' physics data doesn't get reset to normal
+					((EntityData2*)obj->Data2)->CharacterData->PhysicsData.CollisionSize = PhysicsArray[Characters_Tails].CollisionSize;
+					((EntityData2*)obj->Data2)->CharacterData->PhysicsData.YOff = PhysicsArray[Characters_Tails].YOff;
+					((EntityData2*)obj->Data2)->CharacterData->PhysicsData.JumpSpeed = PhysicsArray[Characters_Tails].JumpSpeed;
+				}
+				else
+				{
+					ForcePlayerAction(0, 44);
+					if (!snowboard)
+						snowboard = LoadObject((LoadObj)(LoadObj_Data1 | LoadObj_Data2), 2, Snowboard_Tails_Load);
+				}
+				break;
+			}
+			if (!snowboard)
+				switch (obj->Data1->CharID)
+				{
+				case Characters_Sonic:
+					if (obj->Data1->Action >= 62 && obj->Data1->Action <= 68)
+						snowboard = LoadObject((LoadObj)(LoadObj_Data1 | LoadObj_Data2), 2, Snowboard_Sonic_Load);
+					break;
+				case Characters_Tails:
+					if (obj->Data1->Action >= 48 && obj->Data1->Action <= 54)
+						snowboard = LoadObject((LoadObj)(LoadObj_Data1 | LoadObj_Data2), 2, Snowboard_Tails_Load);
+					break;
+				}//Credits to MainMemory for the Code, https://github.com/MainMemory/SADXBoardSpawner
+			return;
+			PrintDebug("Snowbaord Spawned\n");
+		}
+		else
+		{
+			Chaos_Timer = 180;//forces another Chaos mod if already on snowboard?
+		}
+	}
 
-	ChaosS ChaosArray[17]{
+	ChaosS ChaosArray[18]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpeedPad, nullptr, nullptr, },
 	{ RandomSpikeBall, nullptr, nullptr, },
-	//{ RandomDroppedRings, nullptr, nullptr },
+	{ RandomDroppedRings, nullptr, nullptr },
 	//{ RandomPowerUP, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomHSpeed, nullptr, },
 	{ nullptr, nullptr, RandomSwapMusic },
 	{ nullptr, nullptr, ChaosPlayVoice_rng},
-	//{ nullptr, nullptr, RandomHurt },
+	//{ nullptr, nullptr, RandomSnowboard },
 	{ nullptr, nullptr, RandomTimeOfDay },
 	{ nullptr, nullptr, RandomPause },
 	{ nullptr, nullptr, SwapCamera },
@@ -480,26 +630,19 @@ extern "C"
 	{ nullptr, nullptr, RandomTikalHint },
 
 	};
+	size_t ChaosSize = LengthOfArray(ChaosArray);
+
 	__declspec(dllexport) void __cdecl OnFrame()
 	{
 		// Executed every running frame of SADX
 
-			if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
+		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
-		
+
 		if (NoClip_Timer <= 400 && NoClip_Timer != 0)
 		{
 			NoClip_Timer--;
-			if (NoClip == 1 && ClipTest == 0)
-			{
-				WriteData((int*)0x00444C1D, (int)0x90909090);
-				WriteData((int*)0x00444C21, (int)0x10C48390);
-				WriteData((int*)0x0044A66B, (int)0x90909090);
-				WriteData((int*)0x0044A66F, (int)0x14C48390);
-				WriteData((int*)0x007887D9, (int)0x90909090);
-				WriteData((int*)0x007887DD, (int)0x74C08590);
-				ClipTest = 1;
-			}
+
 			if (NoClip_Timer == 1 && NoClip_Timer != 0)
 			{
 				PrintDebug("NoClip Disabled\n");
@@ -510,8 +653,6 @@ extern "C"
 				WriteData((int*)0x007887D9, (int)0x00D042E8);
 				WriteData((int*)0x007887DD, (int)0x74C08500);
 				NoClip_Timer = 0;
-				NoClip = 0;
-				ClipTest = 0;
 			}
 		}
 
@@ -527,17 +668,15 @@ extern "C"
 
 		if (DisableControl_Timer <= 90 && DisableControl_Timer != 0)
 		{
-			ControlEnabled = 0;
-			//WriteData((int*)0x00909FB0, 0x00);
+			
 			DisableControl_Timer--;
 			
 		}
 		if (DisableControl_Timer == 1 && DisableControl_Timer != 0)
 		{
-			PrintDebug("Enabled Control\n");
 			ControlEnabled = 1;
-			//WriteData((int*)0x00909FB0, 0x01);
 			DisableControl_Timer = 0;
+			PrintDebug("Enabled Control\n");
 		}
 
 		if (DPadDown_Timer <= 90 && DPadDown_Timer != 0)
@@ -573,14 +712,24 @@ extern "C"
 		{
 			fuckt = 0;
 		}
-
-
-		if (Debug_Timer <= 333 && Debug_Timer != 0)
-			Debug_Timer--;
-
-		if (DebugMode == 1 && Debug_Timer <= 5)
+		if (SnowboardTimer <= 333 && SnowboardTimer != 0)
 		{
-			DebugMode = 0;
+			SnowboardTimer--;
+		}
+		if (SnowboardTimer == 1 && SnowboardTimer <= 5 && IssSowboarding == 1)
+		{
+			SnowboardTimer = 0;
+			IssSowboarding = 0;
+			EntityData1Ptrs[0]->Action = 1;
+			PrintDebug("Snowbaord off Action Set\n");
+		}
+		if (Debug_Timer <= 333 && Debug_Timer != 0)
+		{
+			Debug_Timer--;
+			EntityData1Ptrs[0]->Action = 87;
+		}
+		if (Debug_Timer <= 5 && Debug_Timer != 0)
+		{
 			Debug_Timer = 0;
 			EntityData1Ptrs[0]->Action = 1;
 			PrintDebug("Debug turned Off Action Set\n");
@@ -594,7 +743,7 @@ extern "C"
 			char curRand = 0;
 
 			do {
-				curRand = rand() % LengthOfArray(ChaosArray);
+				curRand = rand() % ChaosSize;
 			} while (oldRand == curRand);
 
 			if (ChaosArray[curRand].func != nullptr)
@@ -618,16 +767,16 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnControl()
 	{
 		// Executed when the game processes input
-		if (ControllerPointers[0]->HeldButtons & Buttons_Y) //checks if dpad pressed down?
+		if (Controllers[0].HeldButtons &= ~(Buttons_A | Buttons_L | Buttons_R | Buttons_Y)) //checks if A L R and Y are pressed
 		{
-			//bstimer = 100;
-			//
-			//if (bstimer == 100 && fuckt == 0)
-			//{
-			//	RandomTikalHint();
-			//	fuckt = 1;
-			//	
-			//}//
+			bstimer = 100;
+			
+			if (bstimer == 100 && fuckt == 0)
+			{
+				RandomTikalHint();
+				fuckt = 1;
+				
+			}
 
 		}
 	}
