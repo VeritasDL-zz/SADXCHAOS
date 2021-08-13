@@ -53,7 +53,10 @@
 //cleaned up control disable code
 //changed y grav rand math
 //cleaned up ints
-//
+//added random checkpoint (might not work as a real checkpoint but funny af)
+//added Movement Stick Invert code thanks to Sora!
+//added support for knux, amy, and metal sonic to movement debug, Tails, gamma and big dont have movement debug thanks to stars for pointing out im dumb,
+
 
 
 char oldRand = -1;
@@ -69,14 +72,7 @@ int bstimer = 0;
 int fuckt = 0;
 int SnowboardTimer = 0;
 int IssSowboarding = 0;
-
-//that should reverse some direction of the stick
-//WriteData<1>((int*)0x40F2A2, 0xC6);
-//WriteData<1>((int*)0x40F2A1, 0x1);
-//will restore them
-//WriteData<1>((int*)0x40F2A2, 0xF0);
-//WriteData<1>((int*)0x40F2A1, 0x2B);
-
+int InputInvert_Timer = 0;
 ObjectMaster* snowboard;
 
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
@@ -127,6 +123,18 @@ extern "C"
 			spring2->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
 		PrintDebug("Random Spring\n");
+		return;
+	}
+
+	void RandomCheckPoint(EntityData1* p1)
+	{
+
+		ObjectMaster* checkpoint = LoadObject((LoadObj)15, 6, CheckPoint_Main);
+		PrintDebug("Random checkpoint\n");
+		SETObjData* CheckPointSETData = new SETObjData();
+		checkpoint->SETData.SETData = CheckPointSETData;
+		checkpoint->Data1->Rotation = p1->Rotation;
+		checkpoint->Data1->Position = p1->Position;
 		return;
 	}
 
@@ -283,7 +291,22 @@ extern "C"
 
 	void RandomDebug() //debug mode currently lasts for 75ish? frames
 	{
-		EntityData1Ptrs[0]->Action = 87;
+		switch (CurrentCharacter)
+		{
+		case Characters_Sonic:
+		case Characters_MetalSonic:
+			EntityData1Ptrs[0]->Action = 87;
+			break;
+		case Characters_Knuckles:
+			EntityData1Ptrs[0]->Action = 57;
+			break;
+		case Characters_Amy:
+			EntityData1Ptrs[0]->Action = 53;
+			break;
+		default:
+			Chaos_Timer = 180;
+			return;
+		}
 		Debug_Timer = 333;
 		PrintDebug("Debug Mode on \n");
 		
@@ -305,6 +328,9 @@ extern "C"
 	{
 		Gravity.z = rand() % 2 + (-1.0);
 		PrintDebug("Random Z Gravity\n");
+	}
+	void FakeEmblem()
+	{
 	}
 	void RandomBarrier()//currently disabled, might be killing the player? lol
 	{
@@ -389,7 +415,7 @@ extern "C"
 		ChaosNull func3;
 	};
 
-	FunctionPointer(ObjectMaster*, LoadAutoHint, (const HintText_Text* texts, int voice), 0x7A1BE0);
+
 	//"The frog you are looking for Test 123456 is up ahead Testing How 123456789abcde", //max char for entire text box without new line can be 79 characters 
 	//	"The frog you are looking for Test 123456\nis up ahead Testing How123456789abcdefg", //max char for each line with new line can be up to 81 characters (counting the new line)
 	//A hint with \n can be 81 character (\n counts as 2)
@@ -457,7 +483,6 @@ extern "C"
 	{ 0 } //idk 3rd page or always null?
 	};
 
-
 	const HintText_Text const Hints[12][3] = {
 	{
 	{ "Watch out for the cars!.", 120 }, // text, time
@@ -470,7 +495,7 @@ extern "C"
 	{ 0 } //idk 3rd page or always null?
 	},
 	{
-	{ "You can punch the small bubbles of\nwater.", 120 }, // text, time
+	{ "You can punch the small\nbubbles of water.", 120 }, // text, time
 	{ 0 }, //Second page
 	{ 0 } //idk 3rd page or always null?
 	},
@@ -520,8 +545,8 @@ extern "C"
 	{ 0 }, //Second page
 	{ 0 } //idk 3rd page or always null?
 	},
-
 	};
+
 	size_t HintSize = LengthOfArray(Hints);
 	int Voices[] = {
 	1857,
@@ -545,6 +570,20 @@ extern "C"
 		LoadAutoHint(Hints[hintrand], Voices[hintrand]);
 	    PrintDebug("%i Random Hint Test\n", hintrand);
 		fuckt = 1;
+	}
+
+	void InputInvert()
+	{
+		WriteData<1>((int*)0x40F2A2, 0xC6);
+		WriteData<1>((int*)0x40F2A1, 0x1);
+		InputInvert_Timer = 420;
+		PrintDebug("Input Inverted");
+	}
+
+	Void RandomRotate()
+	{
+		int Rotaterand = rand() % 65535;
+			RotatePlayer(0, Rotaterand);
 	}
 
 	void RandomSnowboard()
@@ -606,28 +645,53 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[18]{
+	ChaosS ChaosArray[45]{
 
 	{ RandomSpring, nullptr, nullptr, },
+	{ RandomSpring, nullptr, nullptr, },
+	{ RandomSpring, nullptr, nullptr, },
+	{ RandomSpeedPad, nullptr, nullptr, },
 	{ RandomSpeedPad, nullptr, nullptr, },
 	{ RandomSpikeBall, nullptr, nullptr, },
+	{ RandomSpikeBall, nullptr, nullptr, },
+	{ RandomSpikeBall, nullptr, nullptr, },
 	{ RandomDroppedRings, nullptr, nullptr },
-	//{ RandomPowerUP, nullptr, nullptr },
+	{ RandomCheckPoint, nullptr, nullptr },
+	{ RandomPowerUP, nullptr, nullptr },
+	{ RandomPowerUP, nullptr, nullptr },
+	{ RandomPowerUP, nullptr, nullptr },
+	{ RandomPowerUP, nullptr, nullptr },
+	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
+	{ nullptr, RandomVSpeed, nullptr, },
+	{ nullptr, RandomHSpeed, nullptr, },
 	{ nullptr, RandomHSpeed, nullptr, },
 	{ nullptr, nullptr, RandomSwapMusic },
 	{ nullptr, nullptr, ChaosPlayVoice_rng},
-	//{ nullptr, nullptr, RandomSnowboard },
+	{ nullptr, nullptr, RandomSnowboard },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, RandomTimeOfDay },
 	{ nullptr, nullptr, RandomTimeOfDay },
 	{ nullptr, nullptr, RandomPause },
+	{ nullptr, nullptr, RandomPause },
+	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, SwapCamera },
 	{ nullptr, nullptr, SwapCamera },
 	{ nullptr, nullptr, RandomDebug },
+	{ nullptr, nullptr, RandomYGravity },
 	{ nullptr, nullptr, RandomYGravity },
 	{ nullptr, nullptr, RandomDPadDownCheck },
 	{ nullptr, nullptr, RandomControlDisable },
 	{ nullptr, nullptr, RandomNoClip },
 	{ nullptr, nullptr, RandomTikalHint },
+	{ nullptr, nullptr, RandomTikalHint },
+	{ nullptr, nullptr, RandomTikalHint },
+	{ nullptr, nullptr, RandomTikalHint },
+	{ nullptr, nullptr, InputInvert },
 
 	};
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -654,6 +718,17 @@ extern "C"
 				WriteData((int*)0x007887DD, (int)0x74C08500);
 				NoClip_Timer = 0;
 			}
+		}
+		if (InputInvert_Timer <= 420 && InputInvert_Timer != 0)
+		{
+			InputInvert_Timer--;
+		}
+		if (InputInvert_Timer == 1 && InputInvert_Timer != 0)
+		{
+			WriteData<1>((int*)0x40F2A2, 0xF0);
+			WriteData<1>((int*)0x40F2A1, 0x2B);
+			InputInvert_Timer = 0;
+			PrintDebug("Input RE-Inverted\n");
 		}
 
 		if (Gravity_Timer <= 222 && Gravity_Timer != 0)
@@ -735,7 +810,7 @@ extern "C"
 			PrintDebug("Debug turned Off Action Set\n");
 		}
 
-		if (Chaos_Timer < 180)
+		if (Chaos_Timer < 180)//30 seconds is 1800
 			Chaos_Timer++;
 
 		if (Chaos_Timer >= 180)
@@ -764,17 +839,17 @@ extern "C"
 
 	}
 
-	__declspec(dllexport) void __cdecl OnControl()
+	__declspec(dllexport) void __cdecl OnControl(EntityData1* p1)
 	{
-		// Executed when the game processes input
-		if (Controllers[0].HeldButtons &= ~(Buttons_A | Buttons_L | Buttons_R | Buttons_Y)) //checks if A L R and Y are pressed
+		 //Executed when the game processes input
+		if (Controllers[0].PressedButtons & Buttons_Y) //checks if A L R and Y are pressed
 		{
 			bstimer = 100;
 			
 			if (bstimer == 100 && fuckt == 0)
 			{
-				RandomTikalHint();
-				fuckt = 1;
+				//DebugMode = 1;
+				fuckt = 0;
 				
 			}
 
