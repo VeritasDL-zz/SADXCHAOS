@@ -17,7 +17,7 @@ Currently this Mod has
 - Random Dropped Rings -  Drops a Random Amount of rings from 0 -  255
 - Random Clip Level -  Changes The Render Distance (Disabled as of 8/10/2021)
 - Random Pause -  Forces The Game to be Paused for 5 Frames (you must unpause 5 times)
-- RandomChar -  Randomly Changes what Charater you are playing as (Currently Disabled because the charater change only happens on death/act/level change/restart)
+- Random Charater -  Randomly Changes what Charater you are playing as (Currently Disabled because the charater change only happens on death/act/level change/restart)
 - Swap Camera -  Changes to what ever camera isnt currently selected
 - Random Debug -  Enables Debug Mode for 333 Frames 
 - Random X Gravity -  Sets X Gravity to a random value (Disabled as of 8/10/2021)
@@ -36,7 +36,7 @@ Currently this Mod has
 - Random Snowboard Credits to MainMemory for the Snowboard spawn Code, https://github.com/MainMemory/SADXBoardSpawner
 - Random Checkpoint - Spawns a Checkpoint on the player, Works as a respawn point
 - Movement Stick Invert - Inverts the Movement Stick Controls - Credits to Sora for this code
-
+- Random Rotation - Sets the Charaters Y Rotation
 
 
 
