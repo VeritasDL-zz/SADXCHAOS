@@ -34,12 +34,14 @@ Currently this Mod has
 - Random NoClip -  Enabled NoClip for 400 Frames
 - Random Tikal Hint -  Spawns a Tikal Hint orb with random text/voice
 - Random Snowboard Credits to MainMemory for the Snowboard spawn Code, https://github.com/MainMemory/SADXBoardSpawner
-
+- Random Checkpoint - Spawns a Checkpoint on the player, Works as a respawn point
+- Movement Stick Invert - Inverts the Movement Stick Controls - Credits to Sora for this code
 
 
 
 
 
 Thanks to Sora for the code base and helping me with dumb questions  
-Thanks to MainMemory and Kell for all the help  
-Thank to the entire SA-1 X-Hax community for everything they continue to do for this game :)
+Thanks to MainMemory for letting me use her snowboard code
+Thanks to Kell for all the help!
+Thanks to the entire SA-1 X-Hax community for everything they continue to do for this game :)
