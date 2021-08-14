@@ -7,6 +7,9 @@
 #include <unordered_map>
 #include <algorithm>
 #include <vector>
+#include <IniFile.hpp>
+
+
 //changelog
 //started Mod 8/5/2021
 //added code base from Soar's scrapped "mania" mode
@@ -53,10 +56,11 @@
 //cleaned up control disable code
 //changed y grav rand math
 //cleaned up ints
+//made Kill Momentum play the custom roblox OOF sound,
 //added random checkpoint (might not work as a real checkpoint but funny af)
 //added Movement Stick Invert code thanks to Sora!
 //added support for knux, amy, and metal sonic to movement debug, Tails, gamma and big dont have movement debug thanks to stars for pointing out im dumb,
-
+//trying to add support for editing the chaos timer, shits fucked 
 
 
 char oldRand = -1;
@@ -86,13 +90,61 @@ void __cdecl Snowboard_Delete_r(ObjectMaster* obj)
 	if (obj == snowboard)
 		snowboard = nullptr;
 }
+std::unordered_map<LevelAndActIDs, std::vector<NJS_VECTOR>> customLocationsMap;
+
+NJS_VECTOR GetRandomCoordinates(LevelAndActIDs levelAndAct)
+{
+	std::vector<NJS_VECTOR> coordsvector = customLocationsMap[levelAndAct];
+	int random = 0;
+
+	int fuckyou = coordsvector.size();
+	if (fuckyou != 0)
+	{
+		fuckyou--;
+		random = rand() % fuckyou;
+	}
+	PrintDebug("%i", fuckyou);
+	PrintDebug("%I", (int)levelAndAct);
+
+	return coordsvector[random];
+}
+
+void InitializeRandomCoordinates()
+{
+	customLocationsMap[LevelAndActIDs_EmeraldCoast1] =
+	{
+	{-9.0f,4.0f,4.0f },
+	{1647.5f,115.0f,840.6f },
+	{4042.8f,8.52f,363.5f },
+	{5596.6f,3.21f,1096.52f }
+	};
+
+	customLocationsMap[LevelAndActIDs_EmeraldCoast2] =
+	{
+	{-086.50f,1106.5f,-2865.5f},
+	{465.78f,635.85f,-798.99f},
+	{1551.2f,545.98f,-958.93f},
+	{2974.0f,2.6099f,-1529.03f},
+	{3174.804f, 4.0f, -1588.66f},
+	{2873.81f,292.30f,-2274.51f},
+	{2959.53f,384.59f,-2724.012f},
+	{3408.735f,70.0f,-2577.899f},
+	{3687.43f,508.0f,-2827.662f},
+	{4129.233f,496.0f,-2793.12f},
+	{5378.593f,56.033f,-2648.15f}
+	};
+}
 
 extern "C"
 {
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
 	{
+
 		// Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
 		// This is where we override functions, replace static data, etc.
+
+		InitializeRandomCoordinates();
+
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
 		WriteCall((void*)0x4E967E, LoadSnowboardObject);
 		WriteCall((void*)0x4E9698, LoadSnowboardObject);
@@ -562,6 +614,9 @@ extern "C"
 	1955,
 	55555 //Custom OOF Voice
 	};
+
+
+
 	void RandomTikalHint()
 	{
 		int hintrand = rand() % HintSize;
@@ -801,7 +856,6 @@ extern "C"
 		if (Debug_Timer <= 333 && Debug_Timer != 0)
 		{
 			Debug_Timer--;
-			EntityData1Ptrs[0]->Action = 87;
 		}
 		if (Debug_Timer <= 5 && Debug_Timer != 0)
 		{
@@ -848,7 +902,10 @@ extern "C"
 			
 			if (bstimer == 100 && fuckt == 0)
 			{
-				//DebugMode = 1;
+				PrintDebug("a%i", GetLevelAndAct());
+				PrintDebug("b%i", (int)LevelAndActIDs_EmeraldCoast1);
+				GetRandomCoordinates((LevelAndActIDs)(GetLevelAndAct()));
+
 				fuckt = 0;
 				
 			}
