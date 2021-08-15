@@ -67,6 +67,8 @@
 //added Ability to edit How often things happen in the config menu
 //cleaned up debug Output a little
 //changed how long Gravity, noclip, and snowboard last before being disabled
+//finished sonic casino act 0 teleports
+//started working on casino act 1 teleport (might work for tails and sonic)
 
 
 
@@ -167,8 +169,14 @@ void InitializeRandomCoordinates()
 
 	customLocationsMap[LevelAndActIDs_Casinopolis1] =
 	{
-	{75.0f,201.0f,270.0f}//sonic spawn
-
+	{75.0f,201.0f,270.0f},//sonic/knux? spawn
+	{698.775f,-195.46f,-292.370f},//where the claw takes your rings
+	{347.270f,230.0f,-181.365f},//top of funny building
+	{-291.916f,-196.0f,133.45f},//water fountain
+	{-290.42f,-198.77f,-585.83f},//in the shower
+	{308.82f,-195.891f,133.98f},//about to enter pinball
+	{694.279f,-291.726f,-204.414f},//out of bounds on the ring platform,
+	{838.22f,-133.06f,-282.697f}//near emerald/capsul
 	};
 
 	customLocationsMap[LevelAndActIDs_Casinopolis2] =
@@ -861,7 +869,7 @@ extern "C"
 			PrintDebug("Debug turned Off, Action Set\n");
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
-			Chaos_Timer++;
+			//Chaos_Timer++;
 		if (Chaos_Timer >= EffectMax)
 		{
 			char curRand = 0;
