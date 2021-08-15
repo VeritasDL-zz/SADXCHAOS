@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <vector>
 #include <IniFile.hpp>
+#include <SADXModLoader.h>
 
 
 //changelog
@@ -60,6 +61,7 @@
 //added random checkpoint (might not work as a real checkpoint but funny af)
 //added Movement Stick Invert code thanks to Sora!
 //added support for knux, amy, and metal sonic to movement debug, Tails, gamma and big dont have movement debug thanks to stars for pointing out im dumb,
+//added random rotate
 //trying to add support for editing the chaos timer, shits fucked 
 //started adding Random Telport with the help of Refrag :)
 //added Ability to edit How often things happen in the config menu
@@ -193,9 +195,12 @@ extern "C"
 		// Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
 		// This is where we override functions, replace static data, etc.
 
+		const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
+		EffectMax = config->getInt("General", "EffectMax", 180);
+		delete config;
 
-		const IniFile* config = new IniFile(std::string(path) + "\config.ini");
-		EffectMax = config->getInt("General", "EffectMax");
+
+
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
 		WriteCall((void*)0x4E967E, LoadSnowboardObject);

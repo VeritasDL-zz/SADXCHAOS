@@ -1,5 +1,4 @@
 ﻿  Chaos.cpp
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(197,59): warning C4129: 'c': unrecognized character escape sequence
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(595,22): warning C4114: same type qualifier used more than once
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(600,22): warning C4114: same type qualifier used more than once
   SADXCHAOS.vcxproj -> C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.dll
           1 file(s) copied.
