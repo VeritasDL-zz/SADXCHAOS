@@ -65,7 +65,8 @@
 //trying to add support for editing the chaos timer, shits fucked 
 //started adding Random Telport with the help of Refrag :)
 //added Ability to edit How often things happen in the config menu
-
+//cleaned up debug Output a little
+//changed how long Gravity, noclip, and snowboard last before being disabled
 
 
 
@@ -78,8 +79,6 @@ int DpadDown = 0;
 int DisableControl_Timer = 0;
 int Gravity_Timer = 0;
 int NoClip_Timer = 0;
-int bstimer = 0;
-int fuckt = 0;
 int SnowboardTimer = 0;
 int IssSowboarding = 0;
 int InputInvert_Timer = 0;
@@ -103,16 +102,12 @@ NJS_VECTOR GetRandomCoordinates(LevelAndActIDs levelAndAct)
 {
 	std::vector<NJS_VECTOR> coordsvector = customLocationsMap[levelAndAct];
 	int random = 0;
-
 	int fuckyou = coordsvector.size();
 	if (fuckyou != 0)
 	{
 		fuckyou--;
 		random = rand() % fuckyou;
 	}
-	PrintDebug("%i", fuckyou);
-	PrintDebug("%I", (int)levelAndAct);
-
 	return coordsvector[random];
 }
 
@@ -120,10 +115,10 @@ void InitializeRandomCoordinates()
 {
 	customLocationsMap[LevelAndActIDs_EmeraldCoast1] =
 	{
-	{-9.0f,4.0f,4.0f },
-	{1647.5f,115.0f,840.6f },
-	{4042.8f,8.52f,363.5f },
-	{5596.6f,3.21f,1096.52f }
+	{-9.0f,4.0f,4.0f},
+	{1647.5f,115.0f,840.6f},
+	{4042.8f,8.52f,363.5f},
+	{5596.6f,3.21f,1096.52f}
 	};
 
 	customLocationsMap[LevelAndActIDs_EmeraldCoast2] =
@@ -132,7 +127,7 @@ void InitializeRandomCoordinates()
 	{465.78f,635.85f,-798.99f},
 	{1551.2f,545.98f,-958.93f},
 	{2974.0f,2.6099f,-1529.03f},
-	{3174.804f, 4.0f, -1588.66f},
+	{3174.804f,4.0f,-1588.66f},
 	{2873.81f,292.30f,-2274.51f},
 	{2959.53f,384.59f,-2724.012f},
 	{3408.735f,70.0f,-2577.899f},
@@ -172,16 +167,14 @@ void InitializeRandomCoordinates()
 
 	customLocationsMap[LevelAndActIDs_Casinopolis1] =
 	{
-	{75.0f,201.0f,270.0f},//sonic spawn
-	{}
+	{75.0f,201.0f,270.0f}//sonic spawn
 
 	};
 
 	customLocationsMap[LevelAndActIDs_Casinopolis2] =
 	{
 	{17.861f,-1840.0f,2869.292f},//sonic/tails spawn
-	{-1415.618f,-680.0f,2868.097f},//top path of first wind tunnel
-	{}
+	{-1415.618f,-680.0f,2868.097f}//top path of first wind tunnel
 
 	};
 
@@ -191,16 +184,11 @@ extern "C"
 {
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
 	{
-
 		// Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
 		// This is where we override functions, replace static data, etc.
-
 		const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
 		EffectMax = config->getInt("General", "EffectMax", 180);
 		delete config;
-
-
-
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
 		WriteCall((void*)0x4E967E, LoadSnowboardObject);
@@ -208,15 +196,12 @@ extern "C"
 		WriteCall((void*)0x597B34, LoadSnowboardObject);
 		WriteCall((void*)0x597B46, LoadSnowboardObject);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
-
-
 		srand((unsigned)time(nullptr));
 	}
 
 	void RandomSpring(EntityData1* p1) 
 	{
 		int number = rand() % 2;
-
 		ObjectMaster* spring = LoadObject((LoadObj)2, 2, SpringB_Main);
 		spring->Data1->Rotation = { rand() % 0x8000, rand() % 0x8000, rand() % 0x8000 };
 		spring->Data1->Scale.y = rand() % 4 + 1 * 2.5;
@@ -237,9 +222,8 @@ extern "C"
 
 	void RandomCheckPoint(EntityData1* p1)
 	{
-
 		ObjectMaster* checkpoint = LoadObject((LoadObj)15, 6, CheckPoint_Main);
-		PrintDebug("Random checkpoint\n");
+		PrintDebug("Random Checkpoint\n");
 		SETObjData* CheckPointSETData = new SETObjData();
 		checkpoint->SETData.SETData = CheckPointSETData;
 		checkpoint->Data1->Rotation = p1->Rotation;
@@ -250,12 +234,10 @@ extern "C"
 	void RandomSpeedPad(EntityData1* p1) 
 	{
 		int number = rand() % 2;
-
 		ObjectMaster* speed = LoadObject((LoadObj)3, 3, DashPanel_Main);
 		speed->Data1->Scale.x = rand() % 5 + 10 * 2.5;
 		speed->Data1->Rotation.y = rand() % 0x8000;
 		speed->Data1->Position = p1->Position;
-
 		if (number)
 		{
 			ObjectMaster* speed2 = LoadObject((LoadObj)3, 3, DashPanel_Main);
@@ -270,15 +252,12 @@ extern "C"
 	void RandomSpikeBall(EntityData1* p1) 
 	{
 		int number = rand() % 2;
-
-
 		ObjectMaster* spike = LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
 		spike->Data1->Rotation.y = rand() % 80 + 1000;
 		spike->Data1->Scale.x = rand() % 5 + 10 * 2.5;
 		spike->Data1->Position = p1->Position;
 		spike->Data1->Position.y += 2;
 		spike->Data1->Position.x += 80;
-
 		if (number) 
 		{
 			ObjectMaster* spike2 = LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
@@ -293,7 +272,6 @@ extern "C"
 	}
 	void RandomKillMomentum(CharObj2* p1) 
 	{
-
 		p1->Speed = { 0, 0, 0 };
 		PrintDebug("Kill Momentum\n");
 		PlayVoice(55555);//OOF
@@ -305,7 +283,6 @@ extern "C"
 		p1->Speed.y = p1->PhysicsData.VSpeedCap;
 		PrintDebug("Random VSpeed\n");
 		return;
-		
 	}
 
 	void RandomHSpeed(CharObj2* p1) 
@@ -320,7 +297,6 @@ extern "C"
 		if (Rings > 0)
 			PrintDebug("Hurt\n");
 			return HurtCharacter(0);
-		
 	}
 
 	void RandomPowerUP(EntityData1* p1)
@@ -349,13 +325,12 @@ extern "C"
 		{
 			SetTimeOfDay(rand() % 3);
 			PrintDebug("Random Time Of Day\n");
-			
 		}
 		else
 		{
+			PrintDebug("Not in adventure field\n");
 			Chaos_Timer = EffectMax;//forces another Chaos mod if not in Adventure 
 		}
-
 	}
 
 	void RandomDroppedRings(EntityData1* p1)
@@ -366,25 +341,18 @@ extern "C"
 	void RandomClipLevel()//currently disabled, may be removed. updated to only change 
 	{
 			ClipLevel = rand() % 3;
-			PrintDebug("Clip Level Set \n");
-
+			PrintDebug("Clip Level Set\n");
 	}
 	void RandomPause() //randomly pauses the game LOL get good, time
 	{
-		//GameState = 16; //pauses game, keeps music running, oh well. 
 		Pause_Timer = 5; //how long in frames? to pause unpause?
 		PrintDebug("Random Pause\n");
 	}
 	void RandomChar()//works but disabled
 	{
 		SetCharacter(rand() % 7);
-		PrintDebug("Random Char\n");
+		PrintDebug("Random Character\n");
 	}
-
-
-	//DisablePause
-	//Fast Pause Unpase // kinda have this? it forces you to unpause a few times, lol 
-
 	void SwapCamera()//Swaps Camera lmfao
 	{
 		if (GetCameraMode_() == 0)
@@ -413,23 +381,21 @@ extern "C"
 			EntityData1Ptrs[0]->Action = 53;
 			break;
 		default:
+			PrintDebug("Debug Mode Failed Due to Current Character\n");
 			Chaos_Timer = EffectMax;
 			return;
 		}
 		Debug_Timer = 333;
-		PrintDebug("Debug Mode on \n");
-		
+		PrintDebug("Debug Mode Enabled\n");
 	}
-
 	void  RandomXGravity()//currently disabled,
 	{
 		Gravity.x = rand() % 2 + (1.5);
 		PrintDebug("Random X Gravity\n");
-
 	}
 	void  RandomYGravity()
 	{
-		Gravity_Timer = 222;
+		Gravity_Timer = 1000;
 		Gravity.y = rand() % 2 + (-1.5);
 		PrintDebug("Random Y Gravity\n");
 	}
@@ -437,9 +403,6 @@ extern "C"
 	{
 		Gravity.z = rand() % 2 + (-1.0);
 		PrintDebug("Random Z Gravity\n");
-	}
-	void FakeEmblem()
-	{
 	}
 	void RandomBarrier()//currently disabled, might be killing the player? lol
 	{
@@ -456,14 +419,12 @@ extern "C"
 		GiveInvincibility(0);
 		PrintDebug("Give Invincibility\n");
 	}
-
 	void RandomControlDisable()
 	{
 		DisableControl_Timer = 90;
 		ControlEnabled = 0;
-		PrintDebug("Disabled Controller\n");
+		PrintDebug("Controller Disabled\n");
 	}
-
 	void MSmallScale(EntityData1* p1)//disabled this
 	{
 		for (int i = 0; i < 21; i++) {
@@ -474,14 +435,11 @@ extern "C"
 		PrintDebug("Small Scale\n");
 		return;
 	}
-
 	void RandomSwapMusic() 
 	{
-
 		do {
 			CurrentSong = rand() % 125;
 		} while (LastSong == CurrentSong);
-
 		LastSong = CurrentSong;
 		PrintDebug("Random Song\n");
 		return;
@@ -500,7 +458,7 @@ extern "C"
 		//enable dpaddown check timer
 		DPadDown_Timer = 90; //90 frames?
 		DpadDown = 0;
-		PrintDebug("Timer set to 90 \n");
+		PrintDebug("Dpad Down or Die\n");
 	}
 
 	void RandomTeleport()
@@ -511,14 +469,14 @@ extern "C"
 
 	void RandomNoClip()
 	{
-		NoClip_Timer = 400;
+		NoClip_Timer = 800;
 		WriteData((int*)0x00444C1D, (int)0x90909090);
 		WriteData((int*)0x00444C21, (int)0x10C48390);
 		WriteData((int*)0x0044A66B, (int)0x90909090);
 		WriteData((int*)0x0044A66F, (int)0x14C48390);
 		WriteData((int*)0x007887D9, (int)0x90909090);
 		WriteData((int*)0x007887DD, (int)0x74C08590);
-		PrintDebug("NoClip Enabled\n");
+		PrintDebug("Walk Thru Walls Enabled\n");
 	}
 	typedef void(__cdecl* ChaosEnt)(EntityData1*);
 	typedef void(__cdecl* ChaosCharObj)(CharObj2*);
@@ -677,37 +635,32 @@ extern "C"
 	55555 //Custom OOF Voice
 	};
 
-
-
 	void RandomTikalHint()
 	{
 		int hintrand = rand() % HintSize;
-		//PrintDebug("%i\n", hintrand);
-		//LoadAutoHint(Hints[0], Voices[0]);
 		LoadAutoHint(Hints[hintrand], Voices[hintrand]);
-	    PrintDebug("%i Random Hint Test\n", hintrand);
-		fuckt = 1;
+	    PrintDebug("%i Random Hint\n", hintrand);
 	}
-
 	void InputInvert()
 	{
 		WriteData<1>((int*)0x40F2A2, 0xC6);
 		WriteData<1>((int*)0x40F2A1, 0x1);
 		InputInvert_Timer = 420;
-		PrintDebug("Input Inverted");
+		PrintDebug("Input Inverted\n");
 	}
 
 	Void RandomRotate()
 	{
 		int Rotaterand = rand() % 65535;
 			RotatePlayer(0, Rotaterand);
+			PrintDebug("%i Rotated\n", Rotaterand);
 	}
 
 	void RandomSnowboard()
 	{
 		if (IssSowboarding == 0)
 		{
-			SnowboardTimer = 333;
+			SnowboardTimer = 500;
 			IssSowboarding = 1;
 			if (GameMode == GameModes_Menu || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || !GetCharacterObject(0)) //Credits to MainMemory for the Code, https://github.com/MainMemory/SADXBoardSpawner
 				return;
@@ -808,25 +761,20 @@ extern "C"
 	{ nullptr, nullptr, RandomTikalHint },
 	{ nullptr, nullptr, RandomTikalHint },
 	{ nullptr, nullptr, RandomTikalHint },
-	{ nullptr, nullptr, InputInvert },
-
+	{ nullptr, nullptr, InputInvert }
 	};
 	size_t ChaosSize = LengthOfArray(ChaosArray);
-
 	__declspec(dllexport) void __cdecl OnFrame()
 	{
 		// Executed every running frame of SADX
-
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
-
-		if (NoClip_Timer <= 400 && NoClip_Timer != 0)
+		if (NoClip_Timer <= 8000 && NoClip_Timer != 0)
 		{
 			NoClip_Timer--;
-
 			if (NoClip_Timer == 1 && NoClip_Timer != 0)
 			{
-				PrintDebug("NoClip Disabled\n");
+				PrintDebug("Walk Thru Walls Disabled\n");
 				WriteData((int*)0x00444C1D, (int)0xFF37EEE8);
 				WriteData((int*)0x00444C21, (int)0x10C483FF);
 				WriteData((int*)0x0044A66B, (int)0xFFA430E8);
@@ -845,10 +793,10 @@ extern "C"
 			WriteData<1>((int*)0x40F2A2, 0xF0);
 			WriteData<1>((int*)0x40F2A1, 0x2B);
 			InputInvert_Timer = 0;
-			PrintDebug("Input RE-Inverted\n");
+			PrintDebug("Input Set to Default\n");
 		}
 
-		if (Gravity_Timer <= 222 && Gravity_Timer != 0)
+		if (Gravity_Timer <= 1000 && Gravity_Timer != 0)
 		{
 			Gravity_Timer--;
 		}
@@ -860,20 +808,17 @@ extern "C"
 
 		if (DisableControl_Timer <= 90 && DisableControl_Timer != 0)
 		{
-			
 			DisableControl_Timer--;
-			
 		}
 		if (DisableControl_Timer == 1 && DisableControl_Timer != 0)
 		{
 			ControlEnabled = 1;
 			DisableControl_Timer = 0;
-			PrintDebug("Enabled Control\n");
+			PrintDebug("Control Enabled\n");
 		}
 
 		if (DPadDown_Timer <= 90 && DPadDown_Timer != 0)
 		{
-
 			SetDebugFontColor(0xFFFF0000);
 			SetDebugFontSize(18);
 			DisplayDebugString(NJM_LOCATION(15, 40), "- PRESS DPAD DOWN OR DIE!!! -");
@@ -885,26 +830,16 @@ extern "C"
 		}
 		if (DPadDown_Timer == 1 && DpadDown != 1)//if timer is less then or 1 and DPadDown is not 1 
 		{
-			PrintDebug("Failed Button Check \n");
+			PrintDebug("Failed Dpad Down Check\n");
 			KillPlayer(0);
 			DPadDown_Timer = 0;
 		}
-		
 		if (Pause_Timer <= 5 && Pause_Timer != 0)
 		{
 			GameState = 16;
 			Pause_Timer--;
 		}
-
-		if (bstimer <= 100 && bstimer != 0)
-		{
-			bstimer--;
-		}
-		if (bstimer == 0 && fuckt == 1)
-		{
-			fuckt = 0;
-		}
-		if (SnowboardTimer <= 333 && SnowboardTimer != 0)
+		if (SnowboardTimer <= 500 && SnowboardTimer != 0)
 		{
 			SnowboardTimer--;
 		}
@@ -913,7 +848,7 @@ extern "C"
 			SnowboardTimer = 0;
 			IssSowboarding = 0;
 			EntityData1Ptrs[0]->Action = 1;
-			PrintDebug("Snowbaord off Action Set\n");
+			PrintDebug("Snowbaord off, Action Set\n");
 		}
 		if (Debug_Timer <= 333 && Debug_Timer != 0)
 		{
@@ -923,27 +858,22 @@ extern "C"
 		{
 			Debug_Timer = 0;
 			EntityData1Ptrs[0]->Action = 1;
-			PrintDebug("Debug turned Off Action Set\n");
+			PrintDebug("Debug turned Off, Action Set\n");
 		}
-
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
 			Chaos_Timer++;
-
 		if (Chaos_Timer >= EffectMax)
 		{
 			char curRand = 0;
-
 			do {
 				curRand = rand() % ChaosSize;
 			} while (oldRand == curRand);
-
 			if (ChaosArray[curRand].func != nullptr)
 				ChaosArray[curRand].func(EntityData1Ptrs[0]);
 			else if (ChaosArray[curRand].func2 != nullptr)
 				ChaosArray[curRand].func2(CharObj2Ptrs[0]);
 			else
 				ChaosArray[curRand].func3();
-
 			oldRand = curRand;
 			Chaos_Timer = 0;
 		}
@@ -954,23 +884,11 @@ extern "C"
 		// Executed before the game processes input
 
 	}
-
 	__declspec(dllexport) void __cdecl OnControl(EntityData1* p1)
 	{
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if A L R and Y are pressed
 		{
-			bstimer = 100;
-			
-			if (bstimer == 100 && fuckt == 0)
-			{
-				//PrintDebug("a%i", GetLevelAndAct());
-				//PrintDebug("b%i", (int)LevelAndActIDs_EmeraldCoast1);
-				//NJS_VECTOR RandomTeleport = GetRandomCoordinates((LevelAndActIDs)(GetLevelAndAct()));
-				//EntityData1Ptrs[0]->Position = RandomTeleport;
-				//fuckt = 0;
-				
-			}
 
 		}
 	}
