@@ -61,6 +61,10 @@
 //added Movement Stick Invert code thanks to Sora!
 //added support for knux, amy, and metal sonic to movement debug, Tails, gamma and big dont have movement debug thanks to stars for pointing out im dumb,
 //trying to add support for editing the chaos timer, shits fucked 
+//started adding Random Telport with the help of Refrag :)
+//added Ability to edit How often things happen in the config menu
+
+
 
 
 char oldRand = -1;
@@ -77,6 +81,7 @@ int fuckt = 0;
 int SnowboardTimer = 0;
 int IssSowboarding = 0;
 int InputInvert_Timer = 0;
+int EffectMax = 0;
 ObjectMaster* snowboard;
 
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
@@ -121,7 +126,7 @@ void InitializeRandomCoordinates()
 
 	customLocationsMap[LevelAndActIDs_EmeraldCoast2] =
 	{
-	{-086.50f,1106.5f,-2865.5f},
+	{-986.50f,1106.5f,-2865.5f},
 	{465.78f,635.85f,-798.99f},
 	{1551.2f,545.98f,-958.93f},
 	{2974.0f,2.6099f,-1529.03f},
@@ -133,6 +138,51 @@ void InitializeRandomCoordinates()
 	{4129.233f,496.0f,-2793.12f},
 	{5378.593f,56.033f,-2648.15f}
 	};
+
+	customLocationsMap[LevelAndActIDs_WindyValley1] =
+	{
+	{1230.0f,-484.0f,-140.0f}, //sonic spawn act 0
+	{2047.50f,-467.0f,5.63f}, //near flower clip
+	{2303.77f,-415.22f,-280.37f}, //after checkpoint, near wind
+	{2934.96f,-535.97f,-1479.40f}, //near torando
+	{2903.87f,-505.80f,-914.59f}, //trampoline lol
+	{2996.993f,-434.81f,-1517.76f}, //near life near torando
+	};
+	customLocationsMap[LevelAndActIDs_WindyValley2] =
+	{
+	{-5.379f,235.476f,-51.534f},//ontop of tikal orb bottom of torando,
+	{-5.176f,493.717f,-75.79f},//ontop of tikal orb near jump pannel 1
+	{-42.50f,986.0f,-11.105f}, //near trampoline
+	{20.395f,1131.01f,19.717f},//on bridge
+	{-25.182f,1800.824f,20.471f}//top of torando
+	};
+
+	customLocationsMap[LevelAndActIDs_WindyValley3] =
+	{
+	{1095.47f,-338.0f,-1250.59f},//top of act 3 sonic/tails spawn
+	{1343.82f,-2661.0f,1324.48f},//near first rocket
+	{3834.417f,-4492.0f,-1161.63f},//near wind
+	{4140.870f,-4125.0268f,-1632.09f},//midair spring
+	{4881.035f,-4043.27f,-2132.892f},//near checkpoint after springs
+	{5718.33f,-6361.026f,665.40f},//near old sonic act 3 skip
+	{5780.81f,-10700.34f,-574.620f}//end of act 3
+	};
+
+	customLocationsMap[LevelAndActIDs_Casinopolis1] =
+	{
+	{75.0f,201.0f,270.0f},//sonic spawn
+	{}
+
+	};
+
+	customLocationsMap[LevelAndActIDs_Casinopolis2] =
+	{
+	{17.861f,-1840.0f,2869.292f},//sonic/tails spawn
+	{-1415.618f,-680.0f,2868.097f},//top path of first wind tunnel
+	{}
+
+	};
+
 }
 
 extern "C"
@@ -143,8 +193,10 @@ extern "C"
 		// Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
 		// This is where we override functions, replace static data, etc.
 
-		InitializeRandomCoordinates();
 
+		const IniFile* config = new IniFile(std::string(path) + "\config.ini");
+		EffectMax = config->getInt("General", "EffectMax");
+		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
 		WriteCall((void*)0x4E967E, LoadSnowboardObject);
 		WriteCall((void*)0x4E9698, LoadSnowboardObject);
@@ -296,7 +348,7 @@ extern "C"
 		}
 		else
 		{
-			Chaos_Timer = 180;//forces another Chaos mod if not in Adventure 
+			Chaos_Timer = EffectMax;//forces another Chaos mod if not in Adventure 
 		}
 
 	}
@@ -356,7 +408,7 @@ extern "C"
 			EntityData1Ptrs[0]->Action = 53;
 			break;
 		default:
-			Chaos_Timer = 180;
+			Chaos_Timer = EffectMax;
 			return;
 		}
 		Debug_Timer = 333;
@@ -446,6 +498,11 @@ extern "C"
 		PrintDebug("Timer set to 90 \n");
 	}
 
+	void RandomTeleport()
+	{
+		NJS_VECTOR RandomTeleport = GetRandomCoordinates((LevelAndActIDs)(GetLevelAndAct()));
+		EntityData1Ptrs[0]->Position = RandomTeleport;
+	}
 
 	void RandomNoClip()
 	{
@@ -696,7 +753,7 @@ extern "C"
 		}
 		else
 		{
-			Chaos_Timer = 180;//forces another Chaos mod if already on snowboard?
+			Chaos_Timer = EffectMax;//forces another Chaos mod if already on snowboard?
 		}
 	}
 
@@ -864,10 +921,10 @@ extern "C"
 			PrintDebug("Debug turned Off Action Set\n");
 		}
 
-		if (Chaos_Timer < 180)//30 seconds is 1800
+		if (Chaos_Timer < EffectMax)//30 seconds is 1800
 			Chaos_Timer++;
 
-		if (Chaos_Timer >= 180)
+		if (Chaos_Timer >= EffectMax)
 		{
 			char curRand = 0;
 
@@ -902,11 +959,11 @@ extern "C"
 			
 			if (bstimer == 100 && fuckt == 0)
 			{
-				PrintDebug("a%i", GetLevelAndAct());
-				PrintDebug("b%i", (int)LevelAndActIDs_EmeraldCoast1);
-				GetRandomCoordinates((LevelAndActIDs)(GetLevelAndAct()));
-
-				fuckt = 0;
+				//PrintDebug("a%i", GetLevelAndAct());
+				//PrintDebug("b%i", (int)LevelAndActIDs_EmeraldCoast1);
+				//NJS_VECTOR RandomTeleport = GetRandomCoordinates((LevelAndActIDs)(GetLevelAndAct()));
+				//EntityData1Ptrs[0]->Position = RandomTeleport;
+				//fuckt = 0;
 				
 			}
 
