@@ -69,6 +69,12 @@
 //changed how long Gravity, noclip, and snowboard last before being disabled
 //finished sonic casino act 0 teleports
 //started working on casino act 1 teleport (might work for tails and sonic)
+//changed gravity random math again
+//finished Casino act 1 teleports
+//finished teleports to emeraldcoast act 0
+//finished icecap act 0 and 1 teleports
+//finished speedhighway act 0 sonic teleports
+//started working on act 2 speedhighway sonic teleports
 
 
 
@@ -117,15 +123,22 @@ void InitializeRandomCoordinates()
 {
 	customLocationsMap[LevelAndActIDs_EmeraldCoast1] =
 	{
-	{-9.0f,4.0f,4.0f},
+	{-9.0f,4.0f,4.0f},//spawn
 	{1647.5f,115.0f,840.6f},
 	{4042.8f,8.52f,363.5f},
-	{5596.6f,3.21f,1096.52f}
+	{5596.6f,3.21f,1096.52f},
+	{-643.81f,46.0f,1381.965f},//bridge
+	{-276.18f,55.228f,1205.669f},//near loop
+	{829.321f,79.94f,636.158f},//near monkeys where gamma finds froggy
+	{1051.650f,75.887f,865.474f}, //dashpad
+	{1877.094f,198.0f,890.83f}, //spikes near lol
+	{6090.589f,96.60f,1177.66f},//spring 
+	{6298.54f,316.899f,1271.01f} //life
 	};
 
 	customLocationsMap[LevelAndActIDs_EmeraldCoast2] =
 	{
-	{-986.50f,1106.5f,-2865.5f},
+	{-986.50f,1106.5f,-2865.5f},//spawn
 	{465.78f,635.85f,-798.99f},
 	{1551.2f,545.98f,-958.93f},
 	{2974.0f,2.6099f,-1529.03f},
@@ -135,7 +148,7 @@ void InitializeRandomCoordinates()
 	{3408.735f,70.0f,-2577.899f},
 	{3687.43f,508.0f,-2827.662f},
 	{4129.233f,496.0f,-2793.12f},
-	{5378.593f,56.033f,-2648.15f}
+	{5378.593f,56.033f,-2648.15f}//end of level?
 	};
 
 	customLocationsMap[LevelAndActIDs_WindyValley1] =
@@ -182,7 +195,52 @@ void InitializeRandomCoordinates()
 	customLocationsMap[LevelAndActIDs_Casinopolis2] =
 	{
 	{17.861f,-1840.0f,2869.292f},//sonic/tails spawn
-	{-1415.618f,-680.0f,2868.097f}//top path of first wind tunnel
+	{-1415.618f,-680.0f,2868.097f},//top path of first wind tunnel
+	{-1256.346f,-887.597f,3082.240f},//mid path first wind tunnel
+	{-1254.956f,-1080.0f,2719.986f},//lwoer path first wind tunnel
+	{-1904.54f,-1510.0f,3018.261f},//top path of second wind tunnel
+	{-2057.164f,-1910.0f,3176.71f},//lower path of second wind tunnel
+	{-1568.430f,-2205.0f,2643.35f},//end of underground
+	{-1569.90f,-2205.0f,1824.0f}//near tails emerald/ladder up
+	};
+
+	customLocationsMap[LevelAndActIDs_IceCap1] =
+	{
+	{1579.99f,-26.32f,1074.0f}, //sonic spawn
+	{435.28f,92.64f,1010.76f},//tikal orb first ice room
+	{487.92f,253.26f,1149.01f}, //life top first ice room
+	{643.67f,213.49f,926.17f}, //rocket end of first ice room
+	{1100.46f,336.22f,462.15f} //entering act 1
+	};
+
+	customLocationsMap[LevelAndActIDs_IceCap2] =
+	{
+	{1043.91f,-339.13f,252.92f}, //sonic spawn
+	{1178.48f,5.248f,-92.66f},//spring bottom of ice room
+	{1555.46f,366.689f,70.93f}, //3 ring box area
+	{1177.05f,333.83f,-266.294f}, //switch to spawn icepath
+	{1448.57f,576.399f,-256.989f}, //jumppad 1
+	{1106.45f,320.0f,-76.74f}//past falling bridge
+	};
+
+	customLocationsMap[LevelAndActIDs_SpeedHighway1] =
+	{
+	{-673.0f,-10.0f,5.0f},//sonic spawn
+	{2555.71f,-1263.25f,768.49f}, //first moving path
+	{4755.08f,-1281.989f,-221.058f}, //bell
+	{5608.82f,-1763.28f,1250.75f}, //first ball move thing
+	{4728.29f,-1433.25f,1650.03f}, //speed shoes
+	{2347.30f,-1303.02f,1797.20f},//after helecopter
+	{1890.57f,-1326.0f,2255.44f}, //rocket
+	{4272.64f,-1888.99f,4256.925f}, //rocket
+	{4038.78f,-1500.0f,4672.31f}//after rocket near end
+	};
+
+	customLocationsMap[LevelAndActIDs_SpeedHighway3] =
+	{
+	{72.0f,24.5f,192.0f},//sonic spawn
+	{-1519.54f,109.795f,-984.970f},//spring
+	{-227.27f,150.0f,-1724.74f} //end
 
 	};
 
@@ -398,18 +456,18 @@ extern "C"
 	}
 	void  RandomXGravity()//currently disabled,
 	{
-		Gravity.x = rand() % 2 + (1.5);
+		Gravity.x = (float)rand() / RAND_MAX + (-1.5);
 		PrintDebug("Random X Gravity\n");
 	}
 	void  RandomYGravity()
 	{
 		Gravity_Timer = 1000;
-		Gravity.y = rand() % 2 + (-1.5);
+		Gravity.y = (float)rand() / RAND_MAX + (-1.5);
 		PrintDebug("Random Y Gravity\n");
 	}
 	void  RandomZGravity()//currently disabled,
 	{
-		Gravity.z = rand() % 2 + (-1.0);
+		Gravity.z = (float)rand() / RAND_MAX + (-1.5);
 		PrintDebug("Random Z Gravity\n");
 	}
 	void RandomBarrier()//currently disabled, might be killing the player? lol
@@ -856,7 +914,7 @@ extern "C"
 			SnowboardTimer = 0;
 			IssSowboarding = 0;
 			EntityData1Ptrs[0]->Action = 1;
-			PrintDebug("Snowbaord off, Action Set\n");
+			PrintDebug("Snowboard off, Action Set\n");
 		}
 		if (Debug_Timer <= 333 && Debug_Timer != 0)
 		{
@@ -869,7 +927,7 @@ extern "C"
 			PrintDebug("Debug turned Off, Action Set\n");
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
-			//Chaos_Timer++;
+			Chaos_Timer++;
 		if (Chaos_Timer >= EffectMax)
 		{
 			char curRand = 0;
@@ -897,7 +955,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if A L R and Y are pressed
 		{
-
+			RandomYGravity();
 		}
 	}
 
