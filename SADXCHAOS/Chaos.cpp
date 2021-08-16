@@ -75,6 +75,9 @@
 //finished icecap act 0 and 1 teleports
 //finished speedhighway act 0 sonic teleports
 //started working on act 2 speedhighway sonic teleports
+//added Random Life PowerUp
+//finished randomteleport crashing when not in a level/act that have teleports thanks to refrag again!
+
 
 
 
@@ -109,13 +112,11 @@ std::unordered_map<LevelAndActIDs, std::vector<NJS_VECTOR>> customLocationsMap;
 NJS_VECTOR GetRandomCoordinates(LevelAndActIDs levelAndAct)
 {
 	std::vector<NJS_VECTOR> coordsvector = customLocationsMap[levelAndAct];
-	int random = 0;
-	int fuckyou = coordsvector.size();
-	if (fuckyou != 0)
-	{
-		fuckyou--;
-		random = rand() % fuckyou;
-	}
+	UINT coordsSize = coordsvector.size();
+	if (coordsSize == 0)
+		return {0.0f,0.0f,0.0f};
+
+	UINT random = rand() % (coordsSize - 1);
 	return coordsvector[random];
 }
 
@@ -241,7 +242,17 @@ void InitializeRandomCoordinates()
 	{72.0f,24.5f,192.0f},//sonic spawn
 	{-1519.54f,109.795f,-984.970f},//spring
 	{-227.27f,150.0f,-1724.74f} //end
+	};
 
+	customLocationsMap[LevelAndActIDs_TwinklePark2] =
+	{
+	{-15.041f,142.0f,-1001.32f},//after rollercoaster sonic
+	{-87.866f,0.0f,-490.0f},//pinball 1 
+	{435.429f,0.0f,718.42f},//pinball 2
+	{724.193f,50.0f,-362.295f},//amy spawn
+	{323.486f,230.04f,608.35f},//near first floating platform
+	{-87.82f,412.65f,14.078f},//spring
+	{102.069f,532.58f,74.430f},//spring
 	};
 
 }
@@ -485,6 +496,11 @@ extern "C"
 		GiveInvincibility(0);
 		PrintDebug("Give Invincibility\n");
 	}
+	void RandomLifePowerup(EntityData1* p1)
+	{
+		ExtraLifePowerup(0);
+		PrintDebug("Give Extra Life\n");
+	}
 	void RandomControlDisable()
 	{
 		DisableControl_Timer = 90;
@@ -524,13 +540,21 @@ extern "C"
 		//enable dpaddown check timer
 		DPadDown_Timer = 90; //90 frames?
 		DpadDown = 0;
-		PrintDebug("Dpad Down or Die\n");
+		PrintDebug("Press Dpad Down Or Die\n");
 	}
 
 	void RandomTeleport()
 	{
+		
 		NJS_VECTOR RandomTeleport = GetRandomCoordinates((LevelAndActIDs)(GetLevelAndAct()));
+		if (RandomTeleport.x == 0.0f && RandomTeleport.y == 0.0f && RandomTeleport.z == 0.0f)
+		{
+			PrintDebug("No Random Teleports for this Level/Act, causing new Effect\n");
+			Chaos_Timer = EffectMax; //calls a new effect
+			return;
+		}
 		EntityData1Ptrs[0]->Position = RandomTeleport;
+		PrintDebug("Random Teleport\n");
 	}
 
 	void RandomNoClip()
@@ -778,10 +802,11 @@ extern "C"
 		else
 		{
 			Chaos_Timer = EffectMax;//forces another Chaos mod if already on snowboard?
+			PrintDebug("Currently on Snowboard new effect chosen\n");
 		}
 	}
 
-	ChaosS ChaosArray[45]{
+	ChaosS ChaosArray[47]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -797,38 +822,41 @@ extern "C"
 	{ RandomPowerUP, nullptr, nullptr },
 	{ RandomPowerUP, nullptr, nullptr },
 	{ RandomPowerUP, nullptr, nullptr },
+	{ RandomLifePowerup, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomHSpeed, nullptr, },
 	{ nullptr, RandomHSpeed, nullptr, },
-	{ nullptr, nullptr, RandomSwapMusic },
+	{ nullptr, nullptr, RandomSwapMusic},
 	{ nullptr, nullptr, ChaosPlayVoice_rng},
-	{ nullptr, nullptr, RandomSnowboard },
-	{ nullptr, nullptr, RandomTimeOfDay },
-	{ nullptr, nullptr, RandomTimeOfDay },
-	{ nullptr, nullptr, RandomTimeOfDay },
-	{ nullptr, nullptr, RandomTimeOfDay },
-	{ nullptr, nullptr, RandomTimeOfDay },
-	{ nullptr, nullptr, RandomPause },
-	{ nullptr, nullptr, RandomPause },
-	{ nullptr, nullptr, SwapCamera },
-	{ nullptr, nullptr, SwapCamera },
-	{ nullptr, nullptr, SwapCamera },
-	{ nullptr, nullptr, SwapCamera },
-	{ nullptr, nullptr, RandomDebug },
-	{ nullptr, nullptr, RandomYGravity },
-	{ nullptr, nullptr, RandomYGravity },
-	{ nullptr, nullptr, RandomDPadDownCheck },
-	{ nullptr, nullptr, RandomControlDisable },
-	{ nullptr, nullptr, RandomNoClip },
-	{ nullptr, nullptr, RandomTikalHint },
-	{ nullptr, nullptr, RandomTikalHint },
-	{ nullptr, nullptr, RandomTikalHint },
-	{ nullptr, nullptr, RandomTikalHint },
-	{ nullptr, nullptr, InputInvert }
+	{ nullptr, nullptr, RandomSnowboard},
+	{ nullptr, nullptr, RandomTimeOfDay},
+	{ nullptr, nullptr, RandomTimeOfDay},
+	{ nullptr, nullptr, RandomTimeOfDay},
+	{ nullptr, nullptr, RandomTimeOfDay},
+	{ nullptr, nullptr, RandomTimeOfDay},
+	{ nullptr, nullptr, RandomPause},
+	{ nullptr, nullptr, RandomPause},
+	{ nullptr, nullptr, SwapCamera},
+	{ nullptr, nullptr, SwapCamera},
+	{ nullptr, nullptr, SwapCamera},
+	{ nullptr, nullptr, SwapCamera},
+	{ nullptr, nullptr, RandomDebug},
+	{ nullptr, nullptr, RandomYGravity},
+	{ nullptr, nullptr, RandomYGravity},
+	{ nullptr, nullptr, RandomDPadDownCheck},
+	{ nullptr, nullptr, RandomControlDisable},
+	{ nullptr, nullptr, RandomNoClip},
+	{ nullptr, nullptr, RandomTikalHint},
+	{ nullptr, nullptr, RandomTikalHint},
+	{ nullptr, nullptr, RandomTikalHint},
+	{ nullptr, nullptr, RandomTikalHint},
+	{ nullptr, nullptr, InputInvert},
+	{ nullptr, nullptr, RandomTeleport}
 	};
+
 	size_t ChaosSize = LengthOfArray(ChaosArray);
 	__declspec(dllexport) void __cdecl OnFrame()
 	{
@@ -840,7 +868,6 @@ extern "C"
 			NoClip_Timer--;
 			if (NoClip_Timer == 1 && NoClip_Timer != 0)
 			{
-				PrintDebug("Walk Thru Walls Disabled\n");
 				WriteData((int*)0x00444C1D, (int)0xFF37EEE8);
 				WriteData((int*)0x00444C21, (int)0x10C483FF);
 				WriteData((int*)0x0044A66B, (int)0xFFA430E8);
@@ -848,6 +875,7 @@ extern "C"
 				WriteData((int*)0x007887D9, (int)0x00D042E8);
 				WriteData((int*)0x007887DD, (int)0x74C08500);
 				NoClip_Timer = 0;
+				PrintDebug("Walk Thru Walls Disabled\n");
 			}
 		}
 		if (InputInvert_Timer <= 420 && InputInvert_Timer != 0)
@@ -870,6 +898,7 @@ extern "C"
 		{
 			ResetGravity();
 			Gravity_Timer = 0;
+			PrintDebug("Y Gravity Reset\n");
 		}
 
 		if (DisableControl_Timer <= 90 && DisableControl_Timer != 0)
@@ -896,9 +925,9 @@ extern "C"
 		}
 		if (DPadDown_Timer == 1 && DpadDown != 1)//if timer is less then or 1 and DPadDown is not 1 
 		{
-			PrintDebug("Failed Dpad Down Check\n");
 			KillPlayer(0);
 			DPadDown_Timer = 0;
+			PrintDebug("Failed Dpad Down Or Die Check\n");
 		}
 		if (Pause_Timer <= 5 && Pause_Timer != 0)
 		{
@@ -909,7 +938,7 @@ extern "C"
 		{
 			SnowboardTimer--;
 		}
-		if (SnowboardTimer == 1 && SnowboardTimer <= 5 && IssSowboarding == 1)
+		if (SnowboardTimer == 1 && SnowboardTimer <= 2 && IssSowboarding == 1)
 		{
 			SnowboardTimer = 0;
 			IssSowboarding = 0;
@@ -924,7 +953,7 @@ extern "C"
 		{
 			Debug_Timer = 0;
 			EntityData1Ptrs[0]->Action = 1;
-			PrintDebug("Debug turned Off, Action Set\n");
+			PrintDebug("Debug turned Off, Default Action Set\n");
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
 			Chaos_Timer++;
@@ -955,7 +984,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if A L R and Y are pressed
 		{
-			RandomYGravity();
+			RandomTeleport();
 		}
 	}
 
