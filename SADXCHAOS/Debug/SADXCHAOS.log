@@ -1,4 +1,6 @@
 ﻿  Chaos.cpp
-C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(646,22): warning C4114: same type qualifier used more than once
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(104,29): warning C4309: 'initializing': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(906,22): warning C4114: same type qualifier used more than once
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(1184,46): warning C4305: 'argument': truncation from 'double' to 'float'
   SADXCHAOS.vcxproj -> C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.dll
           1 file(s) copied.

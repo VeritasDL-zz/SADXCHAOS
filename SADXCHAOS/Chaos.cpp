@@ -8,7 +8,6 @@
 #include <algorithm>
 #include <vector>
 #include <IniFile.hpp>
-#include <SADXModLoader.h>
 
 
 //changelog
@@ -77,6 +76,13 @@
 //started working on act 2 speedhighway sonic teleports
 //added Random Life PowerUp
 //finished randomteleport crashing when not in a level/act that have teleports thanks to refrag again!
+//finished twinkle park teleports
+//added Option for Last Effect to Be Printed to Game Screen
+//changed size, color and position of Last Effect text, also render a paque/translucent box around it.
+//Re Enabled Random Hurt
+//Added Option to print last effet to screen
+//added Ability to spawn Enemys
+
 
 
 
@@ -94,6 +100,16 @@ int SnowboardTimer = 0;
 int IssSowboarding = 0;
 int InputInvert_Timer = 0;
 int EffectMax = 0;
+bool DebugToScreen = false;
+char* LastEffect = new char(128);
+bool EnableFontScaling = false;
+bool SpinnerTextLoader = false;
+bool LeonTextLoader = false;
+bool RinoTextLoader = false;
+bool KikiTextLoader = false;
+bool SmanTextLoader = false;
+bool EGachaTextLoader = false;
+
 ObjectMaster* snowboard;
 
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
@@ -115,7 +131,6 @@ NJS_VECTOR GetRandomCoordinates(LevelAndActIDs levelAndAct)
 	UINT coordsSize = coordsvector.size();
 	if (coordsSize == 0)
 		return {0.0f,0.0f,0.0f};
-
 	UINT random = rand() % (coordsSize - 1);
 	return coordsvector[random];
 }
@@ -265,6 +280,7 @@ extern "C"
 		// This is where we override functions, replace static data, etc.
 		const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
 		EffectMax = config->getInt("General", "EffectMax", 180);
+		DebugToScreen = config->getBool("General", "PrintToScreen", false);
 		delete config;
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
@@ -274,7 +290,225 @@ extern "C"
 		WriteCall((void*)0x597B46, LoadSnowboardObject);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 		srand((unsigned)time(nullptr));
+		strcpy(LastEffect, "SADX CHAOS EDITION 0.9.8.1 By VeritasDL");
 	}
+
+
+	void DrawDebugRectangle(float leftchars, float topchars, float numchars_horz, float numchars_vert)
+	{
+		float FontScale;
+		if (!EnableFontScaling) FontScale = 1.0f;
+		else
+		{
+			if ((float)HorizontalResolution / (float)VerticalResolution > 1.33f) FontScale = floor((float)VerticalResolution / 480.0f);
+			else FontScale = floor((float)HorizontalResolution / 640.0f);
+		}
+		njColorBlendingMode(0, NJD_COLOR_BLENDING_SRCALPHA);
+		njColorBlendingMode(NJD_DESTINATION_COLOR, NJD_COLOR_BLENDING_INVSRCALPHA);
+		DrawRect_Queue(leftchars * FontScale * 16.0f, topchars * FontScale * 16.0f, numchars_horz * FontScale * 16.0f, numchars_vert * FontScale * 16.0f, 62041.496f, 0x7F0000FF, QueuedModelFlagsB_EnableZWrite);
+		njColorBlendingMode(0, NJD_COLOR_BLENDING_SRCALPHA);
+		njColorBlendingMode(NJD_DESTINATION_COLOR, NJD_COLOR_BLENDING_INVSRCALPHA);
+	}
+	void RandomTank(EntityData1* p1)
+	{
+		if (RinoTextLoader == false)
+		{
+			LoadPVM("E_SAI", &E_SAI_TEXLIST);
+			RinoTextLoader = true;
+		}
+
+		int number = rand() % 2;
+		ObjectMaster* RhinoTank = LoadObject((LoadObj)2, 3, RhinoTank_Main);
+		SETObjData* RhinoTankSETData = new SETObjData();
+		RhinoTank->SETData.SETData = RhinoTankSETData;
+		RhinoTank->Data1->Position = EntityData1Ptrs[0]->Position;
+		RhinoTank->Data1->Position.z += rand() % 10 + 1 * 9;
+
+		if (number)
+		{
+			ObjectMaster* RhinoTank = LoadObject((LoadObj)2, 3, RhinoTank_Main);
+			SETObjData* RhinoTankSETData = new SETObjData();
+			RhinoTank->SETData.SETData = RhinoTankSETData;
+			RhinoTank->Data1->Position = EntityData1Ptrs[0]->Position;
+			RhinoTank->Data1->Position.z += rand() % 10 + 1 * 9;
+		}
+		strcpy(LastEffect, "Spawned Tank");
+		PrintDebug("Spawned Tank\n");
+		return;
+	}
+	void RandomLeon(EntityData1* p1) //doesnt seem to work may only work in levels where there is a Leon already
+	{
+		if (LeonTextLoader == false)
+		{
+			LoadPVM("E_LEON", &E_LEON_TEXLIST);
+			LeonTextLoader = true;
+		}
+
+		int number = rand() % 2;
+		ObjectMaster* Leon = LoadObject((LoadObj)2, 3, Leon_Load);
+		SETObjData* LeonSETData = new SETObjData();
+		Leon->SETData.SETData = LeonSETData;
+		Leon->Data1->Position = EntityData1Ptrs[0]->Position;
+		Leon->Data1->Position.z += rand() % 10 + 1 * 9;
+		if (number)
+		{
+			ObjectMaster* Leon = LoadObject((LoadObj)2, 3, Leon_Load);
+			SETObjData* LeonSETData = new SETObjData();
+			Leon->SETData.SETData = LeonSETData;
+			Leon->Data1->Position = EntityData1Ptrs[0]->Position;
+			Leon->Data1->Position.z += rand() % 10 + 1 * 9;
+		}
+		strcpy(LastEffect, "Spawned Leon");
+		PrintDebug("Spawned Leon\n");
+		return;
+	}
+
+	void RandomKiki(EntityData1* p1) 
+	{
+		if (KikiTextLoader == false)
+		{
+			LoadPVM("E_SARU", &E_SARU_TEXLIST);
+			LoadPVM("E_BOMB", &E_BOMB_TEXLIST);
+			KikiTextLoader = true;
+		}
+		ObjectMaster* Kiki = LoadObject((LoadObj)2, 3, Kiki_Load);
+		SETObjData* KikiSETData = new SETObjData();
+		Kiki->SETData.SETData = KikiSETData;
+		Kiki->Data1->Position = EntityData1Ptrs[0]->Position;
+		Kiki->Data1->Position.z += rand() % 10 + 1 * 9;
+		Kiki->Data1->Position.y += rand() % 2 + 1 * 9;
+		strcpy(LastEffect, "Spawned Kiki");
+		PrintDebug("Spawned Kiki\n");
+		return;
+	}
+
+	void RandomFallingSpikeBall(EntityData1* p1)
+	{
+
+		int number = rand() % 2;
+		ObjectMaster* FallingSpikeBall = LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
+		SETObjData* FallingSpikeBallSETData = new SETObjData();
+		FallingSpikeBall->SETData.SETData = FallingSpikeBallSETData;
+		FallingSpikeBall->Data1->Position = EntityData1Ptrs[0]->Position;
+		FallingSpikeBall->Data1->Position.y += rand() % 30 + 1 * 9;
+		FallingSpikeBall->Data1->Position.z += rand() % 30 + 1 * 9;
+
+		if (number)
+		{
+			ObjectMaster* FallingSpikeBall = LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
+			SETObjData* FallingSpikeBallSETData = new SETObjData();
+			FallingSpikeBall->SETData.SETData = FallingSpikeBallSETData;
+			FallingSpikeBall->Data1->Position = EntityData1Ptrs[0]->Position;
+			FallingSpikeBall->Data1->Position.y += rand() % 30 + 1 * 9;
+			FallingSpikeBall->Data1->Position.z += rand() % 30 + 1 * 9;
+		}
+		strcpy(LastEffect, "Falling SpikeBall");
+		PrintDebug("Falling SpikeBall\n");
+		return;
+	}
+
+	void RandomSpinnerA(EntityData1* p1)
+	{
+		if (SpinnerTextLoader == false)
+		{
+			LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
+			SpinnerTextLoader = true;
+		}
+		ObjectMaster* SpinnerA = LoadObject((LoadObj)2, 3, SpinnerA_Main);
+		SETObjData* SpinnerASETData = new SETObjData();
+		SpinnerA->SETData.SETData = SpinnerASETData;
+		SpinnerA->Data1->Position = EntityData1Ptrs[0]->Position;
+		SpinnerA->Data1->Position.z += rand() % 10 + 1 * 9;
+		SpinnerA->Data1->Position.y += rand() % 2 + 1 * 9;
+		strcpy(LastEffect, "Spawned Spinner A");
+		PrintDebug("Spawned Spinner A\n");
+		return;
+	}
+	void RandomSpinnerB(EntityData1* p1)
+	{
+		if (SpinnerTextLoader == false)
+		{
+			LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
+			SpinnerTextLoader = true;
+		}
+		ObjectMaster* SpinnerB = LoadObject((LoadObj)2, 3, SpinnerB_Main);
+		SETObjData* SpinnerBSETData = new SETObjData();
+		SpinnerB->SETData.SETData = SpinnerBSETData;
+		SpinnerB->Data1->Position = EntityData1Ptrs[0]->Position;
+		SpinnerB->Data1->Position.z += rand() % 10 + 1 * 9;
+		SpinnerB->Data1->Position.y += rand() % 2 + 1 * 9;
+		strcpy(LastEffect, "Spawned Spinner B");
+		PrintDebug("Spawned Spinner B\n");
+		return;
+	}
+	void RandomSpinnerC(EntityData1* p1)
+	{
+		if (SpinnerTextLoader == false)
+		{
+			LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
+			SpinnerTextLoader = true;
+		}
+		ObjectMaster* SpinnerC = LoadObject((LoadObj)2, 3, SpinnerC_Main);
+		SETObjData* SpinnerCSETData = new SETObjData();
+		SpinnerC->SETData.SETData = SpinnerCSETData;
+		SpinnerC->Data1->Position = EntityData1Ptrs[0]->Position;
+		SpinnerC->Data1->Position.z += rand() % 10 + 1 * 9;
+		SpinnerC->Data1->Position.y += rand() % 2 + 1 * 9;
+		strcpy(LastEffect, "Spawned Spinner C");
+		PrintDebug("Spawned Spinner C\n");
+		return;
+	}
+
+	void RandomSman(EntityData1* p1)
+	{
+		if (SmanTextLoader == false)
+		{
+			LoadPVM("E_SNOWMAN", &E_SNOWMAN_TEXLIST);
+			SmanTextLoader = true;
+		}
+		ObjectMaster* ESMAN = LoadObject((LoadObj)2, 3, ESman);
+		SETObjData* ESMANSETData = new SETObjData();
+		ESMAN->SETData.SETData = ESMANSETData;
+		ESMAN->Data1->Position = EntityData1Ptrs[0]->Position;
+		strcpy(LastEffect, "Spawned IceBall");
+		PrintDebug("Spawned IceBall\n");
+		return;
+	}
+
+	void RandomEGacha(EntityData1* p1)
+	{
+		if (EGachaTextLoader == false)
+		{
+			LoadPVM("GACHAPON", &GACHAPON_TEXLIST);
+			EGachaTextLoader = true;
+		}
+		int number = rand() % 2;
+
+
+		ObjectMaster* GACHAPON = LoadObject((LoadObj)2, 3, OEGacha);
+		SETObjData* GACHAPONSETData = new SETObjData();
+		GACHAPON->SETData.SETData = GACHAPONSETData;
+		GACHAPON->Data1->Position = EntityData1Ptrs[0]->Position;
+		strcpy(LastEffect, "Spawned Beat");
+		PrintDebug("Spawned Beat\n");
+
+		if (number)
+		{
+			ObjectMaster* GACHAPON = LoadObject((LoadObj)2, 3, OEGacha);
+			SETObjData* GACHAPONSETData = new SETObjData();
+			GACHAPON->SETData.SETData = GACHAPONSETData;
+			GACHAPON->Data1->Position = EntityData1Ptrs[0]->Position;
+			GACHAPON->Data1->Position.y += rand() % 30 + 1 * 9;
+			GACHAPON->Data1->Position.z += rand() % 30 + 1 * 9;
+			
+		}
+		strcpy(LastEffect, "Spawned Beat");
+		PrintDebug("Spawned Beat\n");
+
+		return;
+
+	}
+
 
 	void RandomSpring(EntityData1* p1) 
 	{
@@ -293,6 +527,7 @@ extern "C"
 			spring2->Data1->Position.y += rand() % 10 + 1 * 9;
 			spring2->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
+		strcpy(LastEffect, "Spawned Spring");
 		PrintDebug("Random Spring\n");
 		return;
 	}
@@ -305,6 +540,7 @@ extern "C"
 		checkpoint->SETData.SETData = CheckPointSETData;
 		checkpoint->Data1->Rotation = p1->Rotation;
 		checkpoint->Data1->Position = p1->Position;
+		strcpy(LastEffect, "Random CheckPoint");
 		return;
 	}
 
@@ -323,6 +559,7 @@ extern "C"
 			speed2->Data1->Position = p1->Position;
 			speed2->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
+		strcpy(LastEffect, "Spawned SpeedPad");
 		PrintDebug("Random SpeedPad\n");
 		return;
 	}
@@ -344,28 +581,32 @@ extern "C"
 			spike2->Data1->Position.y += 2;
 			spike2->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
+		strcpy(LastEffect, "Spawned SpikeBall");
 		PrintDebug("Random Spike Balls\n");
 		return;
 	}
 	void RandomKillMomentum(CharObj2* p1) 
 	{
 		p1->Speed = { 0, 0, 0 };
-		PrintDebug("Kill Momentum\n");
 		PlayVoice(55555);//OOF
+		strcpy(LastEffect, "Killed Momentum");
+		PrintDebug("Kill Momentum\n");
 		return;
 	}
 
 	void RandomVSpeed(CharObj2* p1) 
 	{
 		p1->Speed.y = p1->PhysicsData.VSpeedCap;
-		PrintDebug("Random VSpeed\n");
+		strcpy(LastEffect, "Random V Speed");
+		PrintDebug("Random V Speed\n");
 		return;
 	}
 
 	void RandomHSpeed(CharObj2* p1) 
 	{
 			p1->Speed.x = p1->PhysicsData.HSpeedCap;
-			PrintDebug("Random HSpeed\n");
+			strcpy(LastEffect, "Random H Speed");
+			PrintDebug("Random H Speed\n");
 			return;
 	}
 
@@ -373,6 +614,7 @@ extern "C"
 	{
 		if (Rings > 0)
 			PrintDebug("Hurt\n");
+		strcpy(LastEffect, "Hurt");
 			return HurtCharacter(0);
 	}
 
@@ -383,6 +625,7 @@ extern "C"
 			id = rand() % 9;
 		DoThingWithItemBoxPowerupIndex(id);
 		PrintDebug("Random PowerUp\n");
+		strcpy(LastEffect,"Random PowerUp");
 	}
 
 	void MGiantScale(EntityData1* p1) 
@@ -402,6 +645,7 @@ extern "C"
 		{
 			SetTimeOfDay(rand() % 3);
 			PrintDebug("Random Time Of Day\n");
+			strcpy(LastEffect,"Random Time Of Day");
 		}
 		else
 		{
@@ -412,8 +656,10 @@ extern "C"
 
 	void RandomDroppedRings(EntityData1* p1)
 	{
-		SpawnDroppedRings(EntityData1Ptrs[0]->Position.x, EntityData1Ptrs[0]->Position.y, EntityData1Ptrs[0]->Position.z, rand() % 254); //spawns random ammount of rings 0-255 at the player
+		int randomrings = rand() % 254;
+		SpawnDroppedRings(EntityData1Ptrs[0]->Position.x, EntityData1Ptrs[0]->Position.y, EntityData1Ptrs[0]->Position.z, randomrings); //spawns random ammount of rings 0-255 at the player
 		PrintDebug("Random Dropped Rings\n");
+		strcpy(LastEffect,"Dropped Rings");
 	}
 	void RandomClipLevel()//currently disabled, may be removed. updated to only change 
 	{
@@ -424,6 +670,7 @@ extern "C"
 	{
 		Pause_Timer = 5; //how long in frames? to pause unpause?
 		PrintDebug("Random Pause\n");
+		strcpy(LastEffect,"Random Pause");
 	}
 	void RandomChar()//works but disabled
 	{
@@ -441,6 +688,7 @@ extern "C"
 			SetCameraMode_(0);
 		}
 		PrintDebug("Camera Swapped\n");
+		strcpy(LastEffect,"Camera Swapped");
 	}
 
 	void RandomDebug() //debug mode currently lasts for 75ish? frames
@@ -464,6 +712,7 @@ extern "C"
 		}
 		Debug_Timer = 333;
 		PrintDebug("Debug Mode Enabled\n");
+		strcpy(LastEffect,"Debug Mode");
 	}
 	void  RandomXGravity()//currently disabled,
 	{
@@ -475,6 +724,7 @@ extern "C"
 		Gravity_Timer = 1000;
 		Gravity.y = (float)rand() / RAND_MAX + (-1.5);
 		PrintDebug("Random Y Gravity\n");
+		strcpy(LastEffect,"Random Y Gravity");
 	}
 	void  RandomZGravity()//currently disabled,
 	{
@@ -500,12 +750,14 @@ extern "C"
 	{
 		ExtraLifePowerup(0);
 		PrintDebug("Give Extra Life\n");
+		strcpy(LastEffect,"Extra Life");
 	}
 	void RandomControlDisable()
 	{
 		DisableControl_Timer = 90;
 		ControlEnabled = 0;
-		PrintDebug("Controller Disabled\n");
+		PrintDebug("Control Disabled\n");
+		strcpy(LastEffect,"Control Disabled");
 	}
 	void MSmallScale(EntityData1* p1)//disabled this
 	{
@@ -515,6 +767,7 @@ extern "C"
 			SONIC_OBJECTS[i]->scl[2] = 0.5;
 		}
 		PrintDebug("Small Scale\n");
+		strcpy(LastEffect, "Small Scale");
 		return;
 	}
 	void RandomSwapMusic() 
@@ -524,6 +777,7 @@ extern "C"
 		} while (LastSong == CurrentSong);
 		LastSong = CurrentSong;
 		PrintDebug("Random Song\n");
+		strcpy(LastEffect,"Random Song");
 		return;
 	}
 
@@ -532,6 +786,7 @@ extern "C"
 		int a1 = rand() % 2043;
 		PlayVoice(a1);
 		PrintDebug("Random Voice\n");
+		strcpy(LastEffect,"Random Voice");
 		return;
 	}
 
@@ -541,6 +796,7 @@ extern "C"
 		DPadDown_Timer = 90; //90 frames?
 		DpadDown = 0;
 		PrintDebug("Press Dpad Down Or Die\n");
+		strcpy(LastEffect,"Death");
 	}
 
 	void RandomTeleport()
@@ -555,6 +811,7 @@ extern "C"
 		}
 		EntityData1Ptrs[0]->Position = RandomTeleport;
 		PrintDebug("Random Teleport\n");
+		strcpy(LastEffect,"Random Teleport");
 	}
 
 	void RandomNoClip()
@@ -567,6 +824,7 @@ extern "C"
 		WriteData((int*)0x007887D9, (int)0x90909090);
 		WriteData((int*)0x007887DD, (int)0x74C08590);
 		PrintDebug("Walk Thru Walls Enabled\n");
+		strcpy(LastEffect,"Walk Thru Walls");
 	}
 	typedef void(__cdecl* ChaosEnt)(EntityData1*);
 	typedef void(__cdecl* ChaosCharObj)(CharObj2*);
@@ -730,6 +988,7 @@ extern "C"
 		int hintrand = rand() % HintSize;
 		LoadAutoHint(Hints[hintrand], Voices[hintrand]);
 	    PrintDebug("%i Random Hint\n", hintrand);
+		strcpy(LastEffect,"Tikal Hint");
 	}
 	void InputInvert()
 	{
@@ -737,6 +996,7 @@ extern "C"
 		WriteData<1>((int*)0x40F2A1, 0x1);
 		InputInvert_Timer = 420;
 		PrintDebug("Input Inverted\n");
+		strcpy(LastEffect,"Input Inverted");
 	}
 
 	Void RandomRotate()
@@ -744,6 +1004,7 @@ extern "C"
 		int Rotaterand = rand() % 65535;
 			RotatePlayer(0, Rotaterand);
 			PrintDebug("%i Rotated\n", Rotaterand);
+			strcpy(LastEffect,"Random Rotation");
 	}
 
 	void RandomSnowboard()
@@ -796,8 +1057,10 @@ extern "C"
 						snowboard = LoadObject((LoadObj)(LoadObj_Data1 | LoadObj_Data2), 2, Snowboard_Tails_Load);
 					break;
 				}//Credits to MainMemory for the Code, https://github.com/MainMemory/SADXBoardSpawner
-			return;
+			
 			PrintDebug("Snowbaord Spawned\n");
+			strcpy(LastEffect,"Snowboard");
+			return;
 		}
 		else
 		{
@@ -806,7 +1069,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[47]{
+	ChaosS ChaosArray[59]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -821,8 +1084,14 @@ extern "C"
 	{ RandomPowerUP, nullptr, nullptr },
 	{ RandomPowerUP, nullptr, nullptr },
 	{ RandomPowerUP, nullptr, nullptr },
-	{ RandomPowerUP, nullptr, nullptr },
 	{ RandomLifePowerup, nullptr, nullptr },
+	{ RandomTank, nullptr, nullptr },
+	{ RandomEGacha, nullptr, nullptr },
+	{ RandomLeon, nullptr, nullptr },
+	{ RandomSpinnerA, nullptr, nullptr },
+	{ RandomSpinnerB, nullptr, nullptr },
+	{ RandomSpinnerC, nullptr, nullptr },
+	{ RandomSman, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
@@ -848,13 +1117,19 @@ extern "C"
 	{ nullptr, nullptr, RandomYGravity},
 	{ nullptr, nullptr, RandomDPadDownCheck},
 	{ nullptr, nullptr, RandomControlDisable},
+	{ nullptr, nullptr, RandomControlDisable},
+	{ nullptr, nullptr, RandomControlDisable},
+	{ nullptr, nullptr, RandomNoClip},
+	{ nullptr, nullptr, RandomNoClip},
 	{ nullptr, nullptr, RandomNoClip},
 	{ nullptr, nullptr, RandomTikalHint},
 	{ nullptr, nullptr, RandomTikalHint},
 	{ nullptr, nullptr, RandomTikalHint},
 	{ nullptr, nullptr, RandomTikalHint},
 	{ nullptr, nullptr, InputInvert},
-	{ nullptr, nullptr, RandomTeleport}
+	{ nullptr, nullptr, RandomTeleport},
+	{ nullptr, nullptr, RandomHurt},
+	{ nullptr, nullptr, RandomHurt}
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -863,7 +1138,7 @@ extern "C"
 		// Executed every running frame of SADX
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
-		if (NoClip_Timer <= 8000 && NoClip_Timer != 0)
+		if (NoClip_Timer <= 800 && NoClip_Timer != 0)
 		{
 			NoClip_Timer--;
 			if (NoClip_Timer == 1 && NoClip_Timer != 0)
@@ -899,6 +1174,15 @@ extern "C"
 			ResetGravity();
 			Gravity_Timer = 0;
 			PrintDebug("Y Gravity Reset\n");
+			strcpy(LastEffect, "Y Gravity Reset");
+		}
+
+		if (DebugToScreen == true)
+		{
+			SetDebugFontSize(15);
+			SetDebugFontColor(0xFFFFFFFF);
+			DrawDebugRectangle(0.30f, 7.90f, 17.9, 6.2);
+			DisplayDebugStringFormatted(NJM_LOCATION(0, 7)," %s", LastEffect);
 		}
 
 		if (DisableControl_Timer <= 90 && DisableControl_Timer != 0)
@@ -910,6 +1194,7 @@ extern "C"
 			ControlEnabled = 1;
 			DisableControl_Timer = 0;
 			PrintDebug("Control Enabled\n");
+			strcpy(LastEffect, "Control Enabled");
 		}
 
 		if (DPadDown_Timer <= 90 && DPadDown_Timer != 0)
@@ -917,6 +1202,7 @@ extern "C"
 			SetDebugFontColor(0xFFFF0000);
 			SetDebugFontSize(18);
 			DisplayDebugString(NJM_LOCATION(15, 40), "- PRESS DPAD DOWN OR DIE!!! -");
+			
 			if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
 			{
 				DpadDown = 1; // sets dpadcheck to 1
@@ -934,6 +1220,15 @@ extern "C"
 			GameState = 16;
 			Pause_Timer--;
 		}
+		if (GameState < 15 || GameState > 16)
+		{
+			SpinnerTextLoader = false;
+			LeonTextLoader = false;
+			KikiTextLoader = false;
+			RinoTextLoader = false;
+			SmanTextLoader = false;
+			EGachaTextLoader = false;
+		}
 		if (SnowboardTimer <= 500 && SnowboardTimer != 0)
 		{
 			SnowboardTimer--;
@@ -944,6 +1239,7 @@ extern "C"
 			IssSowboarding = 0;
 			EntityData1Ptrs[0]->Action = 1;
 			PrintDebug("Snowboard off, Action Set\n");
+			strcpy(LastEffect, "Snowboard Off");
 		}
 		if (Debug_Timer <= 333 && Debug_Timer != 0)
 		{
@@ -954,6 +1250,7 @@ extern "C"
 			Debug_Timer = 0;
 			EntityData1Ptrs[0]->Action = 1;
 			PrintDebug("Debug turned Off, Default Action Set\n");
+			strcpy(LastEffect, "Debug Off");
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
 			Chaos_Timer++;
@@ -982,9 +1279,8 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnControl(EntityData1* p1)
 	{
 		 //Executed when the game processes input
-		if (Controllers[0].PressedButtons & Buttons_Y) //checks if A L R and Y are pressed
+		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
-			RandomTeleport();
 		}
 	}
 
