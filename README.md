@@ -51,4 +51,5 @@ Thanks to MainMemory for letting me use her snowboard code
 Thanks to Kell and itsEasyActually for all the help!  
 Thanks to the entire SA-1 X-Hax community for everything they continue to do for this game :)  
 
-
+If you don't have the US Voice Files feel free to download this .7z https://drive.google.com/file/d/1JAfwI9kHNAz62BczkHN0l0-3xi0Hy_3H/view?usp=sharing
+and extract them to SADX\system\sounddata\voice_us\wma
