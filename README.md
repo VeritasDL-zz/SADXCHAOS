@@ -46,6 +46,7 @@ Currently this Mod has
 
 
 Thanks to Sora for the code base and helping me with dumb questions  
+Huge Thanks to Refrag for helping me constantly!
 Thanks to MainMemory for letting me use her snowboard code  
 Thanks to Kell and itsEasyActually for all the help!  
 Thanks to the entire SA-1 X-Hax community for everything they continue to do for this game :)  
