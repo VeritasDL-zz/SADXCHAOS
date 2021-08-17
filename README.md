@@ -40,8 +40,8 @@ Currently this Mod has
 - Random Checkpoint - Spawns a Checkpoint on the player, Works as a respawn point
 - Movement Stick Invert - Inverts the Movement Stick Controls - Credits to Sora for this code
 - Random Rotation - Sets the character's Y Rotation
-- Random Teleport - teleports the player If the current Act/Level has vaild teleports
-
+- Random Teleport - Teleports the player If the current Act/Level has vaild teleports
+- Random Enemy - Has a chance to spawn the RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinner, Ice Ball or Beat
 
 
 
