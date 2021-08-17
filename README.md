@@ -40,13 +40,17 @@ Currently this Mod has
 - Random Checkpoint - Spawns a Checkpoint on the player, Works as a respawn point
 - Movement Stick Invert - Inverts the Movement Stick Controls - Credits to Sora for this code
 - Random Rotation - Sets the character's Y Rotation
-
+- Random Teleport - Teleports the player If the current Act/Level has vaild teleports
+- Random Enemy - Has a chance to spawn the RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinner, Ice Ball or Beat
 
 
 
 Thanks to Sora for the code base and helping me with dumb questions  
+Huge Thanks to Refrag for helping me constantly!    
 Thanks to MainMemory for letting me use her snowboard code  
 Thanks to Kell and itsEasyActually for all the help!  
 Thanks to the entire SA-1 X-Hax community for everything they continue to do for this game :)  
 
-
+If you don't have the US Voice Files feel free to download this .7z   
+https://drive.google.com/file/d/1JAfwI9kHNAz62BczkHN0l0-3xi0Hy_3H/view?usp=sharing
+and extract them to SADX\system\sounddata\voice_us\wma
