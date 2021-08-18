@@ -84,6 +84,7 @@
 //added Ability to spawn Enemys
 //added more Enemys lol
 //added RandomBurgerMan
+//actully enabled Random Rotate.
 
 
 
@@ -300,7 +301,7 @@ extern "C"
 		WriteCall((void*)0x597B46, LoadSnowboardObject);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 		srand((unsigned)time(nullptr));
-		strcpy(LastEffect, "SADX CHAOS EDITION 0.9.9.1 By VeritasDL");
+		strcpy(LastEffect, "SADX CHAOS EDITION By VeritasDL");
 	}
 
 
@@ -418,8 +419,8 @@ extern "C"
 			Amebot->SETData.SETData = AmebotSETData;
 			Amebot->Data1->Position = EntityData1Ptrs[0]->Position;
 		}
-		strcpy(LastEffect, "Spawned Amebot");
-		PrintDebug("Spawned Amebot\n");
+		strcpy(LastEffect, "Spawned Amebo");
+		PrintDebug("Spawned Amebo\n");
 		return;
 	}
 
@@ -1017,73 +1018,10 @@ extern "C"
 		ChaosNull func3;
 	};
 
-
 	//"The frog you are looking for Test 123456 is up ahead Testing How 123456789abcde", //max char for entire text box without new line can be 79 characters 
 	//	"The frog you are looking for Test 123456\nis up ahead Testing How123456789abcdefg", //max char for each line with new line can be up to 81 characters (counting the new line)
 	//A hint with \n can be 81 character (\n counts as 2)
 	//A hint with no new line can be 79 charaters
-
-	const HintText_Text Hint0[] = {
-	{ "Watch out for the cars!.", 120 }, // text, time
-	{ 0 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
-	const HintText_Text Hint1[] = {
-	{ "Aim for Chaos' head when he's off guard.", 120 }, // text, time
-	{ 0 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
-	const HintText_Text Hint2[] = {
-	{ "You can punch the small bubbles of\nwater.", 120 }, // text, time
-	{ 0 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
-	const HintText_Text Hint3[] = {
-	{ "Jump on panel number one. It will take\nyou to panels two and three. Jump as", 260 }, // text, time
-	{ "soon as you land on a panel\nor else you'll fall.", 120 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
-	const HintText_Text Hint4[] = {
-	{ "Insert the plug in the\nopening next to the door.", 130 }, // text, time
-	{ "You need to grab hold of\nthe end of the plug.", 140 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};//if you read this
-	  //you mom gay
-	const HintText_Text Hint5[] = {
-	{ "If you're hanging from a cord;\nuse the directional pad to sway.", 180 }, // text, time
-	{ "By touching the cord next to you;\nyou will be able to switch cords.", 180 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
-	const HintText_Text Hint6[] = {
-	{ "To pull out a plug; hold it and shake it.", 120 }, // text, time
-	{ 0 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
-	const HintText_Text Hint7[] = {
-	{ "Even if you're frozen; jump a couple of\ntimes.", 160 }, // text, time
-	{ "and you should be able to crack through.",140 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
-	const HintText_Text Hint8[] = {
-	{ "Try and find places\nwhere it's not windy.", 120 }, // text, time
-	{ 0 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
-	const HintText_Text Hint9[] = {
-	{ "Get a load of this!", 120 }, // text, time
-	{ 0 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
-	const HintText_Text Hint10[] = {
-	{ "You can break through the wall if you use dynamite.", 180 }, // text, time
-	{ 0 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
-	const HintText_Text CustomHint1[] = {
-	{ "OOF", 69 }, // text, time
-	{ 0 }, //Second page
-	{ 0 } //idk 3rd page or always null?
-	};
 
 	const HintText_Text const Hints[12][3] = {
 	{
@@ -1251,7 +1189,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[68]{
+	ChaosS ChaosArray[69]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -1320,7 +1258,8 @@ extern "C"
 	{ nullptr, nullptr, InputInvert},
 	{ nullptr, nullptr, RandomTeleport},
 	{ nullptr, nullptr, RandomHurt},
-	{ nullptr, nullptr, RandomHurt}
+	{ nullptr, nullptr, RandomHurt},
+	{ nullptr, nullptr, RandomRotate},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -1481,7 +1420,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
-			RandomRobo(0);
 		}
 	}
 
