@@ -85,6 +85,10 @@
 //added more Enemys lol
 //added RandomBurgerMan
 //actully enabled Random Rotate.
+//added 24 new tikal hints
+//added more new "hints"
+
+
 
 
 
@@ -1023,7 +1027,7 @@ extern "C"
 	//A hint with \n can be 81 character (\n counts as 2)
 	//A hint with no new line can be 79 charaters
 
-	const HintText_Text const Hints[12][3] = {
+	const HintText_Text const Hints[45][3] = {
 	{
 	{ "Watch out for the cars!.", 120 }, // text, time
 	{ 0 }, //Second page
@@ -1085,6 +1089,171 @@ extern "C"
 	{ 0 }, //Second page
 	{ 0 } //idk 3rd page or always null?
 	},
+	{
+	{ "You're the... Chao!", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Father; please don't!", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "My true hope is that someday\nwe'll understand each other.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "(gasps)", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Father!", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "(groans)", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Keep your balance;\nor else you'll fall off.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Hide in here.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Be careful of Leon.\nHe appears suddenly.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "You're going the wrong way.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Be brave; blue hedgehog.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Watch out for the helicopter propellers.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Save the animals.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Use the dash panels.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "This way!", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Sega!", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "I won't obey!", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Wow...", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "I'm shocked...!", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Oh please!", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "I'm Tikal.\nAnd you are?", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "But the number seven...", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Why?", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Select a memory card.", 100 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Oh no!", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Oh no!", 69 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "The ice looks kinda tasty!", 130 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "What a huge house!", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Froggy; where are you?", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Maybe I'll go home.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "Uh; exits? Exits?", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "I wanna go fishing!", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
+	{
+	{ "So; that's his core.", 120 }, // text, time
+	{ 0 }, //Second page
+	{ 0 } //idk 3rd page or always null?
+	},
 	};
 
 	size_t HintSize = LengthOfArray(Hints);
@@ -1100,7 +1269,41 @@ extern "C"
 	2043,
 	174, //Get a load of this!
 	1955,
-	55555 //Custom OOF Voice
+	55555, //Custom OOF Voice
+	919,
+	1024,
+	1222,
+	1356,
+	1444,
+	1465,
+	1594,
+	1665,
+	1674,
+	1677,
+	1714,
+	1861,
+	1875,
+	1941,
+	1954,
+	2010,
+	1440,
+	1352,
+	1141,
+	1103,
+	746,
+	742,
+	589,
+	18,
+	164,//knux oh-no
+	165,//sonic oh-no
+	241,
+	298,
+	310,
+	319,
+	344,
+	367,
+	389,//core
+
 	};
 
 	void RandomTikalHint()
