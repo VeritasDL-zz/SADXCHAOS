@@ -82,6 +82,8 @@
 //Re Enabled Random Hurt
 //Added Option to print last effet to screen
 //added Ability to spawn Enemys
+//added more Enemys lol
+//added RandomBurgerMan
 
 
 
@@ -109,6 +111,14 @@ bool RinoTextLoader = false;
 bool KikiTextLoader = false;
 bool SmanTextLoader = false;
 bool EGachaTextLoader = false;
+bool PoliceTextLoader = false;
+bool SnakeTextLoader = false;
+bool RoboTextLoader = false;
+bool BuyonTextLoader = false;
+bool AmebotTextLoader = false;
+bool FSBTextLoader = false;
+bool BugerManTextLoader = false;
+bool UnidusTextLoader = false;
 
 ObjectMaster* snowboard;
 
@@ -290,7 +300,7 @@ extern "C"
 		WriteCall((void*)0x597B46, LoadSnowboardObject);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 		srand((unsigned)time(nullptr));
-		strcpy(LastEffect, "SADX CHAOS EDITION 0.9.8.1 By VeritasDL");
+		strcpy(LastEffect, "SADX CHAOS EDITION 0.9.9.1 By VeritasDL");
 	}
 
 
@@ -323,7 +333,6 @@ extern "C"
 		RhinoTank->SETData.SETData = RhinoTankSETData;
 		RhinoTank->Data1->Position = EntityData1Ptrs[0]->Position;
 		RhinoTank->Data1->Position.z += rand() % 10 + 1 * 9;
-
 		if (number)
 		{
 			ObjectMaster* RhinoTank = LoadObject((LoadObj)2, 3, RhinoTank_Main);
@@ -336,14 +345,168 @@ extern "C"
 		PrintDebug("Spawned Tank\n");
 		return;
 	}
-	void RandomLeon(EntityData1* p1) //doesnt seem to work may only work in levels where there is a Leon already
+	void RandomBuyon(EntityData1* p1)
+	{
+		if (BuyonTextLoader == false)
+		{
+			LoadPVM("E_BUYON", &E_BUYON_TEXLIST);
+			BuyonTextLoader = true;
+		}
+
+		int number = rand() % 2;
+		ObjectMaster* Buyon = LoadObject((LoadObj)2, 3, EBuyon);
+		SETObjData* BuyonSETData = new SETObjData();
+		Buyon->SETData.SETData = BuyonSETData;
+		Buyon->Data1->Position = EntityData1Ptrs[0]->Position;
+		Buyon->Data1->Position.z += rand() % 10 + 1 * 9;
+		if (number)
+		{
+			ObjectMaster* Buyon = LoadObject((LoadObj)2, 3, EBuyon);
+			SETObjData* BuyonSETData = new SETObjData();
+			Buyon->SETData.SETData = BuyonSETData;
+			Buyon->Data1->Position = EntityData1Ptrs[0]->Position;
+			Buyon->Data1->Position.z += rand() % 10 + 1 * 9;
+		}
+		strcpy(LastEffect, "Spawned Buyon");
+		PrintDebug("Spawned Buyon\n");
+		return;
+	}
+	void RandomUnidus(EntityData1* p1)
+	{
+		if (UnidusTextLoader == false)
+		{
+			LoadPVM("UNI_A_UNIBODY", &UNI_A_UNIBODY_TEXLIST);
+			LoadPVM("UNI_C_UNIBODY", &UNI_C_UNIBODY_TEXLIST);
+			UnidusTextLoader = true;
+		}
+
+		int number = rand() % 2;
+		ObjectMaster* Unidus = LoadObject((LoadObj)2, 3, UnidusA_Main);
+		SETObjData* UnidusSETData = new SETObjData();
+		Unidus->SETData.SETData = UnidusSETData;
+		Unidus->Data1->Position = EntityData1Ptrs[0]->Position;
+		Unidus->Data1->Position.z += rand() % 10 + 1 * 9;
+		if (number)
+		{
+			ObjectMaster* Unidus = LoadObject((LoadObj)2, 3, UnidusA_Main);
+			SETObjData* UnidusSETData = new SETObjData();
+			Unidus->SETData.SETData = UnidusSETData;
+			Unidus->Data1->Position = EntityData1Ptrs[0]->Position;
+			Unidus->Data1->Position.z += rand() % 10 + 1 * 9;
+		}
+		strcpy(LastEffect, "Spawned Unidus");
+		PrintDebug("Spawned Unidus\n");
+		return;
+	}
+	void RandomAmebot(EntityData1* p1)
+	{
+		if (AmebotTextLoader == false)
+		{
+			LoadPVM("E_AMENBO", &E_AMENBO_TEXLIST);
+			AmebotTextLoader = true;
+		}
+
+		int number = rand() % 2;
+		ObjectMaster* Amebot = LoadObject((LoadObj)2, 3, Sweep_Load);
+		SETObjData* AmebotSETData = new SETObjData();
+		Amebot->SETData.SETData = AmebotSETData;
+		Amebot->Data1->Position = EntityData1Ptrs[0]->Position;
+		if (number)
+		{
+			ObjectMaster* Amebot = LoadObject((LoadObj)2, 3, Sweep_Load);
+			SETObjData* AmebotSETData = new SETObjData();
+			Amebot->SETData.SETData = AmebotSETData;
+			Amebot->Data1->Position = EntityData1Ptrs[0]->Position;
+		}
+		strcpy(LastEffect, "Spawned Amebot");
+		PrintDebug("Spawned Amebot\n");
+		return;
+	}
+
+	void RandomPolice(EntityData1* p1)
+	{
+		if (PoliceTextLoader == false)
+		{
+			LoadPVM("NISEPAT", &NISEPAT_TEXLIST);
+			PoliceTextLoader = true;
+		}
+
+		int number = rand() % 2;
+		ObjectMaster* CopSpeeder = LoadObject((LoadObj)2, 3, EPolice);
+		SETObjData* CopSpeederSETData = new SETObjData();
+		CopSpeeder->SETData.SETData = CopSpeederSETData;
+		CopSpeeder->Data1->Position = EntityData1Ptrs[0]->Position;
+		CopSpeeder->Data1->Position.z += rand() % 10 + 1 * 9;
+		if (number)
+		{
+			ObjectMaster* CopSpeeder = LoadObject((LoadObj)2, 3, EPolice);
+			SETObjData* CopSpeederSETData = new SETObjData();
+			CopSpeeder->SETData.SETData = CopSpeederSETData;
+			CopSpeeder->Data1->Position = EntityData1Ptrs[0]->Position;
+			CopSpeeder->Data1->Position.z += rand() % 10 + 1 * 9;
+		}
+		strcpy(LastEffect, "Spawned The Police");
+		PrintDebug("Spawned The Police\n");
+		return;
+	}
+	void RandomSnake(EntityData1* p1)
+	{
+		if (SnakeTextLoader == false)
+		{
+			LoadPVM("E_SNAKE", &E_SNAKE_TEXLIST);
+			SnakeTextLoader = true;
+		}
+		int number = rand() % 2;
+		ObjectMaster* Snake = LoadObject((LoadObj)2, 3, BoaBoa_Main);
+		SETObjData* SnakeSETData = new SETObjData();
+		Snake->SETData.SETData = SnakeSETData;
+		Snake->Data1->Position = EntityData1Ptrs[0]->Position;
+		Snake->Data1->Position.z += rand() % 90 + 1 * 9;
+		if (number)
+		{
+			ObjectMaster* Snake = LoadObject((LoadObj)2, 3, BoaBoa_Main);
+			SETObjData* SnakeSETData = new SETObjData();
+			Snake->SETData.SETData = SnakeSETData;
+			Snake->Data1->Position = EntityData1Ptrs[0]->Position;
+			Snake->Data1->Position.z += rand() % 90 + 1 * 9;
+		}
+		strcpy(LastEffect, "Spawned Boa-Boa");
+		PrintDebug("Spawned Boa-Boa\n");
+		return;
+	}
+	void RandomRobo(EntityData1* p1)
+	{
+		if (RoboTextLoader == false)
+		{
+			LoadPVM("E_ROBO", &E_ROBO_TEXLIST);
+			SnakeTextLoader = true;
+		}
+		int number = rand() % 2;
+		ObjectMaster* Robo = LoadObject((LoadObj)2, 3, ERobo_0);
+		SETObjData* RoboSETData = new SETObjData();
+		Robo->SETData.SETData = RoboSETData;
+		Robo->Data1->Position = EntityData1Ptrs[0]->Position;
+		Robo->Data1->Position.z += rand() % 10 + 1 * 9;
+		if (number)
+		{
+			ObjectMaster* Robo = LoadObject((LoadObj)2, 3, ERobo_0);
+			SETObjData* RoboSETData = new SETObjData();
+			Robo->SETData.SETData = RoboSETData;
+			Robo->Data1->Position = EntityData1Ptrs[0]->Position;
+			Robo->Data1->Position.z += rand() % 10 + 1 * 9;
+		}
+		strcpy(LastEffect, "Spawned Robo");
+		PrintDebug("Spawned Robo\n");
+		return;
+	}
+
+	void RandomLeon(EntityData1* p1)
 	{
 		if (LeonTextLoader == false)
 		{
 			LoadPVM("E_LEON", &E_LEON_TEXLIST);
 			LeonTextLoader = true;
 		}
-
 		int number = rand() % 2;
 		ObjectMaster* Leon = LoadObject((LoadObj)2, 3, Leon_Load);
 		SETObjData* LeonSETData = new SETObjData();
@@ -371,12 +534,22 @@ extern "C"
 			LoadPVM("E_BOMB", &E_BOMB_TEXLIST);
 			KikiTextLoader = true;
 		}
+		int number = rand() % 2;
 		ObjectMaster* Kiki = LoadObject((LoadObj)2, 3, Kiki_Load);
 		SETObjData* KikiSETData = new SETObjData();
 		Kiki->SETData.SETData = KikiSETData;
 		Kiki->Data1->Position = EntityData1Ptrs[0]->Position;
 		Kiki->Data1->Position.z += rand() % 10 + 1 * 9;
 		Kiki->Data1->Position.y += rand() % 2 + 1 * 9;
+		if (number)
+		{
+			ObjectMaster* Kiki = LoadObject((LoadObj)2, 3, Kiki_Load);
+			SETObjData* KikiSETData = new SETObjData();
+			Kiki->SETData.SETData = KikiSETData;
+			Kiki->Data1->Position = EntityData1Ptrs[0]->Position;
+			Kiki->Data1->Position.z += rand() % 10 + 1 * 9;
+			Kiki->Data1->Position.y += rand() % 2 + 1 * 9;
+		}
 		strcpy(LastEffect, "Spawned Kiki");
 		PrintDebug("Spawned Kiki\n");
 		return;
@@ -384,6 +557,11 @@ extern "C"
 
 	void RandomFallingSpikeBall(EntityData1* p1)
 	{
+		if (FSBTextLoader == false)
+		{
+			LoadPVM("TOGEBALL_TOGEBALL", &TOGEBALL_TOGEBALL_TEXLIST);
+			FSBTextLoader = true;
+		}
 
 		int number = rand() % 2;
 		ObjectMaster* FallingSpikeBall = LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
@@ -392,7 +570,6 @@ extern "C"
 		FallingSpikeBall->Data1->Position = EntityData1Ptrs[0]->Position;
 		FallingSpikeBall->Data1->Position.y += rand() % 30 + 1 * 9;
 		FallingSpikeBall->Data1->Position.z += rand() % 30 + 1 * 9;
-
 		if (number)
 		{
 			ObjectMaster* FallingSpikeBall = LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
@@ -483,15 +660,10 @@ extern "C"
 			EGachaTextLoader = true;
 		}
 		int number = rand() % 2;
-
-
 		ObjectMaster* GACHAPON = LoadObject((LoadObj)2, 3, OEGacha);
 		SETObjData* GACHAPONSETData = new SETObjData();
 		GACHAPON->SETData.SETData = GACHAPONSETData;
 		GACHAPON->Data1->Position = EntityData1Ptrs[0]->Position;
-		strcpy(LastEffect, "Spawned Beat");
-		PrintDebug("Spawned Beat\n");
-
 		if (number)
 		{
 			ObjectMaster* GACHAPON = LoadObject((LoadObj)2, 3, OEGacha);
@@ -500,15 +672,11 @@ extern "C"
 			GACHAPON->Data1->Position = EntityData1Ptrs[0]->Position;
 			GACHAPON->Data1->Position.y += rand() % 30 + 1 * 9;
 			GACHAPON->Data1->Position.z += rand() % 30 + 1 * 9;
-			
 		}
 		strcpy(LastEffect, "Spawned Beat");
 		PrintDebug("Spawned Beat\n");
-
 		return;
-
 	}
-
 
 	void RandomSpring(EntityData1* p1) 
 	{
@@ -517,7 +685,6 @@ extern "C"
 		spring->Data1->Rotation = { rand() % 0x8000, rand() % 0x8000, rand() % 0x8000 };
 		spring->Data1->Scale.y = rand() % 4 + 1 * 2.5;
 		spring->Data1->Position = p1->Position;
-
 		if (number)
 		{
 			ObjectMaster* spring2 = LoadObject((LoadObj)2, 2, SpringB_Main);
@@ -535,12 +702,12 @@ extern "C"
 	void RandomCheckPoint(EntityData1* p1)
 	{
 		ObjectMaster* checkpoint = LoadObject((LoadObj)15, 6, CheckPoint_Main);
-		PrintDebug("Random Checkpoint\n");
 		SETObjData* CheckPointSETData = new SETObjData();
 		checkpoint->SETData.SETData = CheckPointSETData;
 		checkpoint->Data1->Rotation = p1->Rotation;
 		checkpoint->Data1->Position = p1->Position;
 		strcpy(LastEffect, "Random CheckPoint");
+		PrintDebug("Random Checkpoint\n");
 		return;
 	}
 
@@ -585,6 +752,25 @@ extern "C"
 		PrintDebug("Random Spike Balls\n");
 		return;
 	}
+
+	void RandomBurgerMan(EntityData1* p1)
+	{
+		if (BugerManTextLoader == false)
+		{
+			LoadPVM("MI_3DASU", &mi_3dasu_TEXLIST);
+			BugerManTextLoader = true;
+		}
+
+		ObjectMaster* BurgerMan = LoadObject((LoadObj)3, 3, MissionStatue_Load);
+		SETObjData* BurgerManSETData = new SETObjData();
+		BurgerMan->SETData.SETData = BurgerManSETData;
+		BurgerMan->Data1->Position = EntityData1Ptrs[0]->Position;
+		strcpy(LastEffect, "Spawned BurgerMan");
+		PrintDebug("Random BurgerMan\n");
+		return;
+	}
+
+
 	void RandomKillMomentum(CharObj2* p1) 
 	{
 		p1->Speed = { 0, 0, 0 };
@@ -593,7 +779,6 @@ extern "C"
 		PrintDebug("Kill Momentum\n");
 		return;
 	}
-
 	void RandomVSpeed(CharObj2* p1) 
 	{
 		p1->Speed.y = p1->PhysicsData.VSpeedCap;
@@ -601,7 +786,6 @@ extern "C"
 		PrintDebug("Random V Speed\n");
 		return;
 	}
-
 	void RandomHSpeed(CharObj2* p1) 
 	{
 			p1->Speed.x = p1->PhysicsData.HSpeedCap;
@@ -609,15 +793,16 @@ extern "C"
 			PrintDebug("Random H Speed\n");
 			return;
 	}
-
 	void RandomHurt() 
 	{
 		if (Rings > 0)
-			PrintDebug("Hurt\n");
+		{
+			HurtCharacter(0);
+		}
+		PrintDebug("Hurt\n");
 		strcpy(LastEffect, "Hurt");
-			return HurtCharacter(0);
+		return;
 	}
-
 	void RandomPowerUP(EntityData1* p1)
 	{
 		int id = 0;
@@ -627,7 +812,6 @@ extern "C"
 		PrintDebug("Random PowerUp\n");
 		strcpy(LastEffect,"Random PowerUp");
 	}
-
 	void MGiantScale(EntityData1* p1) 
 	{
 		for (int i = 0; i < 21; i++) {
@@ -638,7 +822,6 @@ extern "C"
 		PrintDebug("Giant Scale\n");
 		return;
 	}
-
 	void RandomTimeOfDay() //sets time of day to a random time,
 	{
 		if (GameMode == GameModes_Adventure_Field)//made it so it only changes if you are in adventure field
@@ -653,11 +836,11 @@ extern "C"
 			Chaos_Timer = EffectMax;//forces another Chaos mod if not in Adventure 
 		}
 	}
-
 	void RandomDroppedRings(EntityData1* p1)
 	{
 		int randomrings = rand() % 254;
 		SpawnDroppedRings(EntityData1Ptrs[0]->Position.x, EntityData1Ptrs[0]->Position.y, EntityData1Ptrs[0]->Position.z, randomrings); //spawns random ammount of rings 0-255 at the player
+		Rings = 0;
 		PrintDebug("Random Dropped Rings\n");
 		strcpy(LastEffect,"Dropped Rings");
 	}
@@ -690,7 +873,6 @@ extern "C"
 		PrintDebug("Camera Swapped\n");
 		strcpy(LastEffect,"Camera Swapped");
 	}
-
 	void RandomDebug() //debug mode currently lasts for 75ish? frames
 	{
 		switch (CurrentCharacter)
@@ -1069,7 +1251,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[59]{
+	ChaosS ChaosArray[68]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -1091,7 +1273,16 @@ extern "C"
 	{ RandomSpinnerA, nullptr, nullptr },
 	{ RandomSpinnerB, nullptr, nullptr },
 	{ RandomSpinnerC, nullptr, nullptr },
+	{ RandomRobo, nullptr, nullptr },
+	{ RandomSnake, nullptr, nullptr },
+	{ RandomPolice, nullptr, nullptr },
+	{ RandomAmebot, nullptr, nullptr },
+	{ RandomUnidus, nullptr, nullptr },
+	{ RandomBuyon, nullptr, nullptr },
 	{ RandomSman, nullptr, nullptr },
+	{ RandomBurgerMan, nullptr, nullptr },
+	{ RandomBurgerMan, nullptr, nullptr },
+	{ RandomBurgerMan, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
@@ -1228,6 +1419,15 @@ extern "C"
 			RinoTextLoader = false;
 			SmanTextLoader = false;
 			EGachaTextLoader = false;
+			PoliceTextLoader = false;
+			SnakeTextLoader = false;
+			RoboTextLoader = false;
+			BuyonTextLoader = false;
+			AmebotTextLoader = false;
+			FSBTextLoader = false;
+			BugerManTextLoader = false;
+			UnidusTextLoader = false;
+
 		}
 		if (SnowboardTimer <= 500 && SnowboardTimer != 0)
 		{
@@ -1281,6 +1481,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
+			RandomRobo(0);
 		}
 	}
 
