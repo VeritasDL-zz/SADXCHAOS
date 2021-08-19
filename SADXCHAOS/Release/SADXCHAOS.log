@@ -1,10 +1,24 @@
 ﻿  pch.cpp
   Chaos.cpp
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(358,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(397,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(436,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(477,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(515,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(555,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(594,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(633,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(672,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(738,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(762,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(786,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(817,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(841,23): warning C4018: '<': signed/unsigned mismatch
   dllmain.cpp
      Creating library C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Release\SADXCHAOS.lib and object C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Release\SADXCHAOS.exp
   Generating code
   Previous IPDB not found, fall back to full compilation.
-  All 751 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 753 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   SADXCHAOS.vcxproj -> C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Release\SADXCHAOS.dll
           1 file(s) copied.

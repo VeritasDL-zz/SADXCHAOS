@@ -87,6 +87,7 @@
 //actully enabled Random Rotate.
 //added 24 new tikal hints
 //added more new "hints"
+//sadly i have a crash with enemys in hub-worlds, only Beat, and Spinners can spawn in hubworlds currently 
 
 
 
@@ -124,6 +125,7 @@ bool AmebotTextLoader = false;
 bool FSBTextLoader = false;
 bool BugerManTextLoader = false;
 bool UnidusTextLoader = false;
+bool AnimalTextLoader = false;
 
 ObjectMaster* snowboard;
 
@@ -308,6 +310,23 @@ extern "C"
 		strcpy(LastEffect, "SADX CHAOS EDITION By VeritasDL");
 	}
 
+	PVMEntry MinimalPVMs[]{
+	{ "GOMA", &GOMA_TEXLIST },
+	{ "PEN", &PEN_TEXLIST },
+	{ "RAKO", &RAKO_TEXLIST },
+	{ "KUJA", &KUJA_TEXLIST },
+	{ "TUBA", &TUBA_TEXLIST },
+	{ "OUM", &OUM_TEXLIST },
+	{ "BANB", &BANB_TEXLIST },
+	{ "USA", &USA_TEXLIST },
+	{ "WARA", &WARA_TEXLIST },
+	{ "GORI", &GORI_TEXLIST },
+	{ "LION", &LION_TEXLIST },
+	{ "ZOU", &ZOU_TEXLIST },
+	{ "MOGU", &MOGU_TEXLIST },
+	{ "KOAR", &KOAR_TEXLIST },
+	{ "SUKA", &SUKA_TEXLIST },
+	};
 
 	void DrawDebugRectangle(float leftchars, float topchars, float numchars_horz, float numchars_vert)
 	{
@@ -326,8 +345,21 @@ extern "C"
 	}
 	void RandomTank(EntityData1* p1)
 	{
+		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+		{
+			Chaos_Timer = EffectMax;
+			return;
+
+		}
 		if (RinoTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("E_SAI", &E_SAI_TEXLIST);
 			RinoTextLoader = true;
 		}
@@ -352,8 +384,21 @@ extern "C"
 	}
 	void RandomBuyon(EntityData1* p1)
 	{
+		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+		{
+			Chaos_Timer = EffectMax;
+			return;
+
+		}
 		if (BuyonTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("E_BUYON", &E_BUYON_TEXLIST);
 			BuyonTextLoader = true;
 		}
@@ -378,10 +423,24 @@ extern "C"
 	}
 	void RandomUnidus(EntityData1* p1)
 	{
+		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+		{
+			Chaos_Timer = EffectMax;
+			return;
+
+		}
 		if (UnidusTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("UNI_A_UNIBODY", &UNI_A_UNIBODY_TEXLIST);
 			LoadPVM("UNI_C_UNIBODY", &UNI_C_UNIBODY_TEXLIST);
+			LoadPVM("TOGEBALL_TOGEBALL", &TOGEBALL_TOGEBALL_TEXLIST);
 			UnidusTextLoader = true;
 		}
 
@@ -405,8 +464,21 @@ extern "C"
 	}
 	void RandomAmebot(EntityData1* p1)
 	{
+		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+		{
+			Chaos_Timer = EffectMax;
+			return;
+
+		}
 		if (AmebotTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("E_AMENBO", &E_AMENBO_TEXLIST);
 			AmebotTextLoader = true;
 		}
@@ -427,11 +499,24 @@ extern "C"
 		PrintDebug("Spawned Amebo\n");
 		return;
 	}
-
+	
 	void RandomPolice(EntityData1* p1)
 	{
+		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+		{
+			Chaos_Timer = EffectMax;
+			return;
+
+		}
 		if (PoliceTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("NISEPAT", &NISEPAT_TEXLIST);
 			PoliceTextLoader = true;
 		}
@@ -454,10 +539,24 @@ extern "C"
 		PrintDebug("Spawned The Police\n");
 		return;
 	}
+	
 	void RandomSnake(EntityData1* p1)
 	{
+		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+		{
+			Chaos_Timer = EffectMax;
+			return;
+
+		}
 		if (SnakeTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("E_SNAKE", &E_SNAKE_TEXLIST);
 			SnakeTextLoader = true;
 		}
@@ -479,10 +578,24 @@ extern "C"
 		PrintDebug("Spawned Boa-Boa\n");
 		return;
 	}
+	
 	void RandomRobo(EntityData1* p1)
 	{
+		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+		{
+			Chaos_Timer = EffectMax;
+			return;
+
+		}
 		if (RoboTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("E_ROBO", &E_ROBO_TEXLIST);
 			SnakeTextLoader = true;
 		}
@@ -504,18 +617,31 @@ extern "C"
 		PrintDebug("Spawned Robo\n");
 		return;
 	}
-
+	
 	void RandomLeon(EntityData1* p1)
 	{
+		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+		{
+			Chaos_Timer = EffectMax;
+			return;
+
+		}
 		if (LeonTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("E_LEON", &E_LEON_TEXLIST);
 			LeonTextLoader = true;
 		}
 		int number = rand() % 2;
 		ObjectMaster* Leon = LoadObject((LoadObj)2, 3, Leon_Load);
-		SETObjData* LeonSETData = new SETObjData();
-		Leon->SETData.SETData = LeonSETData;
+		//SETObjData* LeonSETData = new SETObjData();
+		//Leon->SETData.SETData = LeonSETData;
 		Leon->Data1->Position = EntityData1Ptrs[0]->Position;
 		Leon->Data1->Position.z += rand() % 10 + 1 * 9;
 		if (number)
@@ -533,8 +659,21 @@ extern "C"
 
 	void RandomKiki(EntityData1* p1) 
 	{
+		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+		{
+			Chaos_Timer = EffectMax;
+			return;
+
+		}
 		if (KikiTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("E_SARU", &E_SARU_TEXLIST);
 			LoadPVM("E_BOMB", &E_BOMB_TEXLIST);
 			KikiTextLoader = true;
@@ -564,6 +703,7 @@ extern "C"
 	{
 		if (FSBTextLoader == false)
 		{
+
 			LoadPVM("TOGEBALL_TOGEBALL", &TOGEBALL_TOGEBALL_TEXLIST);
 			FSBTextLoader = true;
 		}
@@ -593,6 +733,13 @@ extern "C"
 	{
 		if (SpinnerTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 			SpinnerTextLoader = true;
 		}
@@ -610,6 +757,13 @@ extern "C"
 	{
 		if (SpinnerTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 			SpinnerTextLoader = true;
 		}
@@ -627,6 +781,13 @@ extern "C"
 	{
 		if (SpinnerTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 			SpinnerTextLoader = true;
 		}
@@ -641,11 +802,25 @@ extern "C"
 		return;
 	}
 
-	void RandomSman(EntityData1* p1)
+	void RandomSman(EntityData1* p1)//
 	{
+		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+		{
+			Chaos_Timer = EffectMax;
+			return;
+
+		}
 		if (SmanTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("E_SNOWMAN", &E_SNOWMAN_TEXLIST);
+			LoadNoNamePVM(&stx_ice0_TEXLIST);
 			SmanTextLoader = true;
 		}
 		ObjectMaster* ESMAN = LoadObject((LoadObj)2, 3, ESman);
@@ -661,6 +836,13 @@ extern "C"
 	{
 		if (EGachaTextLoader == false)
 		{
+			if (AnimalTextLoader == false)
+			{
+				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+				}
+				AnimalTextLoader = true;
+			}
 			LoadPVM("GACHAPON", &GACHAPON_TEXLIST);
 			EGachaTextLoader = true;
 		}
@@ -1569,6 +1751,7 @@ extern "C"
 			FSBTextLoader = false;
 			BugerManTextLoader = false;
 			UnidusTextLoader = false;
+			AnimalTextLoader = false;
 
 		}
 		if (SnowboardTimer <= 500 && SnowboardTimer != 0)
@@ -1595,7 +1778,7 @@ extern "C"
 			strcpy(LastEffect, "Debug Off");
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
-			Chaos_Timer++;
+			//Chaos_Timer++;
 		if (Chaos_Timer >= EffectMax)
 		{
 			char curRand = 0;
