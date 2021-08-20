@@ -578,6 +578,7 @@ ObjectFunc(Snowboard_Tails_Main, 0x45E4B0);
 FunctionPointer(int, Load_DelayedSound_Voice, (int), 0x45E5A0);
 ObjectFunc(Tails_Display, 0x460C40);
 ObjectFunc(Snowboard_Tails_Load, 0x461510);
+FunctionPointer(Bool, JumpAllowed, (EntityData1* entity), 0x43BF40);
 ObjectFunc(Tails_Main, 0x461700);
 FunctionPointer(int, ActuallyDoCameraRotationMaybe, (), 0x4629A0);
 ObjectFunc(CameraFunc_FirstPerson, 0x465F50);
