@@ -1708,7 +1708,6 @@ extern "C"
 			ResetGravity();
 			Gravity_Timer = 0;
 			PrintDebug("Y Gravity Reset\n");
-			strcpy(LastEffect, "Y Gravity Reset");
 			strcpy_s(LastEffect, 15, "Y Gravity Reset");
 		}
 
@@ -1716,7 +1715,7 @@ extern "C"
 		{
 			SetDebugFontSize(15);
 			SetDebugFontColor(0xFFFFFFFF);
-			DrawDebugRectangle(0.30f, 7.90f, 17.9, 6.2);
+			DrawDebugRectangle(0.30f, 7.90f, 17.9f, 6.2f);
 			DisplayDebugStringFormatted(NJM_LOCATION(0, 7)," %s", LastEffect);
 		}
 
