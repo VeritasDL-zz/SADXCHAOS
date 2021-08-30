@@ -18,7 +18,7 @@ C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos
      Creating library C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Release\SADXCHAOS.lib and object C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Release\SADXCHAOS.exp
   Generating code
   Previous IPDB not found, fall back to full compilation.
-  All 755 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 756 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   SADXCHAOS.vcxproj -> C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Release\SADXCHAOS.dll
           1 file(s) copied.

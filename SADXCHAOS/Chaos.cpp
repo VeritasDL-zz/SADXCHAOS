@@ -90,7 +90,7 @@
 //sadly i have a crash with enemys in hub-worlds, only Beat, and Spinners can spawn in hubworlds currently 
 //added randomchao, thanks to sora for the help and shuch
 //added config options for, Random Enemys, Input Invert and RandomPause
-
+//added FastAccel (for now) 
 
 
 
@@ -1803,7 +1803,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[70]{
+	ChaosS ChaosArray[71]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -1841,6 +1841,7 @@ extern "C"
 	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomHSpeed, nullptr, },
 	{ nullptr, RandomHSpeed, nullptr, },
+	{ nullptr, FastAccel, nullptr },
 	{ nullptr, nullptr, RandomSwapMusic},
 	{ nullptr, nullptr, ChaosPlayVoice_rng},
 	{ nullptr, nullptr, RandomSnowboard},
@@ -2055,7 +2056,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
-			RandomChaoo();
+			//RandomChaoo();
 		}
 	}
 
