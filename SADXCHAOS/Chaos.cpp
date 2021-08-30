@@ -88,6 +88,8 @@
 //added 24 new tikal hints
 //added more new "hints"
 //sadly i have a crash with enemys in hub-worlds, only Beat, and Spinners can spawn in hubworlds currently 
+//added randomchao, thanks to sora for the help and shuch
+//added config options for, Random Enemys, Input Invert and RandomPause
 
 
 
@@ -108,8 +110,13 @@ int SnowboardTimer = 0;
 int IssSowboarding = 0;
 int InputInvert_Timer = 0;
 int EffectMax = 0;
+int FastAccel_Timer = 0;
+int Animaltyperand = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
+bool EnemysEnabled = true;
+bool InvertEnabled = true;
+bool RPauseEnabled = true;
 char* LastEffect = new char(128);
 bool EnableFontScaling = false;
 bool SpinnerTextLoader = false;
@@ -127,6 +134,7 @@ bool FSBTextLoader = false;
 bool BugerManTextLoader = false;
 bool UnidusTextLoader = false;
 bool AnimalTextLoader = false;
+bool ChaooManagerLoader = false;
 
 ObjectMaster* snowboard;
 
@@ -299,7 +307,10 @@ extern "C"
 		const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
 		EffectMax = config->getInt("General", "EffectMax", 180);
 		DebugToScreen = config->getBool("General", "PrintToScreen", false);
-		TeleportEnabled = config->getBool("General", "TeleportEnabled", false);
+		TeleportEnabled = config->getBool("General", "TeleportEnabled", true);
+		EnemysEnabled = config->getBool("General", "EnemysEnabled", true);
+		InvertEnabled = config->getBool("General", "InvertEnabled", true);
+		RPauseEnabled = config->getBool("General", "PauseEnabled", true);
 		delete config;
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
@@ -347,6 +358,12 @@ extern "C"
 	}
 	void RandomTank(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
+
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
@@ -384,8 +401,117 @@ extern "C"
 		PrintDebug("Spawned Tank\n");
 		return;
 	}
+	void RandomChaooAnimal()
+	{
+		Animaltyperand = rand() % 15 - 1;
+		return;
+	}
+	void RandomChaoo()
+	{
+		if (ChaooManagerLoader == false)
+		{
+			ChaoMain_Constructor();
+			al_confirmload_load();
+			ChaoManager_Load();
+			ChaooManagerLoader = true;
+		}
+
+		int chaotype = rand() % 25;
+		ChaoData* chaodata = new ChaoData();
+		chaodata->data.Happiness = rand() % 100;
+		chaodata->data.Energy = rand() % 32767;
+		chaodata->data.Hunger = rand() % 32767;
+		chaodata->data.StaminaStat = rand() % 3266;
+		chaodata->data.StaminaLevel = rand() % 99;
+		chaodata->data.FlyStat = rand() % 3266;
+		chaodata->data.FlyLevel = rand() % 99;
+		chaodata->data.PowerStat = rand() % 3266;
+		chaodata->data.PowerLevel = rand() % 99;
+		chaodata->data.RunStat = rand() % 3266;
+		chaodata->data.RunLevel = rand() % 99;
+		chaodata->data.SwimStat = rand() % 3266;
+		chaodata->data.SwimLevel = rand() % 99;
+		chaodata->data.UnknownStat = rand() % 3266; //why not lol
+		chaodata->data.UnknownLevel = rand() % 99;
+		chaodata->data.IntelligenceLevel = rand() % 99;
+		chaodata->data.RunnyNoseLevel = rand() % 200 - 100; //hopfully generates a number between -100 and +100
+		chaodata->data.SADXAnimalBehaviors = rand() % 32767; //not sure if it works
+		chaodata->data.FavoriteFruit = rand() % 7;
+		chaodata->data.Texture = rand() % 16;
+		chaodata->data.Garden = rand() % (6 - 4 + 1) + 4;
+		chaodata->data.SADXCharacterBonds->a = rand() % 100;
+		chaodata->data.SADXCharacterBonds->b = rand() % 100;
+		int bodychangechance = rand() % 10;
+		if (bodychangechance == 1)
+		{
+			int bodyrand = rand() % 3;
+			chaodata->data.BodyType = (SADXBodyType)bodyrand;
+		}
+		int headgearchance = rand() % 10;
+		if (headgearchance == 1)
+		{
+			chaodata->data.Headgear = rand() % 84;
+		}
+		int medalchance = rand() % 4;
+		if (medalchance == 1)
+		{
+			chaodata->data.Medal = rand() % 15;
+		}
+		int shinychance = rand() % 4;
+		if (shinychance == 1)
+		{
+			chaodata->data.Shiny = 1;
+		}
+		RandomChaooAnimal();
+		chaodata->data.ArmType = (SADXAnimal)Animaltyperand;
+		RandomChaooAnimal();
+		chaodata->data.WingType = (SADXAnimal)Animaltyperand;
+		RandomChaooAnimal();
+		chaodata->data.TailType = (SADXAnimal)Animaltyperand;
+		RandomChaooAnimal();
+		chaodata->data.LegType = (SADXAnimal)Animaltyperand;
+		RandomChaooAnimal();
+		chaodata->data.EarType = (SADXAnimal)Animaltyperand;
+		RandomChaooAnimal();
+		chaodata->data.ForeheadType = (SADXAnimal)Animaltyperand;
+		RandomChaooAnimal();
+		chaodata->data.EyebrowType = (SADXAnimal)Animaltyperand;
+		RandomChaooAnimal();
+		chaodata->data.UnknownType = (SADXAnimal)Animaltyperand; //why not lol
+		chaodata->data.MouthType = rand() % 15;
+		chaodata->data.EyeType = rand() % 13;
+		chaodata->data.BallType = rand() % 3;
+		chaodata->data.Alignment = rand() % 2 - 1; //test
+		ObjectMaster* Chao = CreateChao(chaodata, 0, 0, &EntityData1Ptrs[0]->Position, 0);
+		chaodata->data.Type = (ChaoType)chaotype;
+		chaodata->data.Color = rand() % 15;
+		chaodata->data.BodyTypeAnimal = 127;
+		chaodata->data.Name[0] = rand() % 255;
+		chaodata->data.Name[1] = rand() % 255;
+		chaodata->data.Name[2] = rand() % 255;
+		chaodata->data.Name[3] = rand() % 255;
+		chaodata->data.Name[4] = rand() % 255;
+		chaodata->data.Name[5] = rand() % 255;
+		chaodata->data.Name[6] = rand() % 255;
+		chaodata->data.FlyGrade = rand() % 5;
+		chaodata->data.IntelligenceGrade = rand() % 5;
+		chaodata->data.LuckyGrade = rand() % 5;
+		chaodata->data.PowerGrade = rand() % 5;
+		chaodata->data.RunGrade = rand() % 5;
+		chaodata->data.StaminaGrade = rand() % 5;
+		chaodata->data.SwimGrade = rand() % 5;
+		chaodata->data.UnknownGrade = rand() % 5;
+
+		PrintDebug("Random Chao\n");
+		strcpy_s(LastEffect, 128, "Spawned Random Chao");
+	}
 	void RandomBuyon(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
@@ -425,6 +551,11 @@ extern "C"
 	}
 	void RandomUnidus(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
@@ -466,6 +597,11 @@ extern "C"
 	}
 	void RandomAmebot(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
@@ -504,6 +640,11 @@ extern "C"
 	
 	void RandomPolice(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
@@ -544,6 +685,11 @@ extern "C"
 	
 	void RandomSnake(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
@@ -583,6 +729,11 @@ extern "C"
 	
 	void RandomRobo(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
@@ -622,6 +773,11 @@ extern "C"
 	
 	void RandomLeon(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
@@ -661,6 +817,11 @@ extern "C"
 
 	void RandomKiki(EntityData1* p1) 
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
@@ -733,6 +894,11 @@ extern "C"
 
 	void RandomSpinnerA(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (SpinnerTextLoader == false)
 		{
 			if (AnimalTextLoader == false)
@@ -757,6 +923,11 @@ extern "C"
 	}
 	void RandomSpinnerB(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (SpinnerTextLoader == false)
 		{
 			if (AnimalTextLoader == false)
@@ -781,6 +952,11 @@ extern "C"
 	}
 	void RandomSpinnerC(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (SpinnerTextLoader == false)
 		{
 			if (AnimalTextLoader == false)
@@ -806,6 +982,11 @@ extern "C"
 
 	void RandomSman(EntityData1* p1)//
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
@@ -836,6 +1017,11 @@ extern "C"
 
 	void RandomEGacha(EntityData1* p1)
 	{
+		if (!EnemysEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (EGachaTextLoader == false)
 		{
 			if (AnimalTextLoader == false)
@@ -968,6 +1154,16 @@ extern "C"
 		PrintDebug("Kill Momentum\n");
 		return;
 	}
+	void FastAccel(CharObj2* p1)
+	{
+		FastAccel_Timer = 400;
+		CharObj2Ptrs[0]->PhysicsData.MaxAccel = 10.0f;
+		CharObj2Ptrs[0]->PhysicsData.AirAccel = 0.10f;
+		CharObj2Ptrs[0]->PhysicsData.HangTime = 120;
+		strcpy_s(LastEffect, 128, "Fast Accel Enabled");
+		PrintDebug("Fast Accel Enabled\n");
+		return;
+	}
 	void RandomVSpeed(CharObj2* p1) 
 	{
 		p1->Speed.y = p1->PhysicsData.VSpeedCap;
@@ -1040,6 +1236,11 @@ extern "C"
 	}
 	void RandomPause() //randomly pauses the game LOL get good, time
 	{
+		if (!PauseEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		Pause_Timer = 5; //how long in frames? to pause unpause?
 		PrintDebug("Random Pause\n");
 		strcpy_s(LastEffect, 128, "Random Pause");
@@ -1085,19 +1286,19 @@ extern "C"
 		PrintDebug("Debug Mode Enabled\n");
 		strcpy_s(LastEffect, 128, "Debug Mode Enabled");
 	}
-	void  RandomXGravity()//currently disabled,
+	void RandomXGravity()//currently disabled,
 	{
 		Gravity.x = (float)rand() / RAND_MAX + (-1.5);
 		PrintDebug("Random X Gravity\n");
 	}
-	void  RandomYGravity()
+	void RandomYGravity()
 	{
 		Gravity_Timer = 1000;
 		Gravity.y = (float)rand() / RAND_MAX + (-1.5);
 		PrintDebug("Random Y Gravity\n");
 		strcpy_s(LastEffect, 128, "Random Y Gravity");
 	}
-	void  RandomZGravity()//currently disabled,
+	void RandomZGravity()//currently disabled,
 	{
 		Gravity.z = (float)rand() / RAND_MAX + (-1.5);
 		PrintDebug("Random Z Gravity\n");
@@ -1470,7 +1671,7 @@ extern "C"
 	1597,
 	1606,
 	2043,
-	174, //Get a load of this!
+	0174, //Get a load of this!
 	1955,
 	55555, //Custom OOF Voice
 	919,
@@ -1493,13 +1694,13 @@ extern "C"
 	1352,
 	1141,
 	1103,
-	746,
-	742,
-	589,
+	0746,
+	0742,
+	89,
 	18,
-	164,//knux oh-no
-	165,//sonic oh-no
-	241,
+	0164,//knux oh-no
+	0165,//sonic oh-no
+	0241,
 	298,
 	310,
 	319,
@@ -1520,6 +1721,11 @@ extern "C"
 	}
 	void InputInvert()
 	{
+		if (!InvertEnabled)
+		{
+				Chaos_Timer = EffectMax;
+				return;
+		}
 		WriteData<1>((int*)0x40F2A2, 0xC6);
 		WriteData<1>((int*)0x40F2A1, 0x1);
 		InputInvert_Timer = 420;
@@ -1597,7 +1803,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[69]{
+	ChaosS ChaosArray[70]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -1668,6 +1874,7 @@ extern "C"
 	{ nullptr, nullptr, RandomHurt},
 	{ nullptr, nullptr, RandomHurt},
 	{ nullptr, nullptr, RandomRotate},
+	{ nullptr, nullptr, RandomChaoo},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -1760,7 +1967,7 @@ extern "C"
 			GameState = 16;
 			Pause_Timer--;
 		}
-		if (GameState != 15 || GameState != 16)
+		if (GameState < 15 || GameState > 16)
 		{
 			if (AnimalTextLoader == true)
 			{
@@ -1779,8 +1986,8 @@ extern "C"
 				BugerManTextLoader = false;
 				UnidusTextLoader = false;
 				AnimalTextLoader = false;
+				ChaooManagerLoader = false;
 			}
-
 		}
 		if (SnowboardTimer <= 500 && SnowboardTimer != 0)
 		{
@@ -1795,16 +2002,29 @@ extern "C"
 			strcpy_s(LastEffect, 128, "Snowboard Off");
 
 		}
-		if (Debug_Timer <= 333 && Debug_Timer != 0)
+		if (FastAccel_Timer <= 400 && FastAccel_Timer != 0)
+		{
+			FastAccel_Timer--;
+		}
+		if (FastAccel_Timer <= 2 && FastAccel_Timer != 0)
+		{
+			CharObj2Ptrs[0]->PhysicsData.MaxAccel = 3.0f;
+			CharObj2Ptrs[0]->PhysicsData.AirAccel = 0.03099999949f;
+			CharObj2Ptrs[0]->PhysicsData.HangTime = 60;
+			strcpy_s(LastEffect, 128, "Fast Accel Disabled");
+			PrintDebug("Fast Accel Disabled\n");
+		}
+		if (Debug_Timer < 333 && Debug_Timer != 0)
 		{
 			Debug_Timer--;
 		}
-		if (Debug_Timer <= 5 && Debug_Timer != 0)
+		if (Debug_Timer <= 2 && Debug_Timer != 0)
 		{
-			Debug_Timer = 0;
+			
 			EntityData1Ptrs[0]->Action = 1;
 			PrintDebug("Debug turned Off, Default Action Set\n");
 			strcpy_s(LastEffect, 128, "Debug Off");
+			Debug_Timer = 0;
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
 			Chaos_Timer++;
@@ -1830,12 +2050,12 @@ extern "C"
 		// Executed before the game processes input
 
 	}
-	__declspec(dllexport) void __cdecl OnControl(EntityData1* p1)
+	__declspec(dllexport) void __cdecl OnControl(CharObj2* p1)
 	{
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
-			LoadAutoHint(Hints[46], Voices[46]);
+			RandomChaoo();
 		}
 	}
 
