@@ -44,6 +44,7 @@ Currently this Mod has
 - Random Enemy - Has a chance to spawn 1 or 2 of the following,   
 RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinner, Ice Ball, Beat, Cops, Boa-Boa, Buyoon, Sweeper and Egg Keeper.
 - Random BurgerMan - Spawns in the BurgerMan Statue.
+- Fast Accel - Increases the players, MaxAccel, AirAccel and HangTime for 400 frames. (currently sets them back to sonic's default values, probably will mess with other charaters but dying/restarting fixes it for now 8/30/2021)
 
 
 
