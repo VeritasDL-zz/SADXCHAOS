@@ -320,7 +320,7 @@ extern "C"
 		WriteCall((void*)0x597B46, LoadSnowboardObject);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 		srand((unsigned)time(nullptr));
-		strcpy_s(LastEffect, 128, "SADX CHAOS EDITION By VeritasDL");
+
 	}
 
 	PVMEntry MinimalPVMs[]{
@@ -1884,6 +1884,7 @@ extern "C"
 		// Executed every running frame of SADX
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
+		strcpy_s(LastEffect, 128, "SADX CHAOS EDITION By VeritasDL"); // i think this was causing random crashes lmfao)
 		if (NoClip_Timer <= 800 && NoClip_Timer != 0)
 		{
 			NoClip_Timer--;
@@ -1930,7 +1931,7 @@ extern "C"
 			SetDebugFontSize(15);
 			SetDebugFontColor(0xFFFFFFFF);
 			DrawDebugRectangle(0.30f, 7.90f, 17.9f, 6.2f);
-			DisplayDebugStringFormatted(NJM_LOCATION(0, 7)," %s", LastEffect);
+			DisplayDebugStringFormatted(NJM_LOCATION(0, 7), " %s", LastEffect);
 		}
 
 		if (DisableControl_Timer <= 90 && DisableControl_Timer != 0)
@@ -1950,7 +1951,7 @@ extern "C"
 			SetDebugFontColor(0xFFFF0000);
 			SetDebugFontSize(18);
 			DisplayDebugString(NJM_LOCATION(15, 40), "- PRESS DPAD DOWN OR DIE!!! -");
-			
+
 			if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
 			{
 				DpadDown = 1; // sets dpadcheck to 1
@@ -2021,7 +2022,7 @@ extern "C"
 		}
 		if (Debug_Timer <= 2 && Debug_Timer != 0)
 		{
-			
+
 			EntityData1Ptrs[0]->Action = 1;
 			PrintDebug("Debug turned Off, Default Action Set\n");
 			strcpy_s(LastEffect, 128, "Debug Off");
