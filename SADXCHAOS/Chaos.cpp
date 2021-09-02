@@ -1671,7 +1671,7 @@ extern "C"
 	1597,
 	1606,
 	2043,
-	0174, //Get a load of this!
+	174, //Get a load of this!
 	1955,
 	55555, //Custom OOF Voice
 	919,
@@ -1694,13 +1694,13 @@ extern "C"
 	1352,
 	1141,
 	1103,
-	0746,
-	0742,
+	746,
+	742,
 	89,
 	18,
-	0164,//knux oh-no
-	0165,//sonic oh-no
-	0241,
+	164,//knux oh-no
+	165,//sonic oh-no
+	241,
 	298,
 	310,
 	319,
@@ -1884,7 +1884,6 @@ extern "C"
 		// Executed every running frame of SADX
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
-		strcpy_s(LastEffect, 128, "SADX CHAOS EDITION By VeritasDL"); // i think this was causing random crashes lmfao)
 		if (NoClip_Timer <= 800 && NoClip_Timer != 0)
 		{
 			NoClip_Timer--;
@@ -2052,12 +2051,12 @@ extern "C"
 		// Executed before the game processes input
 
 	}
-	__declspec(dllexport) void __cdecl OnControl(CharObj2* p1)
+	__declspec(dllexport) void __cdecl OnControl(EntityData1* p1)
 	{
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
-			//RandomChaoo();
+
 		}
 	}
 
