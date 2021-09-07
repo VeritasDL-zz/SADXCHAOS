@@ -116,7 +116,7 @@ and extract them to SADX\system\sounddata\voice_us\wma
    git clone https://github.com/VeritasDL/SADXCHAOS.git
    ```
    
-2. Open SADX Trainer.sln with Visual Studio 2019
+2. Open SADXCHAOS.sln with Visual Studio 2019
 3. Do your edits
 4. Submit a pull request.
 
