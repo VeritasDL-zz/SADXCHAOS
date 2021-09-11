@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "resource.h"
 #include <time.h>
 #include <iostream>
 #include <string>
@@ -8,6 +9,7 @@
 #include <algorithm>
 #include <vector>
 #include <IniFile.hpp>
+using std::string;
 
 
 //changelog
@@ -298,12 +300,58 @@ void InitializeRandomCoordinates()
 
 }
 
+HMODULE moduleHandle;
+static const string Physnames[] = {
+	"sonic",
+	"eggman",
+	"tails",
+	"knuckles",
+	"tikal",
+	"amy",
+	"gamma",
+	"big",
+	"supersonic",
+	"sa2bsonic",
+	"sa2bshadow",
+	"sa2btails",
+	"sa2beggman",
+	"sa2bknuckles",
+	"sa2brouge",
+	"sa2bmechtails",
+	"sa2bmecheggman",
+	"sa2bamy",
+	"sa2bsupersonic",
+	"sa2bsupershadow",
+	"sa2bunused",
+	"sa2bmetalsonic",
+	"sa2bchaowalker",
+	"sa2bdarkchaowalker",
+	"sa2btikal",
+	"sa2bchaos",
+	"sa2bunused2",
+	"sa2bunused3",
+	"heroessonic",
+	"heroesknuckles",
+	"heroestails",
+	"heroesshadow",
+	"heroesomega",
+	"heroesrouge",
+	"heroesamy",
+	"heroesbig",
+	"heroescream",
+	"heroesespio",
+	"heroesvector",
+	"heroescharmy"
+};
+
 extern "C"
 {
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
 	{
 		// Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
 		// This is where we override functions, replace static data, etc.
+		//HRSRC hres = FindResource(moduleHandle, MAKEINTRESOURCE(IDR_MISC1), L"MISC");
+		//39 index's in phys.bin i think
 		const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
 		EffectMax = config->getInt("General", "EffectMax", 180);
 		DebugToScreen = config->getBool("General", "PrintToScreen", false);
@@ -356,6 +404,21 @@ extern "C"
 		njColorBlendingMode(0, NJD_COLOR_BLENDING_SRCALPHA);
 		njColorBlendingMode(NJD_DESTINATION_COLOR, NJD_COLOR_BLENDING_INVSRCALPHA);
 	}
+
+
+
+	void RandomPhysics()
+	{
+		//HRSRC hres = FindResource(moduleHandle, MAKEINTRESOURCE(IDR_MISC1), L"MISC");
+		//PhysicsData *tmp = (PhysicsData*)LockResource(LoadResource(moduleHandle, hres));
+
+		HRSRC hres = FindResource(moduleHandle, MAKEINTRESOURCE(IDR_MISC1), L"MISC");
+		PhysicsData* Obama = (PhysicsData*)LockResource(LoadResource(moduleHandle, hres));
+
+		memcpy(&PhysicsArray[2], &Obama[2], offsetof(PhysicsData, RippleSize));
+		PhysicsArray[2].Gravity = Obama[2].Gravity;
+	}
+
 	void RandomTank(EntityData1* p1)
 	{
 		if (!EnemysEnabled)
@@ -2056,7 +2119,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
-
+			RandomPhysics();
 		}
 	}
 

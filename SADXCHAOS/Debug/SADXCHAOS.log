@@ -1,0 +1,23 @@
+﻿  pch.cpp
+  Chaos.cpp
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(122,29): warning C4309: 'initializing': truncation of constant value
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(440,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(588,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(632,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(678,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(721,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(766,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(810,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(854,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(898,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(969,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(998,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(1027,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(1063,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(1092,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\SADXCHAOS\Chaos.cpp(1482,22): warning C4114: same type qualifier used more than once
+  dllmain.cpp
+  Generating Code...
+     Creating library C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.lib and object C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.exp
+  SADXCHAOS.vcxproj -> C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.dll
+          1 file(s) copied.
