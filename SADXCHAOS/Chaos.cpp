@@ -161,7 +161,7 @@ NJS_VECTOR GetRandomCoordinates(LevelAndActIDs levelAndAct)
 	return coordsvector[random];
 }
 
-struct PhyData[37]
+PhysicsData_t PhyData[38]
 {
 	60,2,16,16,3,0.6,1.66,3,0.23,0.46,1.39,2.3,3.7,5.09,0.076,0.05,0.031,-0.06,-0.18,-0.17,-0.028,-0.008,-0.01,-0.4,-0.1,-0.6,-0.2825,0.3,4,10,0.08,7,5.4,
 	60,3,16,16,3,1,1.66,3,0.23,0.46,1.39,2.3,3.7,5.09,0.076,0.06,0.031,-0.06,-0.18,-0.17,-0.028,-0.008,-0.01,-0.4,-0.1,-0.6,-0.3375,0.3,8.5,18,0.08,7,5.3,
@@ -200,7 +200,7 @@ struct PhyData[37]
 	60,2,32,32,2,0.6,1.66,3,0.11,0.46,1.39,2.3,3.7,5.09,0.076,0.071,0.051,-0.06,-0.22,-0.21,-0.028,-0.01,-0.01,-0.4,-0.125,-0.6,-0.45,0.28,3.5,9,0.08,6,4.5,
 	60,2,32,32,6,0.6,1.66,3,0.23,0.46,1.39,2.3,3.7,5.09,0.076,0.1,0.031,-0.09,-0.15,-0.14,-0.028,-0.008,-0.01,-0.4,-0.25,-0.8,-0.6,0.3,4,10,0.08,7,5.4,
 	60,2,32,32,2.5,0.6,1.66,3,0.18,0.46,1.39,2.3,3.7,5.09,0.076,0.048,0.035,-0.06,-0.18,-0.17,-0.028,-0.008,-0.01,-0.4,-0.35,-0.85,-0.35,0.5,8,17,0.08,16,8.5,
-	60,2,32,32,2,0.6,1.66,3,0.11,0.46,1.39,2.3,3.7,5.09,0.076,0.071,0.051,-0.06,-0.22,-0.21,-0.028,-0.01,-0.01,-0.4,-0.125,-0.6,-0.45,0.28,3.5,9,0.08,6,4.5,
+	60,2,32,32,2,0.6,1.66,3,0.11,0.46,1.39,2.3,3.7,5.09,0.076,0.071,0.051,-0.06,-0.22,-0.21,-0.028,-0.01,-0.01,-0.4,-0.125,-0.6,-0.45,0.28,3.5,9,0.08,6,4.5
 };
 
 static const string Physnames[] = {
@@ -245,10 +245,7 @@ static const string Physnames[] = {
 	"heroesvector",
 	"heroescharmy"
 };
-void InitializeRandomPhys()
-{
 
-}
 
 void InitializeRandomCoordinates()
 {
@@ -387,10 +384,6 @@ void InitializeRandomCoordinates()
 
 }
 
-HMODULE moduleHandle;
-
-
-
 
 extern "C"
 {
@@ -451,11 +444,53 @@ extern "C"
 		njColorBlendingMode(NJD_DESTINATION_COLOR, NJD_COLOR_BLENDING_INVSRCALPHA);
 	}
 
-
-
 	void RandomPhysics()
 	{
+		int Phyrand = rand() % 38;
+		int i = GetCurrentCharacterID();
+		PhysicsData tmp = (PhysicsData)PhyData[Phyrand];
+		memcpy(&PhysicsArray[i], &tmp, sizeof(PhysicsData));
 
+
+		//alot of this stuff doesnt seem to take effect untill the level resets/you die/change acts, idk why
+
+
+
+		//PhysicsArray[i].HangTime = tmp.HangTime;
+		//PhysicsArray[i].FloorGrip = tmp.FloorGrip;
+		//PhysicsArray[i].HSpeedCap = tmp.HSpeedCap;
+		//PhysicsArray[i].VSpeedCap = tmp.VSpeedCap;
+		//PhysicsArray[i].MaxAccel = tmp.MaxAccel;
+		//PhysicsArray[i].field_14 = tmp.field_14;
+		//PhysicsArray[i].JumpSpeed = tmp.JumpSpeed;
+		//PhysicsArray[i].SpringControl = tmp.SpringControl;
+		//PhysicsArray[i].field_20 = tmp.field_20;
+		//PhysicsArray[i].RollCancel = tmp.RollCancel;
+		//PhysicsArray[i].RollEnd = tmp.RollEnd;
+		//PhysicsArray[i].Run1 = tmp.Run1;
+		//PhysicsArray[i].Knockback = tmp.Knockback;
+		//PhysicsArray[i].Run2 = tmp.Run2;
+		//PhysicsArray[i].JumpAddSpeed = tmp.JumpAddSpeed;
+		//PhysicsArray[i].GroundAccel = tmp.GroundAccel;
+		//PhysicsArray[i].AirAccel = tmp.AirAccel;
+		//PhysicsArray[i].GroundDecel = tmp.GroundDecel;
+		//PhysicsArray[i].Brake = tmp.Brake;
+		//PhysicsArray[i].AirBrake = tmp.AirBrake;
+		//PhysicsArray[i].AirDecel = tmp.AirDecel;
+		//PhysicsArray[i].RollDecel = tmp.RollDecel;
+		//PhysicsArray[i].GravityAdd = tmp.GravityAdd;
+		//PhysicsArray[i].HitSpeed = tmp.HitSpeed;
+		//PhysicsArray[i].MinSpeed = tmp.MinSpeed;
+		//PhysicsArray[i].field_64 = tmp.field_64;
+		//PhysicsArray[i].field_68 = tmp.field_68;
+		//PhysicsArray[i].field_6C = tmp.field_6C;
+		//PhysicsArray[i].RippleSize = tmp.RippleSize;
+		//PhysicsArray[i].CollisionSize = tmp.CollisionSize;
+		//PhysicsArray[i].Gravity = tmp.Gravity;
+		//PhysicsArray[i].CameraY = tmp.CameraY;
+		//PhysicsArray[i].YOff = tmp.YOff;
+
+		
 
 	}
 
@@ -2131,7 +2166,7 @@ extern "C"
 			Debug_Timer = 0;
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
-			Chaos_Timer++;
+			//Chaos_Timer++;
 		if (Chaos_Timer >= EffectMax)
 		{
 			char curRand = 0;
