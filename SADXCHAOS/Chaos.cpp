@@ -92,6 +92,9 @@ using std::string;
 //added randomchao, thanks to sora for the help and shuch
 //added config options for, Random Enemys, Input Invert and RandomPause
 //added FastAccel (for now) 
+//added random physics thanks to MainMemory (https://github.com/MainMemory/SADXPhysicsSwapMod) and Refrag  
+//added Decoupple Camera
+
 
 
 
@@ -112,6 +115,7 @@ int IssSowboarding = 0;
 int InputInvert_Timer = 0;
 int EffectMax = 0;
 int FastAccel_Timer = 0;
+int Camera_Timer = 0;
 int Animaltyperand = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
@@ -161,7 +165,7 @@ NJS_VECTOR GetRandomCoordinates(LevelAndActIDs levelAndAct)
 	return coordsvector[random];
 }
 
-PhysicsData_t PhyData[38]
+PhysicsData_t PhyData[38]  //credits to MainMemory For this data, https://github.com/MainMemory/SADXPhysicsSwapMod
 {
 	60,2,16,16,3,0.6,1.66,3,0.23,0.46,1.39,2.3,3.7,5.09,0.076,0.05,0.031,-0.06,-0.18,-0.17,-0.028,-0.008,-0.01,-0.4,-0.1,-0.6,-0.2825,0.3,4,10,0.08,7,5.4,
 	60,3,16,16,3,1,1.66,3,0.23,0.46,1.39,2.3,3.7,5.09,0.076,0.06,0.031,-0.06,-0.18,-0.17,-0.028,-0.008,-0.01,-0.4,-0.1,-0.6,-0.3375,0.3,8.5,18,0.08,7,5.3,
@@ -203,47 +207,47 @@ PhysicsData_t PhyData[38]
 	60,2,32,32,2,0.6,1.66,3,0.11,0.46,1.39,2.3,3.7,5.09,0.076,0.071,0.051,-0.06,-0.22,-0.21,-0.028,-0.01,-0.01,-0.4,-0.125,-0.6,-0.45,0.28,3.5,9,0.08,6,4.5
 };
 
-static const string Physnames[] = {
-	"sonic",
-	"eggman",
-	"tails",
-	"knuckles",
-	"tikal",
-	"amy",
-	"gamma",
-	"big",
-	"supersonic",
-	"sa2bsonic",
-	"sa2bshadow",
-	"sa2btails",
-	"sa2beggman",
-	"sa2bknuckles",
-	"sa2brouge",
-	"sa2bmechtails",
-	"sa2bmecheggman",
-	"sa2bamy",
-	"sa2bsupersonic",
-	"sa2bsupershadow",
-	"sa2bunused",
-	"sa2bmetalsonic",
-	"sa2bchaowalker",
-	"sa2bdarkchaowalker",
-	"sa2btikal",
-	"sa2bchaos",
-	"sa2bunused2",
-	"sa2bunused3",
-	"heroessonic",
-	"heroesknuckles",
-	"heroestails",
-	"heroesshadow",
-	"heroesomega",
-	"heroesrouge",
-	"heroesamy",
-	"heroesbig",
-	"heroescream",
-	"heroesespio",
-	"heroesvector",
-	"heroescharmy"
+static const char* Physnames[] = {
+	"Sonic",
+	"Eggman",
+	"Tails",
+	"Knuckles",
+	"Tikal",
+	"Amy",
+	"Gamma",
+	"Big",
+	"Super Sonic",
+	"Sa2b Sonic",
+	"Sa2b Shadow",
+	"Sa2b Tails",
+	"Sa2b Eggman",
+	"Sa2b Knuckles",
+	"Sa2b Rouge",
+	"Sa2b Mechtails",
+	"Sa2b Mecheggman",
+	"Sa2b Amy",
+	"Sa2b Super Sonic",
+	"Sa2b Super Shadow",
+	"Sa2b Unused",
+	"Sa2b Metal Sonic",
+	"Sa2b Chao Walker",
+	"Sa2b Dark Chao Walker",
+	"Sa2b Tikal",
+	"Sa2b Chaos",
+	"Sa2b Unused2",
+	"Sa2b Unused3",
+	"Heroes Sonic",
+	"Heroes Knuckles",
+	"Heroes Tails",
+	"Heroes Shadow",
+	"Heroes Omega",
+	"Heroes Rouge",
+	"Heroes Amy",
+	"Heroes Big",
+	"Heroes Cream",
+	"Heroes Espio",
+	"Heroes Vector",
+	"Heroes Charmy"
 };
 
 
@@ -447,51 +451,25 @@ extern "C"
 	void RandomPhysics()
 	{
 		int Phyrand = rand() % 38;
-		int i = GetCurrentCharacterID();
+		char charname[128];
+		strcpy_s(charname, 128, Physnames[Phyrand]);
+		char output[128];
+		snprintf(output, 128, "%s Physics", charname);
 		PhysicsData tmp = (PhysicsData)PhyData[Phyrand];
-		memcpy(&PhysicsArray[i], &tmp, sizeof(PhysicsData));
-
-
-		//alot of this stuff doesnt seem to take effect untill the level resets/you die/change acts, idk why
-
-
-
-		//PhysicsArray[i].HangTime = tmp.HangTime;
-		//PhysicsArray[i].FloorGrip = tmp.FloorGrip;
-		//PhysicsArray[i].HSpeedCap = tmp.HSpeedCap;
-		//PhysicsArray[i].VSpeedCap = tmp.VSpeedCap;
-		//PhysicsArray[i].MaxAccel = tmp.MaxAccel;
-		//PhysicsArray[i].field_14 = tmp.field_14;
-		//PhysicsArray[i].JumpSpeed = tmp.JumpSpeed;
-		//PhysicsArray[i].SpringControl = tmp.SpringControl;
-		//PhysicsArray[i].field_20 = tmp.field_20;
-		//PhysicsArray[i].RollCancel = tmp.RollCancel;
-		//PhysicsArray[i].RollEnd = tmp.RollEnd;
-		//PhysicsArray[i].Run1 = tmp.Run1;
-		//PhysicsArray[i].Knockback = tmp.Knockback;
-		//PhysicsArray[i].Run2 = tmp.Run2;
-		//PhysicsArray[i].JumpAddSpeed = tmp.JumpAddSpeed;
-		//PhysicsArray[i].GroundAccel = tmp.GroundAccel;
-		//PhysicsArray[i].AirAccel = tmp.AirAccel;
-		//PhysicsArray[i].GroundDecel = tmp.GroundDecel;
-		//PhysicsArray[i].Brake = tmp.Brake;
-		//PhysicsArray[i].AirBrake = tmp.AirBrake;
-		//PhysicsArray[i].AirDecel = tmp.AirDecel;
-		//PhysicsArray[i].RollDecel = tmp.RollDecel;
-		//PhysicsArray[i].GravityAdd = tmp.GravityAdd;
-		//PhysicsArray[i].HitSpeed = tmp.HitSpeed;
-		//PhysicsArray[i].MinSpeed = tmp.MinSpeed;
-		//PhysicsArray[i].field_64 = tmp.field_64;
-		//PhysicsArray[i].field_68 = tmp.field_68;
-		//PhysicsArray[i].field_6C = tmp.field_6C;
-		//PhysicsArray[i].RippleSize = tmp.RippleSize;
-		//PhysicsArray[i].CollisionSize = tmp.CollisionSize;
-		//PhysicsArray[i].Gravity = tmp.Gravity;
-		//PhysicsArray[i].CameraY = tmp.CameraY;
-		//PhysicsArray[i].YOff = tmp.YOff;
+		memcpy(&CharObj2Ptrs[0]->PhysicsData, &tmp, sizeof(PhysicsData));
+		strcpy_s(LastEffect, 128, output);
+		PrintDebug("Random Physics\n");
 
 		
 
+	}
+
+	void UncoupleCamera()
+	{
+		Camera_Data1->Action = 3;
+		Camera_Timer = 100;
+		//PrintDebug("Camera Detached\n");
+		strcpy_s(LastEffect, 128, "Camera Detached");
 	}
 
 	void RandomTank(EntityData1* p1)
@@ -1941,7 +1919,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[71]{
+	ChaosS ChaosArray[72]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -2014,6 +1992,7 @@ extern "C"
 	{ nullptr, nullptr, RandomHurt},
 	{ nullptr, nullptr, RandomRotate},
 	{ nullptr, nullptr, RandomChaoo},
+	{ nullptr, nullptr, RandomPhysics},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -2049,6 +2028,17 @@ extern "C"
 			InputInvert_Timer = 0;
 			PrintDebug("Input Set to Default\n");
 			strcpy_s(LastEffect, 128, "Input Set to Default");
+		}
+		if (Camera_Timer <= 100 && Camera_Timer != 0)
+		{
+			Camera_Timer--;
+		}
+		if (Camera_Timer == 1 && Camera_Timer != 0)
+		{
+			Camera_Data1->Action = 2;
+			Camera_Timer = 0;
+			//PrintDebug("Camera Attached\n");
+			strcpy_s(LastEffect, 128, "Camera Attached");
 		}
 
 		if (Gravity_Timer <= 1000 && Gravity_Timer != 0)
@@ -2194,7 +2184,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
-			RandomPhysics();
+			UncoupleCamera();
 		}
 	}
 
