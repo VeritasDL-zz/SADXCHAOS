@@ -95,12 +95,14 @@ Download the [Latest Release Here](https://github.com/VeritasDL/SADXCHAOS/releas
 RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinner, Ice Ball, Beat, Cops, Boa-Boa, Buyoon, Sweeper and Egg Keeper.
 - Random BurgerMan - Spawns in the BurgerMan Statue.
 - Fast Accel - Increases the players, MaxAccel, AirAccel and HangTime for 400 frames. (currently sets them back to sonic's default values, probably will mess with other charaters but dying/restarting fixes it for now 8/30/2021)
+- Random Physics - Sets current Physics to the physics from SADX,SA2B and Sonic Heros. Credits to MainMemory for the code and Physics data, https://github.com/MainMemory/SADXPhysicsSwapMod
+- Camera Decouple - Detaches the camera from the player for 100 frames.
 
 
 ## Special Thanks
 Thanks to Sora for the code base and helping me with dumb questions  
 Huge Thanks to Refrag for helping me constantly!    
-Thanks to MainMemory for letting me use her snowboard code  
+Thanks to MainMemory for letting me use her snowboard and random physics code!
 Thanks to Kell and itsEasyActually for all the help!  
 Thanks to the entire SA-1 X-Hax community for everything they continue to do for this game :)  
 
