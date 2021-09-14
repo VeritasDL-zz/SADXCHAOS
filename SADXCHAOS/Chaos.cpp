@@ -451,20 +451,21 @@ extern "C"
 		njColorBlendingMode(NJD_DESTINATION_COLOR, NJD_COLOR_BLENDING_INVSRCALPHA);
 	}
 
+	void DisableJump()
+	{
+		JumpAllowed(false);
+	}
+
 	void RandomPhysics()
 	{
 		int Phyrand = rand() % 38;
-
 		char charname[128];
 		strcpy_s(charname, 128, Physnames[Phyrand]);
 		char output[128];
 		snprintf(output, 128, "%s Physics", charname);
-
 		PhysicsData tmp = (PhysicsData)PhyData[Phyrand];
 		memcpy(&CharObj2Ptrs[0]->PhysicsData, &tmp, sizeof(PhysicsData));
-
 		strcpy_s(LastEffect, 128, output);
-
 		//PrintDebug("Random Physics\n");//this was crashing me? lol how
 	}
 
@@ -2215,7 +2216,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
-			UncoupleCamera();
+			DisableJump();
 
 		}
 	}
