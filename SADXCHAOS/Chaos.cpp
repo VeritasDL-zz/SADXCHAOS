@@ -94,7 +94,9 @@ using std::string;
 //added FastAccel (for now) 
 //added random physics thanks to MainMemory (https://github.com/MainMemory/SADXPhysicsSwapMod) and Refrag  
 //added Decoupple Camera
-
+//added no sound,
+//fixed a bug with fast accel
+//
 
 
 
@@ -116,6 +118,7 @@ int InputInvert_Timer = 0;
 int EffectMax = 0;
 int FastAccel_Timer = 0;
 int Camera_Timer = 0;
+int s0und__Timer = 0;
 int Animaltyperand = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
@@ -451,25 +454,36 @@ extern "C"
 	void RandomPhysics()
 	{
 		int Phyrand = rand() % 38;
+
 		char charname[128];
 		strcpy_s(charname, 128, Physnames[Phyrand]);
 		char output[128];
 		snprintf(output, 128, "%s Physics", charname);
+
 		PhysicsData tmp = (PhysicsData)PhyData[Phyrand];
 		memcpy(&CharObj2Ptrs[0]->PhysicsData, &tmp, sizeof(PhysicsData));
+
 		strcpy_s(LastEffect, 128, output);
-		PrintDebug("Random Physics\n");
 
-		
-
+		//PrintDebug("Random Physics\n");//this was crashing me? lol how
 	}
 
+	void Nos0und_ForYou()
+	{
+		PauseSound();
+		EnableBGM = 0;
+		VoicesEnabled = false;
+		WriteData((int*)0x03B29CE0, (int)0xFFFFFFFF);
+		strcpy_s(LastEffect, 128, "s0und_ Disabled");
+		PrintDebug("s0und_ Disabled\n");
+		s0und__Timer = 110;
+	}
 	void UncoupleCamera()
 	{
-		Camera_Data1->Action = 3;
+		Camera_Data1->Action = 3; //uncouples camera from char
 		Camera_Timer = 100;
-		//PrintDebug("Camera Detached\n");
 		strcpy_s(LastEffect, 128, "Camera Detached");
+		//PrintDebug("Camera Detached\n");//this was crashing me? lol how
 	}
 
 	void RandomTank(EntityData1* p1)
@@ -1919,7 +1933,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[72]{
+	ChaosS ChaosArray[74]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -1993,6 +2007,8 @@ extern "C"
 	{ nullptr, nullptr, RandomRotate},
 	{ nullptr, nullptr, RandomChaoo},
 	{ nullptr, nullptr, RandomPhysics},
+	{ nullptr, nullptr, UncoupleCamera},
+	{ nullptr, nullptr, Nos0und_ForYou},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -2142,6 +2158,21 @@ extern "C"
 			CharObj2Ptrs[0]->PhysicsData.HangTime = 60;
 			strcpy_s(LastEffect, 128, "Fast Accel Disabled");
 			PrintDebug("Fast Accel Disabled\n");
+			FastAccel_Timer = 0;
+		}
+		if (s0und__Timer <= 110 && s0und__Timer != 0)
+		{
+			s0und__Timer--;
+		}
+		if (s0und__Timer == 1 && s0und__Timer != 0)
+		{
+			ResumeSound();
+			EnableBGM = 1;
+			VoicesEnabled = true;
+			WriteData((int*)0x03B29CE0, (int)0x00000000);
+			strcpy_s(LastEffect, 128, "s0und_ Enabled");
+			PrintDebug("s0und_ Enabled\n");
+			s0und__Timer = 0;
 		}
 		if (Debug_Timer < 333 && Debug_Timer != 0)
 		{
@@ -2156,7 +2187,7 @@ extern "C"
 			Debug_Timer = 0;
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
-			//Chaos_Timer++;
+			Chaos_Timer++;
 		if (Chaos_Timer >= EffectMax)
 		{
 			char curRand = 0;
@@ -2185,6 +2216,7 @@ extern "C"
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
 			UncoupleCamera();
+
 		}
 	}
 
