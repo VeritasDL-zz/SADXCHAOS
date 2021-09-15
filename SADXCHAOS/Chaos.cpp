@@ -1937,7 +1937,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[74]{
+	ChaosS ChaosArray[75]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -2013,6 +2013,7 @@ extern "C"
 	{ nullptr, nullptr, RandomPhysics},
 	{ nullptr, nullptr, UncoupleCamera},
 	{ nullptr, nullptr, Nos0und_ForYou},
+	{ nullptr, nullptr, DisablePausee},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
