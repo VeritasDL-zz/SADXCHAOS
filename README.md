@@ -97,6 +97,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Fast Accel - Increases the players, MaxAccel, AirAccel and HangTime for 400 frames. (currently sets them back to sonic's default values, probably will mess with other charaters but dying/restarting fixes it for now 8/30/2021)
 - Random Physics - Sets current Physics to the physics from SADX,SA2B and Sonic Heros. Credits to MainMemory for the code and Physics data, https://github.com/MainMemory/SADXPhysicsSwapMod
 - Camera Decouple - Detaches the camera from the player for 100 frames.
+- Disable Pause - Removes the Ability to pause for 420 frames.
 
 
 ## Special Thanks
