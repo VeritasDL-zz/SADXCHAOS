@@ -96,7 +96,8 @@ using std::string;
 //added Decoupple Camera
 //added no sound,
 //fixed a bug with fast accel
-//
+//added Disable Pause
+//fixed a few warnings
 
 
 
@@ -119,13 +120,14 @@ int EffectMax = 0;
 int FastAccel_Timer = 0;
 int Camera_Timer = 0;
 int s0und__Timer = 0;
+int DisablePause_Timer = 0;
 int Animaltyperand = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
 bool InvertEnabled = true;
 bool RPauseEnabled = true;
-char* LastEffect = new char(128);
+char* LastEffect = new char();
 bool EnableFontScaling = false;
 bool SpinnerTextLoader = false;
 bool LeonTextLoader = false;
@@ -450,12 +452,13 @@ extern "C"
 		njColorBlendingMode(0, NJD_COLOR_BLENDING_SRCALPHA);
 		njColorBlendingMode(NJD_DESTINATION_COLOR, NJD_COLOR_BLENDING_INVSRCALPHA);
 	}
-
-	void DisableJump()
+	void DisablePausee()
 	{
-		JumpAllowed(false);
+		PauseEnabled = false;
+		DisablePause_Timer = 420;
+		strcpy_s(LastEffect, 128, "Pause Disabled");
+		PrintDebug("Pause Disabled\n");
 	}
-
 	void RandomPhysics()
 	{
 		int Phyrand = rand() % 38;
@@ -505,7 +508,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -653,7 +656,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -697,7 +700,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -743,7 +746,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -786,7 +789,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -831,7 +834,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -875,7 +878,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -919,7 +922,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -963,7 +966,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -1034,7 +1037,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -1063,7 +1066,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -1092,7 +1095,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -1128,7 +1131,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -1157,7 +1160,7 @@ extern "C"
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (int j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -2175,6 +2178,18 @@ extern "C"
 			PrintDebug("s0und_ Enabled\n");
 			s0und__Timer = 0;
 		}
+		if (DisablePause_Timer <= 420 && DisablePause_Timer != 0)
+		{
+			DisablePause_Timer--;
+		}
+		if (DisablePause_Timer = 1 && DisablePause_Timer != 0)
+		{
+			PauseEnabled = true;
+			strcpy_s(LastEffect, 128, "Pause Enabled");
+			PrintDebug("Pause Enabled\n");
+			DisablePause_Timer = 0;
+		}
+
 		if (Debug_Timer < 333 && Debug_Timer != 0)
 		{
 			Debug_Timer--;
@@ -2216,8 +2231,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
 		{
-			DisableJump();
-
 		}
 	}
 
