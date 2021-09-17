@@ -98,6 +98,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random Physics - Sets current Physics to the physics from SADX,SA2B and Sonic Heros. Credits to MainMemory for the code and Physics data, https://github.com/MainMemory/SADXPhysicsSwapMod
 - Camera Decouple - Detaches the camera from the player for 100 frames.
 - Disable Pause - Removes the Ability to pause for 420 frames.
+- Random Key Block - Spawns in the key block from Amys hot shelter
 
 
 ## Special Thanks
