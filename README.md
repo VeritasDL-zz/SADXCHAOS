@@ -99,7 +99,9 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Camera Decouple - Detaches the camera from the player for 100 frames.
 - Disable Pause - Removes the Ability to pause for 420 frames.
 - Random Key Block - Spawns in the key block from Amys hot shelter
-
+- No s0und_ For You - Disables all/most sounds for 110 frames.
+- Random Emblem - Spawns in a Emblem that the player can collect. doesnt increase emblem count.
+- Disable Pause - Disables Ability to Pause the game for 420 frames.
 
 ## Special Thanks
 Thanks to Sora for the code base and helping me with dumb questions  
