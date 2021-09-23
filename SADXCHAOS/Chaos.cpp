@@ -98,8 +98,10 @@ using std::string;
 //fixed a bug with fast accel
 //added Disable Pause
 //fixed a few warnings
-
-
+//added Random Key Block
+//added random colors for the random key block, 
+//added random emblem.
+//
 
 
 
@@ -122,6 +124,7 @@ int Camera_Timer = 0;
 int s0und__Timer = 0;
 int DisablePause_Timer = 0;
 int Animaltyperand = 0;
+int EmblemID = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -144,7 +147,11 @@ bool FSBTextLoader = false;
 bool BugerManTextLoader = false;
 bool UnidusTextLoader = false;
 bool AnimalTextLoader = false;
+bool KeyBlockTextLoader = false;
 bool ChaooManagerLoader = false;
+bool EmblemTextLoader = false;
+bool IceTextLoader = false;
+bool WindTextLoader = false;
 
 ObjectMaster* snowboard;
 
@@ -457,7 +464,7 @@ extern "C"
 		PauseEnabled = false;
 		DisablePause_Timer = 420;
 		strcpy_s(LastEffect, 128, "Pause Disabled");
-		PrintDebug("Pause Disabled\n");
+		////PrintDebug("Pause Disabled\n");
 	}
 	void RandomPhysics()
 	{
@@ -469,7 +476,7 @@ extern "C"
 		PhysicsData tmp = (PhysicsData)PhyData[Phyrand];
 		memcpy(&CharObj2Ptrs[0]->PhysicsData, &tmp, sizeof(PhysicsData));
 		strcpy_s(LastEffect, 128, output);
-		//PrintDebug("Random Physics\n");//this was crashing me? lol how
+		////PrintDebug("Random Physics\n");//this was crashing me? lol how
 	}
 
 	void Nos0und_ForYou()
@@ -479,7 +486,7 @@ extern "C"
 		VoicesEnabled = false;
 		WriteData((int*)0x03B29CE0, (int)0xFFFFFFFF);
 		strcpy_s(LastEffect, 128, "s0und_ Disabled");
-		PrintDebug("s0und_ Disabled\n");
+		//PrintDebug("s0und_ Disabled\n");
 		s0und__Timer = 110;
 	}
 	void UncoupleCamera()
@@ -487,8 +494,56 @@ extern "C"
 		Camera_Data1->Action = 3; //uncouples camera from char
 		Camera_Timer = 100;
 		strcpy_s(LastEffect, 128, "Camera Detached");
-		//PrintDebug("Camera Detached\n");//this was crashing me? lol how
+		////PrintDebug("Camera Detached\n");//this was crashing me? lol how
 	}
+	void RandomEmblem(EntityData1* p1)
+	{
+		if (EmblemTextLoader == false)
+		{
+			LoadPVM("EMBLEM", &EMBLEM_TEXLIST);
+			EmblemTextLoader = true;
+		}
+
+		WriteData((int*)0x03B2B5F6, (int)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast 
+		ObjectMaster* Emblem = LoadObject((LoadObj)2, 3, Emblem_Main);
+		SETObjData* EmblemSETData = new SETObjData();
+		Emblem->SETData.SETData = EmblemSETData;
+		Emblem->Data1->Position = EntityData1Ptrs[0]->Position;
+		Emblem->Data1->Position.z += rand() % 100 + 1 * 9;
+		Emblem->Data1->Position.y += rand() % 5 + 3;
+		Emblem->Data1->Action = 0;//emblem id, sonic emeraldcoast 
+		Emblem->Data1->Rotation.x = rand() % 1000; //how fast it rotates.
+		strcpy_s(LastEffect, 128, "Random Emblem");
+		//PrintDebug("Random Emblem\n")
+	}
+
+	//void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021
+	//{
+	//	if (IceTextLoader == false)
+	//	{
+	//		IceTextLoader = true;
+	//	}
+
+	//	ObjectMaster* IceKey = LoadObject((LoadObj)3, 3, IceKey_Main);
+	//	SETObjData* IceKeySETData = new SETObjData();
+	//	IceKey->SETData.SETData = IceKeySETData;
+	//	IceKey->Data1->Position = EntityData1Ptrs[0]->Position;
+	//	strcpy_s(LastEffect, 128, "Random IceKey");
+	//}
+	//void RandomWindKey(EntityData1* p1) // disabled for now 9/23/2021
+	//{
+	//	if (WindTextLoader == false)
+	//	{
+	//		LoadPVM("HANDKEY", &RUIN01_TEXLIST);
+	//		WindTextLoader == true;
+	//	}
+
+	//	ObjectMaster* WindKey = LoadObject((LoadObj)3, 3, OHandKey);
+	//	SETObjData* WindKeySETData = new SETObjData();
+	//	WindKey->SETData.SETData = WindKeySETData;
+	//	WindKey->Data1->Position = EntityData1Ptrs[0]->Position;
+	//	strcpy_s(LastEffect, 128, "Random WindKey");
+	//} // disabled for now 9/23/2021
 
 	void RandomTank(EntityData1* p1)
 	{
@@ -532,7 +587,7 @@ extern "C"
 			RhinoTank->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Tank");
-		PrintDebug("Spawned Tank\n");
+		//PrintDebug("Spawned Tank\n");
 		return;
 	}
 	void RandomChaooAnimal()
@@ -635,8 +690,7 @@ extern "C"
 		chaodata->data.StaminaGrade = rand() % 5;
 		chaodata->data.SwimGrade = rand() % 5;
 		chaodata->data.UnknownGrade = rand() % 5;
-
-		PrintDebug("Random Chao\n");
+		//PrintDebug("Random Chao\n");
 		strcpy_s(LastEffect, 128, "Spawned Random Chao");
 	}
 	void RandomBuyon(EntityData1* p1)
@@ -680,7 +734,7 @@ extern "C"
 			Buyon->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Buyon");
-		PrintDebug("Spawned Buyon\n");
+		//PrintDebug("Spawned Buyon\n");
 		return;
 	}
 	void RandomUnidus(EntityData1* p1)
@@ -726,7 +780,7 @@ extern "C"
 			Unidus->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Unidus");
-		PrintDebug("Spawned Unidus\n");
+		//PrintDebug("Spawned Unidus\n");
 		return;
 	}
 	void RandomAmebot(EntityData1* p1)
@@ -768,7 +822,7 @@ extern "C"
 			Amebot->Data1->Position = EntityData1Ptrs[0]->Position;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Amebo");
-		PrintDebug("Spawned Amebo\n");
+		//PrintDebug("Spawned Amebo\n");
 		return;
 	}
 	
@@ -813,7 +867,7 @@ extern "C"
 			CopSpeeder->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned The Police");
-		PrintDebug("Spawned The Police\n");
+		//PrintDebug("Spawned The Police\n");
 		return;
 	}
 	
@@ -857,7 +911,7 @@ extern "C"
 			Snake->Data1->Position.z += rand() % 90 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Boa-Boa");
-		PrintDebug("Spawned Boa-Boa\n");
+		//PrintDebug("Spawned Boa-Boa\n");
 		return;
 	}
 	
@@ -901,7 +955,7 @@ extern "C"
 			Robo->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Robo");
-		PrintDebug("Spawned Robo\n");
+		//PrintDebug("Spawned Robo\n");
 		return;
 	}
 	
@@ -945,7 +999,7 @@ extern "C"
 			Leon->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Leon");
-		PrintDebug("Spawned Leon\n");
+		//PrintDebug("Spawned Leon\n");
 		return;
 	}
 
@@ -992,7 +1046,7 @@ extern "C"
 			Kiki->Data1->Position.y += rand() % 2 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Kiki");
-		PrintDebug("Spawned Kiki\n");
+		//PrintDebug("Spawned Kiki\n");
 		return;
 	}
 
@@ -1022,7 +1076,7 @@ extern "C"
 			FallingSpikeBall->Data1->Position.z += rand() % 30 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Falling SpikeBall");
-		PrintDebug("Falling SpikeBall\n");
+		//PrintDebug("Falling SpikeBall\n");
 		return;
 	}
 
@@ -1052,7 +1106,7 @@ extern "C"
 		SpinnerA->Data1->Position.z += rand() % 10 + 1 * 9;
 		SpinnerA->Data1->Position.y += rand() % 2 + 1 * 9;
 		strcpy_s(LastEffect, 128, "Spawned Spinner A");
-		PrintDebug("Spawned Spinner A\n");
+		//PrintDebug("Spawned Spinner A\n");
 		return;
 	}
 	void RandomSpinnerB(EntityData1* p1)
@@ -1081,7 +1135,7 @@ extern "C"
 		SpinnerB->Data1->Position.z += rand() % 10 + 1 * 9;
 		SpinnerB->Data1->Position.y += rand() % 2 + 1 * 9;
 		strcpy_s(LastEffect, 128, "Spawned Spinner B");
-		PrintDebug("Spawned Spinner B\n");
+		//PrintDebug("Spawned Spinner B\n");
 		return;
 	}
 	void RandomSpinnerC(EntityData1* p1)
@@ -1110,7 +1164,7 @@ extern "C"
 		SpinnerC->Data1->Position.z += rand() % 10 + 1 * 9;
 		SpinnerC->Data1->Position.y += rand() % 2 + 1 * 9;
 		strcpy_s(LastEffect, 128, "Spawned Spinner C");
-		PrintDebug("Spawned Spinner C\n");
+		//PrintDebug("Spawned Spinner C\n");
 		return;
 	}
 
@@ -1145,7 +1199,7 @@ extern "C"
 		ESMAN->SETData.SETData = ESMANSETData;
 		ESMAN->Data1->Position = EntityData1Ptrs[0]->Position;
 		strcpy_s(LastEffect, 128, "Spawned IceBall");
-		PrintDebug("Spawned IceBall\n");
+		//PrintDebug("Spawned IceBall\n");
 		return;
 	}
 
@@ -1183,7 +1237,7 @@ extern "C"
 			GACHAPON->Data1->Position.z += rand() % 30 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Beat");
-		PrintDebug("Spawned Beat\n");
+		//PrintDebug("Spawned Beat\n");
 		return;
 	}
 
@@ -1204,7 +1258,7 @@ extern "C"
 			spring2->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Spring");
-		PrintDebug("Random Spring\n");
+		//PrintDebug("Random Spring\n");
 		return;
 	}
 
@@ -1216,7 +1270,7 @@ extern "C"
 		checkpoint->Data1->Rotation = p1->Rotation;
 		checkpoint->Data1->Position = p1->Position;
 		strcpy_s(LastEffect, 128, "Random CheckPoint");
-		PrintDebug("Random Checkpoint\n");
+		//PrintDebug("Random Checkpoint\n");
 		return;
 	}
 
@@ -1236,7 +1290,7 @@ extern "C"
 			speed2->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned SpeedPad");
-		PrintDebug("Random SpeedPad\n");
+		//PrintDebug("Random SpeedPad\n");
 		return;
 	}
 	void RandomSpikeBall(EntityData1* p1) 
@@ -1258,7 +1312,7 @@ extern "C"
 			spike2->Data1->Position.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned SpikeBall");
-		PrintDebug("Random Spike Balls\n");
+		//PrintDebug("Random Spike Balls\n");
 		return;
 	}
 
@@ -1275,7 +1329,26 @@ extern "C"
 		BurgerMan->SETData.SETData = BurgerManSETData;
 		BurgerMan->Data1->Position = EntityData1Ptrs[0]->Position;
 		strcpy_s(LastEffect, 128, "Spawned BurgerMan");
-		PrintDebug("Random BurgerMan\n");
+		//PrintDebug("Random BurgerMan\n");
+		return;
+	}
+
+	void RandomKeyBlock(EntityData1* p1)
+	{
+		WriteData((int*)0x017D0A2C, (int)0xC61C4000);//stops the block from exploding i hope
+		if (KeyBlockTextLoader == false)
+		{
+			LoadPVM("HOTSHELTER2", &HOTSHELTER2_TEXLIST);
+			KeyBlockTextLoader = true;
+		}
+
+		ObjectMaster* KeyBlock = LoadObject((LoadObj)3, 3, OBoxSwitch);
+		SETObjData* KeyBlockSETData = new SETObjData();
+		KeyBlock->SETData.SETData = KeyBlockSETData;
+		KeyBlock->Data1->Position = EntityData1Ptrs[0]->Position;
+		KeyBlock->Data1->Scale.x = rand() % 3;//color of block
+		strcpy_s(LastEffect, 128, "Spawned KeyBlock");
+		//PrintDebug("Random KeyBlock\n");
 		return;
 	}
 
@@ -1285,7 +1358,7 @@ extern "C"
 		PlayVoice(55555);//OOF
 		p1->Speed = { 0, 0, 0 };
 		strcpy_s(LastEffect, 128, "Killed Momentum");
-		PrintDebug("Kill Momentum\n");
+		//PrintDebug("Kill Momentum\n");
 		return;
 	}
 	void FastAccel(CharObj2* p1)
@@ -1295,21 +1368,21 @@ extern "C"
 		CharObj2Ptrs[0]->PhysicsData.AirAccel = 0.10f;
 		CharObj2Ptrs[0]->PhysicsData.HangTime = 120;
 		strcpy_s(LastEffect, 128, "Fast Accel Enabled");
-		PrintDebug("Fast Accel Enabled\n");
+		//PrintDebug("Fast Accel Enabled\n");
 		return;
 	}
 	void RandomVSpeed(CharObj2* p1) 
 	{
 		p1->Speed.y = p1->PhysicsData.VSpeedCap;
 		strcpy_s(LastEffect, 128, "Random V Speed");
-		PrintDebug("Random V Speed\n");
+		//PrintDebug("Random V Speed\n");
 		return;
 	}
 	void RandomHSpeed(CharObj2* p1) 
 	{
 			p1->Speed.x = p1->PhysicsData.HSpeedCap;
 			strcpy_s(LastEffect, 128, "Random H Speed");
-			PrintDebug("Random H Speed\n");
+			//PrintDebug("Random H Speed\n");
 			return;
 	}
 	void RandomHurt() 
@@ -1318,7 +1391,7 @@ extern "C"
 		{
 			HurtCharacter(0);
 		}
-		PrintDebug("Hurt\n");
+		//PrintDebug("Hurt\n");
 		strcpy_s(LastEffect, 128, "Hurt");
 		return;
 	}
@@ -1328,7 +1401,7 @@ extern "C"
 		if (id < 0 || id > 8) //failsafe
 			id = rand() % 9;
 		DoThingWithItemBoxPowerupIndex(id);
-		PrintDebug("Random PowerUp\n");
+		//PrintDebug("Random PowerUp\n");
 		strcpy_s(LastEffect, 128, "Random PowerUp");
 	}
 	void MGiantScale(EntityData1* p1) 
@@ -1338,7 +1411,7 @@ extern "C"
 			SONIC_OBJECTS[i]->scl[1] = 4;
 			SONIC_OBJECTS[i]->scl[2] = 4;
 		}
-		PrintDebug("Giant Scale\n");
+		//PrintDebug("Giant Scale\n");
 		return;
 	}
 	void RandomTimeOfDay() //sets time of day to a random time,
@@ -1346,12 +1419,12 @@ extern "C"
 		if (GameMode == GameModes_Adventure_Field)//made it so it only changes if you are in adventure field
 		{
 			SetTimeOfDay(rand() % 3);
-			PrintDebug("Random Time Of Day\n");
+			//PrintDebug("Random Time Of Day\n");
 			strcpy_s(LastEffect, 128, "Random Time Of Day");
 		}
 		else
 		{
-			PrintDebug("Not in adventure field\n");
+			//PrintDebug("Not in adventure field\n");
 			Chaos_Timer = EffectMax;//forces another Chaos mod if not in Adventure 
 		}
 	}
@@ -1360,13 +1433,13 @@ extern "C"
 		int randomrings = rand() % 254;
 		SpawnDroppedRings(EntityData1Ptrs[0]->Position.x, EntityData1Ptrs[0]->Position.y, EntityData1Ptrs[0]->Position.z, randomrings); //spawns random ammount of rings 0-255 at the player
 		Rings = 0;
-		PrintDebug("Random Dropped Rings\n");
+		//PrintDebug("Random Dropped Rings\n");
 		strcpy_s(LastEffect, 128, "Dropped Rings");
 	}
 	void RandomClipLevel()//currently disabled, may be removed. updated to only change 
 	{
 			ClipLevel = rand() % 3;
-			PrintDebug("Clip Level Set\n");
+			//PrintDebug("Clip Level Set\n");
 	}
 	void RandomPause() //randomly pauses the game LOL get good, time
 	{
@@ -1376,13 +1449,13 @@ extern "C"
 			return;
 		}
 		Pause_Timer = 5; //how long in frames? to pause unpause?
-		PrintDebug("Random Pause\n");
+		//PrintDebug("Random Pause\n");
 		strcpy_s(LastEffect, 128, "Random Pause");
 	}
 	void RandomChar()//works but disabled
 	{
 		SetCharacter(rand() % 7);
-		PrintDebug("Random Character\n");
+		//PrintDebug("Random Character\n");
 	}
 	void SwapCamera()//Swaps Camera lmfao
 	{
@@ -1394,7 +1467,7 @@ extern "C"
 		{
 			SetCameraMode_(0);
 		}
-		PrintDebug("Camera Swapped\n");
+		//PrintDebug("Camera Swapped\n");
 		strcpy_s(LastEffect, 128, "Camera Swapped");
 	}
 	void RandomDebug() //debug mode currently lasts for 75ish? frames
@@ -1412,57 +1485,57 @@ extern "C"
 			EntityData1Ptrs[0]->Action = 53;
 			break;
 		default:
-			PrintDebug("Debug Mode Failed Due to Current Character\n");
+			//PrintDebug("Debug Mode Failed Due to Current Character\n");
 			Chaos_Timer = EffectMax;
 			return;
 		}
 		Debug_Timer = 333;
-		PrintDebug("Debug Mode Enabled\n");
+		//PrintDebug("Debug Mode Enabled\n");
 		strcpy_s(LastEffect, 128, "Debug Mode Enabled");
 	}
 	void RandomXGravity()//currently disabled,
 	{
 		Gravity.x = (float)rand() / RAND_MAX + (-1.5);
-		PrintDebug("Random X Gravity\n");
+		//PrintDebug("Random X Gravity\n");
 	}
 	void RandomYGravity()
 	{
 		Gravity_Timer = 1000;
 		Gravity.y = (float)rand() / RAND_MAX + (-1.5);
-		PrintDebug("Random Y Gravity\n");
+		//PrintDebug("Random Y Gravity\n");
 		strcpy_s(LastEffect, 128, "Random Y Gravity");
 	}
 	void RandomZGravity()//currently disabled,
 	{
 		Gravity.z = (float)rand() / RAND_MAX + (-1.5);
-		PrintDebug("Random Z Gravity\n");
+		//PrintDebug("Random Z Gravity\n");
 	}
 	void RandomBarrier()//currently disabled, might be killing the player? lol
 	{
 		GiveBarrier(0);
-		PrintDebug("Give Barrier\n");
+		//PrintDebug("Give Barrier\n");
 	}
 	void RandomMagneticBarrier()//currently disabled, might be killing the player? lol
 	{
 		GiveMagneticBarrier(0);
-		PrintDebug("Give Magnetic Barrier\n");
+		//PrintDebug("Give Magnetic Barrier\n");
 	}
 	void RandomInvincibility()//currently disabled, might be killing the player? lol
 	{
 		GiveInvincibility(0);
-		PrintDebug("Give Invincibility\n");
+		//PrintDebug("Give Invincibility\n");
 	}
 	void RandomLifePowerup(EntityData1* p1)
 	{
 		ExtraLifePowerup(0);
-		PrintDebug("Give Extra Life\n");
+		//PrintDebug("Give Extra Life\n");
 		strcpy_s(LastEffect, 128, "Extra Life");
 	}
 	void RandomControlDisable()
 	{
 		DisableControl_Timer = 90;
 		ControlEnabled = 0;
-		PrintDebug("Control Disabled\n");
+		//PrintDebug("Control Disabled\n");
 		strcpy_s(LastEffect, 128, "Control Disabled");
 	}
 	void MSmallScale(EntityData1* p1)//disabled this
@@ -1472,7 +1545,7 @@ extern "C"
 			SONIC_OBJECTS[i]->scl[1] = 0.5;
 			SONIC_OBJECTS[i]->scl[2] = 0.5;
 		}
-		PrintDebug("Small Scale\n");
+		//PrintDebug("Small Scale\n");
 		strcpy_s(LastEffect, 128, "Small Scale");
 		return;
 	}
@@ -1482,7 +1555,7 @@ extern "C"
 			CurrentSong = rand() % 125;
 		} while (LastSong == CurrentSong);
 		LastSong = CurrentSong;
-		PrintDebug("Random Song\n");
+		//PrintDebug("Random Song\n");
 		strcpy_s(LastEffect, 128, "Random Song");
 		return;
 	}
@@ -1491,7 +1564,7 @@ extern "C"
 	{
 		int a1 = rand() % 2043;
 		PlayVoice(a1);
-		PrintDebug("Random Voice\n");
+		//PrintDebug("Random Voice\n");
 		strcpy_s(LastEffect, 128, "Random Voice");
 		return;
 	}
@@ -1501,7 +1574,7 @@ extern "C"
 		//enable dpaddown check timer
 		DPadDown_Timer = 90; //90 frames?
 		DpadDown = 0;
-		PrintDebug("Press Dpad Down Or Die\n");
+		//PrintDebug("Press Dpad Down Or Die\n");
 		strcpy_s(LastEffect, 128, "Death");
 	}
 
@@ -1515,12 +1588,12 @@ extern "C"
 		NJS_VECTOR RandomTeleport = GetRandomCoordinates((LevelAndActIDs)(GetLevelAndAct()));
 		if (RandomTeleport.x == 0.0f && RandomTeleport.y == 0.0f && RandomTeleport.z == 0.0f)
 		{
-			PrintDebug("No Random Teleports for this Level/Act, causing new Effect\n");
+			//PrintDebug("No Random Teleports for this Level/Act, causing new Effect\n");
 			Chaos_Timer = EffectMax; //calls a new effect
 			return;
 		}
 		EntityData1Ptrs[0]->Position = RandomTeleport;
-		PrintDebug("Random Teleport\n");
+		//PrintDebug("Random Teleport\n");
 		strcpy_s(LastEffect, 128, "Random Teleport");
 	}
 
@@ -1533,7 +1606,7 @@ extern "C"
 		WriteData((int*)0x0044A66F, (int)0x14C48390);
 		WriteData((int*)0x007887D9, (int)0x90909090);
 		WriteData((int*)0x007887DD, (int)0x74C08590);
-		PrintDebug("Walk Thru Walls Enabled\n");
+		//PrintDebug("Walk Thru Walls Enabled\n");
 		strcpy_s(LastEffect, 128, "Walk Thru Walls Enabled");
 	}
 	typedef void(__cdecl* ChaosEnt)(EntityData1*);
@@ -1850,7 +1923,7 @@ extern "C"
 	{
 		int hintrand = rand() % HintSize;
 		LoadAutoHint(Hints[hintrand], Voices[hintrand]);
-	    PrintDebug("%i Random Hint\n", hintrand);
+	    //PrintDebug("%i Random Hint\n", hintrand);
 		strcpy_s(LastEffect, 128, "Tikal Hint");
 	}
 	void InputInvert()
@@ -1863,7 +1936,7 @@ extern "C"
 		WriteData<1>((int*)0x40F2A2, 0xC6);
 		WriteData<1>((int*)0x40F2A1, 0x1);
 		InputInvert_Timer = 420;
-		PrintDebug("Input Inverted\n");
+		//PrintDebug("Input Inverted\n");
 		strcpy_s(LastEffect, 128, "Input Inverted");
 	}
 
@@ -1871,7 +1944,7 @@ extern "C"
 	{
 		int Rotaterand = rand() % 65535;
 			RotatePlayer(0, Rotaterand);
-			PrintDebug("%i Rotated\n", Rotaterand);
+			//PrintDebug("%i Rotated\n", Rotaterand);
 			strcpy_s(LastEffect, 128, "Random Rotation");
 	}
 
@@ -1926,18 +1999,18 @@ extern "C"
 					break;
 				}//Credits to MainMemory for the Code, https://github.com/MainMemory/SADXBoardSpawner
 			
-			PrintDebug("Snowbaord Spawned\n");
+			//PrintDebug("Snowbaord Spawned\n");
 			strcpy_s(LastEffect, 128, "Snowboard");
 			return;
 		}
 		else
 		{
 			Chaos_Timer = EffectMax;//forces another Chaos mod if already on snowboard?
-			PrintDebug("Currently on Snowboard new effect chosen\n");
+			//PrintDebug("Currently on Snowboard new effect chosen\n");
 		}
 	}
 
-	ChaosS ChaosArray[75]{
+	ChaosS ChaosArray[77]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -1969,6 +2042,8 @@ extern "C"
 	{ RandomBurgerMan, nullptr, nullptr },
 	{ RandomBurgerMan, nullptr, nullptr },
 	{ RandomBurgerMan, nullptr, nullptr },
+	{ RandomKeyBlock, nullptr, nullptr },
+	{ RandomEmblem, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
@@ -2019,6 +2094,30 @@ extern "C"
 	size_t ChaosSize = LengthOfArray(ChaosArray);
 	__declspec(dllexport) void __cdecl OnFrame()
 	{
+
+		if (CurrentLevel == LevelIDs_SSGarden)
+		{
+			SetDebugFontSize(15);
+			SetDebugFontColor(0xFFFFFFFF);
+			BYTE Chao0SwimGrade = *(BYTE*)0x03C888A0;
+			BYTE Chao0RunGrade = *(BYTE*)0x03C888A2;
+			BYTE Chao1SwimGrade = *(BYTE*)0x03C890A0;
+			BYTE Chao1RunGrade = *(BYTE*)0x03C890A2;
+			const char* grades[] = { "E", "D", "C", "B", "A", "S" };
+
+
+			if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
+			{
+				WriteData((int*)0x03C8888A, (int)0x11);
+				WriteData((int*)0x03C8908A, (int)0x12);
+			}
+
+			DisplayDebugStringFormatted(NJM_LOCATION(0, 1), "Chao 1 Swim Grade %S", grades[Chao0SwimGrade]);
+			DisplayDebugStringFormatted(NJM_LOCATION(0, 2), "Chao 1 Run Grade %S", grades[Chao0RunGrade]);
+			DisplayDebugStringFormatted(NJM_LOCATION(0, 3), "Chao 2 Swim Grade %S", grades[Chao1SwimGrade]);
+			DisplayDebugStringFormatted(NJM_LOCATION(0, 4), "Chao 2 Run Grade %S", grades[Chao1RunGrade]);
+		}
+
 		// Executed every running frame of SADX
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
@@ -2034,7 +2133,7 @@ extern "C"
 				WriteData((int*)0x007887D9, (int)0x00D042E8);
 				WriteData((int*)0x007887DD, (int)0x74C08500);
 				NoClip_Timer = 0;
-				PrintDebug("Walk Thru Walls Disabled\n");
+				//PrintDebug("Walk Thru Walls Disabled\n");
 				strcpy_s(LastEffect, 128, "Walk Thru Walls Disabled");
 			}
 		}
@@ -2047,7 +2146,7 @@ extern "C"
 			WriteData<1>((int*)0x40F2A2, 0xF0);
 			WriteData<1>((int*)0x40F2A1, 0x2B);
 			InputInvert_Timer = 0;
-			PrintDebug("Input Set to Default\n");
+			//PrintDebug("Input Set to Default\n");
 			strcpy_s(LastEffect, 128, "Input Set to Default");
 		}
 		if (Camera_Timer <= 100 && Camera_Timer != 0)
@@ -2058,7 +2157,7 @@ extern "C"
 		{
 			Camera_Data1->Action = 2;
 			Camera_Timer = 0;
-			//PrintDebug("Camera Attached\n");
+			////PrintDebug("Camera Attached\n");
 			strcpy_s(LastEffect, 128, "Camera Attached");
 		}
 
@@ -2070,7 +2169,7 @@ extern "C"
 		{
 			ResetGravity();
 			Gravity_Timer = 0;
-			PrintDebug("Y Gravity Reset\n");
+			//PrintDebug("Y Gravity Reset\n");
 			strcpy_s(LastEffect, 128, "Y Gravity Reset");
 		}
 
@@ -2090,7 +2189,7 @@ extern "C"
 		{
 			ControlEnabled = 1;
 			DisableControl_Timer = 0;
-			PrintDebug("Control Enabled\n");
+			//PrintDebug("Control Enabled\n");
 			strcpy_s(LastEffect, 128, "Control Enabled");
 		}
 
@@ -2110,7 +2209,7 @@ extern "C"
 		{
 			KillPlayer(0);
 			DPadDown_Timer = 0;
-			PrintDebug("Failed Dpad Down Or Die Check\n");
+			//PrintDebug("Failed Dpad Down Or Die Check\n");
 		}
 		if (Pause_Timer <= 5 && Pause_Timer != 0)
 		{
@@ -2137,6 +2236,10 @@ extern "C"
 				UnidusTextLoader = false;
 				AnimalTextLoader = false;
 				ChaooManagerLoader = false;
+				KeyBlockTextLoader = false;
+				EmblemTextLoader = false;
+				IceTextLoader = false;
+				WindTextLoader = false;
 			}
 		}
 		if (SnowboardTimer <= 500 && SnowboardTimer != 0)
@@ -2148,7 +2251,7 @@ extern "C"
 			SnowboardTimer = 0;
 			IssSowboarding = 0;
 			EntityData1Ptrs[0]->Action = 1;
-			PrintDebug("Snowboard off, Action Set\n");
+			//PrintDebug("Snowboard off, Action Set\n");
 			strcpy_s(LastEffect, 128, "Snowboard Off");
 
 		}
@@ -2162,7 +2265,7 @@ extern "C"
 			CharObj2Ptrs[0]->PhysicsData.AirAccel = 0.03099999949f;
 			CharObj2Ptrs[0]->PhysicsData.HangTime = 60;
 			strcpy_s(LastEffect, 128, "Fast Accel Disabled");
-			PrintDebug("Fast Accel Disabled\n");
+			//PrintDebug("Fast Accel Disabled\n");
 			FastAccel_Timer = 0;
 		}
 		if (s0und__Timer <= 110 && s0und__Timer != 0)
@@ -2176,7 +2279,7 @@ extern "C"
 			VoicesEnabled = true;
 			WriteData((int*)0x03B29CE0, (int)0x00000000);
 			strcpy_s(LastEffect, 128, "s0und_ Enabled");
-			PrintDebug("s0und_ Enabled\n");
+			//PrintDebug("s0und_ Enabled\n");
 			s0und__Timer = 0;
 		}
 		if (DisablePause_Timer <= 420 && DisablePause_Timer != 0)
@@ -2187,7 +2290,7 @@ extern "C"
 		{
 			PauseEnabled = true;
 			strcpy_s(LastEffect, 128, "Pause Enabled");
-			PrintDebug("Pause Enabled\n");
+			//PrintDebug("Pause Enabled\n");
 			DisablePause_Timer = 0;
 		}
 
@@ -2199,7 +2302,7 @@ extern "C"
 		{
 
 			EntityData1Ptrs[0]->Action = 1;
-			PrintDebug("Debug turned Off, Default Action Set\n");
+			//PrintDebug("Debug turned Off, Default Action Set\n");
 			strcpy_s(LastEffect, 128, "Debug Off");
 			Debug_Timer = 0;
 		}
@@ -2230,9 +2333,9 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnControl(EntityData1* p1)
 	{
 		 //Executed when the game processes input
-		if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
-		{
-		}
+		//if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
+		//{
+		//}
 	}
 
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
