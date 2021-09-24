@@ -125,6 +125,8 @@ int s0und__Timer = 0;
 int DisablePause_Timer = 0;
 int Animaltyperand = 0;
 int EmblemID = 0;
+int CurrentLevelOld = -1;
+int SaveHash = -1;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -152,6 +154,7 @@ bool ChaooManagerLoader = false;
 bool EmblemTextLoader = false;
 bool IceTextLoader = false;
 bool WindTextLoader = false;
+bool ShownMenu = false;
 
 ObjectMaster* snowboard;
 
@@ -544,6 +547,8 @@ extern "C"
 	//	WindKey->Data1->Position = EntityData1Ptrs[0]->Position;
 	//	strcpy_s(LastEffect, 128, "Random WindKey");
 	//} // disabled for now 9/23/2021
+
+
 
 	void RandomTank(EntityData1* p1)
 	{
@@ -2094,30 +2099,6 @@ extern "C"
 	size_t ChaosSize = LengthOfArray(ChaosArray);
 	__declspec(dllexport) void __cdecl OnFrame()
 	{
-
-		if (CurrentLevel == LevelIDs_SSGarden)
-		{
-			SetDebugFontSize(15);
-			SetDebugFontColor(0xFFFFFFFF);
-			BYTE Chao0SwimGrade = *(BYTE*)0x03C888A0;
-			BYTE Chao0RunGrade = *(BYTE*)0x03C888A2;
-			BYTE Chao1SwimGrade = *(BYTE*)0x03C890A0;
-			BYTE Chao1RunGrade = *(BYTE*)0x03C890A2;
-			const char* grades[] = { "E", "D", "C", "B", "A", "S" };
-
-
-			if (Controllers[0].PressedButtons & Buttons_Y) //checks if Y is pressed
-			{
-				WriteData((int*)0x03C8888A, (int)0x11);
-				WriteData((int*)0x03C8908A, (int)0x12);
-			}
-
-			DisplayDebugStringFormatted(NJM_LOCATION(0, 1), "Chao 1 Swim Grade %S", grades[Chao0SwimGrade]);
-			DisplayDebugStringFormatted(NJM_LOCATION(0, 2), "Chao 1 Run Grade %S", grades[Chao0RunGrade]);
-			DisplayDebugStringFormatted(NJM_LOCATION(0, 3), "Chao 2 Swim Grade %S", grades[Chao1SwimGrade]);
-			DisplayDebugStringFormatted(NJM_LOCATION(0, 4), "Chao 2 Run Grade %S", grades[Chao1RunGrade]);
-		}
-
 		// Executed every running frame of SADX
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
@@ -2333,9 +2314,9 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnControl(EntityData1* p1)
 	{
 		 //Executed when the game processes input
-		//if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
-		//{
-		//}
+		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
+		{
+		}
 	}
 
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
