@@ -386,5 +386,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 .idea/
 *.sln.iml
-SADXCHAOS/SADXCHAOS.vcxproj.user
-SADXCHAOS/SADXCHAOS.vcxproj.user
+

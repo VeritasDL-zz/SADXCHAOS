@@ -101,10 +101,10 @@ using std::string;
 //added Random Key Block
 //added random colors for the random key block, 
 //added random emblem.
-//
+//fixed a bug with the texture loader resetter 
 
 
-
+//want to add config to disable, disable pause,
 
 char oldRand = -1;
 int Chaos_Timer = 0;
@@ -155,6 +155,7 @@ bool EmblemTextLoader = false;
 bool IceTextLoader = false;
 bool WindTextLoader = false;
 bool ShownMenu = false;
+bool TextLoaded = false;
 
 ObjectMaster* snowboard;
 
@@ -505,6 +506,7 @@ extern "C"
 		{
 			LoadPVM("EMBLEM", &EMBLEM_TEXLIST);
 			EmblemTextLoader = true;
+			TextLoaded = true;
 		}
 
 		WriteData((int*)0x03B2B5F6, (int)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast 
@@ -575,6 +577,7 @@ extern "C"
 			}
 			LoadPVM("E_SAI", &E_SAI_TEXLIST);
 			RinoTextLoader = true;
+			TextLoaded = true;
 		}
 
 		int number = rand() % 2;
@@ -722,6 +725,7 @@ extern "C"
 			}
 			LoadPVM("E_BUYON", &E_BUYON_TEXLIST);
 			BuyonTextLoader = true;
+			TextLoaded = true;
 		}
 
 		int number = rand() % 2;
@@ -768,6 +772,7 @@ extern "C"
 			LoadPVM("UNI_C_UNIBODY", &UNI_C_UNIBODY_TEXLIST);
 			LoadPVM("TOGEBALL_TOGEBALL", &TOGEBALL_TOGEBALL_TEXLIST);
 			UnidusTextLoader = true;
+			TextLoaded = true;
 		}
 
 		int number = rand() % 2;
@@ -812,6 +817,7 @@ extern "C"
 			}
 			LoadPVM("E_AMENBO", &E_AMENBO_TEXLIST);
 			AmebotTextLoader = true;
+			TextLoaded = true;
 		}
 
 		int number = rand() % 2;
@@ -855,6 +861,7 @@ extern "C"
 			}
 			LoadPVM("NISEPAT", &NISEPAT_TEXLIST);
 			PoliceTextLoader = true;
+			TextLoaded = true;
 		}
 
 		int number = rand() % 2;
@@ -900,6 +907,7 @@ extern "C"
 			}
 			LoadPVM("E_SNAKE", &E_SNAKE_TEXLIST);
 			SnakeTextLoader = true;
+			TextLoaded = true;
 		}
 		int number = rand() % 2;
 		ObjectMaster* Snake = LoadObject((LoadObj)2, 3, BoaBoa_Main);
@@ -944,6 +952,7 @@ extern "C"
 			}
 			LoadPVM("E_ROBO", &E_ROBO_TEXLIST);
 			SnakeTextLoader = true;
+			TextLoaded = true;
 		}
 		int number = rand() % 2;
 		ObjectMaster* Robo = LoadObject((LoadObj)2, 3, ERobo_0);
@@ -988,6 +997,7 @@ extern "C"
 			}
 			LoadPVM("E_LEON", &E_LEON_TEXLIST);
 			LeonTextLoader = true;
+			TextLoaded = true;
 		}
 		int number = rand() % 2;
 		ObjectMaster* Leon = LoadObject((LoadObj)2, 3, Leon_Load);
@@ -1033,6 +1043,7 @@ extern "C"
 			LoadPVM("E_SARU", &E_SARU_TEXLIST);
 			LoadPVM("E_BOMB", &E_BOMB_TEXLIST);
 			KikiTextLoader = true;
+			TextLoaded = true;
 		}
 		int number = rand() % 2;
 		ObjectMaster* Kiki = LoadObject((LoadObj)2, 3, Kiki_Load);
@@ -1062,6 +1073,7 @@ extern "C"
 
 			LoadPVM("TOGEBALL_TOGEBALL", &TOGEBALL_TOGEBALL_TEXLIST);
 			FSBTextLoader = true;
+			TextLoaded = true;
 		}
 
 		int number = rand() % 2;
@@ -1103,6 +1115,7 @@ extern "C"
 			}
 			LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 			SpinnerTextLoader = true;
+			TextLoaded = true;
 		}
 		ObjectMaster* SpinnerA = LoadObject((LoadObj)2, 3, SpinnerA_Main);
 		SETObjData* SpinnerASETData = new SETObjData();
@@ -1132,6 +1145,7 @@ extern "C"
 			}
 			LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 			SpinnerTextLoader = true;
+			TextLoaded = true;
 		}
 		ObjectMaster* SpinnerB = LoadObject((LoadObj)2, 3, SpinnerB_Main);
 		SETObjData* SpinnerBSETData = new SETObjData();
@@ -1161,6 +1175,7 @@ extern "C"
 			}
 			LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 			SpinnerTextLoader = true;
+			TextLoaded = true;
 		}
 		ObjectMaster* SpinnerC = LoadObject((LoadObj)2, 3, SpinnerC_Main);
 		SETObjData* SpinnerCSETData = new SETObjData();
@@ -1198,6 +1213,7 @@ extern "C"
 			LoadPVM("E_SNOWMAN", &E_SNOWMAN_TEXLIST);
 			LoadNoNamePVM(&stx_ice0_TEXLIST);
 			SmanTextLoader = true;
+			TextLoaded = true;
 		}
 		ObjectMaster* ESMAN = LoadObject((LoadObj)2, 3, ESman);
 		SETObjData* ESMANSETData = new SETObjData();
@@ -1226,6 +1242,7 @@ extern "C"
 			}
 			LoadPVM("GACHAPON", &GACHAPON_TEXLIST);
 			EGachaTextLoader = true;
+			TextLoaded = true;
 		}
 		int number = rand() % 2;
 		ObjectMaster* GACHAPON = LoadObject((LoadObj)2, 3, OEGacha);
@@ -1327,6 +1344,7 @@ extern "C"
 		{
 			LoadPVM("MI_3DASU", &mi_3dasu_TEXLIST);
 			BugerManTextLoader = true;
+			TextLoaded = true;
 		}
 
 		ObjectMaster* BurgerMan = LoadObject((LoadObj)3, 3, MissionStatue_Load);
@@ -1345,6 +1363,7 @@ extern "C"
 		{
 			LoadPVM("HOTSHELTER2", &HOTSHELTER2_TEXLIST);
 			KeyBlockTextLoader = true;
+			TextLoaded = true;
 		}
 
 		ObjectMaster* KeyBlock = LoadObject((LoadObj)3, 3, OBoxSwitch);
@@ -1448,7 +1467,7 @@ extern "C"
 	}
 	void RandomPause() //randomly pauses the game LOL get good, time
 	{
-		if (!PauseEnabled)
+		if (!RPauseEnabled)
 		{
 			Chaos_Timer = EffectMax;
 			return;
@@ -2100,6 +2119,30 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnFrame()
 	{
 		// Executed every running frame of SADX
+		if (GameState != 15 && GameState != 16 && TextLoaded)
+		{
+			SpinnerTextLoader = false;
+			LeonTextLoader = false;
+			KikiTextLoader = false;
+			RinoTextLoader = false;
+			SmanTextLoader = false;
+			EGachaTextLoader = false;
+			PoliceTextLoader = false;
+			SnakeTextLoader = false;
+			RoboTextLoader = false;
+			BuyonTextLoader = false;
+			AmebotTextLoader = false;
+			FSBTextLoader = false;
+			BugerManTextLoader = false;
+			UnidusTextLoader = false;
+			AnimalTextLoader = false;
+			ChaooManagerLoader = false;
+			KeyBlockTextLoader = false;
+			EmblemTextLoader = false;
+			IceTextLoader = false;
+			WindTextLoader = false;
+			TextLoaded = false;
+		}
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
 		if (NoClip_Timer <= 800 && NoClip_Timer != 0)
@@ -2197,32 +2240,7 @@ extern "C"
 			GameState = 16;
 			Pause_Timer--;
 		}
-		if (GameState < 15 || GameState > 16)
-		{
-			if (AnimalTextLoader == true)
-			{
-				SpinnerTextLoader = false;
-				LeonTextLoader = false;
-				KikiTextLoader = false;
-				RinoTextLoader = false;
-				SmanTextLoader = false;
-				EGachaTextLoader = false;
-				PoliceTextLoader = false;
-				SnakeTextLoader = false;
-				RoboTextLoader = false;
-				BuyonTextLoader = false;
-				AmebotTextLoader = false;
-				FSBTextLoader = false;
-				BugerManTextLoader = false;
-				UnidusTextLoader = false;
-				AnimalTextLoader = false;
-				ChaooManagerLoader = false;
-				KeyBlockTextLoader = false;
-				EmblemTextLoader = false;
-				IceTextLoader = false;
-				WindTextLoader = false;
-			}
-		}
+		
 		if (SnowboardTimer <= 500 && SnowboardTimer != 0)
 		{
 			SnowboardTimer--;
