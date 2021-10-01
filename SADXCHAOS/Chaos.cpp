@@ -102,9 +102,30 @@ using std::string;
 //added random colors for the random key block, 
 //added random emblem.
 //fixed a bug with the texture loader resetter 
+//added config to disable, disable pause
+//Removed OOF from Kill momentum
+//updated Effect Table
+//Tikal Hint now 20% less likely
+//RandomKillMomentum 20% less likly
+//changed no_s0und_ to 222 frames from 110 frames
+//ghetto fix for Y offset change with Random Phys.
+//fix for Debug Scaling thanks to PKR's Debug mod https://github.com/PiKeyAr/sadx-debug-mode/
 
 
-//want to add config to disable, disable pause,
+
+
+
+//random emblem broke 
+// 
+//Keyblock was explosion in emerald coast
+//Kill momentum doesn't always work?
+
+//Convert the entire? &Knuckles Rap into wav for Effect where the meme Rap plays as a song?
+//Add &Knuckles Tikal Hint with Short Clip of "&Knuckles" Rap
+//Detect if no 60/63FPS Mod? i need to Detect if 30 Fps and change timers if they are? idk seems wack
+
+
+
 
 char oldRand = -1;
 int Chaos_Timer = 0;
@@ -132,6 +153,7 @@ bool TeleportEnabled = true;
 bool EnemysEnabled = true;
 bool InvertEnabled = true;
 bool RPauseEnabled = true;
+bool PauseDisableEnabled = true;
 char* LastEffect = new char();
 bool EnableFontScaling = false;
 bool SpinnerTextLoader = false;
@@ -418,6 +440,7 @@ extern "C"
 		EnemysEnabled = config->getBool("General", "EnemysEnabled", true);
 		InvertEnabled = config->getBool("General", "InvertEnabled", true);
 		RPauseEnabled = config->getBool("General", "PauseEnabled", true);
+		PauseDisableEnabled = config->getBool("General", "PauseDisableEnabled", true);
 		delete config;
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
@@ -448,6 +471,18 @@ extern "C"
 	{ "SUKA", &SUKA_TEXLIST },
 	};
 
+	void ScaleDebugFont(int scale)
+	{
+		float FontScale;
+		if (!EnableFontScaling) FontScale = 1.0f;
+		else
+		{
+			if ((float)HorizontalResolution / (float)VerticalResolution > 1.33f) FontScale = floor((float)VerticalResolution / 480.0f);
+			else FontScale = floor((float)HorizontalResolution / 640.0f);
+		}
+		SetDebugFontSize(FontScale * scale);
+	}
+
 	void DrawDebugRectangle(float leftchars, float topchars, float numchars_horz, float numchars_vert)
 	{
 		float FontScale;
@@ -465,6 +500,11 @@ extern "C"
 	}
 	void DisablePausee()
 	{
+		if (!PauseDisableEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		PauseEnabled = false;
 		DisablePause_Timer = 420;
 		strcpy_s(LastEffect, 128, "Pause Disabled");
@@ -473,12 +513,14 @@ extern "C"
 	void RandomPhysics()
 	{
 		int Phyrand = rand() % 38;
+		int OldYOffset = CharObj2Ptrs[0]->PhysicsData.YOff; //store current Y Offset
 		char charname[128];
 		strcpy_s(charname, 128, Physnames[Phyrand]);
 		char output[128];
 		snprintf(output, 128, "%s Physics", charname);
 		PhysicsData tmp = (PhysicsData)PhyData[Phyrand];
 		memcpy(&CharObj2Ptrs[0]->PhysicsData, &tmp, sizeof(PhysicsData));
+		CharObj2Ptrs[0]->PhysicsData.YOff = OldYOffset;//restores Saved Y Offset.
 		strcpy_s(LastEffect, 128, output);
 		////PrintDebug("Random Physics\n");//this was crashing me? lol how
 	}
@@ -491,7 +533,7 @@ extern "C"
 		WriteData((int*)0x03B29CE0, (int)0xFFFFFFFF);
 		strcpy_s(LastEffect, 128, "s0und_ Disabled");
 		//PrintDebug("s0und_ Disabled\n");
-		s0und__Timer = 110;
+		s0und__Timer = 222;
 	}
 	void UncoupleCamera()
 	{
@@ -500,7 +542,7 @@ extern "C"
 		strcpy_s(LastEffect, 128, "Camera Detached");
 		////PrintDebug("Camera Detached\n");//this was crashing me? lol how
 	}
-	void RandomEmblem(EntityData1* p1)
+	void RandomEmblem(EntityData1* p1)//disabled as of 9/26/2021
 	{
 		if (EmblemTextLoader == false)
 		{
@@ -509,14 +551,15 @@ extern "C"
 			TextLoaded = true;
 		}
 
-		WriteData((int*)0x03B2B5F6, (int)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast 
+		//WriteData((BYTE*)0x03B2B5F6, (BYTE)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast
+		
 		ObjectMaster* Emblem = LoadObject((LoadObj)2, 3, Emblem_Main);
 		SETObjData* EmblemSETData = new SETObjData();
 		Emblem->SETData.SETData = EmblemSETData;
 		Emblem->Data1->Position = EntityData1Ptrs[0]->Position;
 		Emblem->Data1->Position.z += rand() % 100 + 1 * 9;
 		Emblem->Data1->Position.y += rand() % 5 + 3;
-		Emblem->Data1->Action = 0;//emblem id, sonic emeraldcoast 
+		Emblem->Data1->Action = 0;//emblem id, sonic emeraldcoast
 		Emblem->Data1->Rotation.x = rand() % 1000; //how fast it rotates.
 		strcpy_s(LastEffect, 128, "Random Emblem");
 		//PrintDebug("Random Emblem\n")
@@ -1358,7 +1401,7 @@ extern "C"
 
 	void RandomKeyBlock(EntityData1* p1)
 	{
-		WriteData((int*)0x017D0A2C, (int)0xC61C4000);//stops the block from exploding i hope
+		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//stops the block from exploding i hope
 		if (KeyBlockTextLoader == false)
 		{
 			LoadPVM("HOTSHELTER2", &HOTSHELTER2_TEXLIST);
@@ -1379,7 +1422,7 @@ extern "C"
 
 	void RandomKillMomentum(CharObj2* p1) 
 	{
-		PlayVoice(55555);//OOF
+		//PlayVoice(55555);//OOF (disabled 9/30/2021)
 		p1->Speed = { 0, 0, 0 };
 		strcpy_s(LastEffect, 128, "Killed Momentum");
 		//PrintDebug("Kill Momentum\n");
@@ -2034,7 +2077,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[77]{
+	ChaosS ChaosArray[74]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -2067,8 +2110,7 @@ extern "C"
 	{ RandomBurgerMan, nullptr, nullptr },
 	{ RandomBurgerMan, nullptr, nullptr },
 	{ RandomKeyBlock, nullptr, nullptr },
-	{ RandomEmblem, nullptr, nullptr },
-	{ nullptr, RandomKillMomentum, nullptr, },
+	{ RandomKeyBlock, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
@@ -2099,8 +2141,6 @@ extern "C"
 	{ nullptr, nullptr, RandomNoClip},
 	{ nullptr, nullptr, RandomNoClip},
 	{ nullptr, nullptr, RandomNoClip},
-	{ nullptr, nullptr, RandomTikalHint},
-	{ nullptr, nullptr, RandomTikalHint},
 	{ nullptr, nullptr, RandomTikalHint},
 	{ nullptr, nullptr, RandomTikalHint},
 	{ nullptr, nullptr, InputInvert},
@@ -2199,7 +2239,7 @@ extern "C"
 
 		if (DebugToScreen == true)
 		{
-			SetDebugFontSize(15);
+			ScaleDebugFont(15);
 			SetDebugFontColor(0xFFFFFFFF);
 			DrawDebugRectangle(0.30f, 7.90f, 17.9f, 6.2f);
 			DisplayDebugStringFormatted(NJM_LOCATION(0, 7), " %s", LastEffect);
@@ -2220,7 +2260,7 @@ extern "C"
 		if (DPadDown_Timer <= 90 && DPadDown_Timer != 0)
 		{
 			SetDebugFontColor(0xFFFF0000);
-			SetDebugFontSize(18);
+			ScaleDebugFont(18);
 			DisplayDebugString(NJM_LOCATION(15, 40), "- PRESS DPAD DOWN OR DIE!!! -");
 
 			if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down?
@@ -2267,7 +2307,7 @@ extern "C"
 			//PrintDebug("Fast Accel Disabled\n");
 			FastAccel_Timer = 0;
 		}
-		if (s0und__Timer <= 110 && s0und__Timer != 0)
+		if (s0und__Timer <= 222 && s0und__Timer != 0)
 		{
 			s0und__Timer--;
 		}
@@ -2334,6 +2374,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			RandomKeyBlock(0);
 		}
 	}
 
