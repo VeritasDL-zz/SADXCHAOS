@@ -103,6 +103,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random Emblem - Spawns in a Emblem that the player can collect. Does Not increase emblem count.
 - Disable Pause - Disables Ability to Pause the game for 420 frames.
 - Random Chao - Spawns in a Chao with Random Stat Levels, Stat Grades, Texture, Body Type, Hat Type, Medal Type, Shiny, Random Animal Attributes, Color and Name
+- Random Chao Fruit - Spawns in a Random Chao Fruit Type.
 ## Special Thanks
 Thanks to Sora for the code base and helping me with dumb questions  
 Huge Thanks to Refrag for helping me constantly!    
