@@ -110,6 +110,8 @@ using std::string;
 //changed no_s0und_ to 222 frames from 110 frames
 //ghetto fix for Y offset change with Random Phys.
 //fix for Debug Scaling thanks to PKR's Debug mod https://github.com/PiKeyAr/sadx-debug-mode/
+//fix for debug mod stacking
+//added Random Chao Fruit, thanks to kell and pkr
 
 
 
@@ -120,9 +122,10 @@ using std::string;
 //Keyblock was explosion in emerald coast
 //Kill momentum doesn't always work?
 
+
 //Convert the entire? &Knuckles Rap into wav for Effect where the meme Rap plays as a song?
 //Add &Knuckles Tikal Hint with Short Clip of "&Knuckles" Rap
-//Detect if no 60/63FPS Mod? i need to Detect if 30 Fps and change timers if they are? idk seems wack
+
 
 
 
@@ -148,6 +151,8 @@ int Animaltyperand = 0;
 int EmblemID = 0;
 int CurrentLevelOld = -1;
 int SaveHash = -1;
+int FruitNumb = -1;
+int HatNumb = -1;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -176,8 +181,12 @@ bool ChaooManagerLoader = false;
 bool EmblemTextLoader = false;
 bool IceTextLoader = false;
 bool WindTextLoader = false;
+bool ChaoFruitTextLoader = false;
+bool ChaoHatTextLoader = false;
 bool ShownMenu = false;
 bool TextLoaded = false;
+bool DebugEnabled = false;
+
 
 ObjectMaster* snowboard;
 
@@ -261,8 +270,8 @@ static const char* Physnames[] = {
 	"Sa2b Eggman",
 	"Sa2b Knuckles",
 	"Sa2b Rouge",
-	"Sa2b Mechtails",
-	"Sa2b Mecheggman",
+	"Sa2b Mech Tails",
+	"Sa2b Mech Eggman",
 	"Sa2b Amy",
 	"Sa2b Super Sonic",
 	"Sa2b Super Shadow",
@@ -470,6 +479,9 @@ extern "C"
 	{ "KOAR", &KOAR_TEXLIST },
 	{ "SUKA", &SUKA_TEXLIST },
 	};
+
+
+
 
 	void ScaleDebugFont(int scale)
 	{
@@ -744,6 +756,23 @@ extern "C"
 		//PrintDebug("Random Chao\n");
 		strcpy_s(LastEffect, 128, "Spawned Random Chao");
 	}
+	void RandomFruit(EntityData1* p1)
+	{
+		if (!ChaoFruitTextLoader)
+		{
+			LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST); //need to change to what ever loads the chao fruit textlist
+			TextLoaded = true;
+			ChaoFruitTextLoader = true;
+		}
+		
+		//need to rng between 3-12 and somtimes 24, 24 is normal chao fruit who cares about it
+		Int FruitType = (rand() % (12 + 1 - 3)) + 3;
+		LoadChaoFruit(FruitType, &EntityData1Ptrs[0]->Position, 0, nullptr, nullptr);
+		strcpy_s(LastEffect, 128, "Spawned Chao Fruit");
+
+	}
+	
+
 	void RandomBuyon(EntityData1* p1)
 	{
 		if (!EnemysEnabled)
@@ -1539,6 +1568,10 @@ extern "C"
 	}
 	void RandomDebug() //debug mode currently lasts for 75ish? frames
 	{
+		if (DebugEnabled)
+		{
+			Chaos_Timer = EffectMax; //get new chaos effect because debug movement is enabled already
+		}
 		switch (CurrentCharacter)
 		{
 		case Characters_Sonic:
@@ -1557,6 +1590,7 @@ extern "C"
 			return;
 		}
 		Debug_Timer = 333;
+		DebugEnabled = true;
 		//PrintDebug("Debug Mode Enabled\n");
 		strcpy_s(LastEffect, 128, "Debug Mode Enabled");
 	}
@@ -2077,7 +2111,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[74]{
+	ChaosS ChaosArray[76]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -2111,6 +2145,8 @@ extern "C"
 	{ RandomBurgerMan, nullptr, nullptr },
 	{ RandomKeyBlock, nullptr, nullptr },
 	{ RandomKeyBlock, nullptr, nullptr },
+	{ RandomFruit, nullptr, nullptr },
+	{ RandomFruit, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
@@ -2182,6 +2218,10 @@ extern "C"
 			IceTextLoader = false;
 			WindTextLoader = false;
 			TextLoaded = false;
+			DebugEnabled = false; //@temp.walker may remove
+			ChaoFruitTextLoader = false; //@temp.walker may remove
+			ChaoHatTextLoader = false;
+			HatNumb = -1;
 		}
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
@@ -2344,9 +2384,10 @@ extern "C"
 			//PrintDebug("Debug turned Off, Default Action Set\n");
 			strcpy_s(LastEffect, 128, "Debug Off");
 			Debug_Timer = 0;
+			DebugEnabled = false;
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
-			Chaos_Timer++;
+			//Chaos_Timer++;
 		if (Chaos_Timer >= EffectMax)
 		{
 			char curRand = 0;
@@ -2374,7 +2415,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomKeyBlock(0);
 		}
 	}
 

@@ -399,6 +399,8 @@ FunctionPointer(Sint32, RunSegaSonicTeamLogos, (), 0x42CC70);
 FunctionPointer(int, GetCharacterSelection, (), 0x42CDE0);
 FunctionPointer(ObjectMaster *, j_LoadCharBossAI, (CharBossData *a1), 0x42CE30);
 FunctionPointer(ObjectMaster *, j_LoadCharBoss, (CharBossData *a1), 0x42CE40);
+FunctionPointer(ObjectMaster*, LoadChaoFruit, (int type, NJS_VECTOR* position, Angle angle, NJS_VECTOR* vector, void* savedata), 0x722DE0);
+FunctionPointer(ObjectMaster*, LoadChaoHat, (int type, NJS_VECTOR* position, Angle angle, NJS_VECTOR* vector, void* savedata), 0x7236F0);
 FunctionPointer(int, j_LoadTitleCardTexture, (int minDispTime), 0x42CE80);
 FunctionPointer(Sint32, j_DisplayTitleCard, (), 0x42CE90);
 FunctionPointer(bool, CheckSaveFile, (SaveFileData *saveFile), 0x42D0B0);
@@ -2679,6 +2681,7 @@ FunctionPointer(void, polybuff_normal_vcolor_quad, (NJS_MESHSET_SADX *meshset, N
 FunctionPointer(void, polybuff_normal_vcolor_uv_strip, (NJS_MESHSET_SADX *a1, NJS_POINT3 *points, NJS_VECTOR *normals), 0x784060);
 FunctionPointer(void, polybuff_normal_vcolor_uv_tri, (NJS_MESHSET *a1, NJS_VECTOR *a2, NJS_POINT3 *a3), 0x784480);
 FunctionPointer(void, polybuff_normal_vcolor_uv_quad, (NJS_MESHSET *a1, NJS_VECTOR *a2, NJS_POINT3 *a3), 0x784620);
+FunctionPointer(int, DrawObject, (NJS_OBJECT* model), 0x4034B0);
 ThiscallFunctionPointer(void, Direct3D_ParseMaterial, (NJS_MATERIAL *material), 0x784850);
 FunctionPointer(void, njDrawModel_SADX_Dynamic, (NJS_MODEL_SADX *callback), 0x784AE0);
 ThiscallFunctionPointer(void, njGetMatrix, (NJS_MATRIX_PTR m), 0x784BC0);
@@ -2937,6 +2940,7 @@ VoidFunc(InitEC0NPCData, 0x7D2720);
 VoidFunc(InitEC3NPCData, 0x7D2CF0);
 VoidFunc(InitSSNPCData, 0x7D5810);
 VoidFunc(al_xy_init, 0x7DAE80);
+
 
 // Bool __usercall@<eax>(NJS_TEXLIST *a1@<eax>)
 static const void *const VerifyTexListPtr = (void*)0x403250;
