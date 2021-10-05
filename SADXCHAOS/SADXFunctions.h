@@ -713,6 +713,7 @@ ObjectFunc(EAclift, 0x4AA620);
 ObjectFunc(Kiki_Display, 0x4AB2B0);
 ObjectFunc(Kiki_Main, 0x4ACF80);
 ObjectFunc(Kiki_Load, 0x4AD140);
+ObjectFunc(Kiki_Bomb, 0x4AC920);
 ObjectFunc(Boss_Display_, 0x4AD3F0);
 ObjectFunc(Boss_Main_, 0x4AD660);
 ObjectFunc(Bos_Main__, 0x4ADB30);
