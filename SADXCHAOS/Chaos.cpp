@@ -111,23 +111,19 @@ using std::string;
 //ghetto fix for Y offset change with Random Phys.
 //fix for Debug Scaling thanks to PKR's Debug mod https://github.com/PiKeyAr/sadx-debug-mode/
 //fix for debug mod stacking
-//added Random Chao Fruit, thanks to kell and pkr
+//added Random Chao Fruit and Chao Hat, thanks to kell and pkr
+//changed most spawn things to using tasks, removed creation of setdata for objects that dont need it.
 
 
 
 
 
+
+//Todo
 //random emblem broke 
-// 
-//Keyblock was explosion in emerald coast
 //Kill momentum doesn't always work?
-
-
 //Convert the entire? &Knuckles Rap into wav for Effect where the meme Rap plays as a song?
 //Add &Knuckles Tikal Hint with Short Clip of "&Knuckles" Rap
-
-
-
 
 
 char oldRand = -1;
@@ -510,6 +506,7 @@ extern "C"
 		njColorBlendingMode(0, NJD_COLOR_BLENDING_SRCALPHA);
 		njColorBlendingMode(NJD_DESTINATION_COLOR, NJD_COLOR_BLENDING_INVSRCALPHA);
 	}
+
 	void DisablePausee()
 	{
 		if (!PauseDisableEnabled)
@@ -522,6 +519,7 @@ extern "C"
 		strcpy_s(LastEffect, 128, "Pause Disabled");
 		////PrintDebug("Pause Disabled\n");
 	}
+
 	void RandomPhysics()
 	{
 		int Phyrand = rand() % 38;
@@ -547,6 +545,7 @@ extern "C"
 		//PrintDebug("s0und_ Disabled\n");
 		s0und__Timer = 222;
 	}
+
 	void UncoupleCamera()
 	{
 		Camera_Data1->Action = 3; //uncouples camera from char
@@ -554,7 +553,8 @@ extern "C"
 		strcpy_s(LastEffect, 128, "Camera Detached");
 		////PrintDebug("Camera Detached\n");//this was crashing me? lol how
 	}
-	void RandomEmblem(EntityData1* p1)//disabled as of 9/26/2021
+
+	void RandomEmblem(EntityData1* p1)//updated 10/04/2021 doesnt work still lol get fucked
 	{
 		if (EmblemTextLoader == false)
 		{
@@ -562,18 +562,27 @@ extern "C"
 			EmblemTextLoader = true;
 			TextLoaded = true;
 		}
-
-		//WriteData((BYTE*)0x03B2B5F6, (BYTE)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast
-		
-		ObjectMaster* Emblem = LoadObject((LoadObj)2, 3, Emblem_Main);
-		SETObjData* EmblemSETData = new SETObjData();
-		Emblem->SETData.SETData = EmblemSETData;
-		Emblem->Data1->Position = EntityData1Ptrs[0]->Position;
-		Emblem->Data1->Position.z += rand() % 100 + 1 * 9;
-		Emblem->Data1->Position.y += rand() % 5 + 3;
-		Emblem->Data1->Action = 0;//emblem id, sonic emeraldcoast
-		Emblem->Data1->Rotation.x = rand() % 1000; //how fast it rotates.
+		task* Emblem;
+		Emblem = (task*)LoadObject((LoadObj)2, 3, Emblem_Main);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Emblem->ocp = objCondition;
+		Emblem->twp->pos = EntityData1Ptrs[0]->Position;
+		Emblem->twp->pos.y += rand() % 5 + 3;
+		Emblem->twp->pos.z += rand() % 100 + 1 * 9;
+		Emblem->twp->ang.x = rand() % 1000;
 		strcpy_s(LastEffect, 128, "Random Emblem");
+		return;
+		////WriteData((BYTE*)0x03B2B5F6, (BYTE)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast
+		////old emblem spawn code
+		//ObjectMaster* Emblem = LoadObject((LoadObj)2, 3, Emblem_Main);
+		//SETObjData* EmblemSETData = new SETObjData();
+		//Emblem->SETData.SETData = EmblemSETData;
+		//Emblem->Data1->Position = EntityData1Ptrs[0]->Position;
+		//Emblem->Data1->Position.z += rand() % 100 + 1 * 9;
+		//Emblem->Data1->Position.y += rand() % 5 + 3;
+		//Emblem->Data1->LoopData->Position
+		//Emblem->Data1->Rotation.x = rand() % 1000; //how fast it rotates.
+		//strcpy_s(LastEffect, 128, "Random Emblem");
 		//PrintDebug("Random Emblem\n")
 	}
 
@@ -605,8 +614,6 @@ extern "C"
 	//	strcpy_s(LastEffect, 128, "Random WindKey");
 	//} // disabled for now 9/23/2021
 
-
-
 	void RandomTank(EntityData1* p1)
 	{
 		if (!EnemysEnabled)
@@ -614,12 +621,10 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-
 		if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 		{
 			Chaos_Timer = EffectMax;
 			return;
-
 		}
 		if (RinoTextLoader == false)
 		{
@@ -634,30 +639,31 @@ extern "C"
 			RinoTextLoader = true;
 			TextLoaded = true;
 		}
-
 		int number = rand() % 2;
-		ObjectMaster* RhinoTank = LoadObject((LoadObj)2, 3, RhinoTank_Main);
-		SETObjData* RhinoTankSETData = new SETObjData();
-		RhinoTank->SETData.SETData = RhinoTankSETData;
-		RhinoTank->Data1->Position = EntityData1Ptrs[0]->Position;
-		RhinoTank->Data1->Position.z += rand() % 10 + 1 * 9;
+		task* RhinoTank;
+		RhinoTank = (task*)LoadObject((LoadObj)2, 3, RhinoTank_Main);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		RhinoTank->ocp = objCondition;
+		RhinoTank->twp->pos = EntityData1Ptrs[0]->Position;
+		RhinoTank->twp->pos.z += rand() % 10 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* RhinoTank = LoadObject((LoadObj)2, 3, RhinoTank_Main);
-			SETObjData* RhinoTankSETData = new SETObjData();
-			RhinoTank->SETData.SETData = RhinoTankSETData;
-			RhinoTank->Data1->Position = EntityData1Ptrs[0]->Position;
-			RhinoTank->Data1->Position.z += rand() % 10 + 1 * 9;
+			RhinoTank = (task*)LoadObject((LoadObj)2, 3, RhinoTank_Main);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			RhinoTank->ocp = objCondition;
+			RhinoTank->twp->pos = EntityData1Ptrs[0]->Position;
+			RhinoTank->twp->pos.z += rand() % 10 + 1 * 9;
 		}
-		strcpy_s(LastEffect, 128, "Spawned Tank");
-		//PrintDebug("Spawned Tank\n");
+		strcpy_s(LastEffect, 128, "Spawned RhinoTank");
 		return;
 	}
+
 	void RandomChaooAnimal()
 	{
 		Animaltyperand = rand() % 15 - 1;
 		return;
 	}
+
 	void RandomChaoo()
 	{
 		if (ChaooManagerLoader == false)
@@ -667,7 +673,6 @@ extern "C"
 			ChaoManager_Load();
 			ChaooManagerLoader = true;
 		}
-
 		int chaotype = rand() % 25;
 		ChaoData* chaodata = new ChaoData();
 		chaodata->data.Happiness = rand() % 100;
@@ -756,6 +761,7 @@ extern "C"
 		//PrintDebug("Random Chao\n");
 		strcpy_s(LastEffect, 128, "Spawned Random Chao");
 	}
+
 	void RandomFruit(EntityData1* p1)
 	{
 		if (!ChaoFruitTextLoader)
@@ -764,14 +770,32 @@ extern "C"
 			TextLoaded = true;
 			ChaoFruitTextLoader = true;
 		}
-		
-		//need to rng between 3-12 and somtimes 24, 24 is normal chao fruit who cares about it
 		Int FruitType = (rand() % (12 + 1 - 3)) + 3;
 		LoadChaoFruit(FruitType, &EntityData1Ptrs[0]->Position, 0, nullptr, nullptr);
 		strcpy_s(LastEffect, 128, "Spawned Chao Fruit");
-
 	}
-	
+
+	void RandomHat(EntityData1* p1)
+	{
+		if (!ChaoHatTextLoader)
+		{
+			ChaoMain_Constructor();
+			TextLoaded = true;
+			ChaoHatTextLoader = true;
+		}
+		if (HatNumb < 10)
+		{
+			int HatType = rand() % 84 + 1;//chao hat 0-84 rng,
+			LoadChaoHat(HatType, &EntityData1Ptrs[0]->Position, 0, nullptr, nullptr);
+			strcpy_s(LastEffect, 128, "Spawned Chao Hat");
+			HatNumb++;
+		}
+		if (HatNumb >= 10)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
+	}
 
 	void RandomBuyon(EntityData1* p1)
 	{
@@ -784,7 +808,6 @@ extern "C"
 		{
 			Chaos_Timer = EffectMax;
 			return;
-
 		}
 		if (BuyonTextLoader == false)
 		{
@@ -799,25 +822,25 @@ extern "C"
 			BuyonTextLoader = true;
 			TextLoaded = true;
 		}
-
 		int number = rand() % 2;
-		ObjectMaster* Buyon = LoadObject((LoadObj)2, 3, EBuyon);
-		SETObjData* BuyonSETData = new SETObjData();
-		Buyon->SETData.SETData = BuyonSETData;
-		Buyon->Data1->Position = EntityData1Ptrs[0]->Position;
-		Buyon->Data1->Position.z += rand() % 10 + 1 * 9;
+		task* Buyon;
+		Buyon = (task*)LoadObject((LoadObj)2, 3, EBuyon);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Buyon->ocp = objCondition;
+		Buyon->twp->pos = EntityData1Ptrs[0]->Position;
+		Buyon->twp->pos.z += rand() % 10 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* Buyon = LoadObject((LoadObj)2, 3, EBuyon);
-			SETObjData* BuyonSETData = new SETObjData();
-			Buyon->SETData.SETData = BuyonSETData;
-			Buyon->Data1->Position = EntityData1Ptrs[0]->Position;
-			Buyon->Data1->Position.z += rand() % 10 + 1 * 9;
+			Buyon = (task*)LoadObject((LoadObj)2, 3, EBuyon);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			Buyon->ocp = objCondition;
+			Buyon->twp->pos = EntityData1Ptrs[0]->Position;
+			Buyon->twp->pos.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Buyon");
-		//PrintDebug("Spawned Buyon\n");
 		return;
 	}
+
 	void RandomUnidus(EntityData1* p1)
 	{
 		if (!EnemysEnabled)
@@ -829,13 +852,12 @@ extern "C"
 		{
 			Chaos_Timer = EffectMax;
 			return;
-
 		}
 		if (UnidusTextLoader == false)
 		{
 			if (AnimalTextLoader == false)
 			{
-				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
 				}
 				AnimalTextLoader = true;
@@ -846,25 +868,25 @@ extern "C"
 			UnidusTextLoader = true;
 			TextLoaded = true;
 		}
-
 		int number = rand() % 2;
-		ObjectMaster* Unidus = LoadObject((LoadObj)2, 3, UnidusA_Main);
-		SETObjData* UnidusSETData = new SETObjData();
-		Unidus->SETData.SETData = UnidusSETData;
-		Unidus->Data1->Position = EntityData1Ptrs[0]->Position;
-		Unidus->Data1->Position.z += rand() % 10 + 1 * 9;
+		task* Unidus;
+		Unidus = (task*)LoadObject((LoadObj)2, 3, UnidusA_Main);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Unidus->ocp = objCondition;
+		Unidus->twp->pos = EntityData1Ptrs[0]->Position;
+		Unidus->twp->pos.z += rand() % 10 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* Unidus = LoadObject((LoadObj)2, 3, UnidusA_Main);
-			SETObjData* UnidusSETData = new SETObjData();
-			Unidus->SETData.SETData = UnidusSETData;
-			Unidus->Data1->Position = EntityData1Ptrs[0]->Position;
-			Unidus->Data1->Position.z += rand() % 10 + 1 * 9;
+			Unidus = (task*)LoadObject((LoadObj)2, 3, UnidusA_Main);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			Unidus->ocp = objCondition;
+			Unidus->twp->pos = EntityData1Ptrs[0]->Position;
+			Unidus->twp->pos.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Unidus");
-		//PrintDebug("Spawned Unidus\n");
 		return;
 	}
+
 	void RandomAmebot(EntityData1* p1)
 	{
 		if (!EnemysEnabled)
@@ -876,7 +898,6 @@ extern "C"
 		{
 			Chaos_Timer = EffectMax;
 			return;
-
 		}
 		if (AmebotTextLoader == false)
 		{
@@ -891,21 +912,22 @@ extern "C"
 			AmebotTextLoader = true;
 			TextLoaded = true;
 		}
-
 		int number = rand() % 2;
-		ObjectMaster* Amebot = LoadObject((LoadObj)2, 3, Sweep_Load);
-		SETObjData* AmebotSETData = new SETObjData();
-		Amebot->SETData.SETData = AmebotSETData;
-		Amebot->Data1->Position = EntityData1Ptrs[0]->Position;
+		task* Amebot;
+		Amebot = (task*)LoadObject((LoadObj)2, 3, Sweep_Load);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Amebot->ocp = objCondition;
+		Amebot->twp->pos = EntityData1Ptrs[0]->Position;
+		Amebot->twp->pos.z += rand() % 10 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* Amebot = LoadObject((LoadObj)2, 3, Sweep_Load);
-			SETObjData* AmebotSETData = new SETObjData();
-			Amebot->SETData.SETData = AmebotSETData;
-			Amebot->Data1->Position = EntityData1Ptrs[0]->Position;
+			Amebot = (task*)LoadObject((LoadObj)2, 3, Sweep_Load);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			Amebot->ocp = objCondition;
+			Amebot->twp->pos = EntityData1Ptrs[0]->Position;
+			Amebot->twp->pos.z += rand() % 10 + 1 * 9;
 		}
-		strcpy_s(LastEffect, 128, "Spawned Amebo");
-		//PrintDebug("Spawned Amebo\n");
+		strcpy_s(LastEffect, 128, "Spawned Amebot");
 		return;
 	}
 	
@@ -920,7 +942,6 @@ extern "C"
 		{
 			Chaos_Timer = EffectMax;
 			return;
-
 		}
 		if (PoliceTextLoader == false)
 		{
@@ -935,23 +956,22 @@ extern "C"
 			PoliceTextLoader = true;
 			TextLoaded = true;
 		}
-
 		int number = rand() % 2;
-		ObjectMaster* CopSpeeder = LoadObject((LoadObj)2, 3, EPolice);
-		SETObjData* CopSpeederSETData = new SETObjData();
-		CopSpeeder->SETData.SETData = CopSpeederSETData;
-		CopSpeeder->Data1->Position = EntityData1Ptrs[0]->Position;
-		CopSpeeder->Data1->Position.z += rand() % 10 + 1 * 9;
+		task* CopSpeeder;
+		CopSpeeder = (task*)LoadObject((LoadObj)2, 3, EPolice);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		CopSpeeder->ocp = objCondition;
+		CopSpeeder->twp->pos = EntityData1Ptrs[0]->Position;
+		CopSpeeder->twp->pos.z += rand() % 10 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* CopSpeeder = LoadObject((LoadObj)2, 3, EPolice);
-			SETObjData* CopSpeederSETData = new SETObjData();
-			CopSpeeder->SETData.SETData = CopSpeederSETData;
-			CopSpeeder->Data1->Position = EntityData1Ptrs[0]->Position;
-			CopSpeeder->Data1->Position.z += rand() % 10 + 1 * 9;
+			CopSpeeder = (task*)LoadObject((LoadObj)2, 3, EPolice);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			CopSpeeder->ocp = objCondition;
+			CopSpeeder->twp->pos = EntityData1Ptrs[0]->Position;
+			CopSpeeder->twp->pos.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned The Police");
-		//PrintDebug("Spawned The Police\n");
 		return;
 	}
 	
@@ -966,7 +986,6 @@ extern "C"
 		{
 			Chaos_Timer = EffectMax;
 			return;
-
 		}
 		if (SnakeTextLoader == false)
 		{
@@ -982,25 +1001,25 @@ extern "C"
 			TextLoaded = true;
 		}
 		int number = rand() % 2;
-		ObjectMaster* Snake = LoadObject((LoadObj)2, 3, BoaBoa_Main);
-		SETObjData* SnakeSETData = new SETObjData();
-		Snake->SETData.SETData = SnakeSETData;
-		Snake->Data1->Position = EntityData1Ptrs[0]->Position;
-		Snake->Data1->Position.z += rand() % 90 + 1 * 9;
+		task* Snake;
+		Snake = (task*)LoadObject((LoadObj)2, 3, BoaBoa_Main);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Snake->ocp = objCondition;
+		Snake->twp->pos = EntityData1Ptrs[0]->Position;
+		Snake->twp->pos.z += rand() % 90 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* Snake = LoadObject((LoadObj)2, 3, BoaBoa_Main);
-			SETObjData* SnakeSETData = new SETObjData();
-			Snake->SETData.SETData = SnakeSETData;
-			Snake->Data1->Position = EntityData1Ptrs[0]->Position;
-			Snake->Data1->Position.z += rand() % 90 + 1 * 9;
+			Snake = (task*)LoadObject((LoadObj)2, 3, BoaBoa_Main);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			Snake->ocp = objCondition;
+			Snake->twp->pos = EntityData1Ptrs[0]->Position;
+			Snake->twp->pos.z += rand() % 90 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Boa-Boa");
-		//PrintDebug("Spawned Boa-Boa\n");
 		return;
 	}
 	
-	void RandomRobo(EntityData1* p1)
+	void RandomRobo(EntityData1* p1)//updated to task, untested 10/04/2021
 	{
 		if (!EnemysEnabled)
 		{
@@ -1011,7 +1030,6 @@ extern "C"
 		{
 			Chaos_Timer = EffectMax;
 			return;
-
 		}
 		if (RoboTextLoader == false)
 		{
@@ -1027,21 +1045,21 @@ extern "C"
 			TextLoaded = true;
 		}
 		int number = rand() % 2;
-		ObjectMaster* Robo = LoadObject((LoadObj)2, 3, ERobo_0);
-		SETObjData* RoboSETData = new SETObjData();
-		Robo->SETData.SETData = RoboSETData;
-		Robo->Data1->Position = EntityData1Ptrs[0]->Position;
-		Robo->Data1->Position.z += rand() % 10 + 1 * 9;
+		task* Robo;
+		Robo = (task*)LoadObject((LoadObj)2, 3, ERobo_0);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Robo->ocp = objCondition;
+		Robo->twp->pos = EntityData1Ptrs[0]->Position;
+		Robo->twp->pos.z += rand() % 10 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* Robo = LoadObject((LoadObj)2, 3, ERobo_0);
-			SETObjData* RoboSETData = new SETObjData();
-			Robo->SETData.SETData = RoboSETData;
-			Robo->Data1->Position = EntityData1Ptrs[0]->Position;
-			Robo->Data1->Position.z += rand() % 10 + 1 * 9;
+			Robo = (task*)LoadObject((LoadObj)2, 3, ERobo_0);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			Robo->ocp = objCondition;
+			Robo->twp->pos = EntityData1Ptrs[0]->Position;
+			Robo->twp->pos.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Robo");
-		//PrintDebug("Spawned Robo\n");
 		return;
 	}
 	
@@ -1056,7 +1074,6 @@ extern "C"
 		{
 			Chaos_Timer = EffectMax;
 			return;
-
 		}
 		if (LeonTextLoader == false)
 		{
@@ -1072,25 +1089,25 @@ extern "C"
 			TextLoaded = true;
 		}
 		int number = rand() % 2;
-		ObjectMaster* Leon = LoadObject((LoadObj)2, 3, Leon_Load);
-		SETObjData* LeonSETData = new SETObjData();
-		Leon->SETData.SETData = LeonSETData;
-		Leon->Data1->Position = EntityData1Ptrs[0]->Position;
-		Leon->Data1->Position.z += rand() % 10 + 1 * 9;
+		task* Leon;
+		Leon = (task*)LoadObject((LoadObj)2, 3, Leon_Load);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Leon->ocp = objCondition;
+		Leon->twp->pos = EntityData1Ptrs[0]->Position;
+		Leon->twp->pos.z += rand() % 10 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* Leon = LoadObject((LoadObj)2, 3, Leon_Load);
-			SETObjData* LeonSETData = new SETObjData();
-			Leon->SETData.SETData = LeonSETData;
-			Leon->Data1->Position = EntityData1Ptrs[0]->Position;
-			Leon->Data1->Position.z += rand() % 10 + 1 * 9;
+			Leon = (task*)LoadObject((LoadObj)2, 3, Leon_Load);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			Leon->ocp = objCondition;
+			Leon->twp->pos = EntityData1Ptrs[0]->Position;
+			Leon->twp->pos.z += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Leon");
-		//PrintDebug("Spawned Leon\n");
 		return;
 	}
 
-	void RandomKiki(EntityData1* p1) 
+	void RandomKiki(EntityData1* p1)
 	{
 		if (!EnemysEnabled)
 		{
@@ -1101,7 +1118,6 @@ extern "C"
 		{
 			Chaos_Timer = EffectMax;
 			return;
-
 		}
 		if (KikiTextLoader == false)
 		{
@@ -1118,57 +1134,50 @@ extern "C"
 			TextLoaded = true;
 		}
 		int number = rand() % 2;
-		ObjectMaster* Kiki = LoadObject((LoadObj)2, 3, Kiki_Load);
-		SETObjData* KikiSETData = new SETObjData();
-		Kiki->SETData.SETData = KikiSETData;
-		Kiki->Data1->Position = EntityData1Ptrs[0]->Position;
-		Kiki->Data1->Position.z += rand() % 10 + 1 * 9;
-		Kiki->Data1->Position.y += rand() % 2 + 1 * 9;
+		task* Kiki;
+		Kiki = (task*)LoadObject((LoadObj)2, 3, Kiki_Load);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Kiki->ocp = objCondition;
+		Kiki->twp->pos = EntityData1Ptrs[0]->Position;
+		Kiki->twp->pos.z += rand() % 10 + 1 * 9;
+		Kiki->twp->pos.y += rand() % 2 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* Kiki = LoadObject((LoadObj)2, 3, Kiki_Load);
-			SETObjData* KikiSETData = new SETObjData();
-			Kiki->SETData.SETData = KikiSETData;
-			Kiki->Data1->Position = EntityData1Ptrs[0]->Position;
-			Kiki->Data1->Position.z += rand() % 10 + 1 * 9;
-			Kiki->Data1->Position.y += rand() % 2 + 1 * 9;
+			Kiki = (task*)LoadObject((LoadObj)2, 3, Kiki_Load);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			Kiki->ocp = objCondition;
+			Kiki->twp->pos = EntityData1Ptrs[0]->Position;
+			Kiki->twp->pos.z += rand() % 10 + 1 * 9;
+			Kiki->twp->pos.y += rand() % 2 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Kiki");
-		//PrintDebug("Spawned Kiki\n");
 		return;
 	}
 
-	void RandomFallingSpikeBall(EntityData1* p1)
+	void RandomFallingSpikeBall(EntityData1* p1)//need to fix i wanna see if i can get them moving up and down?
 	{
 		if (FSBTextLoader == false)
 		{
-
 			LoadPVM("TOGEBALL_TOGEBALL", &TOGEBALL_TOGEBALL_TEXLIST);
 			FSBTextLoader = true;
 			TextLoaded = true;
 		}
-
 		int number = rand() % 2;
-		ObjectMaster* FallingSpikeBall = LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
-		SETObjData* FallingSpikeBallSETData = new SETObjData();
-		FallingSpikeBall->SETData.SETData = FallingSpikeBallSETData;
-		FallingSpikeBall->Data1->Position = EntityData1Ptrs[0]->Position;
-		FallingSpikeBall->Data1->Position.y += rand() % 30 + 1 * 9;
-		FallingSpikeBall->Data1->Position.z += rand() % 30 + 1 * 9;
+		task* FallingSpikeBall;
+		FallingSpikeBall = (task*)LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
+		FallingSpikeBall->twp->pos = EntityData1Ptrs[0]->Position;
+		FallingSpikeBall->twp->pos.y += rand() % 30 + 1 * 9;
+		FallingSpikeBall->twp->pos.z += rand() % 30 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* FallingSpikeBall = LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
-			SETObjData* FallingSpikeBallSETData = new SETObjData();
-			FallingSpikeBall->SETData.SETData = FallingSpikeBallSETData;
-			FallingSpikeBall->Data1->Position = EntityData1Ptrs[0]->Position;
-			FallingSpikeBall->Data1->Position.y += rand() % 30 + 1 * 9;
-			FallingSpikeBall->Data1->Position.z += rand() % 30 + 1 * 9;
+			FallingSpikeBall = (task*)LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
+			FallingSpikeBall->twp->pos = EntityData1Ptrs[0]->Position;
+			FallingSpikeBall->twp->pos.y += rand() % 30 + 1 * 9;
+			FallingSpikeBall->twp->pos.z += rand() % 30 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Falling SpikeBall");
-		//PrintDebug("Falling SpikeBall\n");
 		return;
 	}
-
 	void RandomSpinnerA(EntityData1* p1)
 	{
 		if (!EnemysEnabled)
@@ -1189,14 +1198,24 @@ extern "C"
 			SpinnerTextLoader = true;
 			TextLoaded = true;
 		}
-		ObjectMaster* SpinnerA = LoadObject((LoadObj)2, 3, SpinnerA_Main);
-		SETObjData* SpinnerASETData = new SETObjData();
-		SpinnerA->SETData.SETData = SpinnerASETData;
-		SpinnerA->Data1->Position = EntityData1Ptrs[0]->Position;
-		SpinnerA->Data1->Position.z += rand() % 10 + 1 * 9;
-		SpinnerA->Data1->Position.y += rand() % 2 + 1 * 9;
+		int number = rand() % 2;
+		task* SpinnerA;
+		SpinnerA = (task*)LoadObject((LoadObj)2, 3, SpinnerA_Main);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		SpinnerA->ocp = objCondition;
+		SpinnerA->twp->pos = EntityData1Ptrs[0]->Position;
+		SpinnerA->twp->pos.z += rand() % 10 + 1 * 9;
+		SpinnerA->twp->pos.y += rand() % 2 + 1 * 9;
+		if (number)
+		{
+			SpinnerA = (task*)LoadObject((LoadObj)2, 3, SpinnerA_Main);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			SpinnerA->ocp = objCondition;
+			SpinnerA->twp->pos = EntityData1Ptrs[0]->Position;
+			SpinnerA->twp->pos.z += rand() % 10 + 1 * 9;
+			SpinnerA->twp->pos.y += rand() % 2 + 1 * 9;
+		}
 		strcpy_s(LastEffect, 128, "Spawned Spinner A");
-		//PrintDebug("Spawned Spinner A\n");
 		return;
 	}
 	void RandomSpinnerB(EntityData1* p1)
@@ -1219,14 +1238,24 @@ extern "C"
 			SpinnerTextLoader = true;
 			TextLoaded = true;
 		}
-		ObjectMaster* SpinnerB = LoadObject((LoadObj)2, 3, SpinnerB_Main);
-		SETObjData* SpinnerBSETData = new SETObjData();
-		SpinnerB->SETData.SETData = SpinnerBSETData;
-		SpinnerB->Data1->Position = EntityData1Ptrs[0]->Position;
-		SpinnerB->Data1->Position.z += rand() % 10 + 1 * 9;
-		SpinnerB->Data1->Position.y += rand() % 2 + 1 * 9;
+		int number = rand() % 2;
+		task* SpinnerB;
+		SpinnerB = (task*)LoadObject((LoadObj)2, 3, SpinnerB_Main);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		SpinnerB->ocp = objCondition;
+		SpinnerB->twp->pos = EntityData1Ptrs[0]->Position;
+		SpinnerB->twp->pos.z += rand() % 10 + 1 * 9;
+		SpinnerB->twp->pos.y += rand() % 2 + 1 * 9;
+		if (number)
+		{
+			SpinnerB = (task*)LoadObject((LoadObj)2, 3, SpinnerB_Main);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			SpinnerB->ocp = objCondition;
+			SpinnerB->twp->pos = EntityData1Ptrs[0]->Position;
+			SpinnerB->twp->pos.z += rand() % 10 + 1 * 9;
+			SpinnerB->twp->pos.y += rand() % 2 + 1 * 9;
+		}
 		strcpy_s(LastEffect, 128, "Spawned Spinner B");
-		//PrintDebug("Spawned Spinner B\n");
 		return;
 	}
 	void RandomSpinnerC(EntityData1* p1)
@@ -1249,18 +1278,28 @@ extern "C"
 			SpinnerTextLoader = true;
 			TextLoaded = true;
 		}
-		ObjectMaster* SpinnerC = LoadObject((LoadObj)2, 3, SpinnerC_Main);
-		SETObjData* SpinnerCSETData = new SETObjData();
-		SpinnerC->SETData.SETData = SpinnerCSETData;
-		SpinnerC->Data1->Position = EntityData1Ptrs[0]->Position;
-		SpinnerC->Data1->Position.z += rand() % 10 + 1 * 9;
-		SpinnerC->Data1->Position.y += rand() % 2 + 1 * 9;
+		int number = rand() % 2;
+		task* SpinnerC;
+		SpinnerC = (task*)LoadObject((LoadObj)2, 3, SpinnerC_Main);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		SpinnerC->ocp = objCondition;
+		SpinnerC->twp->pos = EntityData1Ptrs[0]->Position;
+		SpinnerC->twp->pos.z += rand() % 10 + 1 * 9;
+		SpinnerC->twp->pos.y += rand() % 2 + 1 * 9;
+		if (number)
+		{
+			SpinnerC = (task*)LoadObject((LoadObj)2, 3, SpinnerC_Main);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			SpinnerC->ocp = objCondition;
+			SpinnerC->twp->pos = EntityData1Ptrs[0]->Position;
+			SpinnerC->twp->pos.z += rand() % 10 + 1 * 9;
+			SpinnerC->twp->pos.y += rand() % 2 + 1 * 9;
+		}
 		strcpy_s(LastEffect, 128, "Spawned Spinner C");
-		//PrintDebug("Spawned Spinner C\n");
 		return;
 	}
 
-	void RandomSman(EntityData1* p1)//
+	void RandomSman(EntityData1* p1)
 	{
 		if (!EnemysEnabled)
 		{
@@ -1271,7 +1310,6 @@ extern "C"
 		{
 			Chaos_Timer = EffectMax;
 			return;
-
 		}
 		if (SmanTextLoader == false)
 		{
@@ -1287,15 +1325,15 @@ extern "C"
 			SmanTextLoader = true;
 			TextLoaded = true;
 		}
-		ObjectMaster* ESMAN = LoadObject((LoadObj)2, 3, ESman);
-		SETObjData* ESMANSETData = new SETObjData();
-		ESMAN->SETData.SETData = ESMANSETData;
-		ESMAN->Data1->Position = EntityData1Ptrs[0]->Position;
+		task* ESMAN;
+		ESMAN = (task*)LoadObject((LoadObj)2, 3, ESman);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		ESMAN->ocp = objCondition;
+		ESMAN->twp->pos = EntityData1Ptrs[0]->Position;
+		ESMAN->twp->pos.z += rand() % 10 + 1 * 9;
+		ESMAN->twp->pos.y += rand() % 2 + 1 * 9;
 		strcpy_s(LastEffect, 128, "Spawned IceBall");
-		//PrintDebug("Spawned IceBall\n");
-		return;
 	}
-
 	void RandomEGacha(EntityData1* p1)
 	{
 		if (!EnemysEnabled)
@@ -1317,96 +1355,101 @@ extern "C"
 			TextLoaded = true;
 		}
 		int number = rand() % 2;
-		ObjectMaster* GACHAPON = LoadObject((LoadObj)2, 3, OEGacha);
-		SETObjData* GACHAPONSETData = new SETObjData();
-		GACHAPON->SETData.SETData = GACHAPONSETData;
-		GACHAPON->Data1->Position = EntityData1Ptrs[0]->Position;
+		task* GACHAPON;
+		GACHAPON = (task*)LoadObject((LoadObj)2, 3, OEGacha);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		GACHAPON->ocp = objCondition;
+		GACHAPON->twp->pos = EntityData1Ptrs[0]->Position;
+		GACHAPON->twp->pos.z += rand() % 10 + 1 * 9;
+		GACHAPON->twp->pos.y += rand() % 10 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* GACHAPON = LoadObject((LoadObj)2, 3, OEGacha);
-			SETObjData* GACHAPONSETData = new SETObjData();
-			GACHAPON->SETData.SETData = GACHAPONSETData;
-			GACHAPON->Data1->Position = EntityData1Ptrs[0]->Position;
-			GACHAPON->Data1->Position.y += rand() % 30 + 1 * 9;
-			GACHAPON->Data1->Position.z += rand() % 30 + 1 * 9;
+			GACHAPON = (task*)LoadObject((LoadObj)2, 3, OEGacha);
+			OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+			GACHAPON->ocp = objCondition;
+			GACHAPON->twp->pos = EntityData1Ptrs[0]->Position;
+			GACHAPON->twp->pos.z += rand() % 30 + 1 * 9;
+			GACHAPON->twp->pos.y += rand() % 30 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Beat");
-		//PrintDebug("Spawned Beat\n");
 		return;
 	}
-
-	void RandomSpring(EntityData1* p1) 
+	void RandomSpring(EntityData1* p1)
 	{
 		int number = rand() % 2;
-		ObjectMaster* spring = LoadObject((LoadObj)2, 2, SpringB_Main);
-		spring->Data1->Rotation = { rand() % 0x8000, rand() % 0x8000, rand() % 0x8000 };
-		spring->Data1->Scale.y = rand() % 4 + 1 * 2.5;
-		spring->Data1->Position = p1->Position;
+		task* Spring;
+		Spring = (task*)LoadObject((LoadObj)2, 3, SpringB_Main);
+		Spring->twp->pos = EntityData1Ptrs[0]->Position;
+		Spring->twp->ang = { rand() % 0x8000, rand() % 0x8000, rand() % 0x8000 };
+		Spring->twp->scl.y = rand() % 4 + 1 * 2.5;
+		Spring->twp->pos.z += rand() % 10 + 1 * 9;
+		Spring->twp->pos.y += rand() % 10 + 1 * 9;
 		if (number)
 		{
-			ObjectMaster* spring2 = LoadObject((LoadObj)2, 2, SpringB_Main);
-			spring2->Data1->Rotation = { rand() % 0x8000, rand() % 0x8000, rand() % 0x8000 };
-			spring2->Data1->Scale.y = rand() % 5 + 10 * 2.5;
-			spring2->Data1->Position = p1->Position;
-			spring2->Data1->Position.y += rand() % 10 + 1 * 9;
-			spring2->Data1->Position.z += rand() % 10 + 1 * 9;
+			Spring = (task*)LoadObject((LoadObj)2, 3, SpringB_Main);
+			Spring->twp->pos = EntityData1Ptrs[0]->Position;
+			Spring->twp->ang = { rand() % 0x8000, rand() % 0x8000, rand() % 0x8000 };
+			Spring->twp->scl.y = rand() % 4 + 1 * 2.5;
+			Spring->twp->pos.z += rand() % 10 + 1 * 9;
+			Spring->twp->pos.y += rand() % 10 + 1 * 9;
 		}
 		strcpy_s(LastEffect, 128, "Spawned Spring");
-		//PrintDebug("Random Spring\n");
 		return;
 	}
 
 	void RandomCheckPoint(EntityData1* p1)
 	{
-		ObjectMaster* checkpoint = LoadObject((LoadObj)15, 6, CheckPoint_Main);
-		SETObjData* CheckPointSETData = new SETObjData();
-		checkpoint->SETData.SETData = CheckPointSETData;
-		checkpoint->Data1->Rotation = p1->Rotation;
-		checkpoint->Data1->Position = p1->Position;
+		task* CheckPoint;
+		CheckPoint = (task*)LoadObject((LoadObj)15, 6, CheckPoint_Main);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		CheckPoint->ocp = objCondition;
+		CheckPoint->twp->pos = EntityData1Ptrs[0]->Position;
+		CheckPoint->twp->ang = PlayerTaskPtr[0]->ang;
 		strcpy_s(LastEffect, 128, "Random CheckPoint");
-		//PrintDebug("Random Checkpoint\n");
-		return;
 	}
 
-	void RandomSpeedPad(EntityData1* p1) 
+	void RandomSpeedPad(EntityData1* p1)//updated untested 10/04/2021
 	{
 		int number = rand() % 2;
-		ObjectMaster* speed = LoadObject((LoadObj)3, 3, DashPanel_Main);
-		speed->Data1->Scale.x = rand() % 5 + 10 * 2.5;
-		speed->Data1->Rotation.y = rand() % 0x8000;
-		speed->Data1->Position = p1->Position;
+		task* Speed;
+		Speed = (task*)LoadObject((LoadObj)3, 3, DashPanel_Main);
+		Speed->twp->scl.x = rand() % 5 + 10 * 2.5;
+		Speed->twp->ang.y = rand() % 0x8000;
+		Speed->twp->pos = EntityData1Ptrs[0]->Position;
 		if (number)
 		{
-			ObjectMaster* speed2 = LoadObject((LoadObj)3, 3, DashPanel_Main);
-			speed2->Data1->Scale.x = rand() % 5 + 10 * 2.5;
-			speed2->Data1->Rotation.y = rand() % 0x8000;
-			speed2->Data1->Position = p1->Position;
-			speed2->Data1->Position.z += rand() % 10 + 1 * 9;
+			task* Speed;
+			Speed = (task*)LoadObject((LoadObj)3, 3, DashPanel_Main);
+			Speed->twp->scl.x = rand() % 5 + 10 * 2.5;
+			Speed->twp->ang.y = rand() % 0x8000;
+			Speed->twp->pos = EntityData1Ptrs[0]->Position;
 		}
-		strcpy_s(LastEffect, 128, "Spawned SpeedPad");
-		//PrintDebug("Random SpeedPad\n");
+		strcpy_s(LastEffect, 128, "Random SpeedPad");
 		return;
+
 	}
-	void RandomSpikeBall(EntityData1* p1) 
+	void RandomSpikeBall(EntityData1* p1)
 	{
 		int number = rand() % 2;
-		ObjectMaster* spike = LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
-		spike->Data1->Rotation.y = rand() % 80 + 1000;
-		spike->Data1->Scale.x = rand() % 5 + 10 * 2.5;
-		spike->Data1->Position = p1->Position;
-		spike->Data1->Position.y += 2;
-		spike->Data1->Position.x += 80;
-		if (number) 
+		task* spike;
+		spike = (task*)LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
+		spike->twp->ang.y = rand() % 80 + 1000;
+		spike->twp->scl.x = rand() % 5 + 10 * 2.5;
+		spike->twp->pos = EntityData1Ptrs[0]->Position;
+		spike->twp->pos.y += 2;
+		spike->twp->pos.x += 80;
+		if (number)
 		{
-			ObjectMaster* spike2 = LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
-			spike2->Data1->Rotation.y = rand() % 80 + 1000;
-			spike2->Data1->Scale.x = rand() % 5 + 10 * 2.5;
-			spike2->Data1->Position = p1->Position;
-			spike2->Data1->Position.y += 2;
-			spike2->Data1->Position.z += rand() % 10 + 1 * 9;
+			task* spike;
+			spike = (task*)LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
+			spike->twp->ang.y = rand() % 80 + 1000;
+			spike->twp->scl.x = rand() % 5 + 10 * 2.5;
+			spike->twp->pos = EntityData1Ptrs[0]->Position;
+			spike->twp->pos.y += 2;
+			spike->twp->pos.x += rand() % 10 + 1 * 9;
+
 		}
-		strcpy_s(LastEffect, 128, "Spawned SpikeBall");
-		//PrintDebug("Random Spike Balls\n");
+		strcpy_s(LastEffect, 128, "Random SpikeBall");
 		return;
 	}
 
@@ -1418,17 +1461,14 @@ extern "C"
 			BugerManTextLoader = true;
 			TextLoaded = true;
 		}
-
-		ObjectMaster* BurgerMan = LoadObject((LoadObj)3, 3, MissionStatue_Load);
-		SETObjData* BurgerManSETData = new SETObjData();
-		BurgerMan->SETData.SETData = BurgerManSETData;
-		BurgerMan->Data1->Position = EntityData1Ptrs[0]->Position;
+		task* BurgerMan;
+		BurgerMan = (task*)LoadObject((LoadObj)3, 3, MissionStatue_Load);
+		BurgerMan->twp->pos = EntityData1Ptrs[0]->Position;
 		strcpy_s(LastEffect, 128, "Spawned BurgerMan");
-		//PrintDebug("Random BurgerMan\n");
 		return;
 	}
 
-	void RandomKeyBlock(EntityData1* p1)
+	void RandomKeyBlock(EntityData1* p1)//updated untested
 	{
 		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//stops the block from exploding i hope
 		if (KeyBlockTextLoader == false)
@@ -1437,21 +1477,19 @@ extern "C"
 			KeyBlockTextLoader = true;
 			TextLoaded = true;
 		}
-
-		ObjectMaster* KeyBlock = LoadObject((LoadObj)3, 3, OBoxSwitch);
-		SETObjData* KeyBlockSETData = new SETObjData();
-		KeyBlock->SETData.SETData = KeyBlockSETData;
-		KeyBlock->Data1->Position = EntityData1Ptrs[0]->Position;
-		KeyBlock->Data1->Scale.x = rand() % 3;//color of block
+		task* KeyBlock;
+		KeyBlock = (task*)LoadObject((LoadObj)3, 3, OBoxSwitch);
+		KeyBlock->twp->pos = EntityData1Ptrs[0]->Position;
+		KeyBlock->twp->scl.x = rand() % 3;
+		if (CurrentLevel == LevelIDs_EmeraldCoast)
+		{
+			KeyBlock->twp->scl.x = 0;//fix for other colors not working in emeraldcoast? 
+		}
 		strcpy_s(LastEffect, 128, "Spawned KeyBlock");
-		//PrintDebug("Random KeyBlock\n");
 		return;
 	}
-
-
 	void RandomKillMomentum(CharObj2* p1) 
 	{
-		//PlayVoice(55555);//OOF (disabled 9/30/2021)
 		p1->Speed = { 0, 0, 0 };
 		strcpy_s(LastEffect, 128, "Killed Momentum");
 		//PrintDebug("Kill Momentum\n");
@@ -2415,6 +2453,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			RandomSpikeBall(0);
 		}
 	}
 
