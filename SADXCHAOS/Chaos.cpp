@@ -113,7 +113,7 @@ using std::string;
 //fix for debug mod stacking
 //added Random Chao Fruit and Chao Hat, thanks to kell and pkr
 //changed most spawn things to using tasks, removed creation of setdata for objects that dont need it.
-
+//fixed RandomFallingSpikeBall moving up and down 
 
 
 
@@ -1154,7 +1154,7 @@ extern "C"
 		return;
 	}
 
-	void RandomFallingSpikeBall(EntityData1* p1)//need to fix i wanna see if i can get them moving up and down?
+	void RandomFallingSpikeBall(EntityData1* p1)
 	{
 		if (FSBTextLoader == false)
 		{
@@ -1166,14 +1166,19 @@ extern "C"
 		task* FallingSpikeBall;
 		FallingSpikeBall = (task*)LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
 		FallingSpikeBall->twp->pos = EntityData1Ptrs[0]->Position;
-		FallingSpikeBall->twp->pos.y += rand() % 30 + 1 * 9;
 		FallingSpikeBall->twp->pos.z += rand() % 30 + 1 * 9;
+		FallingSpikeBall->twp->scl.z = 60;
+		FallingSpikeBall->twp->scl.x = 60;
+		FallingSpikeBall->twp->scl.y = 1;
 		if (number)
 		{
 			FallingSpikeBall = (task*)LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
 			FallingSpikeBall->twp->pos = EntityData1Ptrs[0]->Position;
 			FallingSpikeBall->twp->pos.y += rand() % 30 + 1 * 9;
 			FallingSpikeBall->twp->pos.z += rand() % 30 + 1 * 9;
+			FallingSpikeBall->twp->scl.z = 60;
+			FallingSpikeBall->twp->scl.x = 60;
+			FallingSpikeBall->twp->scl.y = 1;
 		}
 		strcpy_s(LastEffect, 128, "Falling SpikeBall");
 		return;
@@ -1408,7 +1413,7 @@ extern "C"
 		strcpy_s(LastEffect, 128, "Random CheckPoint");
 	}
 
-	void RandomSpeedPad(EntityData1* p1)//updated untested 10/04/2021
+	void RandomSpeedPad(EntityData1* p1)
 	{
 		int number = rand() % 2;
 		task* Speed;
@@ -2453,7 +2458,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomSpikeBall(0);
+			RandomFallingSpikeBall(0);
 		}
 	}
 
