@@ -58,9 +58,9 @@ Download the [Latest Release Here](https://github.com/VeritasDL/SADXCHAOS/releas
 
 ## List Of Chaos Mods
 - Random Spring - Spawns 1 or 2 random Springs which have random Rotation, Scale, and Position
-- Random SpeedPad - Spawns 1 or 2 random SpeedPad which have random Rotation, Scale, and Position
-- Random SpikeBall - Spawns 1 or 2 random SpikeBalls which have random Rotation, Scale, and Position
-- Random Kill Momentum - Sets your momentum to 0, and plays the Roblox "OOF" sound effect.
+- Random SpeedPad - Spawns 1 or 2 Random SpeedPad which have random Rotation, Scale, and Position
+- Random SpikeBall - Spawns 1 or 2 Random SpikeBalls which have random Rotation, Scale, and Position
+- Random Kill Momentum - Sets your Speed to 0.
 - Random VSpeed - Sets your Y Speed to the Y speed Cap?
 - Random HSpeed -  Sets your H Speed to the H speed Cap?
 - Random Hurt -  Randomly Hurts the player if they have rings.
@@ -70,7 +70,7 @@ Download the [Latest Release Here](https://github.com/VeritasDL/SADXCHAOS/releas
 - Random Clip Level -  Changes The Render Distance (Disabled as of 8/10/2021)
 - Random Pause -  Forces The Game Paused for 5 Frames (you must unpause 5 times)
 - Random Character -  Randomly Changes what character you are playing as (Currently Disabled because the character change only happens on death/act/level change/restart)
-- Swap Camera -  Changes to what ever camera isn't currently selected.
+- Swap Camera -  Switches Camera Type
 - Random Debug -  Enables Debug Mode for 333 Frames.
 - Random X Gravity -  Sets X Gravity to a random value (Disabled as of 8/10/2021)
 - Random Y Gravity -  Sets Y Gravity to a random value for 1000 frames.
@@ -98,12 +98,14 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random Physics - Sets current Physics to the physics from SADX,SA2B and Sonic Heros. Credits to MainMemory for the code and Physics data, https://github.com/MainMemory/SADXPhysicsSwapMod
 - Camera Decouple - Detaches the camera from the player for 100 frames.
 - Disable Pause - Removes the Ability to pause for 420 frames.
-- Random Key Block - Spawns in the key block with random color from Amys Hot Shelter
+- Random Key Block - Spawns in the Key Block with random color from Amys Hot Shelter
 - No s0und_ For You - Disables all/most sounds for 222 frames.
-- Random Emblem - Spawns in a Emblem that the player can collect. Does Not increase emblem count.
+- Random Emblem - Spawns in a Emblem that the player can collect. Does Not increase emblem count. (disabled)
 - Disable Pause - Disables Ability to Pause the game for 420 frames.
 - Random Chao - Spawns in a Chao with Random Stat Levels, Stat Grades, Texture, Body Type, Hat Type, Medal Type, Shiny, Random Animal Attributes, Color and Name
-- Random Chao Fruit - Spawns in a Random Chao Fruit Type.
+- Random Chao Fruit - Spawns in a Random Chao Fruit.
+- Random Chao Hat - Spawn in a Random Chao Hat.
+- 
 ## Special Thanks
 Thanks to Sora for the code base and helping me with dumb questions  
 Huge Thanks to Refrag for helping me constantly!  
