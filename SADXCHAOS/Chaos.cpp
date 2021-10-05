@@ -554,7 +554,7 @@ extern "C"
 		////PrintDebug("Camera Detached\n");//this was crashing me? lol how
 	}
 
-	void RandomEmblem(EntityData1* p1)//updated 10/04/2021 doesnt work still lol get fucked
+	void RandomEmblem(EntityData1* p1)//updated 10/04/2021 doesnt work still lol get fucked, figured out emblem id but still doesnt work, lol
 	{
 		if (EmblemTextLoader == false)
 		{
@@ -570,49 +570,41 @@ extern "C"
 		Emblem->twp->pos.y += rand() % 5 + 3;
 		Emblem->twp->pos.z += rand() % 100 + 1 * 9;
 		Emblem->twp->ang.x = rand() % 1000;
+		Emblem->twp->value.l = 129; //Emblem ID, holy jesus 
 		strcpy_s(LastEffect, 128, "Random Emblem");
 		return;
 		////WriteData((BYTE*)0x03B2B5F6, (BYTE)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast
-		////old emblem spawn code
-		//ObjectMaster* Emblem = LoadObject((LoadObj)2, 3, Emblem_Main);
-		//SETObjData* EmblemSETData = new SETObjData();
-		//Emblem->SETData.SETData = EmblemSETData;
-		//Emblem->Data1->Position = EntityData1Ptrs[0]->Position;
-		//Emblem->Data1->Position.z += rand() % 100 + 1 * 9;
-		//Emblem->Data1->Position.y += rand() % 5 + 3;
-		//Emblem->Data1->LoopData->Position
-		//Emblem->Data1->Rotation.x = rand() % 1000; //how fast it rotates.
-		//strcpy_s(LastEffect, 128, "Random Emblem");
-		//PrintDebug("Random Emblem\n")
 	}
 
-	//void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021
-	//{
-	//	if (IceTextLoader == false)
-	//	{
-	//		IceTextLoader = true;
-	//	}
-
-	//	ObjectMaster* IceKey = LoadObject((LoadObj)3, 3, IceKey_Main);
-	//	SETObjData* IceKeySETData = new SETObjData();
-	//	IceKey->SETData.SETData = IceKeySETData;
-	//	IceKey->Data1->Position = EntityData1Ptrs[0]->Position;
-	//	strcpy_s(LastEffect, 128, "Random IceKey");
-	//}
-	//void RandomWindKey(EntityData1* p1) // disabled for now 9/23/2021
-	//{
-	//	if (WindTextLoader == false)
-	//	{
-	//		LoadPVM("HANDKEY", &RUIN01_TEXLIST);
-	//		WindTextLoader == true;
-	//	}
-
-	//	ObjectMaster* WindKey = LoadObject((LoadObj)3, 3, OHandKey);
-	//	SETObjData* WindKeySETData = new SETObjData();
-	//	WindKey->SETData.SETData = WindKeySETData;
-	//	WindKey->Data1->Position = EntityData1Ptrs[0]->Position;
-	//	strcpy_s(LastEffect, 128, "Random WindKey");
-	//} // disabled for now 9/23/2021
+	void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
+	{
+		if (IceTextLoader == false)
+		{
+			IceTextLoader = true;
+		}
+		task* IceKey;
+		IceKey = (task*)LoadObject((LoadObj)3, 3, IceKey_Main);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		IceKey->ocp = objCondition;
+		IceKey->twp->pos = EntityData1Ptrs[0]->Position;
+		strcpy_s(LastEffect, 128, "Random IceKey");
+		return;
+	}
+	void RandomWindKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
+	{
+		if (WindTextLoader == false)
+		{
+			LoadPVM("HANDKEY", &RUIN01_TEXLIST);
+			WindTextLoader == true;
+		}
+		task* WindKey;
+		WindKey = (task*)LoadObject((LoadObj)3, 3, OHandKey);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		WindKey->ocp = objCondition;
+		WindKey->twp->pos = EntityData1Ptrs[0]->Position;
+		strcpy_s(LastEffect, 128, "Random IceKey");
+		return;
+	} // disabled for now 9/23/2021
 
 	void RandomTank(EntityData1* p1)
 	{
@@ -2458,7 +2450,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomFallingSpikeBall(0);
+			RandomEmblem(0);
 		}
 	}
 
