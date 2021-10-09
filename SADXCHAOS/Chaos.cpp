@@ -114,11 +114,8 @@ using std::string;
 //added Random Chao Fruit and Chao Hat, thanks to kell and pkr
 //changed most spawn things to using tasks, removed creation of setdata for objects that dont need it.
 //fixed RandomFallingSpikeBall moving up and down 
-
-
-
-
-
+//
+// 
 //Todo
 //random emblem broke 
 //Kill momentum doesn't always work?
@@ -182,8 +179,6 @@ bool ChaoHatTextLoader = false;
 bool ShownMenu = false;
 bool TextLoaded = false;
 bool DebugEnabled = false;
-
-
 ObjectMaster* snowboard;
 
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
@@ -476,10 +471,7 @@ extern "C"
 	{ "SUKA", &SUKA_TEXLIST },
 	};
 
-
-
-
-	void ScaleDebugFont(int scale)
+	void ScaleDebugFont(int scale)//thanks to PkR for this code https://github.com/PiKeyAr/sadx-debug-mode/
 	{
 		float FontScale;
 		if (!EnableFontScaling) FontScale = 1.0f;
@@ -491,7 +483,7 @@ extern "C"
 		SetDebugFontSize(FontScale * scale);
 	}
 
-	void DrawDebugRectangle(float leftchars, float topchars, float numchars_horz, float numchars_vert)
+	void DrawDebugRectangle(float leftchars, float topchars, float numchars_horz, float numchars_vert)//thanks to PkR for this code https://github.com/PiKeyAr/sadx-debug-mode/
 	{
 		float FontScale;
 		if (!EnableFontScaling) FontScale = 1.0f;
@@ -595,7 +587,7 @@ extern "C"
 		if (WindTextLoader == false)
 		{
 			LoadPVM("HANDKEY", &RUIN01_TEXLIST);
-			WindTextLoader == true;
+			WindTextLoader = true;
 		}
 		task* WindKey;
 		WindKey = (task*)LoadObject((LoadObj)3, 3, OHandKey);
@@ -2181,7 +2173,7 @@ extern "C"
 	{ RandomKeyBlock, nullptr, nullptr },
 	{ RandomKeyBlock, nullptr, nullptr },
 	{ RandomFruit, nullptr, nullptr },
-	{ RandomFruit, nullptr, nullptr },
+	{ RandomHat, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
@@ -2422,7 +2414,7 @@ extern "C"
 			DebugEnabled = false;
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
-			//Chaos_Timer++;
+			Chaos_Timer++;
 		if (Chaos_Timer >= EffectMax)
 		{
 			char curRand = 0;
