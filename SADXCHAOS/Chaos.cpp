@@ -424,8 +424,16 @@ void InitializeRandomCoordinates()
 	{102.069f,532.58f,74.430f},//spring
 	};
 
+	customLocationsMap[LevelAndActIDs_RedMountain1] =
+	{
+		{18.208f,32.314f,636.059f}, //sonic act 0 spawn
+		{-63.728f,921.607f,106.733f},//spring after rocket
+		{-804.800f,1091.28f,-199.402f},//on rock that shoots you foward
+		{-3401.674f,152.835f,-1586.210f},//on rock sonic does skip from
+		{-3822.46f,1121.60f,-1910.86f}//top of mountain 
+	};
 }
-
+//beat has bad texture in redmountain? 
 
 extern "C"
 {
