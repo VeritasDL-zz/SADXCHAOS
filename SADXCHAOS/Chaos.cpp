@@ -114,13 +114,21 @@ using std::string;
 //added Random Chao Fruit and Chao Hat, thanks to kell and pkr
 //changed most spawn things to using tasks, removed creation of setdata for objects that dont need it.
 //fixed RandomFallingSpikeBall moving up and down 
-//
+//Started Working on Big Ice Cap Rock
+//Big IceCap Rock Finished
+//AndKnuckles added 
+//Made it So Big's Rock can be picked up by others!
+// 
+// 
 // 
 //Todo
 //random emblem broke 
 //Kill momentum doesn't always work?
-//Convert the entire? &Knuckles Rap into wav for Effect where the meme Rap plays as a song?
 //Add &Knuckles Tikal Hint with Short Clip of "&Knuckles" Rap
+//Random Remove Powerup (idea from sora) (check current char, and current unlocked powerups and remove a random one)
+
+
+
 
 
 char oldRand = -1;
@@ -176,6 +184,7 @@ bool IceTextLoader = false;
 bool WindTextLoader = false;
 bool ChaoFruitTextLoader = false;
 bool ChaoHatTextLoader = false;
+bool BigRockTextLoader = false;
 bool ShownMenu = false;
 bool TextLoaded = false;
 bool DebugEnabled = false;
@@ -434,7 +443,10 @@ void InitializeRandomCoordinates()
 	};
 }
 //beat has bad texture in redmountain? 
-
+void OverRideBigRockTex()
+{
+	njSetTexture(&OBJ_ICECAP_TEXLIST);
+}
 extern "C"
 {
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
@@ -456,7 +468,10 @@ extern "C"
 		WriteCall((void*)0x4E9698, LoadSnowboardObject);
 		WriteCall((void*)0x597B34, LoadSnowboardObject);
 		WriteCall((void*)0x597B46, LoadSnowboardObject);
+		WriteCall((void*)0x4EDD17, OverRideBigRockTex);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
+		WriteData((char*)0x4EE7BB, (char)4);//big ice rock pickup ability
+		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//stops the amy key block from exploding i hope
 		srand((unsigned)time(nullptr));
 
 	}
@@ -532,7 +547,7 @@ extern "C"
 		memcpy(&CharObj2Ptrs[0]->PhysicsData, &tmp, sizeof(PhysicsData));
 		CharObj2Ptrs[0]->PhysicsData.YOff = OldYOffset;//restores Saved Y Offset.
 		strcpy_s(LastEffect, 128, output);
-		////PrintDebug("Random Physics\n");//this was crashing me? lol how
+		//PrintDebug("Random Physics\n");//this was crashing me? lol how
 	}
 
 	void Nos0und_ForYou()
@@ -544,6 +559,15 @@ extern "C"
 		strcpy_s(LastEffect, 128, "s0und_ Disabled");
 		//PrintDebug("s0und_ Disabled\n");
 		s0und__Timer = 222;
+	}
+
+	void RemoveRandomPowerUp()
+	{
+		//int CharID = CurrentCharacter;
+		//if (CharObj2Ptrs[0]->Upgrades & Upgrades_LightShoes)
+		//{
+		//	CharObj2Ptrs[0]->Upgrades |= Upgrades_LightShoes;
+		//}
 	}
 
 	void UncoupleCamera()
@@ -574,6 +598,22 @@ extern "C"
 		strcpy_s(LastEffect, 128, "Random Emblem");
 		return;
 		////WriteData((BYTE*)0x03B2B5F6, (BYTE)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast
+	}
+
+	void BigRock(EntityData1* p1)
+	{
+		if (!BigRockTextLoader)
+		{
+			LoadPVM("OBJ_ICECAP", &OBJ_ICECAP_TEXLIST);
+			BigRockTextLoader = true;
+			TextLoaded = true;
+		}
+
+		task* BigRock;
+		BigRock = (task*)LoadObject((LoadObj)3, 3, OBiciwa);
+		BigRock->twp->pos = EntityData1Ptrs[0]->Position;
+		strcpy_s(LastEffect, 128, "Spawned Big Rock");
+		return;
 	}
 
 	void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
@@ -1467,7 +1507,6 @@ extern "C"
 
 	void RandomKeyBlock(EntityData1* p1)//updated untested
 	{
-		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//stops the block from exploding i hope
 		if (KeyBlockTextLoader == false)
 		{
 			LoadPVM("HOTSHELTER2", &HOTSHELTER2_TEXLIST);
@@ -1480,7 +1519,7 @@ extern "C"
 		KeyBlock->twp->scl.x = rand() % 3;
 		if (CurrentLevel == LevelIDs_EmeraldCoast)
 		{
-			KeyBlock->twp->scl.x = 0;//fix for other colors not working in emeraldcoast? 
+			KeyBlock->twp->scl.x = 0;//fix for other colors not working in emeraldcoast? idk why 
 		}
 		strcpy_s(LastEffect, 128, "Spawned KeyBlock");
 		return;
@@ -1685,6 +1724,23 @@ extern "C"
 		strcpy_s(LastEffect, 128, "Small Scale");
 		return;
 	}
+
+	void AndKnuckles()
+	{
+		int Knuckles = rand() % 3;
+		if (Knuckles == 0)
+		{
+			PlayVoice(66666);//Custom Knuckles Meme Song Clip,
+			strcpy_s(LastEffect, 128, "&Knuckles");
+			return;
+		}
+		else
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
+	}
+
 	void RandomSwapMusic() 
 	{
 		do {
@@ -1698,13 +1754,12 @@ extern "C"
 
 	void ChaosPlayVoice_rng() 
 	{
-		int a1 = rand() % 2043;
-		PlayVoice(a1);
+		int Voice = rand() % 2043;
+		PlayVoice(Voice);
 		//PrintDebug("Random Voice\n");
 		strcpy_s(LastEffect, 128, "Random Voice");
 		return;
 	}
-
 	void RandomDPadDownCheck()
 	{
 		//enable dpaddown check timer
@@ -2256,6 +2311,7 @@ extern "C"
 			DebugEnabled = false; //@temp.walker may remove
 			ChaoFruitTextLoader = false; //@temp.walker may remove
 			ChaoHatTextLoader = false;
+			BigRockTextLoader = false;
 			HatNumb = -1;
 		}
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
@@ -2443,7 +2499,6 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnInput()
 	{
 		// Executed before the game processes input
-
 	}
 	__declspec(dllexport) void __cdecl OnControl(EntityData1* p1)
 	{
