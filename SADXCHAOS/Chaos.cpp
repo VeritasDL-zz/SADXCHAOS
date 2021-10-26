@@ -118,6 +118,9 @@ using std::string;
 //Big IceCap Rock Finished
 //AndKnuckles added 
 //Made it So Big's Rock can be picked up by others!
+//Fixed Random Chao (sorta)
+//Fixed Random KeyBlock again,
+//Added Config Option to Disabled Spawning of Grab-Able Objects
 // 
 // 
 // 
@@ -126,6 +129,8 @@ using std::string;
 //Kill momentum doesn't always work?
 //Add &Knuckles Tikal Hint with Short Clip of "&Knuckles" Rap
 //Random Remove Powerup (idea from sora) (check current char, and current unlocked powerups and remove a random one)
+//boss battles, might be like the hub worlds where enemys being killed can just randomly crash even tho i load all the animal textures?
+
 
 
 
@@ -160,6 +165,7 @@ bool EnemysEnabled = true;
 bool InvertEnabled = true;
 bool RPauseEnabled = true;
 bool PauseDisableEnabled = true;
+bool GrabAbleObjectsEnabled = true;
 char* LastEffect = new char();
 bool EnableFontScaling = false;
 bool SpinnerTextLoader = false;
@@ -461,6 +467,7 @@ extern "C"
 		InvertEnabled = config->getBool("General", "InvertEnabled", true);
 		RPauseEnabled = config->getBool("General", "PauseEnabled", true);
 		PauseDisableEnabled = config->getBool("General", "PauseDisableEnabled", true);
+		GrabAbleObjectsEnabled = config->getBool("General", "GrabAbleObjectsEnabled", true);
 		delete config;
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
@@ -471,7 +478,10 @@ extern "C"
 		WriteCall((void*)0x4EDD17, OverRideBigRockTex);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 		WriteData((char*)0x4EE7BB, (char)4);//big ice rock pickup ability
-		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//stops the amy key block from exploding i hope
+		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//stops the amy key block from exploding 
+		WriteData((int*)0x017D0A38, (int)0xC7C35000);//stops the amy key block from exploding
+		WriteData((int*)0x017D0A44, (int)0xC7C35000);//stops the amy key block from exploding
+		WriteData((int*)0x017D0A50, (int)0xC7C35000);//stops the amy key block from exploding
 		srand((unsigned)time(nullptr));
 
 	}
@@ -580,7 +590,7 @@ extern "C"
 
 	void RandomEmblem(EntityData1* p1)//updated 10/04/2021 doesnt work still lol get fucked, figured out emblem id but still doesnt work, lol
 	{
-		if (EmblemTextLoader == false)
+		if (!EmblemTextLoader)
 		{
 			LoadPVM("EMBLEM", &EMBLEM_TEXLIST);
 			EmblemTextLoader = true;
@@ -602,6 +612,11 @@ extern "C"
 
 	void BigRock(EntityData1* p1)
 	{
+		if (!GrabAbleObjectsEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (!BigRockTextLoader)
 		{
 			LoadPVM("OBJ_ICECAP", &OBJ_ICECAP_TEXLIST);
@@ -618,7 +633,12 @@ extern "C"
 
 	void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
 	{
-		if (IceTextLoader == false)
+		if (!GrabAbleObjectsEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
+		if (!IceTextLoader)
 		{
 			IceTextLoader = true;
 		}
@@ -632,7 +652,12 @@ extern "C"
 	}
 	void RandomWindKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
 	{
-		if (WindTextLoader == false)
+		if (!GrabAbleObjectsEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
+		if (!WindTextLoader)
 		{
 			LoadPVM("HANDKEY", &RUIN01_TEXLIST);
 			WindTextLoader = true;
@@ -658,9 +683,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (RinoTextLoader == false)
+		if (!RinoTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -698,7 +723,8 @@ extern "C"
 
 	void RandomChaoo()
 	{
-		if (ChaooManagerLoader == false)
+
+		if (!ChaooManagerLoader)
 		{
 			ChaoMain_Constructor();
 			al_confirmload_load();
@@ -772,7 +798,7 @@ extern "C"
 		chaodata->data.BallType = rand() % 3;
 		chaodata->data.Alignment = rand() % 2 - 1; //test
 		ObjectMaster* Chao = CreateChao(chaodata, 0, 0, &EntityData1Ptrs[0]->Position, 0);
-		chaodata->data.Type = (ChaoType)chaotype;
+		//chaodata->data.Type = (ChaoType)chaotype; idk why this wasnt working disabled for now,
 		chaodata->data.Color = rand() % 15;
 		chaodata->data.BodyTypeAnimal = 127;
 		chaodata->data.Name[0] = rand() % 255;
@@ -796,6 +822,11 @@ extern "C"
 
 	void RandomFruit(EntityData1* p1)
 	{
+		if (!GrabAbleObjectsEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (!ChaoFruitTextLoader)
 		{
 			LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST); //need to change to what ever loads the chao fruit textlist
@@ -809,6 +840,11 @@ extern "C"
 
 	void RandomHat(EntityData1* p1)
 	{
+		if (!GrabAbleObjectsEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (!ChaoHatTextLoader)
 		{
 			ChaoMain_Constructor();
@@ -841,9 +877,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (BuyonTextLoader == false)
+		if (!BuyonTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -885,9 +921,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (UnidusTextLoader == false)
+		if (!UnidusTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -931,9 +967,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (AmebotTextLoader == false)
+		if (!AmebotTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -975,9 +1011,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (PoliceTextLoader == false)
+		if (!PoliceTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -1019,9 +1055,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (SnakeTextLoader == false)
+		if (!SnakeTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -1063,9 +1099,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (RoboTextLoader == false)
+		if (!RoboTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -1107,9 +1143,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (LeonTextLoader == false)
+		if (!LeonTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -1151,9 +1187,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (KikiTextLoader == false)
+		if (!KikiTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -1188,7 +1224,7 @@ extern "C"
 
 	void RandomFallingSpikeBall(EntityData1* p1)
 	{
-		if (FSBTextLoader == false)
+		if (!FSBTextLoader)
 		{
 			LoadPVM("TOGEBALL_TOGEBALL", &TOGEBALL_TOGEBALL_TEXLIST);
 			FSBTextLoader = true;
@@ -1222,9 +1258,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (SpinnerTextLoader == false)
+		if (!SpinnerTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -1262,9 +1298,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (SpinnerTextLoader == false)
+		if (!SpinnerTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -1302,9 +1338,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (SpinnerTextLoader == false)
+		if (!SpinnerTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -1348,9 +1384,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (SmanTextLoader == false)
+		if (!SmanTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -1378,9 +1414,9 @@ extern "C"
 			Chaos_Timer = EffectMax;
 			return;
 		}
-		if (EGachaTextLoader == false)
+		if (!EGachaTextLoader)
 		{
-			if (AnimalTextLoader == false)
+			if (!AnimalTextLoader)
 			{
 				for (size_t  j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
 					LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
@@ -1492,7 +1528,12 @@ extern "C"
 
 	void RandomBurgerMan(EntityData1* p1)
 	{
-		if (BugerManTextLoader == false)
+		if (!GrabAbleObjectsEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
+		if (!BugerManTextLoader)
 		{
 			LoadPVM("MI_3DASU", &mi_3dasu_TEXLIST);
 			BugerManTextLoader = true;
@@ -1507,7 +1548,12 @@ extern "C"
 
 	void RandomKeyBlock(EntityData1* p1)//updated untested
 	{
-		if (KeyBlockTextLoader == false)
+		if (!GrabAbleObjectsEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
+		if (!KeyBlockTextLoader)
 		{
 			LoadPVM("HOTSHELTER2", &HOTSHELTER2_TEXLIST);
 			KeyBlockTextLoader = true;
@@ -1517,10 +1563,6 @@ extern "C"
 		KeyBlock = (task*)LoadObject((LoadObj)3, 3, OBoxSwitch);
 		KeyBlock->twp->pos = EntityData1Ptrs[0]->Position;
 		KeyBlock->twp->scl.x = rand() % 3;
-		if (CurrentLevel == LevelIDs_EmeraldCoast)
-		{
-			KeyBlock->twp->scl.x = 0;//fix for other colors not working in emeraldcoast? idk why 
-		}
 		strcpy_s(LastEffect, 128, "Spawned KeyBlock");
 		return;
 	}
@@ -2201,7 +2243,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[76]{
+	ChaosS ChaosArray[77]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -2279,6 +2321,7 @@ extern "C"
 	{ nullptr, nullptr, UncoupleCamera},
 	{ nullptr, nullptr, Nos0und_ForYou},
 	{ nullptr, nullptr, DisablePausee},
+	{ nullptr, nullptr, AndKnuckles},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -2505,6 +2548,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			RandomKeyBlock(0);
 		}
 	}
 
