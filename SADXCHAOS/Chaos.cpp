@@ -121,9 +121,10 @@ using std::string;
 //Fixed Random Chao (sorta)
 //Fixed Random KeyBlock again,
 //Added Config Option to Disabled Spawning of Grab-Able Objects
-// 
-// 
-// 
+//Started working on bigCar
+//Started Woking on Random X and Z gravity
+//Added No Gravity
+//  
 //Todo
 //random emblem broke 
 //Kill momentum doesn't always work?
@@ -131,9 +132,8 @@ using std::string;
 //Random Remove Powerup (idea from sora) (check current char, and current unlocked powerups and remove a random one)
 //boss battles, might be like the hub worlds where enemys being killed can just randomly crash even tho i load all the animal textures?
 
-
-
-
+//gamma hs, ham crashed 7 times, in a row
+//seems to be related to gamma locking onto enemys he was never intended to? idk
 
 
 char oldRand = -1;
@@ -143,7 +143,13 @@ int Pause_Timer = 0;
 int DPadDown_Timer = 0;
 int DpadDown = 0;
 int DisableControl_Timer = 0;
-int Gravity_Timer = 0;
+int XGravity_Timer = 0;
+int YGravity_Timer = 0;
+int ZGravity_Timer = 0;
+int NoGravityTimer = 0;
+Float XGravity = 0;
+Float YGravity = 0;
+Float ZGravity = 0;
 int NoClip_Timer = 0;
 int SnowboardTimer = 0;
 int IssSowboarding = 0;
@@ -191,6 +197,7 @@ bool WindTextLoader = false;
 bool ChaoFruitTextLoader = false;
 bool ChaoHatTextLoader = false;
 bool BigRockTextLoader = false;
+bool CarTextLoader = false;
 bool ShownMenu = false;
 bool TextLoaded = false;
 bool DebugEnabled = false;
@@ -478,6 +485,7 @@ extern "C"
 		WriteCall((void*)0x4EDD17, OverRideBigRockTex);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 		WriteData((char*)0x4EE7BB, (char)4);//big ice rock pickup ability
+		WriteData((char*)0x639A00, (char)4);//Patch for Picking Up Car in Station Square Act 0
 		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//stops the amy key block from exploding 
 		WriteData((int*)0x017D0A38, (int)0xC7C35000);//stops the amy key block from exploding
 		WriteData((int*)0x017D0A44, (int)0xC7C35000);//stops the amy key block from exploding
@@ -573,11 +581,7 @@ extern "C"
 
 	void RemoveRandomPowerUp()
 	{
-		//int CharID = CurrentCharacter;
-		//if (CharObj2Ptrs[0]->Upgrades & Upgrades_LightShoes)
-		//{
-		//	CharObj2Ptrs[0]->Upgrades |= Upgrades_LightShoes;
-		//}
+
 	}
 
 	void UncoupleCamera()
@@ -631,6 +635,26 @@ extern "C"
 		return;
 	}
 
+	void BigCar(EntityData1* p1)
+	{
+		if (!GrabAbleObjectsEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
+		if (!CarTextLoader)
+		{
+			//LoadPVM("OBJ_ICECAP", &OBJ_ICECAP_TEXLIST);
+			CarTextLoader = true;
+			TextLoaded = true;
+		}
+
+		task* Car;
+		Car = (task*)LoadObject((LoadObj)7, 3, ORotyu);
+		Car->twp->pos = EntityData1Ptrs[0]->Position;
+		strcpy_s(LastEffect, 128, "Spawned Car");
+		return;
+	}
 	void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
 	{
 		if (!GrabAbleObjectsEnabled)
@@ -1712,20 +1736,43 @@ extern "C"
 	}
 	void RandomXGravity()//currently disabled,
 	{
+		if (XGravity_Timer == 0)
+		{
+			XGravity = Gravity.x;
+		}
+		XGravity_Timer = 1000;
 		Gravity.x = (float)rand() / RAND_MAX + (-1.5);
+		strcpy_s(LastEffect, 128, "Random X Gravity");
 		//PrintDebug("Random X Gravity\n");
 	}
 	void RandomYGravity()
 	{
-		Gravity_Timer = 1000;
+		if (YGravity_Timer == 0)
+		{
+			YGravity = Gravity.y;
+		}
+		YGravity_Timer = 1000;
 		Gravity.y = (float)rand() / RAND_MAX + (-1.5);
-		//PrintDebug("Random Y Gravity\n");
 		strcpy_s(LastEffect, 128, "Random Y Gravity");
 	}
 	void RandomZGravity()//currently disabled,
 	{
+		if (ZGravity_Timer == 0)
+		{
+			ZGravity = Gravity.z;
+		}
+		ZGravity_Timer = 1000;
 		Gravity.z = (float)rand() / RAND_MAX + (-1.5);
+		strcpy_s(LastEffect, 128, "Random Z Gravity");
 		//PrintDebug("Random Z Gravity\n");
+	}
+	void NoGravity()
+	{
+		NoGravityTimer = 400;
+		Gravity.x = 0;
+		Gravity.y = 0;
+		Gravity.z = 0;
+		strcpy_s(LastEffect, 128, "Gravity Disabled");
 	}
 	void RandomBarrier()//currently disabled, might be killing the player? lol
 	{
@@ -2243,7 +2290,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[77]{
+	ChaosS ChaosArray[79]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -2322,6 +2369,8 @@ extern "C"
 	{ nullptr, nullptr, Nos0und_ForYou},
 	{ nullptr, nullptr, DisablePausee},
 	{ nullptr, nullptr, AndKnuckles},
+	{ nullptr, nullptr, NoGravity},
+	{ nullptr, nullptr, NoGravity},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -2355,6 +2404,7 @@ extern "C"
 			ChaoFruitTextLoader = false; //@temp.walker may remove
 			ChaoHatTextLoader = false;
 			BigRockTextLoader = false;
+			CarTextLoader = false;
 			HatNumb = -1;
 		}
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
@@ -2398,19 +2448,48 @@ extern "C"
 			////PrintDebug("Camera Attached\n");
 			strcpy_s(LastEffect, 128, "Camera Attached");
 		}
-
-		if (Gravity_Timer <= 1000 && Gravity_Timer != 0)
+		if (XGravity_Timer <= 1000 && XGravity_Timer != 0)
 		{
-			Gravity_Timer--;
+			XGravity_Timer--;
 		}
-		if (Gravity_Timer == 1 && Gravity_Timer != 0)
+		if (XGravity_Timer == 1 && XGravity_Timer != 0)
 		{
 			ResetGravity();
-			Gravity_Timer = 0;
+			XGravity_Timer = 0;
+			//PrintDebug("X Gravity Reset\n");
+			strcpy_s(LastEffect, 128, "X Gravity Reset");
+		}
+		if (YGravity_Timer <= 1000 && YGravity_Timer != 0)
+		{
+			YGravity_Timer--;
+		}
+		if (YGravity_Timer == 1 && YGravity_Timer != 0)
+		{
+			ResetGravity();
+			YGravity_Timer = 0;
 			//PrintDebug("Y Gravity Reset\n");
 			strcpy_s(LastEffect, 128, "Y Gravity Reset");
 		}
-
+		if (ZGravity_Timer <= 1000 && ZGravity_Timer != 0)
+		{
+			ZGravity_Timer--;
+		}
+		if (ZGravity_Timer == 1 && ZGravity_Timer != 0)
+		{
+			ResetGravity();
+			ZGravity_Timer = 0;
+			//PrintDebug("Z Gravity Reset\n");
+			strcpy_s(LastEffect, 128, "Z Gravity Reset");
+		}
+		if (NoGravityTimer <= 400 && NoGravityTimer != 0)
+		{
+			NoGravityTimer--;
+		}
+		if (NoGravityTimer == 1 && NoGravityTimer != 0)
+		{
+			ResetGravity();
+			strcpy_s(LastEffect, 128, "Gravity Restored");
+		}
 		if (DebugToScreen == true)
 		{
 			ScaleDebugFont(15);
@@ -2548,7 +2627,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomKeyBlock(0);
+			RandomXGravity();
 		}
 	}
 
