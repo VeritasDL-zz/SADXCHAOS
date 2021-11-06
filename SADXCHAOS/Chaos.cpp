@@ -124,6 +124,7 @@ using std::string;
 //Started working on bigCar
 //Started Woking on Random X and Z gravity
 //Added No Gravity
+//Re-Enabled Random Invincibility Random Magnetic Barrier and Random Barrier
 //  
 //Todo
 //random emblem broke 
@@ -1734,12 +1735,12 @@ extern "C"
 		//PrintDebug("Debug Mode Enabled\n");
 		strcpy_s(LastEffect, 128, "Debug Mode Enabled");
 	}
-	void RandomXGravity()//currently disabled,
+	void RandomXGravity()//Updated 11/06/2021, Enabled For Now
 	{
-		if (XGravity_Timer == 0)
+		/*if (XGravity_Timer == 0)
 		{
 			XGravity = Gravity.x;
-		}
+		}*/
 		XGravity_Timer = 1000;
 		Gravity.x = (float)rand() / RAND_MAX + (-1.5);
 		strcpy_s(LastEffect, 128, "Random X Gravity");
@@ -1747,20 +1748,20 @@ extern "C"
 	}
 	void RandomYGravity()
 	{
-		if (YGravity_Timer == 0)
+		/*if (YGravity_Timer == 0)
 		{
 			YGravity = Gravity.y;
-		}
+		}*/
 		YGravity_Timer = 1000;
 		Gravity.y = (float)rand() / RAND_MAX + (-1.5);
 		strcpy_s(LastEffect, 128, "Random Y Gravity");
 	}
-	void RandomZGravity()//currently disabled,
+	void RandomZGravity()//Updated 11/06/2021, Enabled For Now
 	{
-		if (ZGravity_Timer == 0)
+		/*if (ZGravity_Timer == 0)
 		{
 			ZGravity = Gravity.z;
-		}
+		}*/
 		ZGravity_Timer = 1000;
 		Gravity.z = (float)rand() / RAND_MAX + (-1.5);
 		strcpy_s(LastEffect, 128, "Random Z Gravity");
@@ -1777,16 +1778,19 @@ extern "C"
 	void RandomBarrier()//currently disabled, might be killing the player? lol
 	{
 		GiveBarrier(0);
+		strcpy_s(LastEffect, 128, "Gave Barrier");
 		//PrintDebug("Give Barrier\n");
 	}
 	void RandomMagneticBarrier()//currently disabled, might be killing the player? lol
 	{
 		GiveMagneticBarrier(0);
+		strcpy_s(LastEffect, 128, "Gave Magnetic Barrier");
 		//PrintDebug("Give Magnetic Barrier\n");
 	}
 	void RandomInvincibility()//currently disabled, might be killing the player? lol
 	{
 		GiveInvincibility(0);
+		strcpy_s(LastEffect, 128, "Gave Invincibility");
 		//PrintDebug("Give Invincibility\n");
 	}
 	void RandomLifePowerup(EntityData1* p1)
@@ -2290,7 +2294,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[79]{
+	ChaosS ChaosArray[82]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -2371,6 +2375,9 @@ extern "C"
 	{ nullptr, nullptr, AndKnuckles},
 	{ nullptr, nullptr, NoGravity},
 	{ nullptr, nullptr, NoGravity},
+	{ nullptr, nullptr, RandomBarrier},
+	{ nullptr, nullptr, RandomInvincibility},
+	{ nullptr, nullptr, RandomMagneticBarrier},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -2627,7 +2634,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomXGravity();
+			RandomBarrier();
 		}
 	}
 
