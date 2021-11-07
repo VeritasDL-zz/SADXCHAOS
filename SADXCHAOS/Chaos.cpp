@@ -130,6 +130,8 @@ using std::string;
 //Fixed a bug with Debug Movement
 //Fixed a bug with Random Snowboard 
 //Fixed Another Bug With Debug Movement
+//Re-enabled Random X and Z Gravity
+// 
 //Todo
 //random emblem broke 
 //Kill momentum doesn't always work?
@@ -317,6 +319,16 @@ static const char* Physnames[] = {
 	"Heroes Charmy"
 };
 
+ObjectFuncPtr charfuncs[] = {
+	Sonic_Main,
+	Eggman_Main,
+	Tails_Main,
+	Knuckles_Main,
+	Tikal_Main,
+	Amy_Main,
+	Gamma_Main,
+	Big_Main
+};
 
 void InitializeRandomCoordinates()
 {
@@ -1700,10 +1712,24 @@ extern "C"
 		//PrintDebug("Random Pause\n");
 		strcpy_s(LastEffect, 128, "Random Pause");
 	}
-	void RandomChar()//works but disabled
+	void RandomChar(ObjectMaster* obj)//Still doesnt work, 11/07/2021, trying to make work but man this shits hard
 	{
-		SetCharacter(rand() % 7);
-		//PrintDebug("Random Character\n");
+
+		char P1Action = EntityData1Ptrs[0]->Action;
+		CharObj2* co2 = CharObj2Ptrs[0];
+		EntityData1* P1Data = EntityData1Ptrs[0];
+		EntityData1* data = obj->Data1;
+		ObjectMaster* player1 = GetCharacterObject(0);
+
+		CheckThingButThenDeleteObject(player1);
+		player1->Data1->CollisionInfo = nullptr;
+		int RandomCharID = rand() % 7;
+		player1->MainSub = charfuncs[RandomCharID];
+		P1Data->CharID = RandomCharID;
+		P1Data->Action = 0;
+		Collision_Free(player1);
+		P1Data->Status = 0;
+		player1->MainSub(player1);
 	}
 	void SwapCamera()//Swaps Camera lmfao
 	{
@@ -2336,7 +2362,7 @@ extern "C"
 		}
 	}
 
-	ChaosS ChaosArray[82]{
+	ChaosS ChaosArray[86]{
 
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -2393,8 +2419,12 @@ extern "C"
 	{ nullptr, nullptr, SwapCamera},
 	{ nullptr, nullptr, SwapCamera},
 	{ nullptr, nullptr, RandomDebug},
+	{ nullptr, nullptr, RandomXGravity},
+	{ nullptr, nullptr, RandomXGravity},
 	{ nullptr, nullptr, RandomYGravity},
 	{ nullptr, nullptr, RandomYGravity},
+	{ nullptr, nullptr, RandomZGravity},
+	{ nullptr, nullptr, RandomZGravity},
 	{ nullptr, nullptr, RandomDPadDownCheck},
 	{ nullptr, nullptr, RandomControlDisable},
 	{ nullptr, nullptr, RandomControlDisable},
@@ -2539,7 +2569,7 @@ extern "C"
 			ResetGravity();
 			strcpy_s(LastEffect, 128, "Gravity Restored");
 		}
-		if (DebugToScreen == true)
+		if (DebugToScreen)
 		{
 			ScaleDebugFont(15);
 			SetDebugFontColor(0xFFFFFFFF);
@@ -2676,7 +2706,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomPhysics();
+			LoadObject(LoadObj_Data1, 2, RandomChar);
 		}
 	}
 
