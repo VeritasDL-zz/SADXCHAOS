@@ -131,6 +131,12 @@ using std::string;
 //Fixed a bug with Random Snowboard 
 //Fixed Another Bug With Debug Movement
 //Re-enabled Random X and Z Gravity
+//Hopfully Fixed a Crash/Memory Leak with Last Effect, 
+//Still Working on Random Character 
+// 
+// 
+// 
+// 
 // 
 //Todo
 //random emblem broke 
@@ -141,7 +147,6 @@ using std::string;
 
 //gamma hs, ham crashed 7 times, in a row
 //seems to be related to gamma locking onto enemys he was never intended to? idk
-// random phy crashes? idk man
 
 char oldRand = -1;
 int Chaos_Timer = 0;
@@ -181,7 +186,7 @@ bool PauseDisableEnabled = true;
 bool GrabAbleObjectsEnabled = true;
 bool GravityChangeEnabled = true;
 bool RPhysicsEnabled = true;
-char* LastEffect = new char();
+char* LastEffect = new char[128];
 bool EnableFontScaling = false;
 bool SpinnerTextLoader = false;
 bool LeonTextLoader = false;
@@ -210,6 +215,7 @@ bool CarTextLoader = false;
 bool ShownMenu = false;
 bool TextLoaded = false;
 bool DebugEnabled = false;
+const unsigned char PLAYER_COUNT = 4;
 ObjectMaster* snowboard;
 
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
@@ -479,12 +485,23 @@ void OverRideBigRockTex()
 {
 	njSetTexture(&OBJ_ICECAP_TEXLIST);
 }
+__int16 selectedcharacter[PLAYER_COUNT] = { -1, -1, -1, -1 }; //this is taken from https://github.com/MainMemory/SADXCharSel
+int GetCharacter0ID() //this is taken from https://github.com/MainMemory/SADXCharSel
+{
+	return GetCharacterID(0);
+}
+int GetSelectedCharacter() //this is taken from https://github.com/MainMemory/SADXCharSel
+{
+	return selectedcharacter[0];
+}
+
 extern "C"
 {
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
 	{
 		// Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
 		// This is where we override functions, replace static data, etc.
+
 		const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
 		EffectMax = config->getInt("General", "EffectMax", 180);
 		DebugToScreen = config->getBool("General", "PrintToScreen", false);
@@ -511,7 +528,60 @@ extern "C"
 		WriteData((int*)0x017D0A38, (int)0xC7C35000);//stops the amy key block from exploding
 		WriteData((int*)0x017D0A44, (int)0xC7C35000);//stops the amy key block from exploding
 		WriteData((int*)0x017D0A50, (int)0xC7C35000);//stops the amy key block from exploding
+
+
+
+		//all of this is taken from https://github.com/MainMemory/SADXCharSel
+		WriteData((Uint8*)0x007A4DC4, PLAYER_COUNT); // Spring_Main
+		WriteData((Uint8*)0x007A4FF7, PLAYER_COUNT); // SpringB_Main
+		WriteData((Uint8*)0x0079F77C, PLAYER_COUNT); // SpringH_Main
+		WriteData((Uint8*)0x004418B8, PLAYER_COUNT); // IsPlayerInsideSphere (could probably use a better name!)
+
+		WriteJump((void*)0x490C6B, (void*)0x490C80); // prevent Big from automatically loading Big's HUD
+		WriteCall((void*)0x426005, GetCharacter0ID); // fix ResetTime() for Gamma
+		WriteCall((void*)0x427F2B, GetCharacter0ID); // fix ResetTime2() for Gamma
+		WriteData((char*)0x41486D, (char)0xEB); // fix time reset at level load for Gamma
+		WriteData((__int16**)0x414A0C, &selectedcharacter[0]); // fix 1min minimum at level restart for Gamma
+		WriteCall((void*)0x426081, GetCharacter0ID); // fix Gamma's timer
+		WriteCall((void*)0x4266C9, GetCharacter0ID); // fix Gamma's time bonus
+		WriteCall((void*)0x426379, GetCharacter0ID); // fix Gamma's time display
+		WriteJump((void*)0x47A907, (void*)0x47A936); // prevent Knuckles from automatically loading Emerald radar
+		WriteData<6>((void*)0x475E7C, 0x90u); // make radar work when not Knuckles
+		WriteData<6>((void*)0x4764CC, 0x90u); // make Tikal hints work when not Knuckles
+		WriteCall((void*)0x4D677C, GetCharacter0ID); // fix item boxes for Gamma
+		WriteCall((void*)0x4D6786, GetCharacter0ID); // fix item boxes for Big
+		WriteCall((void*)0x4D6790, GetCharacter0ID); // fix item boxes for Sonic
+		WriteCall((void*)0x4C06D9, GetCharacter0ID); // fix floating item boxes for Gamma
+		WriteCall((void*)0x4C06E3, GetCharacter0ID); // fix floating item boxes for Big
+		WriteCall((void*)0x4C06ED, GetCharacter0ID); // fix floating item boxes for Sonic
+		WriteCall((void*)0x424D0A, GetSelectedCharacter); // fix character sfx for Casinopolis
+		WriteData((void**)0x424F88, (void*)0x424E41); // ''
+		WriteData((void**)0x424F8C, (void*)0x424E5C); // ''
+		WriteData((void**)0x424F90, (void*)0x424E77); // ''
+		WriteCall((void*)0x424E08, GetSelectedCharacter); // fix character sfx
+		WriteCall((void*)0x4245F0, GetSelectedCharacter); // fix character voices in Chao Garden
+		WriteCall((void*)0x4BFFEF, GetCharacter0ID); // fix 1up icon
+		WriteCall((void*)0x4C02F3, GetCharacter0ID); // ''
+		WriteCall((void*)0x4D682F, GetCharacter0ID); // ''
+		WriteCall((void*)0x4D69AF, GetCharacter0ID); // ''
+		WriteCall((void*)0x425E62, GetCharacter0ID); // fix life icon
+		WriteData((char*)0x4879C1, (char)0x90);
+		WriteCall((void*)0x61CB77, GetCurrentCharacterID); // make Twinkle Park playable
+		WriteCall((void*)0x61CF8D, GetCurrentCharacterID); // ''
+		WriteCall((void*)0x79D7E2, GetCharacter0ID); // fix cart jump voice
+		WriteData<6>((void*)0x48ADA5, 0x90u); // prevent Amy from loading the bird
+		WriteCall((void*)0x4E966C, GetCharacter0ID); // fix ice cap snowboard 1
+		WriteCall((void*)0x4E9686, GetCharacter0ID); // fix ice cap snowboard 2
+		WriteCall((void*)0x597B1C, GetCharacter0ID); // fix sand hill snowboard
+
+
+		WriteData<1>((int*)0x7B52A0, 0x2); //remove Eggman debug mode		
+		WriteData<1>((int*)0x7b5290, 0x2); //remove Eggman debug mode	
+		WriteData<21>((int*)0x7b52a1, 0x90);
+		WriteData<1>((int*)0x7b43bc, 0x2); //remove Tikal debug mode
+
 		srand((unsigned)time(nullptr));
+		strcpy_s(LastEffect, 128, "Chaos Edition");
 
 	}
 
@@ -583,14 +653,10 @@ extern "C"
 		}
 		int Phyrand = rand() % 38;
 		int OldYOffset = CharObj2Ptrs[0]->PhysicsData.YOff; //store current Y Offset
-		char charname[128];
-		strcpy_s(charname, 128, Physnames[Phyrand]);
-		char output[128];
-		snprintf(output, 128, "%s Physics", charname);
 		PhysicsData tmp = (PhysicsData)PhyData[Phyrand];
 		memcpy(&CharObj2Ptrs[0]->PhysicsData, &tmp, sizeof(PhysicsData));
 		CharObj2Ptrs[0]->PhysicsData.YOff = OldYOffset;//restores Saved Y Offset.
-		strcpy_s(LastEffect, 128, output);
+		snprintf(LastEffect, 128, "%s Physics", Physnames[Phyrand]);
 	}
 
 	void Nos0und_ForYou()
@@ -1712,18 +1778,20 @@ extern "C"
 		//PrintDebug("Random Pause\n");
 		strcpy_s(LastEffect, 128, "Random Pause");
 	}
-	void RandomChar(ObjectMaster* obj)//Still doesnt work, 11/07/2021, trying to make work but man this shits hard
+	void RandomChar()//Still doesnt work, 11/07/2021, trying to make work but man this shits hard
 	{
-
+		int CurrentCharID = GetCurrentCharacterID();
 		char P1Action = EntityData1Ptrs[0]->Action;
 		CharObj2* co2 = CharObj2Ptrs[0];
 		EntityData1* P1Data = EntityData1Ptrs[0];
-		EntityData1* data = obj->Data1;
 		ObjectMaster* player1 = GetCharacterObject(0);
-
 		CheckThingButThenDeleteObject(player1);
 		player1->Data1->CollisionInfo = nullptr;
-		int RandomCharID = rand() % 7;
+		int RandomCharID = rand() % 8;
+		while (RandomCharID == P1Data->CharID)
+		{
+			RandomCharID = rand() % 8;
+		}
 		player1->MainSub = charfuncs[RandomCharID];
 		P1Data->CharID = RandomCharID;
 		P1Data->Action = 0;
@@ -2706,7 +2774,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			LoadObject(LoadObj_Data1, 2, RandomChar);
+			//RandomPhysics();
 		}
 	}
 
