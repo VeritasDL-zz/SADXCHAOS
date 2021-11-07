@@ -129,6 +129,7 @@ using std::string;
 //Added Config Option for Random Physics
 //Fixed a bug with Debug Movement
 //Fixed a bug with Random Snowboard 
+//Fixed Another Bug With Debug Movement
 //Todo
 //random emblem broke 
 //Kill momentum doesn't always work?
@@ -493,7 +494,7 @@ extern "C"
 		WriteCall((void*)0x4EDD17, OverRideBigRockTex);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 		WriteData((char*)0x4EE7BB, (char)4);//big ice rock pickup ability
-		WriteData((char*)0x639A00, (char)4);//Patch for Picking Up Car in Station Square Act 0
+		//WriteData((char*)0x639A00, (char)4);//Patch for Picking Up Car in Station Square Act 0
 		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//stops the amy key block from exploding 
 		WriteData((int*)0x017D0A38, (int)0xC7C35000);//stops the amy key block from exploding
 		WriteData((int*)0x017D0A44, (int)0xC7C35000);//stops the amy key block from exploding
@@ -578,7 +579,6 @@ extern "C"
 		memcpy(&CharObj2Ptrs[0]->PhysicsData, &tmp, sizeof(PhysicsData));
 		CharObj2Ptrs[0]->PhysicsData.YOff = OldYOffset;//restores Saved Y Offset.
 		strcpy_s(LastEffect, 128, output);
-		//PrintDebug("Random Physics\n");//this was crashing me? lol how
 	}
 
 	void Nos0und_ForYou()
@@ -591,12 +591,6 @@ extern "C"
 		//PrintDebug("s0und_ Disabled\n");
 		s0und__Timer = 222;
 	}
-
-	void RemoveRandomPowerUp()
-	{
-
-	}
-
 	void UncoupleCamera()
 	{
 		Camera_Data1->Action = 3; //uncouples camera from char
@@ -2641,7 +2635,7 @@ extern "C"
 			DisablePause_Timer = 0;
 		}
 
-		if (Debug_Timer < 333 && Debug_Timer != 0)
+		if (Debug_Timer <= 333 && Debug_Timer != 0)
 		{
 			Debug_Timer--;
 		}
@@ -2682,6 +2676,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			RandomPhysics();
 		}
 	}
 
