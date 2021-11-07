@@ -125,7 +125,10 @@ using std::string;
 //Started Woking on Random X and Z gravity
 //Added No Gravity
 //Re-Enabled Random Invincibility Random Magnetic Barrier and Random Barrier
-//  
+//Added Config Option For Gravity Mods
+//Added Config Option for Random Physics
+//Fixed a bug with Debug Movement
+//Fixed a bug with Random Snowboard 
 //Todo
 //random emblem broke 
 //Kill momentum doesn't always work?
@@ -135,7 +138,7 @@ using std::string;
 
 //gamma hs, ham crashed 7 times, in a row
 //seems to be related to gamma locking onto enemys he was never intended to? idk
-
+// random phy crashes? idk man
 
 char oldRand = -1;
 int Chaos_Timer = 0;
@@ -173,6 +176,8 @@ bool InvertEnabled = true;
 bool RPauseEnabled = true;
 bool PauseDisableEnabled = true;
 bool GrabAbleObjectsEnabled = true;
+bool GravityChangeEnabled = true;
+bool RPhysicsEnabled = true;
 char* LastEffect = new char();
 bool EnableFontScaling = false;
 bool SpinnerTextLoader = false;
@@ -476,6 +481,8 @@ extern "C"
 		RPauseEnabled = config->getBool("General", "PauseEnabled", true);
 		PauseDisableEnabled = config->getBool("General", "PauseDisableEnabled", true);
 		GrabAbleObjectsEnabled = config->getBool("General", "GrabAbleObjectsEnabled", true);
+		GravityChangeEnabled = config->getBool("General", "GravityChangeEnabled", true);
+		RPhysicsEnabled = config->getBool("General", "RPhysicsEnabled", true);
 		delete config;
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
@@ -556,6 +563,11 @@ extern "C"
 
 	void RandomPhysics()
 	{
+		if (!RPhysicsEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		int Phyrand = rand() % 38;
 		int OldYOffset = CharObj2Ptrs[0]->PhysicsData.YOff; //store current Y Offset
 		char charname[128];
@@ -1627,10 +1639,15 @@ extern "C"
 		if (Rings > 0)
 		{
 			HurtCharacter(0);
+			strcpy_s(LastEffect, 128, "Hurt");
+			return;
 		}
-		//PrintDebug("Hurt\n");
-		strcpy_s(LastEffect, 128, "Hurt");
-		return;
+		else
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
+
 	}
 	void RandomPowerUP(EntityData1* p1)
 	{
@@ -1712,6 +1729,12 @@ extern "C"
 		if (DebugEnabled)
 		{
 			Chaos_Timer = EffectMax; //get new chaos effect because debug movement is enabled already
+			return;
+		}
+		if (IssSowboarding == 1)
+		{
+			Chaos_Timer = EffectMax;
+			return;
 		}
 		switch (CurrentCharacter)
 		{
@@ -1741,6 +1764,11 @@ extern "C"
 		{
 			XGravity = Gravity.x;
 		}*/
+		if (!GravityChangeEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		XGravity_Timer = 1000;
 		Gravity.x = (float)rand() / RAND_MAX + (-1.5);
 		strcpy_s(LastEffect, 128, "Random X Gravity");
@@ -1752,6 +1780,11 @@ extern "C"
 		{
 			YGravity = Gravity.y;
 		}*/
+		if (!GravityChangeEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		YGravity_Timer = 1000;
 		Gravity.y = (float)rand() / RAND_MAX + (-1.5);
 		strcpy_s(LastEffect, 128, "Random Y Gravity");
@@ -1762,6 +1795,11 @@ extern "C"
 		{
 			ZGravity = Gravity.z;
 		}*/
+		if (!GravityChangeEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		ZGravity_Timer = 1000;
 		Gravity.z = (float)rand() / RAND_MAX + (-1.5);
 		strcpy_s(LastEffect, 128, "Random Z Gravity");
@@ -1769,25 +1807,30 @@ extern "C"
 	}
 	void NoGravity()
 	{
+		if (!GravityChangeEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		NoGravityTimer = 400;
 		Gravity.x = 0;
 		Gravity.y = 0;
 		Gravity.z = 0;
 		strcpy_s(LastEffect, 128, "Gravity Disabled");
 	}
-	void RandomBarrier()//currently disabled, might be killing the player? lol
+	void RandomBarrier()//Updated 11/06/2021, Enabled For Now
 	{
 		GiveBarrier(0);
 		strcpy_s(LastEffect, 128, "Gave Barrier");
 		//PrintDebug("Give Barrier\n");
 	}
-	void RandomMagneticBarrier()//currently disabled, might be killing the player? lol
+	void RandomMagneticBarrier()//Updated 11/06/2021, Enabled For Now
 	{
 		GiveMagneticBarrier(0);
 		strcpy_s(LastEffect, 128, "Gave Magnetic Barrier");
 		//PrintDebug("Give Magnetic Barrier\n");
 	}
-	void RandomInvincibility()//currently disabled, might be killing the player? lol
+	void RandomInvincibility()//Updated 11/06/2021, Enabled For Now
 	{
 		GiveInvincibility(0);
 		strcpy_s(LastEffect, 128, "Gave Invincibility");
@@ -2227,13 +2270,18 @@ extern "C"
 	Void RandomRotate()
 	{
 		int Rotaterand = rand() % 65535;
-			RotatePlayer(0, Rotaterand);
-			//PrintDebug("%i Rotated\n", Rotaterand);
-			strcpy_s(LastEffect, 128, "Random Rotation");
+		RotatePlayer(0, Rotaterand);
+		//PrintDebug("%i Rotated\n", Rotaterand);
+		strcpy_s(LastEffect, 128, "Random Rotation");
 	}
 
 	void RandomSnowboard()
 	{
+		if (DebugEnabled)
+		{
+			Chaos_Timer = EffectMax;
+			return;
+		}
 		if (IssSowboarding == 0)
 		{
 			SnowboardTimer = 500;
@@ -2634,7 +2682,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomBarrier();
 		}
 	}
 
