@@ -494,6 +494,8 @@ int GetSelectedCharacter() //this is taken from https://github.com/MainMemory/SA
 {
 	return selectedcharacter[0];
 }
+short defaultcharacters[Characters_MetalSonic] = { Characters_Sonic, Characters_Eggman, Characters_Tails, Characters_Knuckles, Characters_Tikal, Characters_Amy, Characters_Gamma, Characters_Big };
+
 
 extern "C"
 {
@@ -579,6 +581,7 @@ extern "C"
 		WriteData<1>((int*)0x7b5290, 0x2); //remove Eggman debug mode	
 		WriteData<21>((int*)0x7b52a1, 0x90);
 		WriteData<1>((int*)0x7b43bc, 0x2); //remove Tikal debug mode
+
 
 		srand((unsigned)time(nullptr));
 		strcpy_s(LastEffect, 128, "Chaos Edition");
@@ -1785,10 +1788,21 @@ extern "C"
 		CharObj2* co2 = CharObj2Ptrs[0];
 		EntityData1* P1Data = EntityData1Ptrs[0];
 		ObjectMaster* player1 = GetCharacterObject(0);
+		EntityData1* data = player1->Data1;
+		short powerups = co2->Powerups;
+		short jumptime = co2->JumpTime;
+		short underwatertime = co2->UnderwaterTime;
+		float loopdist = co2->LoopDist;
+		NJS_VECTOR speed = co2->Speed;
+
 		CheckThingButThenDeleteObject(player1);
 		player1->Data1->CollisionInfo = nullptr;
 		int RandomCharID = rand() % 8;
 		while (RandomCharID == P1Data->CharID)
+		{
+			RandomCharID = rand() % 8;
+		}
+		while (RandomCharID == 6 || RandomCharID == 7)
 		{
 			RandomCharID = rand() % 8;
 		}
@@ -1798,6 +1812,14 @@ extern "C"
 		Collision_Free(player1);
 		P1Data->Status = 0;
 		player1->MainSub(player1);
+
+		CharObj2Ptrs[0]->Powerups = powerups;
+		CharObj2Ptrs[0]->JumpTime = jumptime;
+		CharObj2Ptrs[0]->UnderwaterTime = underwatertime;
+		CharObj2Ptrs[0]->LoopDist = loopdist;
+		CharObj2Ptrs[0]->Speed = speed;
+		data->Action++;
+		strcpy_s(LastEffect, 128, "Random Char");
 	}
 	void SwapCamera()//Swaps Camera lmfao
 	{
@@ -2774,7 +2796,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			//RandomPhysics();
+			RandomChar();
 		}
 	}
 
