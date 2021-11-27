@@ -9,5 +9,9 @@
 #include "SADXModLoader.h"
 // add headers that you want to pre-compile here
 #include "framework.h"
-
+#include "Enemies.h"
+#include "Objects.h"
+#include "Effects.h"
+#include "Teleport.h"
+#include "PowerUPS.h"
 #endif //PCH_H
