@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Effects.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="framework.h" />
@@ -172,9 +173,11 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PowerUPS.h" />
     <ClInclude Include="Teleport.h" />
+    <ClInclude Include="TikalHints.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chaos.cpp" />
+    <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Effects.cpp" />
     <ClCompile Include="Enemies.cpp" />
@@ -187,6 +190,7 @@
     </ClCompile>
     <ClCompile Include="PowerUPS.cpp" />
     <ClCompile Include="Teleport.cpp" />
+    <ClCompile Include="TikalHints.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
