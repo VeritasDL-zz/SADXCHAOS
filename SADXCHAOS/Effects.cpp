@@ -298,6 +298,7 @@ void RandomTimeOfDay() //sets time of day to a random time,
 	{
 		SetTimeOfDay(rand() % 3);
 		strcpy_s(LastEffect, 128, "Random Time Of Day");
+		return;
 	}
 	else
 	{
@@ -311,11 +312,11 @@ void RandomDroppedRings(EntityData1* p1)
 	Rings = 0;
 	strcpy_s(LastEffect, 128, "Dropped Rings");
 }
-void RandomClipLevel()//currently disabled, may be removed. updated to only change 
+void RandomClipLevel()//currently disabled, may be removed
 {
 	ClipLevel = rand() % 3;
 }
-void RandomPause() //randomly pauses the game LOL get good, time
+void RandomPause() //randomly pauses the game LOL get good
 {
 	if (!RPauseEnabled)
 	{
@@ -344,7 +345,7 @@ void RandomDebug() //debug mode currently lasts for 75ish? frames
 		Chaos_Timer = EffectMax; //get new chaos effect because debug movement is enabled already
 		return;
 	}
-	if (IssSowboarding == 1)
+	if (IssSowboarding == 1)//get new effect because user is on snowboard
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -446,7 +447,7 @@ void MSmallScale(EntityData1* p1)//disabled this
 }
 void AndKnuckles()
 {
-	int Knuckles = rand() % 3;
+	int Knuckles = rand() % 2;
 	if (Knuckles == 0)
 	{
 		PlayVoice(66666);//Custom Knuckles Meme Song Clip,
@@ -505,9 +506,20 @@ void InputInvert()
 	InputInvert_Timer = 420;
 	strcpy_s(LastEffect, 128, "Input Inverted");
 }
-Void RandomRotate()
+void RandomRotate()
 {
 	int Rotaterand = rand() % 65535;
 	RotatePlayer(0, Rotaterand);
 	strcpy_s(LastEffect, 128, "Random Rotation");
+}
+void RingAllergy()
+{
+	if (!AllergicToRings)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
+	RingCount = Rings;
+	RingAllergy_Timer = 500;
+	strcpy_s(LastEffect, 128, "Ring Allergy");
 }

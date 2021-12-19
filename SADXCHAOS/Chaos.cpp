@@ -137,8 +137,8 @@ using std::string;
 //split up code into multipul CPP files
 //moved Tikal Hints to its own .h/.cpp file
 //moved debug draw to its own .h/.cpp file too
+//Added Ring Allergy and Config For Ring Allergy, 
 //
-// 
 // 
 // 
 //Todo
@@ -180,6 +180,8 @@ int CurrentLevelOld = -1;
 int SaveHash = -1;
 int FruitNumb = -1;
 int HatNumb = -1;
+int RingAllergy_Timer = 0;
+int RingCount = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -189,6 +191,7 @@ bool PauseDisableEnabled = true;
 bool GrabAbleObjectsEnabled = true;
 bool GravityChangeEnabled = true;
 bool RPhysicsEnabled = true;
+bool AllergicToRings = true;
 char* LastEffect = new char[128];
 bool EnableFontScaling = false;
 bool SpinnerTextLoader = false;
@@ -274,6 +277,7 @@ extern "C"
 		GrabAbleObjectsEnabled = config->getBool("General", "GrabAbleObjectsEnabled", true);
 		GravityChangeEnabled = config->getBool("General", "GravityChangeEnabled", true);
 		RPhysicsEnabled = config->getBool("General", "RPhysicsEnabled", true);
+		AllergicToRings = config->getBool("General", "AllergicToRings", true);
 		delete config;
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
@@ -297,7 +301,6 @@ extern "C"
 		WriteData((Uint8*)0x007A4FF7, PLAYER_COUNT); // SpringB_Main
 		WriteData((Uint8*)0x0079F77C, PLAYER_COUNT); // SpringH_Main
 		WriteData((Uint8*)0x004418B8, PLAYER_COUNT); // IsPlayerInsideSphere (could probably use a better name!)
-
 		WriteJump((void*)0x490C6B, (void*)0x490C80); // prevent Big from automatically loading Big's HUD
 		WriteCall((void*)0x426005, GetCharacter0ID); // fix ResetTime() for Gamma
 		WriteCall((void*)0x427F2B, GetCharacter0ID); // fix ResetTime2() for Gamma
@@ -334,17 +337,12 @@ extern "C"
 		WriteCall((void*)0x4E966C, GetCharacter0ID); // fix ice cap snowboard 1
 		WriteCall((void*)0x4E9686, GetCharacter0ID); // fix ice cap snowboard 2
 		WriteCall((void*)0x597B1C, GetCharacter0ID); // fix sand hill snowboard
-
-
 		WriteData<1>((int*)0x7B52A0, 0x2); //remove Eggman debug mode		
 		WriteData<1>((int*)0x7b5290, 0x2); //remove Eggman debug mode	
 		WriteData<21>((int*)0x7b52a1, 0x90);
 		WriteData<1>((int*)0x7b43bc, 0x2); //remove Tikal debug mode
-
-
 		srand((unsigned)time(nullptr));
 		strcpy_s(LastEffect, 128, "Chaos Edition");
-
 	}
 	PVMEntry MinimalPVMs[]{
 	{ "GOMA", &GOMA_TEXLIST },
@@ -685,6 +683,18 @@ extern "C"
 			strcpy_s(LastEffect, 128, "s0und_ Enabled");
 			s0und__Timer = 0;
 		}
+		if (RingAllergy_Timer <= 500 && RingAllergy_Timer != 0)
+		{
+			if (Rings != RingCount)
+			{
+				KillPlayer(0);
+			}
+			RingAllergy_Timer--;
+		}
+		if (RingAllergy_Timer = 1 && RingAllergy_Timer != 0)
+		{
+			RingAllergy_Timer = 0;
+		}
 		if (DisablePause_Timer <= 420 && DisablePause_Timer != 0)
 		{
 			DisablePause_Timer--;
@@ -735,6 +745,5 @@ extern "C"
 		{
 		}
 	}
-
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
 }

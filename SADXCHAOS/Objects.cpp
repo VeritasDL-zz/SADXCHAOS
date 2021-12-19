@@ -22,14 +22,12 @@ void BigRock(EntityData1* p1)
 		BigRockTextLoader = true;
 		TextLoaded = true;
 	}
-
 	task* BigRock;
 	BigRock = (task*)LoadObject((LoadObj)3, 3, OBiciwa);
 	BigRock->twp->pos = EntityData1Ptrs[0]->Position;
 	strcpy_s(LastEffect, 128, "Spawned Big Rock");
 	return;
 }
-
 void BigCar(EntityData1* p1)
 {
 	if (!GrabAbleObjectsEnabled)
@@ -43,7 +41,6 @@ void BigCar(EntityData1* p1)
 		CarTextLoader = true;
 		TextLoaded = true;
 	}
-
 	task* Car;
 	Car = (task*)LoadObject((LoadObj)7, 3, ORotyu);
 	Car->twp->pos = EntityData1Ptrs[0]->Position;
@@ -261,7 +258,7 @@ void RandomSnowboard()
 	}
 	else
 	{
-		Chaos_Timer = EffectMax;//forces another Chaos mod if already on snowboard?
+		Chaos_Timer = EffectMax;//forces another Chaos mod if already on snowboard
 	}
 }
 void RandomSpring(EntityData1* p1)
@@ -305,7 +302,6 @@ void RandomSpikeBall(EntityData1* p1)
 		spike->twp->pos = EntityData1Ptrs[0]->Position;
 		spike->twp->pos.y += 2;
 		spike->twp->pos.x += rand() % 10 + 1 * 9;
-
 	}
 	strcpy_s(LastEffect, 128, "Random SpikeBall");
 	return;

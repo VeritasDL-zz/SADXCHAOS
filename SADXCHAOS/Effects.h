@@ -33,5 +33,5 @@ void RandomDPadDownCheck();
 void RandomTeleport();
 void RandomNoClip();
 void InputInvert();
-Void RandomRotate();
+void RandomRotate();
 

@@ -1,12 +1,10 @@
 #include "TikalHints.h"
 #include "pch.h"
 #include "stdlib.h"
-
 //"The frog you are looking for Test 123456 is up ahead Testing How 123456789abcde", //max char for entire text box without new line can be 79 characters 
 //	"The frog you are looking for Test 123456\nis up ahead Testing How123456789abcdefg", //max char for each line with new line can be up to 81 characters (counting the new line)
 //A hint with \n can be 81 character (\n counts as 2)
 //A hint with no new line can be 79 charaters
-
 void RandomTikalHint()
 {
 	int hintrand = rand() % HintSize;
@@ -14,7 +12,6 @@ void RandomTikalHint()
 	//PrintDebug("%i Random Hint\n", hintrand);
 	strcpy_s(LastEffect, 128, "Tikal Hint");
 }
-
 const HintText_Text const Hints[48][3] = {
 {
 { "Watch out for the cars!.", 120 }, // text, time
@@ -258,7 +255,6 @@ const HintText_Text const Hints[48][3] = {
 { 0 } //idk 3rd page or always null?
 },
 };
-
 size_t HintSize = LengthOfArray(Hints);
 int Voices[] = {
 1857,
