@@ -72,21 +72,22 @@ Download the [Latest Release Here](https://github.com/VeritasDL/SADXCHAOS/releas
 - Random Character -  Randomly Changes what character you are playing as (Currently Disabled because the character change only happens on death/act/level change/restart)
 - Swap Camera -  Switches Camera Type
 - Random Debug -  Enables Debug Mode for 333 Frames.
-- Random X Gravity -  Sets X Gravity to a random value (Disabled as of 8/10/2021)
+- Random X Gravity -  Sets X Gravity to a random value for 1000 frames.
 - Random Y Gravity -  Sets Y Gravity to a random value for 1000 frames.
-- Random Z Gravity -  Sets Z Gravity to a random value (Disabled as of 8/10/2021)
-- Random Barrier -  Gives Barrier (Disabled as of 8/10/2021)
-- Random Magnetic Barrier -  Gives Magnetic Barrier (Disabled as of 8/10/2021)
-- Random Invincibility -  Gives Invincibility (Disabled as of 8/10/2021)
+- Random Z Gravity -  Sets Z Gravity to a random value for 1000 frames.
+- No Gravity - Disables Gravity for 400 frames.
+- Random Barrier -  Gives Barrier
+- Random Magnetic Barrier -  Gives Magnetic Barrier
+- Random Invincibility -  Gives Invincibility
 - Random Control Disable -  Disabled Control for 90 Frames.
 - Small Scale -  Makes the character scale smaller (Disabled as of 8/10/2021)
 - Random Swap Music -  Switches the current music.
 - Random Voice Clip -  Plays a random voice file.
 - Dpad Down Or Die -  Player must press Dpad down within 90 frames, or they will be killed.
-- Random NoClip -  Enabled NoClip for 800 Frames.
+- Random NoClip -  Enables NoClip for 800 Frames.
 - Random Tikal Hint -  Spawns a Tikal Hint orb with random text/voice.
 - Random Snowboard - Spawns and makes you ride a snowboard for 500 frames.
-- Credits to MainMemory for the Snowboard spawn Code, https://github.com/MainMemory/SADXBoardSpawner
+- Credits to MainMemory for her Snowboard spawn Code, https://github.com/MainMemory/SADXBoardSpawner
 - Random Checkpoint - Spawns a Checkpoint on the player, Works as a respawn point.
 - Movement Stick Invert - Inverts the Movement Stick Controls for 420 frames. - Credits to Sora for this code.
 - Random Rotation - Sets the character's Y Rotation.
@@ -95,7 +96,7 @@ Download the [Latest Release Here](https://github.com/VeritasDL/SADXCHAOS/releas
 RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinner, Ice Ball, Beat, Cops, Boa-Boa, Buyoon, Sweeper and Egg Keeper.
 - Random BurgerMan - Spawns in the BurgerMan Statue.
 - Fast Accel - Increases the players, MaxAccel, AirAccel and HangTime for 400 frames. (currently sets them back to sonic's default values, probably will mess with other charaters but dying/restarting fixes it for now 8/30/2021)
-- Random Physics - Sets current Physics to the physics from SADX,SA2B and Sonic Heros. Credits to MainMemory for the code and Physics data, https://github.com/MainMemory/SADXPhysicsSwapMod
+- Random Physics - Sets current Physics to the physics from SADX,SA2B and Sonic Heros. Credits to MainMemory for her code and Physics data, https://github.com/MainMemory/SADXPhysicsSwapMod
 - Camera Decouple - Detaches the camera from the player for 100 frames.
 - Disable Pause - Removes the Ability to pause for 420 frames.
 - Random Key Block - Spawns in the Key Block with random color from Amys Hot Shelter
