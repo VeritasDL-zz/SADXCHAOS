@@ -241,6 +241,23 @@ void RandomKillMomentum(CharObj2* p1)
 }
 void FastAccel(CharObj2* p1)
 {
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
+	if (FishingRod_ptr != 0x00000000)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	FastAccel_Timer = 400;
 	CharObj2Ptrs[0]->PhysicsData.MaxAccel = 10.0f;
 	CharObj2Ptrs[0]->PhysicsData.AirAccel = 0.10f;
@@ -250,18 +267,57 @@ void FastAccel(CharObj2* p1)
 }
 void RandomVSpeed(CharObj2* p1)
 {
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
+	if (FishingRod_ptr != 0x00000000)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	p1->Speed.y = p1->PhysicsData.VSpeedCap;
 	strcpy_s(LastEffect, 128, "Random V Speed");
 	return;
 }
 void RandomHSpeed(CharObj2* p1)
 {
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
+	if (FishingRod_ptr != 0x00000000)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	p1->Speed.x = p1->PhysicsData.HSpeedCap;
 	strcpy_s(LastEffect, 128, "Random H Speed");
 	return;
 }
 void RandomHurt()
 {
+	if (FishingRod_ptr != 0x00000000)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (Rings > 0)
 	{
 		HurtCharacter(0);
@@ -345,6 +401,18 @@ void RandomDebug() //debug mode currently lasts for 75ish? frames
 		Chaos_Timer = EffectMax; //get new chaos effect because debug movement is enabled already
 		return;
 	}
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
 	if (IssSowboarding == 1)//get new effect because user is on snowboard
 	{
 		Chaos_Timer = EffectMax;
@@ -376,6 +444,23 @@ void RandomXGravity()//Updated 11/06/2021, Enabled For Now
 	{
 		XGravity = Gravity.x;
 	}*/
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
+	if (FishingRod_ptr != 0x00000000)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (!GravityChangeEnabled)
 	{
 		Chaos_Timer = EffectMax;
@@ -391,6 +476,23 @@ void RandomYGravity()
 	{
 		YGravity = Gravity.y;
 	}*/
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
+	if (FishingRod_ptr != 0x00000000)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (!GravityChangeEnabled)
 	{
 		Chaos_Timer = EffectMax;
@@ -406,6 +508,23 @@ void RandomZGravity()//Updated 11/06/2021, Enabled For Now
 	{
 		ZGravity = Gravity.z;
 	}*/
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
+	if (FishingRod_ptr != 0x00000000)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (!GravityChangeEnabled)
 	{
 		Chaos_Timer = EffectMax;
@@ -418,6 +537,11 @@ void RandomZGravity()//Updated 11/06/2021, Enabled For Now
 }
 void NoGravity()
 {
+	if (FishingRod_ptr != 0x00000000)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (!GravityChangeEnabled)
 	{
 		Chaos_Timer = EffectMax;
@@ -447,7 +571,7 @@ void MSmallScale(EntityData1* p1)//disabled this
 }
 void AndKnuckles()
 {
-	int Knuckles = rand() % 2;
+	int Knuckles = rand() % 4;
 	if (Knuckles == 0)
 	{
 		PlayVoice(66666);//Custom Knuckles Meme Song Clip,
@@ -481,10 +605,22 @@ void RandomDPadDownCheck()
 	//enable dpaddown check timer
 	DPadDown_Timer = 90; //90 frames?
 	DpadDown = 0;
-	strcpy_s(LastEffect, 128, "Death");
+	strcpy_s(LastEffect, 128, "Dpad Down Or Die");
 }
 void RandomNoClip()
 {
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
 	NoClip_Timer = 800;
 	WriteData((int*)0x00444C1D, (int)0x90909090);
 	WriteData((int*)0x00444C21, (int)0x10C48390);
@@ -514,12 +650,38 @@ void RandomRotate()
 }
 void RingAllergy()
 {
+
 	if (!AllergicToRings)
 	{
 		Chaos_Timer = EffectMax;
 		return;
 	}
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
 	RingCount = Rings;
 	RingAllergy_Timer = 500;
 	strcpy_s(LastEffect, 128, "Ring Allergy");
+}
+void NoJumpBall()
+{
+	if (CurrentCharacter == Characters_Sonic || CurrentCharacter == Characters_Tails || CurrentCharacter == Characters_Knuckles)
+	{
+		NoJumpBall_Timer = 420;
+	}
+	else
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
+
 }

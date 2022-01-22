@@ -2125,6 +2125,7 @@ DataPointer(SETEntry *, CurrentSetFileBase, 0x3C4E458);
 DataPointer(SETEntry *, CurrentSetFile, 0x3C4E45C);
 DataArray(SETObjData, SETTable, 0x3C4E460, 1023);
 DataPointer(ObjectMaster *, FishingHud_ptr, 0x3C52500);
+DataPointer(ObjectMaster*, FishingRod_ptr, 0x3C524F8);
 DataPointer(__int16, BigWeightRecord, 0x3C5251C);
 DataPointer(float, FishingLineLength, 0x3C52528);
 DataPointer(float, RodTension, 0x3C5252C);

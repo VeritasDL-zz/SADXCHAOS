@@ -138,8 +138,12 @@ using std::string;
 //moved Tikal Hints to its own .h/.cpp file
 //moved debug draw to its own .h/.cpp file too
 //Added Ring Allergy and Config For Ring Allergy, 
-//
-// 
+//Fixed Ring Allergy (I think)
+//Added A EggViper HandyCap, with config option, (1/22/2022)
+//Removed IceBall from spawning while playing as gamma (1/22/2022)
+//Fixed RandomSnowboard trying to run when not playing as Sonic Or Tails (1/22/2022)
+//Temp Commented out All Random Char Init Fixes (1/22/2022)
+//Added Check for Big Fishing to make playing a big a little bit easier (1/22/2022)
 // 
 //Todo
 //random emblem broke 
@@ -150,6 +154,7 @@ using std::string;
 //beat has bad texture in redmountain? 
 //gamma hs, ham crashed 7 times, in a row
 //seems to be related to gamma locking onto enemys he was never intended to? idk
+//Working on NoJumpBall Effect Sill not finished (12/28/2021)
 
 char oldRand = -1;
 int Chaos_Timer = 0;
@@ -182,6 +187,7 @@ int FruitNumb = -1;
 int HatNumb = -1;
 int RingAllergy_Timer = 0;
 int RingCount = 0;
+int NoJumpBall_Timer = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -191,6 +197,7 @@ bool PauseDisableEnabled = true;
 bool GrabAbleObjectsEnabled = true;
 bool GravityChangeEnabled = true;
 bool RPhysicsEnabled = true;
+bool EggViperHandyCapEanbled = true;
 bool AllergicToRings = true;
 char* LastEffect = new char[128];
 bool EnableFontScaling = false;
@@ -278,6 +285,7 @@ extern "C"
 		GravityChangeEnabled = config->getBool("General", "GravityChangeEnabled", true);
 		RPhysicsEnabled = config->getBool("General", "RPhysicsEnabled", true);
 		AllergicToRings = config->getBool("General", "AllergicToRings", true);
+		EggViperHandyCapEanbled = config->getBool("General", "EggViperHandyCap", true);
 		delete config;
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
@@ -296,51 +304,51 @@ extern "C"
 
 
 
-		//all of this is taken from https://github.com/MainMemory/SADXCharSel
-		WriteData((Uint8*)0x007A4DC4, PLAYER_COUNT); // Spring_Main
-		WriteData((Uint8*)0x007A4FF7, PLAYER_COUNT); // SpringB_Main
-		WriteData((Uint8*)0x0079F77C, PLAYER_COUNT); // SpringH_Main
-		WriteData((Uint8*)0x004418B8, PLAYER_COUNT); // IsPlayerInsideSphere (could probably use a better name!)
-		WriteJump((void*)0x490C6B, (void*)0x490C80); // prevent Big from automatically loading Big's HUD
-		WriteCall((void*)0x426005, GetCharacter0ID); // fix ResetTime() for Gamma
-		WriteCall((void*)0x427F2B, GetCharacter0ID); // fix ResetTime2() for Gamma
-		WriteData((char*)0x41486D, (char)0xEB); // fix time reset at level load for Gamma
-		WriteData((__int16**)0x414A0C, &selectedcharacter[0]); // fix 1min minimum at level restart for Gamma
-		WriteCall((void*)0x426081, GetCharacter0ID); // fix Gamma's timer
-		WriteCall((void*)0x4266C9, GetCharacter0ID); // fix Gamma's time bonus
-		WriteCall((void*)0x426379, GetCharacter0ID); // fix Gamma's time display
-		WriteJump((void*)0x47A907, (void*)0x47A936); // prevent Knuckles from automatically loading Emerald radar
-		WriteData<6>((void*)0x475E7C, 0x90u); // make radar work when not Knuckles
-		WriteData<6>((void*)0x4764CC, 0x90u); // make Tikal hints work when not Knuckles
-		WriteCall((void*)0x4D677C, GetCharacter0ID); // fix item boxes for Gamma
-		WriteCall((void*)0x4D6786, GetCharacter0ID); // fix item boxes for Big
-		WriteCall((void*)0x4D6790, GetCharacter0ID); // fix item boxes for Sonic
-		WriteCall((void*)0x4C06D9, GetCharacter0ID); // fix floating item boxes for Gamma
-		WriteCall((void*)0x4C06E3, GetCharacter0ID); // fix floating item boxes for Big
-		WriteCall((void*)0x4C06ED, GetCharacter0ID); // fix floating item boxes for Sonic
-		WriteCall((void*)0x424D0A, GetSelectedCharacter); // fix character sfx for Casinopolis
-		WriteData((void**)0x424F88, (void*)0x424E41); // ''
-		WriteData((void**)0x424F8C, (void*)0x424E5C); // ''
-		WriteData((void**)0x424F90, (void*)0x424E77); // ''
-		WriteCall((void*)0x424E08, GetSelectedCharacter); // fix character sfx
-		WriteCall((void*)0x4245F0, GetSelectedCharacter); // fix character voices in Chao Garden
-		WriteCall((void*)0x4BFFEF, GetCharacter0ID); // fix 1up icon
-		WriteCall((void*)0x4C02F3, GetCharacter0ID); // ''
-		WriteCall((void*)0x4D682F, GetCharacter0ID); // ''
-		WriteCall((void*)0x4D69AF, GetCharacter0ID); // ''
-		WriteCall((void*)0x425E62, GetCharacter0ID); // fix life icon
-		WriteData((char*)0x4879C1, (char)0x90);
-		WriteCall((void*)0x61CB77, GetCurrentCharacterID); // make Twinkle Park playable
-		WriteCall((void*)0x61CF8D, GetCurrentCharacterID); // ''
-		WriteCall((void*)0x79D7E2, GetCharacter0ID); // fix cart jump voice
-		WriteData<6>((void*)0x48ADA5, 0x90u); // prevent Amy from loading the bird
-		WriteCall((void*)0x4E966C, GetCharacter0ID); // fix ice cap snowboard 1
-		WriteCall((void*)0x4E9686, GetCharacter0ID); // fix ice cap snowboard 2
-		WriteCall((void*)0x597B1C, GetCharacter0ID); // fix sand hill snowboard
-		WriteData<1>((int*)0x7B52A0, 0x2); //remove Eggman debug mode		
-		WriteData<1>((int*)0x7b5290, 0x2); //remove Eggman debug mode	
-		WriteData<21>((int*)0x7b52a1, 0x90);
-		WriteData<1>((int*)0x7b43bc, 0x2); //remove Tikal debug mode
+		//all of this is taken from https://github.com/MainMemory/SADXCharSel, //Temp Disabled as of 1/22/2022
+		//WriteData((Uint8*)0x007A4DC4, PLAYER_COUNT); // Spring_Main
+		//WriteData((Uint8*)0x007A4FF7, PLAYER_COUNT); // SpringB_Main
+		//WriteData((Uint8*)0x0079F77C, PLAYER_COUNT); // SpringH_Main
+		//WriteData((Uint8*)0x004418B8, PLAYER_COUNT); // IsPlayerInsideSphere (could probably use a better name!)
+		//WriteJump((void*)0x490C6B, (void*)0x490C80); // prevent Big from automatically loading Big's HUD
+		//WriteCall((void*)0x426005, GetCharacter0ID); // fix ResetTime() for Gamma
+		//WriteCall((void*)0x427F2B, GetCharacter0ID); // fix ResetTime2() for Gamma
+		//WriteData((char*)0x41486D, (char)0xEB); // fix time reset at level load for Gamma
+		//WriteData((__int16**)0x414A0C, &selectedcharacter[0]); // fix 1min minimum at level restart for Gamma
+		//WriteCall((void*)0x426081, GetCharacter0ID); // fix Gamma's timer
+		//WriteCall((void*)0x4266C9, GetCharacter0ID); // fix Gamma's time bonus
+		//WriteCall((void*)0x426379, GetCharacter0ID); // fix Gamma's time display
+		//WriteJump((void*)0x47A907, (void*)0x47A936); // prevent Knuckles from automatically loading Emerald radar
+		//WriteData<6>((void*)0x475E7C, 0x90u); // make radar work when not Knuckles
+		//WriteData<6>((void*)0x4764CC, 0x90u); // make Tikal hints work when not Knuckles
+		//WriteCall((void*)0x4D677C, GetCharacter0ID); // fix item boxes for Gamma
+		//WriteCall((void*)0x4D6786, GetCharacter0ID); // fix item boxes for Big
+		//WriteCall((void*)0x4D6790, GetCharacter0ID); // fix item boxes for Sonic
+		//WriteCall((void*)0x4C06D9, GetCharacter0ID); // fix floating item boxes for Gamma
+		//WriteCall((void*)0x4C06E3, GetCharacter0ID); // fix floating item boxes for Big
+		//WriteCall((void*)0x4C06ED, GetCharacter0ID); // fix floating item boxes for Sonic
+		//WriteCall((void*)0x424D0A, GetSelectedCharacter); // fix character sfx for Casinopolis
+		//WriteData((void**)0x424F88, (void*)0x424E41); // ''
+		//WriteData((void**)0x424F8C, (void*)0x424E5C); // ''
+		//WriteData((void**)0x424F90, (void*)0x424E77); // ''
+		//WriteCall((void*)0x424E08, GetSelectedCharacter); // fix character sfx
+		//WriteCall((void*)0x4245F0, GetSelectedCharacter); // fix character voices in Chao Garden
+		//WriteCall((void*)0x4BFFEF, GetCharacter0ID); // fix 1up icon
+		//WriteCall((void*)0x4C02F3, GetCharacter0ID); // ''
+		//WriteCall((void*)0x4D682F, GetCharacter0ID); // ''
+		//WriteCall((void*)0x4D69AF, GetCharacter0ID); // ''
+		//WriteCall((void*)0x425E62, GetCharacter0ID); // fix life icon
+		//WriteData((char*)0x4879C1, (char)0x90);
+		//WriteCall((void*)0x61CB77, GetCurrentCharacterID); // make Twinkle Park playable
+		//WriteCall((void*)0x61CF8D, GetCurrentCharacterID); // ''
+		//WriteCall((void*)0x79D7E2, GetCharacter0ID); // fix cart jump voice
+		//WriteData<6>((void*)0x48ADA5, 0x90u); // prevent Amy from loading the bird
+		//WriteCall((void*)0x4E966C, GetCharacter0ID); // fix ice cap snowboard 1
+		//WriteCall((void*)0x4E9686, GetCharacter0ID); // fix ice cap snowboard 2
+		//WriteCall((void*)0x597B1C, GetCharacter0ID); // fix sand hill snowboard
+		//WriteData<1>((int*)0x7B52A0, 0x2); //remove Eggman debug mode		
+		//WriteData<1>((int*)0x7b5290, 0x2); //remove Eggman debug mode	
+		//WriteData<21>((int*)0x7b52a1, 0x90);
+		//WriteData<1>((int*)0x7b43bc, 0x2); //remove Tikal debug mode //Temp Disabled as of 1/22/2022
 		srand((unsigned)time(nullptr));
 		strcpy_s(LastEffect, 128, "Chaos Edition");
 	}
@@ -362,7 +370,7 @@ extern "C"
 	{ "SUKA", &SUKA_TEXLIST },
 	};
 
-	void RandomChar()//Still doesnt work, 11/07/2021, trying to make work but man this shits hard
+	void RandomChar()//Still doesnt work 1/22/2022 trying to make work but man this shits hard
 	{
 		int CurrentCharID = GetCurrentCharacterID();
 		char P1Action = EntityData1Ptrs[0]->Action;
@@ -525,7 +533,7 @@ extern "C"
 			IceTextLoader = false;
 			WindTextLoader = false;
 			TextLoaded = false;
-			DebugEnabled = false; //@temp.walker may remove
+			DebugEnabled = false;
 			ChaoFruitTextLoader = false; //@temp.walker may remove
 			ChaoHatTextLoader = false;
 			BigRockTextLoader = false;
@@ -695,6 +703,15 @@ extern "C"
 		{
 			RingAllergy_Timer = 0;
 		}
+		if (NoJumpBall_Timer <= 420 && NoJumpBall_Timer != 0) //doesnt seem to work, idk yet 12/28/2021
+		{
+			ControllerPointers[0]->HeldButtons += Buttons_A;
+			NoJumpBall_Timer--;
+		}
+		if (NoJumpBall_Timer = 1 && NoJumpBall_Timer != 0)
+		{
+			NoJumpBall_Timer = 0;
+		}
 		if (DisablePause_Timer <= 420 && DisablePause_Timer != 0)
 		{
 			DisablePause_Timer--;
@@ -743,6 +760,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			NoJumpBall();
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

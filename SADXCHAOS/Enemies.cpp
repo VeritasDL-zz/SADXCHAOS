@@ -560,6 +560,11 @@ void RandomSman(EntityData1* p1)
 		Chaos_Timer = EffectMax;
 		return;
 	}
+	if (CurrentCharacter == Characters_Gamma)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
 		Chaos_Timer = EffectMax;

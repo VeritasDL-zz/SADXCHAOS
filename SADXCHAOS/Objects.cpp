@@ -141,6 +141,18 @@ void RandomCheckPoint(EntityData1* p1)
 }
 void RandomSpeedPad(EntityData1* p1)
 {
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
 	int number = rand() % 2;
 	task* Speed;
 	Speed = (task*)LoadObject((LoadObj)3, 3, DashPanel_Main);
@@ -200,6 +212,23 @@ void RandomKeyBlock(EntityData1* p1)//updated untested
 }
 void RandomSnowboard()
 {
+	if (CurrentCharacter != Characters_Sonic || CurrentCharacter != Characters_Tails)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
 	if (DebugEnabled)
 	{
 		Chaos_Timer = EffectMax;
@@ -263,6 +292,18 @@ void RandomSnowboard()
 }
 void RandomSpring(EntityData1* p1)
 {
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
 	int number = rand() % 2;
 	task* Spring;
 	Spring = (task*)LoadObject((LoadObj)2, 3, SpringB_Main);
@@ -285,6 +326,18 @@ void RandomSpring(EntityData1* p1)
 }
 void RandomSpikeBall(EntityData1* p1)
 {
+	if (EggViperHandyCapEanbled)
+	{
+		int EVHandyCap = rand() % 5;
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			if (EVHandyCap != 0)
+			{
+				Chaos_Timer = EffectMax;
+				return;
+			}
+		}
+	}
 	int number = rand() % 2;
 	task* spike;
 	spike = (task*)LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
