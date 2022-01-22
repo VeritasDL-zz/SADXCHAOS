@@ -107,7 +107,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random Chao Fruit - Spawns in a Random Chao Fruit.
 - Random Chao Hat - Spawns in a Random Chao Hat.
 - Random Big Rock - Spawns in The Big Rock for Big's Ice Cap, others can pick it up aswel! 
-- 
+- Ring Allergy - Kills The Player if Rings are collected for 500 Frames
 ## Special Thanks
 Thanks to Sora for the code base and helping me with dumb questions  
 Huge Thanks to Refrag for helping me constantly!  
