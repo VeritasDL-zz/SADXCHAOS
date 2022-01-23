@@ -212,16 +212,16 @@ void RandomKeyBlock(EntityData1* p1)//updated untested
 }
 void RandomSnowboard()
 {
-	if (CurrentCharacter != Characters_Sonic || CurrentCharacter != Characters_Tails)
+	if (CurrentCharacter != Characters_Sonic && CurrentCharacter != Characters_Tails)
 	{
 		Chaos_Timer = EffectMax;
 		return;
 	}
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
 				Chaos_Timer = EffectMax;

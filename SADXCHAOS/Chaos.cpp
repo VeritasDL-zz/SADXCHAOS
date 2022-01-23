@@ -187,7 +187,6 @@ int FruitNumb = -1;
 int HatNumb = -1;
 int RingAllergy_Timer = 0;
 int RingCount = 0;
-int NoJumpBall_Timer = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -703,15 +702,6 @@ extern "C"
 		{
 			RingAllergy_Timer = 0;
 		}
-		if (NoJumpBall_Timer <= 420 && NoJumpBall_Timer != 0) //doesnt seem to work, idk yet 12/28/2021
-		{
-			ControllerPointers[0]->HeldButtons += Buttons_A;
-			NoJumpBall_Timer--;
-		}
-		if (NoJumpBall_Timer = 1 && NoJumpBall_Timer != 0)
-		{
-			NoJumpBall_Timer = 0;
-		}
 		if (DisablePause_Timer <= 420 && DisablePause_Timer != 0)
 		{
 			DisablePause_Timer--;
@@ -760,7 +750,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			NoJumpBall();
+			//RandomSnowboard();
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

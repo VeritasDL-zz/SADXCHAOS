@@ -35,5 +35,5 @@ void RandomNoClip();
 void InputInvert();
 void RandomRotate();
 void RingAllergy();
-void NoJumpBall();
+void TeleportRandomTask();
 

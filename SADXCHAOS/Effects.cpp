@@ -604,7 +604,7 @@ void RandomDPadDownCheck()
 {
 	//enable dpaddown check timer
 	DPadDown_Timer = 90; //90 frames?
-	DpadDown = 0;
+	DpadDown = 0; //resets dpad down check, 
 	strcpy_s(LastEffect, 128, "Dpad Down Or Die");
 }
 void RandomNoClip()
@@ -672,16 +672,8 @@ void RingAllergy()
 	RingAllergy_Timer = 500;
 	strcpy_s(LastEffect, 128, "Ring Allergy");
 }
-void NoJumpBall()
+void TeleportRandomTask()
 {
-	if (CurrentCharacter == Characters_Sonic || CurrentCharacter == Characters_Tails || CurrentCharacter == Characters_Knuckles)
-	{
-		NoJumpBall_Timer = 420;
-	}
-	else
-	{
-		Chaos_Timer = EffectMax;
-		return;
-	}
+	//CustomObjectArray[1023]
 
 }
