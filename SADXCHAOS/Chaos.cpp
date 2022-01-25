@@ -144,6 +144,9 @@ using std::string;
 //Fixed RandomSnowboard trying to run when not playing as Sonic Or Tails (1/22/2022)
 //Temp Commented out All Random Char Init Fixes (1/22/2022)
 //Added Check for Big Fishing to make playing a big a little bit easier (1/22/2022)
+//Disabled Enemies From Spawning Durring E101R boss fight (1/25/2022)
+//fixed bug with big fishing code (1/22/2022)
+//stopped sman for spawning durring egg viper (1/22/2022)
 // 
 //Todo
 //random emblem broke 
@@ -750,7 +753,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			//RandomSnowboard();
+			//debug testing here
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

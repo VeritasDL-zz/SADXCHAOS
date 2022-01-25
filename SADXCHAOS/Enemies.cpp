@@ -19,6 +19,11 @@ void RandomTank(EntityData1* p1)
 		Chaos_Timer = EffectMax;
 		return;
 	}
+	if (CurrentLevel == LevelIDs_E101R)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
 		Chaos_Timer = EffectMax;
@@ -67,6 +72,11 @@ void RandomBuyon(EntityData1* p1)
 		Chaos_Timer = EffectMax;
 		return;
 	}
+	if (CurrentLevel == LevelIDs_E101R)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (!BuyonTextLoader)
 	{
 		if (!AnimalTextLoader)
@@ -106,6 +116,11 @@ void RandomUnidus(EntityData1* p1)
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
+	if (CurrentLevel == LevelIDs_E101R)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -155,6 +170,11 @@ void RandomAmebot(EntityData1* p1)
 		Chaos_Timer = EffectMax;
 		return;
 	}
+	if (CurrentLevel == LevelIDs_E101R)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (!AmebotTextLoader)
 	{
 		if (!AnimalTextLoader)
@@ -194,6 +214,11 @@ void RandomPolice(EntityData1* p1)
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
+	if (CurrentLevel == LevelIDs_E101R)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -241,6 +266,11 @@ void RandomSnake(EntityData1* p1)
 		Chaos_Timer = EffectMax;
 		return;
 	}
+	if (CurrentLevel == LevelIDs_E101R)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (!SnakeTextLoader)
 	{
 		if (!AnimalTextLoader)
@@ -275,6 +305,11 @@ void RandomSnake(EntityData1* p1)
 void RandomRobo(EntityData1* p1)//updated to task, untested 10/04/2021
 {
 	if (!EnemysEnabled)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
+	if (CurrentLevel == LevelIDs_E101R)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -327,6 +362,11 @@ void RandomLeon(EntityData1* p1)
 		Chaos_Timer = EffectMax;
 		return;
 	}
+	if (CurrentLevel == LevelIDs_E101R)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (!LeonTextLoader)
 	{
 		if (!AnimalTextLoader)
@@ -366,6 +406,11 @@ void RandomKiki(EntityData1* p1)
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
+	if (CurrentLevel == LevelIDs_E101R)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -440,6 +485,11 @@ void RandomSpinnerA(EntityData1* p1)
 		Chaos_Timer = EffectMax;
 		return;
 	}
+	if (CurrentLevel == LevelIDs_E101R)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (!SpinnerTextLoader)
 	{
 		if (!AnimalTextLoader)
@@ -480,6 +530,11 @@ void RandomSpinnerB(EntityData1* p1)
 		Chaos_Timer = EffectMax;
 		return;
 	}
+	if (CurrentLevel == LevelIDs_E101R)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
 	if (!SpinnerTextLoader)
 	{
 		if (!AnimalTextLoader)
@@ -492,6 +547,11 @@ void RandomSpinnerB(EntityData1* p1)
 		LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 		SpinnerTextLoader = true;
 		TextLoaded = true;
+	}
+	if (CurrentLevel == LevelIDs_E101R)
+	{
+		Chaos_Timer = EffectMax;
+		return;
 	}
 	int number = rand() % 2;
 	task* SpinnerB;
@@ -516,6 +576,11 @@ void RandomSpinnerB(EntityData1* p1)
 void RandomSpinnerC(EntityData1* p1)
 {
 	if (!EnemysEnabled)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
+	if (CurrentLevel == LevelIDs_E101R)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -555,6 +620,7 @@ void RandomSpinnerC(EntityData1* p1)
 }
 void RandomSman(EntityData1* p1)
 {
+
 	if (!EnemysEnabled)
 	{
 		Chaos_Timer = EffectMax;
@@ -566,6 +632,11 @@ void RandomSman(EntityData1* p1)
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
+	if (CurrentLevel == LevelIDs_EggViper)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -596,6 +667,11 @@ void RandomSman(EntityData1* p1)
 void RandomEGacha(EntityData1* p1)
 {
 	if (!EnemysEnabled)
+	{
+		Chaos_Timer = EffectMax;
+		return;
+	}
+	if (CurrentLevel == LevelIDs_E101R)
 	{
 		Chaos_Timer = EffectMax;
 		return;

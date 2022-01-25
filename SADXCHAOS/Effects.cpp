@@ -253,7 +253,7 @@ void FastAccel(CharObj2* p1)
 			}
 		}
 	}
-	if (FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -279,7 +279,7 @@ void RandomVSpeed(CharObj2* p1)
 			}
 		}
 	}
-	if (FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -302,7 +302,7 @@ void RandomHSpeed(CharObj2* p1)
 			}
 		}
 	}
-	if (FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -313,7 +313,7 @@ void RandomHSpeed(CharObj2* p1)
 }
 void RandomHurt()
 {
-	if (FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -456,7 +456,7 @@ void RandomXGravity()//Updated 11/06/2021, Enabled For Now
 			}
 		}
 	}
-	if (FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -488,7 +488,7 @@ void RandomYGravity()
 			}
 		}
 	}
-	if (FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -520,7 +520,7 @@ void RandomZGravity()//Updated 11/06/2021, Enabled For Now
 			}
 		}
 	}
-	if (FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
 		Chaos_Timer = EffectMax;
 		return;
@@ -537,7 +537,7 @@ void RandomZGravity()//Updated 11/06/2021, Enabled For Now
 }
 void NoGravity()
 {
-	if (FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
 		Chaos_Timer = EffectMax;
 		return;
