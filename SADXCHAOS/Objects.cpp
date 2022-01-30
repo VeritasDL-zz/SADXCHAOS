@@ -295,9 +295,9 @@ void RandomSpring(EntityData1* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
 				NewEffect();
@@ -329,9 +329,9 @@ void RandomSpikeBall(EntityData1* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
 				NewEffect();

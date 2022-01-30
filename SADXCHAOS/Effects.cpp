@@ -590,9 +590,9 @@ void RandomNoClip()
 {
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
 				NewEffect();
@@ -636,7 +636,6 @@ void RingAllergy()
 	}
 	if (EggViperHandyCapEanbled)
 	{
-
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
 			int EVHandyCap = rand() % 5;
@@ -672,7 +671,7 @@ void IncreaseCutsceneSkipTime()
 }
 void RemovePowerUp()
 {
-	//int RNG1 = rand() % 5; //retail
+	//int RNG = rand() % 5; //retail
 	int RNG2 = rand() % 3;
 	int RNG = 0; //DEBUG TESTING
 	if (RNG == 0)
@@ -705,7 +704,7 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Tails)
 		{
-			if (CharObj2Ptrs[0]->Upgrades & Upgrades_JetAnklet)
+			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_JetAnklet)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_JetAnklet;
 				WriteData<1>((int*)0x3B188D5, 0x00);
@@ -727,14 +726,13 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Big)
 		{
-			int BigRNG = rand() % 2;
-			if (BigRNG == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LifeRing)
+			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LifeRing)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LifeRing;
 				WriteData<1>((int*)0x3B189D8, 0x00);
 				strcpy_s(LastEffect, 128, "Removed Life Ring");
 			}
-			if (BigRNG == 1 && CharObj2Ptrs[0]->Upgrades & Upgrades_PowerRod)
+			if (RNG2 == 1 && CharObj2Ptrs[0]->Upgrades & Upgrades_PowerRod)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_PowerRod;
 				WriteData<1>((int*)0x3B189D9, 0x00);

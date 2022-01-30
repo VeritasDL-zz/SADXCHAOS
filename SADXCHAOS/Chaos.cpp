@@ -429,7 +429,7 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-	ChaosS ChaosArray[89]
+	ChaosS ChaosArray[91]
 	{
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -520,6 +520,8 @@ extern "C"
 	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
 	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
 	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
+	{ nullptr, nullptr, RemovePowerUp},
+	{ nullptr, nullptr, RemovePowerUp},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
