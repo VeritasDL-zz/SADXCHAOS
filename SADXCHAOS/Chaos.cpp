@@ -147,7 +147,12 @@ using std::string;
 //Disabled Enemies From Spawning Durring E101R boss fight (1/25/2022)
 //fixed bug with big fishing code (1/22/2022)
 //stopped sman for spawning durring egg viper (1/22/2022)
-// 
+//Added IncreaseCutsceneSkipTime - Sets Frames needed to skip to 1A2 (1/29/2022)
+//started working on remove powerup (1/29/2022)
+//still working on remove powerup (1/30/2022)
+//Created a NewEffect function and made all skipped mods call the function (1/30/2022)
+//fixed a bug with DisablePause and RingAllergy (1/30/2022)
+//  
 //Todo
 //random emblem broke 
 //Kill momentum doesn't always work?
@@ -190,6 +195,7 @@ int FruitNumb = -1;
 int HatNumb = -1;
 int RingAllergy_Timer = 0;
 int RingCount = 0;
+int EVHandyCap = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -230,6 +236,7 @@ bool CarTextLoader = false;
 bool ShownMenu = false;
 bool TextLoaded = false;
 bool DebugEnabled = false;
+bool WriteOnce = false;
 const unsigned char PLAYER_COUNT = 4;
 ObjectMaster* snowboard;
 
@@ -258,6 +265,11 @@ ObjectFuncPtr charfuncs[] = {
 void OverRideBigRockTex()
 {
 	njSetTexture(&OBJ_ICECAP_TEXLIST);
+}
+void NewEffect()
+{
+	Chaos_Timer = EffectMax;
+	return;
 }
 __int16 selectedcharacter[PLAYER_COUNT] = { -1, -1, -1, -1 }; //this is taken from https://github.com/MainMemory/SADXCharSel
 int GetCharacter0ID() //this is taken from https://github.com/MainMemory/SADXCharSel
@@ -371,7 +383,6 @@ extern "C"
 	{ "KOAR", &KOAR_TEXLIST },
 	{ "SUKA", &SUKA_TEXLIST },
 	};
-
 	void RandomChar()//Still doesnt work 1/22/2022 trying to make work but man this shits hard
 	{
 		int CurrentCharID = GetCurrentCharacterID();
@@ -418,7 +429,7 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-	ChaosS ChaosArray[86]
+	ChaosS ChaosArray[89]
 	{
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -506,6 +517,9 @@ extern "C"
 	{ nullptr, nullptr, RandomBarrier},
 	{ nullptr, nullptr, RandomInvincibility},
 	{ nullptr, nullptr, RandomMagneticBarrier},
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -540,6 +554,7 @@ extern "C"
 			ChaoHatTextLoader = false;
 			BigRockTextLoader = false;
 			CarTextLoader = false;
+			WriteOnce = false;
 			HatNumb = -1;
 		}
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
@@ -701,7 +716,7 @@ extern "C"
 			}
 			RingAllergy_Timer--;
 		}
-		if (RingAllergy_Timer = 1 && RingAllergy_Timer != 0)
+		if (RingAllergy_Timer == 1 && RingAllergy_Timer != 0)
 		{
 			RingAllergy_Timer = 0;
 		}
@@ -709,7 +724,7 @@ extern "C"
 		{
 			DisablePause_Timer--;
 		}
-		if (DisablePause_Timer = 1 && DisablePause_Timer != 0)
+		if (DisablePause_Timer == 1 && DisablePause_Timer != 0)
 		{
 			PauseEnabled = true;
 			strcpy_s(LastEffect, 128, "Pause Enabled");
@@ -746,14 +761,12 @@ extern "C"
 	}
 	__declspec(dllexport) void __cdecl OnInput()
 	{
-		// Executed before the game processes input
 	}
 	__declspec(dllexport) void __cdecl OnControl(EntityData1* p1)
 	{
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			//debug testing here
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

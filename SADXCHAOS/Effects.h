@@ -36,4 +36,6 @@ void InputInvert();
 void RandomRotate();
 void RingAllergy();
 void TeleportRandomTask();
+void IncreaseCutsceneSkipTime();
+void RemovePowerUp();
 

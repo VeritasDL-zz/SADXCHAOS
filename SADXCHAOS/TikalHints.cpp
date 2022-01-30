@@ -9,7 +9,6 @@ void RandomTikalHint()
 {
 	int hintrand = rand() % HintSize;
 	LoadAutoHint(Hints[hintrand], Voices[hintrand]);
-	//PrintDebug("%i Random Hint\n", hintrand);
 	strcpy_s(LastEffect, 128, "Tikal Hint");
 }
 const HintText_Text const Hints[48][3] = {

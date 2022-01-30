@@ -16,17 +16,17 @@ void RandomTank(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!RinoTextLoader)
@@ -64,17 +64,17 @@ void RandomBuyon(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!BuyonTextLoader)
@@ -112,17 +112,17 @@ void RandomUnidus(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!UnidusTextLoader)
@@ -162,17 +162,17 @@ void RandomAmebot(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!AmebotTextLoader)
@@ -210,17 +210,17 @@ void RandomPolice(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!PoliceTextLoader)
@@ -258,17 +258,17 @@ void RandomSnake(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!SnakeTextLoader)
@@ -306,17 +306,17 @@ void RandomRobo(EntityData1* p1)//updated to task, untested 10/04/2021
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!RoboTextLoader)
@@ -354,17 +354,17 @@ void RandomLeon(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!LeonTextLoader)
@@ -402,17 +402,17 @@ void RandomKiki(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!KikiTextLoader)
@@ -482,12 +482,12 @@ void RandomSpinnerA(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!SpinnerTextLoader)
@@ -527,12 +527,12 @@ void RandomSpinnerB(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!SpinnerTextLoader)
@@ -550,7 +550,7 @@ void RandomSpinnerB(EntityData1* p1)
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	int number = rand() % 2;
@@ -577,12 +577,12 @@ void RandomSpinnerC(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!SpinnerTextLoader)
@@ -620,25 +620,24 @@ void RandomSpinnerC(EntityData1* p1)
 }
 void RandomSman(EntityData1* p1)
 {
-
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentCharacter == Characters_Gamma)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_EggViper)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!SmanTextLoader)
@@ -668,12 +667,12 @@ void RandomEGacha(EntityData1* p1)
 {
 	if (!EnemysEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_E101R)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!EGachaTextLoader)

@@ -167,13 +167,13 @@ void RandomTeleport()
 {
 	if (TeleportEnabled == false)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	NJS_VECTOR RandomTeleport = GetRandomCoordinates((LevelAndActIDs)(GetLevelAndAct()));
 	if (RandomTeleport.x == 0.0f && RandomTeleport.y == 0.0f && RandomTeleport.z == 0.0f)
 	{
-		Chaos_Timer = EffectMax; //calls a new effect
+		NewEffect();
 		return;
 	}
 	EntityData1Ptrs[0]->Position = RandomTeleport;

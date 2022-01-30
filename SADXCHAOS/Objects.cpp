@@ -13,7 +13,7 @@ void BigRock(EntityData1* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!BigRockTextLoader)
@@ -32,7 +32,7 @@ void BigCar(EntityData1* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!CarTextLoader)
@@ -51,7 +51,7 @@ void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tas
 {
 	if (!GrabAbleObjectsEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!IceTextLoader)
@@ -70,7 +70,7 @@ void RandomWindKey(EntityData1* p1) // disabled for now 9/23/2021, updated to ta
 {
 	if (!GrabAbleObjectsEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!WindTextLoader)
@@ -90,7 +90,7 @@ void RandomFruit(EntityData1* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!ChaoFruitTextLoader)
@@ -107,7 +107,7 @@ void RandomHat(EntityData1* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!ChaoHatTextLoader)
@@ -125,7 +125,7 @@ void RandomHat(EntityData1* p1)
 	}
 	if (HatNumb >= 10)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 }
@@ -148,7 +148,7 @@ void RandomSpeedPad(EntityData1* p1)
 		{
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
@@ -174,7 +174,7 @@ void RandomBurgerMan(EntityData1* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!BugerManTextLoader)
@@ -194,7 +194,7 @@ void RandomKeyBlock(EntityData1* p1)//updated untested
 {
 	if (!GrabAbleObjectsEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!KeyBlockTextLoader)
@@ -214,7 +214,7 @@ void RandomSnowboard()
 {
 	if (CurrentCharacter != Characters_Sonic && CurrentCharacter != Characters_Tails)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (EggViperHandyCapEanbled)
@@ -224,14 +224,14 @@ void RandomSnowboard()
 			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
 	}
 	if (DebugEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (IssSowboarding == 0)
@@ -287,7 +287,8 @@ void RandomSnowboard()
 	}
 	else
 	{
-		Chaos_Timer = EffectMax;//forces another Chaos mod if already on snowboard
+		NewEffect();//forces another Chaos mod if already on snowboard
+		return;
 	}
 }
 void RandomSpring(EntityData1* p1)
@@ -299,7 +300,7 @@ void RandomSpring(EntityData1* p1)
 		{
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
@@ -333,7 +334,7 @@ void RandomSpikeBall(EntityData1* p1)
 		{
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}

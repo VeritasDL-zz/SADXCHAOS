@@ -73,6 +73,8 @@ extern bool ShownMenu;
 extern bool TextLoaded;
 extern bool DebugEnabled;
 extern bool AllergicToRings;
+extern bool WriteOnce;
 extern const unsigned char PLAYER_COUNT;
 extern ObjectMaster* snowboard;
 extern PVMEntry MinimalPVMs[15];
+void NewEffect();

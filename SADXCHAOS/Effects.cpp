@@ -9,11 +9,12 @@
 #include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
+
 void DisablePausee()
 {
 	if (!PauseDisableEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	PauseEnabled = false;
@@ -107,7 +108,7 @@ void RandomPhysics()
 {
 	if (!RPhysicsEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	int Phyrand = rand() % 38;
@@ -243,19 +244,19 @@ void FastAccel(CharObj2* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
 	}
 	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	FastAccel_Timer = 400;
@@ -269,19 +270,19 @@ void RandomVSpeed(CharObj2* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
 	}
 	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	p1->Speed.y = p1->PhysicsData.VSpeedCap;
@@ -292,19 +293,19 @@ void RandomHSpeed(CharObj2* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
 	}
 	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	p1->Speed.x = p1->PhysicsData.HSpeedCap;
@@ -315,7 +316,7 @@ void RandomHurt()
 {
 	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (Rings > 0)
@@ -326,7 +327,7 @@ void RandomHurt()
 	}
 	else
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 
@@ -358,7 +359,8 @@ void RandomTimeOfDay() //sets time of day to a random time,
 	}
 	else
 	{
-		Chaos_Timer = EffectMax;//forces another Chaos mod if not in Adventure 
+		NewEffect();
+		return;//forces another Chaos mod if not in Adventure 
 	}
 }
 void RandomDroppedRings(EntityData1* p1)
@@ -376,7 +378,7 @@ void RandomPause() //randomly pauses the game LOL get good
 {
 	if (!RPauseEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	Pause_Timer = 5; //how long in frames? to pause unpause?
@@ -398,24 +400,24 @@ void RandomDebug() //debug mode currently lasts for 75ish? frames
 {
 	if (DebugEnabled)
 	{
-		Chaos_Timer = EffectMax; //get new chaos effect because debug movement is enabled already
+		NewEffect(); //get new chaos effect because debug movement is enabled already
 		return;
 	}
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
 	}
 	if (IssSowboarding == 1)//get new effect because user is on snowboard
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	switch (CurrentCharacter)
@@ -431,7 +433,7 @@ void RandomDebug() //debug mode currently lasts for 75ish? frames
 		EntityData1Ptrs[0]->Action = 53;
 		break;
 	default:
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	Debug_Timer = 333;
@@ -440,30 +442,26 @@ void RandomDebug() //debug mode currently lasts for 75ish? frames
 }
 void RandomXGravity()//Updated 11/06/2021, Enabled For Now
 {
-	/*if (XGravity_Timer == 0)
-	{
-		XGravity = Gravity.x;
-	}*/
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
 	}
 	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!GravityChangeEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	XGravity_Timer = 1000;
@@ -472,30 +470,26 @@ void RandomXGravity()//Updated 11/06/2021, Enabled For Now
 }
 void RandomYGravity()
 {
-	/*if (YGravity_Timer == 0)
-	{
-		YGravity = Gravity.y;
-	}*/
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
 	}
 	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!GravityChangeEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	YGravity_Timer = 1000;
@@ -504,47 +498,42 @@ void RandomYGravity()
 }
 void RandomZGravity()//Updated 11/06/2021, Enabled For Now
 {
-	/*if (ZGravity_Timer == 0)
-	{
-		ZGravity = Gravity.z;
-	}*/
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
 	}
 	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!GravityChangeEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	ZGravity_Timer = 1000;
 	Gravity.z = (float)rand() / RAND_MAX + (-1.5);
 	strcpy_s(LastEffect, 128, "Random Z Gravity");
-	//PrintDebug("Random Z Gravity\n");
 }
 void NoGravity()
 {
 	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (!GravityChangeEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	NoGravityTimer = 400;
@@ -559,16 +548,6 @@ void RandomControlDisable()
 	ControlEnabled = 0;
 	strcpy_s(LastEffect, 128, "Control Disabled");
 }
-void MSmallScale(EntityData1* p1)//disabled this
-{
-	for (int i = 0; i < 21; i++) {
-		SONIC_OBJECTS[i]->scl[0] = 0.5;
-		SONIC_OBJECTS[i]->scl[1] = 0.5;
-		SONIC_OBJECTS[i]->scl[2] = 0.5;
-	}
-	strcpy_s(LastEffect, 128, "Small Scale");
-	return;
-}
 void AndKnuckles()
 {
 	int Knuckles = rand() % 4;
@@ -580,7 +559,7 @@ void AndKnuckles()
 	}
 	else
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 }
@@ -616,7 +595,7 @@ void RandomNoClip()
 		{
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
@@ -634,7 +613,7 @@ void InputInvert()
 {
 	if (!InvertEnabled)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	WriteData<1>((int*)0x40F2A2, 0xC6);
@@ -650,20 +629,20 @@ void RandomRotate()
 }
 void RingAllergy()
 {
-
 	if (!AllergicToRings)
 	{
-		Chaos_Timer = EffectMax;
+		NewEffect();
 		return;
 	}
 	if (EggViperHandyCapEanbled)
 	{
-		int EVHandyCap = rand() % 5;
+
 		if (CurrentLevel == LevelIDs_EggViper)
 		{
+			int EVHandyCap = rand() % 5;
 			if (EVHandyCap != 0)
 			{
-				Chaos_Timer = EffectMax;
+				NewEffect();
 				return;
 			}
 		}
@@ -674,6 +653,103 @@ void RingAllergy()
 }
 void TeleportRandomTask()
 {
-	//CustomObjectArray[1023]
+	
 
+}
+void IncreaseCutsceneSkipTime()
+{
+	if (EV_MainThread_ptr == 0)
+	{
+		NewEffect();
+		return;
+	}
+	if (!WriteOnce) //temp.walker may not need, may remove check
+	{
+		WriteOnce = true;
+		WriteData((int*)0x03B2C580, (int)0x01A2);
+		strcpy_s(LastEffect, 128, "Long Cutscene Time");
+	}
+}
+void RemovePowerUp()
+{
+	//int RNG1 = rand() % 5; //retail
+	int RNG2 = rand() % 3;
+	int RNG = 0; //DEBUG TESTING
+	if (RNG == 0)
+	{
+		if (CurrentCharacter == Characters_Sonic)
+		{
+			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LightShoes)
+			{
+				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LightShoes;
+				WriteData<1>((int*)0x3B18895, 0x00);
+				strcpy_s(LastEffect, 128, "Removed Light Speed Shoes");
+			}
+			if (RNG2 == 1 && CharObj2Ptrs[0]->Upgrades & Upgrades_CrystalRing)
+			{
+				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_CrystalRing;
+				WriteData<1>((int*)0x3B18896, 0x00);
+				strcpy_s(LastEffect, 128, "Removed Crystal Ring");
+			}
+			if (RNG2 == 2 && CharObj2Ptrs[0]->Upgrades & Upgrades_AncientLight)
+			{
+				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_AncientLight;
+				WriteData<1>((int*)0x03B188A7, 0x00);
+				strcpy_s(LastEffect, 128, "Removed Ancient Light");
+			}
+			else
+			{
+				NewEffect();
+				return;
+			}
+		}
+		if (CurrentCharacter == Characters_Tails)
+		{
+			if (CharObj2Ptrs[0]->Upgrades & Upgrades_JetAnklet)
+			{
+				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_JetAnklet;
+				WriteData<1>((int*)0x3B188D5, 0x00);
+				strcpy_s(LastEffect, 128, "Removed Jet Anklet");
+			}
+			else
+			{
+				NewEffect();
+				return;
+			}
+		}
+		if (CurrentCharacter == Characters_Knuckles)
+		{
+			//need to test what power ups i can re-get
+		}
+		if (CurrentCharacter == Characters_Amy)
+		{
+			//need to test what power ups i can re-get
+		}
+		if (CurrentCharacter == Characters_Big)
+		{
+			int BigRNG = rand() % 2;
+			if (BigRNG == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LifeRing)
+			{
+				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LifeRing;
+				WriteData<1>((int*)0x3B189D8, 0x00);
+				strcpy_s(LastEffect, 128, "Removed Life Ring");
+			}
+			if (BigRNG == 1 && CharObj2Ptrs[0]->Upgrades & Upgrades_PowerRod)
+			{
+				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_PowerRod;
+				WriteData<1>((int*)0x3B189D9, 0x00);
+				strcpy_s(LastEffect, 128, "Removed Power Rod");
+			}
+			else
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
+	else
+	{
+		NewEffect();
+		return;
+	}
 }
