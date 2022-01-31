@@ -38,4 +38,5 @@ void RingAllergy();
 void TeleportRandomTask();
 void IncreaseCutsceneSkipTime();
 void RemovePowerUp();
+void RandomCollisionSize();
 

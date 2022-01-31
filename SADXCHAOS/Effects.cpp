@@ -751,3 +751,8 @@ void RemovePowerUp()
 		return;
 	}
 }
+void RandomCollisionSize()
+{
+	int CSize = rand() % 9;
+	CharObj2Ptrs[0]->PhysicsData.CollisionSize = CSize;
+}

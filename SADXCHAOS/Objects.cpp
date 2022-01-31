@@ -362,6 +362,8 @@ void RandomSpikeBall(EntityData1* p1)
 }
 void RandomEmblem(EntityData1* p1)//updated 10/04/2021 doesnt work still lol get fucked, figured out emblem id but still doesnt work, lol
 {
+	//SaveFile.Emblems[0] = SaveFile.Emblems[0] - 1;
+	//WriteData((BYTE*)0x03B2B5F6, (BYTE)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast
 	if (!EmblemTextLoader)
 	{
 		LoadPVM("EMBLEM", &EMBLEM_TEXLIST);
@@ -379,5 +381,5 @@ void RandomEmblem(EntityData1* p1)//updated 10/04/2021 doesnt work still lol get
 	Emblem->twp->value.l = 129; //Emblem ID, holy jesus 
 	strcpy_s(LastEffect, 128, "Random Emblem");
 	return;
-	////WriteData((BYTE*)0x03B2B5F6, (BYTE)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast
+	
 }
