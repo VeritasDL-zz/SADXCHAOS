@@ -9,6 +9,9 @@
 #include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
+int RNG = 0;
+int RNG2 = 0;
+
 
 void DisablePausee()
 {
@@ -671,9 +674,9 @@ void IncreaseCutsceneSkipTime()
 }
 void RemovePowerUp()
 {
-	//int RNG = rand() % 5; //retail
-	int RNG2 = rand() % 3;
-	int RNG = 0; //DEBUG TESTING
+	RNG = rand() % 3; //retail value
+	RNG2 = rand() % 3;
+	RNG = 0; //DEBUG TESTING
 	if (RNG == 0)
 	{
 		if (CurrentCharacter == Characters_Sonic)
@@ -704,7 +707,7 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Tails)
 		{
-			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_JetAnklet)
+			if (CharObj2Ptrs[0]->Upgrades & Upgrades_JetAnklet)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_JetAnklet;
 				WriteData<1>((int*)0x3B188D5, 0x00);
