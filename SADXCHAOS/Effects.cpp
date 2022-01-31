@@ -676,7 +676,7 @@ void RemovePowerUp()
 {
 	RNG = rand() % 3; //retail value
 	RNG2 = rand() % 3;
-	RNG = 0; //DEBUG TESTING
+	//RNG = 0; //DEBUG TESTING
 	if (RNG == 0)
 	{
 		if (CurrentCharacter == Characters_Sonic)
@@ -756,6 +756,6 @@ void RemovePowerUp()
 }
 void RandomCollisionSize()
 {
-	int CSize = rand() % 9;
+	int CSize = rand() % 9 + (1);
 	CharObj2Ptrs[0]->PhysicsData.CollisionSize = CSize;
 }
