@@ -17,7 +17,7 @@
 enum StatusBits
 {
 	StatusBits_Ground,
-	StatusBits_Unknown1,
+	StatusBits_OnColli,
 	StatusBits_Hurt,
 	StatusBits_ObjectInteract,
 	StatusBits_Unknown2,
@@ -37,7 +37,7 @@ enum StatusBits
 enum Status : uint16_t
 {
 	makemask(Status, Ground),
-	makemask(Status, Unknown1),
+	makemask(Status, OnColli),
 	makemask(Status, Hurt),
 	makemask(Status, ObjectInteract),
 	makemask(Status, Unknown2),
@@ -336,10 +336,12 @@ enum ColFlags : Uint32
 	ColFlags_Dig            = 0x100,
 	ColFlags_NoClimb        = 0x1000,
 	ColFlags_Hurt           = 0x10000,
+	ColFlags_Tube           = 0x20000,
 	ColFlags_Footprints     = 0x100000,
 	ColFlags_NoAlphaSortPls = 0x1000000,
 	ColFlags_AlphaSortThing = 0x2000000,
-	ColFlags_UvManipulation = 0x4000000,
+	ColFlags_NoVertexBuffer = 0x4000000,
+	ColFlags_Dynamic        = 0x8000000,
 	ColFlags_UseRotation    = 0x10000000,
 	ColFlags_Visible        = 0x80000000
 };
@@ -1584,11 +1586,11 @@ enum QueuedModelFlagsB : __int8
 
 enum RenderFlags : int
 {
-	EnvironmentMap   = 0x1,
-	ConstantMaterial = 0x2,
-	OffsetMaterial   = 0x4,
-	RenderFlags_8    = 0x8,
-	RenderFlags_10   = 0x10,
+	RenderFlags_EnvironmentMap   = 0x1,
+	RenderFlags_ConstantMaterial = 0x2,
+	RenderFlags_OffsetMaterial   = 0x4,
+	RenderFlags_RenderFlags_8    = 0x8,
+	RenderFlags_NoVertexColor    = 0x10,
 };
 
 #endif /* SADXMODLOADER_SADXENUMS_H */

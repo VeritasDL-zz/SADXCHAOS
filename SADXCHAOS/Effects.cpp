@@ -370,7 +370,7 @@ void RandomDroppedRings(EntityData1* p1)
 {
 	int randomrings = rand() % 254;
 	SpawnDroppedRings(EntityData1Ptrs[0]->Position.x, EntityData1Ptrs[0]->Position.y, EntityData1Ptrs[0]->Position.z, randomrings); //spawns random ammount of rings 0-255 at the player
-	Rings = 0;
+	TakeRingsInterval1(randomrings);
 	strcpy_s(LastEffect, 128, "Dropped Rings");
 }
 void RandomClipLevel()//currently disabled, may be removed
@@ -721,7 +721,23 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Knuckles)
 		{
-			//need to test what power ups i can re-get
+			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_FightingGloves)
+			{
+				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_FightingGloves;
+				WriteData<1>((int*)0x3B18922, 0x00);
+				strcpy_s(LastEffect, 128, "Removed Fighting Gloves");
+			}
+			if (RNG2 == 1 && CharObj2Ptrs[0]->Upgrades & Upgrades_ShovelClaw)
+			{
+				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_ShovelClaw;
+				WriteData<1>((int*)0x3B18921, 0x00);
+				strcpy_s(LastEffect, 128, "Removed Shovel Claw");
+			}
+			else
+			{
+				NewEffect();
+				return;
+			}
 		}
 		if (CurrentCharacter == Characters_Amy)
 		{

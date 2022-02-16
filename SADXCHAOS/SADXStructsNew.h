@@ -12,10 +12,16 @@
 #include "SADXEnums.h"
 
  // All structs should be packed.
-#pragma pack(push, 1)
+#pragma pack(push, 4)
 
 struct task;
 struct taskwk;
+struct _OBJ_CAMERAPARAM;
+struct _OBJ_ADJUSTPARAM;
+
+typedef void(__cdecl* TaskFuncPtr)(task*);
+typedef void(__cdecl* CamFuncPtr)(_OBJ_CAMERAPARAM*);
+typedef void(__cdecl* CamAdjustPtr)(taskwk*, taskwk*, _OBJ_ADJUSTPARAM*);
 
 struct Angle3
 {
@@ -294,9 +300,9 @@ struct task
 	task* last;
 	task* ptp;
 	task* ctp;
-	void(__cdecl* exec)(task*);
-	void(__cdecl* disp)(task*);
-	void(__cdecl* dest)(task*);
+	TaskFuncPtr exec;
+	TaskFuncPtr disp;
+	TaskFuncPtr dest;
 	OBJ_CONDITION* ocp;
 	taskwk* twp;
 	motionwk* mwp;
@@ -329,7 +335,7 @@ struct _OBJ_LANDENTRY
 	float xWidth;
 	float yWidth;
 	float zWidth;
-	obj* pObject;
+	NJS_OBJECT* pObject;
 	int blockbit;
 	int slAttribute;
 };
@@ -339,7 +345,7 @@ struct _OBJ_MOTLANDENTRY
 	float fFrame;
 	float fStep;
 	float fMaxFrame;
-	obj* pObject;
+	NJS_OBJECT* pObject;
 	NJS_ACTION* pMotion; // NJS_MOTION* in the original struct, but that's wrong
 	NJS_TEXLIST* pTexList;
 };
@@ -361,7 +367,7 @@ struct _OBJ_LANDTABLE
 
 struct TEX_PVMTABLE
 {
-	char* pname;
+	const char* pname;
 	NJS_TEXLIST* ptexlist;
 };
 
@@ -406,7 +412,7 @@ struct PDS_PERIPHERAL
 	__int16 y1;
 	__int16 x2;
 	__int16 y2;
-	char* name;
+	const char* name;
 	void* extend;
 	unsigned int old;
 	PDS_PERIPHERALINFO* info;
@@ -483,7 +489,7 @@ struct enemywk
 	float height;
 	float weight;
 	task* lock_tp;
-	void(__cdecl* dest_org)(task*);
+	TaskFuncPtr dest_org;
 	char pnum;
 	char old_mode;
 	char old_smode;
@@ -536,7 +542,7 @@ struct NpcMessageTable
 struct NpcMessageTable2
 {
 	__int16* code;
-	char** message;
+	const char** message;
 };
 
 struct SPLINE_DATA
@@ -562,6 +568,110 @@ struct _OBJ_CAMERAPARAM
 	float zDirPos;
 	float fDistance;
 	unsigned int ulTimer;
+};
+
+struct _OBJ_ADJUSTPARAM
+{
+	__int16 ssAdjustFlag;
+	int angSpeed[3];
+	float fSpeed;
+	int counter;
+};
+
+struct _OBJ_CAMERAMODE {
+	CamFuncPtr fnCamera;
+	char scCameraLevel;
+	char scCameraDirectMode;
+	int boolManual;
+	CamFuncPtr fnDebug;
+};
+
+struct _OBJ_CAMERAADJUST {
+	int slAttribute;
+	CamAdjustPtr fnAdjust;
+};
+
+struct _CameraSystemWork
+{
+	int G_boolSwitched;
+	__int16 G_ssCameraEntry;
+	char G_scCameraMode;
+	char G_scCameraDirect;
+	char G_scCameraLevel;
+	char G_scCameraAdjust;
+	char G_scCameraPriority;
+	char G_scCameraAttribute;
+	CamFuncPtr G_pfnCamera;
+	CamAdjustPtr G_pfnAdjust;
+	unsigned int G_ulTimer;
+	int G_ssRestoreLevel[6];
+	__int16 G_ssRestoreEntry[6];
+	char G_scRestoreAttribute[6];
+	CamFuncPtr G_pfnRestoreCamera[6];
+	CamAdjustPtr G_pfnRestoreAdjust[6];
+	void* G_pCameraEntry;
+	char G_scRestoreCameraMode[6];
+	char G_scRestoreCameraAdjust[6];
+	char G_scRestoreCameraDirect[6];
+	__int16 G_scRestoreCameraLevel[6];
+	NJS_POINT3 G_vecCameraOffset;
+};
+
+struct _camcontwk
+{
+	unsigned __int8 cammode;
+	unsigned __int8 camsmode;
+	unsigned __int8 bBlank;
+	unsigned __int8 btimer;
+	unsigned __int16 wtimer;
+	__int16 ssFlag;
+	float tgtdist;
+	float camxpos;
+	float camypos;
+	float camzpos;
+	float tgtxpos;
+	float tgtypos;
+	float tgtzpos;
+	int angx;
+	int angy;
+	int angz;
+	float prevcamxpos;
+	float prevcamypos;
+	float prevcamzpos;
+	int angx_spd;
+	int angy_spd;
+	int angz_spd;
+	float xspd;
+	float yspd;
+	float zspd;
+	float xacc;
+	float yacc;
+	float zacc;
+};
+
+struct _OBJ_CAMERAENTRY
+{
+	char scMode;
+	char scPriority;
+	unsigned __int8 ucAdjType;
+	char scColType;
+	unsigned __int16 xColAng;
+	unsigned __int16 yColAng;
+	float xColPos;
+	float yColPos;
+	float zColPos;
+	float xColScl;
+	float yColScl;
+	float zColScl;
+	unsigned __int16 xCamAng;
+	unsigned __int16 yCamAng;
+	float xDirPos;
+	float yDirPos;
+	float zDirPos;
+	float xCamPos;
+	float yCamPos;
+	float zCamPos;
+	float fDistance;
 };
 
 struct sSplineData
@@ -612,9 +722,9 @@ struct PL_ACTION
 
 struct PL_JOIN_VERTEX
 {
-	obj* objptr;
-	obj* srcobj;
-	obj* dstobj;
+	NJS_OBJECT* objptr;
+	NJS_OBJECT* srcobj;
+	NJS_OBJECT* dstobj;
 	char numVertex;
 	char inpmode;
 	char srcdepth;
@@ -842,7 +952,8 @@ struct al_entry_work
 	al_entry_work* pLockOn;
 };
 
-struct __declspec(align(2)) AL_BODY_INFO
+#pragma pack(push, 2)
+struct AL_BODY_INFO
 {
 	float HPos;
 	float VPos;
@@ -870,6 +981,7 @@ struct __declspec(align(2)) AL_BODY_INFO
 	char FormNum;
 	char FormSubNum;
 };
+#pragma pack(pop)
 
 struct AL_TIME
 {
@@ -1202,9 +1314,9 @@ struct PL_FACE
 	float frame;
 	float framespeed;
 	FACETBL* tbl;
-	obj* sibling;
-	obj* faceorg;
-	obj* facebuf;
+	NJS_OBJECT* sibling;
+	NJS_OBJECT* faceorg;
+	NJS_OBJECT* facebuf;
 	NJS_MOTION* facetypes;
 };
 
@@ -1277,7 +1389,7 @@ struct playerwk
 	task* htp;
 	task* ttp;
 	PL_FACE* pfp;
-	obj* lclop;
+	NJS_OBJECT* lclop;
 	PL_LANDPOSI* island_list;
 	playerwk_free free;
 	player_parameter p;
@@ -1338,6 +1450,150 @@ struct cpathtag
 	unsigned __int8 type;
 	float points;
 	cpathtbl* tblhead;
+};
+
+struct pathctrl
+{
+	float length;
+	NJS_POINT3 pos;
+};
+
+struct pathtbl
+{
+	__int16 slangx;
+	__int16 slangz;
+	float length;
+	float xpos;
+	float ypos;
+	float zpos;
+};
+
+struct pathtag
+{
+	unsigned __int8 pathtype;
+	unsigned __int16 points;
+	float totallen;
+	pathtbl* tblhead;
+	void* pathtask;
+};
+
+struct pathgrp
+{
+	unsigned int wanmb;
+	pathtag** tags;
+};
+
+struct pathwk
+{
+	float mPosX;
+	float mPosZ;
+	float mWidthX;
+	float mWidthZ;
+	float mRadius;
+	int mAngle;
+};
+
+struct SEQ_SECTION
+{
+	void(__cdecl* init)();
+	void(__cdecl* main)(int);
+};
+
+struct SEQ_SECTIONTBL
+{
+	SEQ_SECTION* psec;
+	unsigned __int8 stg;
+	unsigned __int8 act;
+	unsigned __int16 entrance;
+	char name[32];
+};
+
+struct SEQUENCE
+{
+	char time;
+	char emerald;
+	__int16 seqno;
+	__int16 sec;
+	__int16 nextsec;
+	unsigned __int16 stage;
+	unsigned __int16 destination;
+};
+
+struct _OBJ_LANDCOLL
+{
+	int slAttribute;
+	NJS_OBJECT* pObject;
+	task* pTask;
+};
+
+struct PL_KILLCOLLI
+{
+	int character;
+	NJS_OBJECT* object;
+};
+
+struct _OBJ_ITEMENTRY
+{
+	unsigned __int8 ucInitMode;
+	unsigned __int8 ucLevel;
+	__int16 ssAttribute;
+	float fRange;
+	void* ptr;
+	TaskFuncPtr fnExec;
+	const char* strObjName;
+};
+
+struct _OBJ_ITEMTABLE
+{
+	__int16 ssCount;
+	__int16 ssAttribute;
+	_OBJ_ITEMENTRY* pObjItemEntry;
+};
+
+struct ___stcClip
+{
+	float f32Near;
+	float f32Far;
+};
+
+struct __declspec(align(4)) ___stcFog
+{
+	float f32StartZ;
+	float f32EndZ;
+	unsigned int Col;
+	unsigned __int8 u8Enable;
+};
+
+struct particle_info
+{
+	float scl;
+	float sclspd;
+	float animspd;
+	float friction;
+	float yacc;
+	NJS_POINT3 pos;
+	NJS_POINT3 velo;
+	NJS_ARGB argb;
+};
+
+struct __declspec(align(4)) stcWaterSurface
+{
+	float f32x0;
+	float f32y0;
+	float f32z0;
+	char s8AnimNo0;
+	char s8Frame0;
+	char u8WrapX;
+	char u8WrapZ;
+	float f32WrapXZ;
+	float f32TransScale;
+	char u8StripArrayNo;
+};
+
+struct stcAnim
+{
+	char s8TexNo;
+	char s8Frame;
 };
 
 #pragma pack(pop)

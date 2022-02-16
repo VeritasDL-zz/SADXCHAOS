@@ -152,17 +152,18 @@ using std::string;
 //still working on remove powerup (1/30/2022)
 //Created a NewEffect function and made all skipped mods call the function (1/30/2022)
 //fixed a bug with DisablePause and RingAllergy (1/30/2022)
-//  
+//Enabled RingAllergy (2/1/2022)
+//Enabled BigRock (2/1/2022)
+//Changed RandomDroppedRings to Use TakeRingsInterval1 rather then set rings to 0 (2/15/2022)
+// 
+// 
 //Todo
 //random emblem broke 
 //Kill momentum doesn't always work?
-//Add &Knuckles Tikal Hint with Short Clip of "&Knuckles" Rap
-//Random Remove Powerup (idea from sora) (check current char, and current unlocked powerups and remove a random one)
 //boss battles, might be like the hub worlds where enemys being killed can just randomly crash even tho i load all the animal textures?
 //beat has bad texture in redmountain? 
 //gamma hs, ham crashed 7 times, in a row
 //seems to be related to gamma locking onto enemys he was never intended to? idk
-//Working on NoJumpBall Effect Sill not finished (12/28/2021)
 
 char oldRand = -1;
 int Chaos_Timer = 0;
@@ -429,7 +430,7 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-	ChaosS ChaosArray[93]
+	ChaosS ChaosArray[97]
 	{
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpring, nullptr, nullptr, },
@@ -465,6 +466,8 @@ extern "C"
 	{ RandomKeyBlock, nullptr, nullptr },
 	{ RandomFruit, nullptr, nullptr },
 	{ RandomHat, nullptr, nullptr },
+	{ BigRock, nullptr, nullptr },
+	{ BigRock, nullptr, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomVSpeed, nullptr, },
@@ -524,6 +527,8 @@ extern "C"
 	{ nullptr, nullptr, RemovePowerUp},
 	{ nullptr, nullptr, RandomCollisionSize},
 	{ nullptr, nullptr, RandomCollisionSize},
+	{ nullptr, nullptr, RingAllergy},
+	{ nullptr, nullptr, RingAllergy},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -771,6 +776,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			RandomDroppedRings(0);
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

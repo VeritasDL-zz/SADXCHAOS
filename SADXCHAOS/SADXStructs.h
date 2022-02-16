@@ -154,17 +154,18 @@ struct COL
 {
 	NJS_VECTOR Center;
 	float Radius;
-	int Padding[2];
+	float widthY; // Unused
+	float widthZ; // Unused
 	NJS_OBJECT *Model;
-	int anonymous_6;
+	int blockbits;
 	int Flags;
 };
 
 struct GeoAnimData
 {
-	int anonymous_0;
-	float anonymous_1;
-	float anonymous_2;
+	float Frame;
+	float Speed;
+	float MaxFrame;
 	NJS_OBJECT *Model;
 	NJS_ACTION *Animation;
 	NJS_TEXLIST *TexList;
@@ -174,15 +175,16 @@ struct LandTable
 {
 	int16_t COLCount;
 	int16_t AnimCount;
+	int16_t Attrs;
 	// see LandTableFlags enum
-	int Flags;
-	float Unknown_1;
+	int16_t LoadFlags;
+	float ClippingDistance;
 	COL *Col;
 	GeoAnimData *AnimData;
 	const char *TexName;
 	NJS_TEXLIST *TexList;
-	int Unknown_4;
-	int Unknown_5;
+	int BinaryNamePointer;
+	int LoadFuncPointer;
 };
 
 struct P2Path
@@ -335,7 +337,7 @@ struct CharObj2
 	short Upgrades;
 	short Powerups;
 	short JumpTime;
-	short field_A;
+	short NoControlTime;
 	short UnderwaterTime;
 	short IdleTime;
 	short StatusBackup;
@@ -344,7 +346,7 @@ struct CharObj2
 	float LoopDist;
 	float Up;
 	NJS_VECTOR SomeKindOfSpeedOffset;
-	NJS_VECTOR field_2C;
+	NJS_VECTOR Effect;
 	NJS_VECTOR Speed;
 	NJS_VECTOR field_44;
 	NJS_VECTOR SurfaceNormal;
@@ -352,7 +354,7 @@ struct CharObj2
 	int SurfaceFlags_Old;
 	void *array_1x132;
 	ObjectMaster *ObjectHeld;
-	void *field_6C;
+	ObjectMaster* DynColObject;
 	void *SomePointer;
 	int field_74;
 	void *array_15x32;
@@ -372,41 +374,43 @@ struct CharObj2
 
 struct CollisionData
 {
-	char field_0;
-	char field_1;
-	char field_2;
-	char field_3;
-	int field_4;
-	NJS_VECTOR origin;
-	NJS_VECTOR scale;
-	int field_20;
-	Rotation3 rotation;
+	char kind;
+	char form;
+	char push;
+	char damage;
+	Uint32 attr;
+	NJS_VECTOR center;
+	float a;
+	float b;
+	float c;
+	float d;
+	int angx;
+	int angy;
+	int angz;
 };
 
 struct EntityData1;
 struct CollisionThing
 {
-	char field_0;
-	char field_1;
-	short FlagsMaybe;
-	EntityData1 *Entity;
+	char my_num;
+	char hit_num;
+	unsigned __int16 flag;
+	EntityData1 *hit_twp;
 };
 
 struct CollisionInfo
 {
-	short List;
-	short ThingCount;
-	short Flags;
-	short Count;
-	float Radius;
+	unsigned __int16 id;
+	__int16 nbHit;
+	unsigned __int16 flag;
+	unsigned __int16 nbInfo;
+	float colli_range;
 	CollisionData *CollisionArray;
 	CollisionThing CollisionThings[16];
-	int CollisionThingsEnd;
-	int field_94;
-	int field_98;
+	NJS_POINT3 normal;
 	ObjectMaster *Object;
-	short field_A0;
-	short field_A2;
+	__int16 my_num;
+	__int16 hit_num;
 	CollisionInfo *CollidingObject;
 };
 
@@ -693,8 +697,8 @@ struct LevelCutsceneData
 
 struct CutsceneData
 {
-	ObjectFuncPtr Function;
-	void *Textures;
+	void(__cdecl* Function)(int a1);
+	PVMEntry* Textures;
 };
 
 struct HintText_Text
@@ -1578,6 +1582,62 @@ struct CharBossData
 	ObjectMaster *BossCharacter;
 	int anonymous_3;
 	void(__cdecl *DeleteFunc)();
+};
+
+struct BlackMarketItemAttributes
+{
+	int PurchasePrice;
+	int SalePrice;
+	__int16 RequiredEmblems;
+	__int16 Name;
+	__int16 Description;
+	__int16 anonymous_7;
+};
+
+struct BlackMarketItemAttributesList
+{
+	BlackMarketItemAttributes *Items;
+	int Count;
+};
+
+struct TutorialScreenData
+{
+	__int16 BoxX;
+	__int16 BoxY;
+	__int16 anonymous_2;
+	__int16 BoxScaleX;
+	__int16 BoxScaleY;
+	__int16 anonymous_3;
+	void *Pointer1;
+	void *Pointer2;
+};
+
+struct TutorialScreenHead
+{
+	unsigned __int16 arrayLength;
+	unsigned __int16 pageCount;
+	TutorialScreenData *data;
+	NJS_TEXLIST *texlistA;
+	NJS_TEXLIST *texlistB;
+	const char *pvmA;
+	const char *pvmB;
+};
+
+struct DebugStringInfo
+{
+	__int16 column;
+	__int16 row;
+	__int16 fontsize;
+	int color;
+	const char *text;
+};
+
+struct DemoData
+{
+	__int16 level;
+	__int16 act;
+	__int16 character;
+	__int16 cutscene;
 };
 
 #pragma pack(pop)
