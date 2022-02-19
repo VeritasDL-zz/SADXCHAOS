@@ -155,6 +155,11 @@ using std::string;
 //Enabled RingAllergy (2/1/2022)
 //Enabled BigRock (2/1/2022)
 //Changed RandomDroppedRings to Use TakeRingsInterval1 rather then set rings to 0 (2/15/2022)
+//Added FlipCamera thanks to Skoob (2/18/2022)
+//added SpinCamera (2/18/2022)
+//added FlipCamera and Spin Camera to ChaosArray (2/18/2022)
+//Shuffled ChaosArray because why not (2/18/2022)
+// 
 // 
 // 
 //Todo
@@ -197,6 +202,9 @@ int HatNumb = -1;
 int RingAllergy_Timer = 0;
 int RingCount = 0;
 int EVHandyCap = 0;
+int CameraFlip_Timer = 0;
+int CameraSpin_Timer = 0;
+int CameraSpin_Val = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -430,105 +438,107 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-	ChaosS ChaosArray[97]
+	ChaosS ChaosArray[99]
 	{
 	{ RandomSpring, nullptr, nullptr, },
-	{ RandomSpring, nullptr, nullptr, },
-	{ RandomSpring, nullptr, nullptr, },
-	{ RandomSpeedPad, nullptr, nullptr, },
-	{ RandomSpeedPad, nullptr, nullptr, },
-	{ RandomSpikeBall, nullptr, nullptr, },
-	{ RandomSpikeBall, nullptr, nullptr, },
-	{ RandomSpikeBall, nullptr, nullptr, },
-	{ RandomDroppedRings, nullptr, nullptr },
-	{ RandomCheckPoint, nullptr, nullptr },
-	{ RandomPowerUP, nullptr, nullptr },
-	{ RandomPowerUP, nullptr, nullptr },
-	{ RandomPowerUP, nullptr, nullptr },
-	{ RandomLifePowerup, nullptr, nullptr },
-	{ RandomTank, nullptr, nullptr },
-	{ RandomEGacha, nullptr, nullptr },
-	{ RandomLeon, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
+	{ RandomSpikeBall, nullptr, nullptr, },
+	{ RandomSpikeBall, nullptr, nullptr, },
 	{ RandomSpinnerB, nullptr, nullptr },
-	{ RandomSpinnerC, nullptr, nullptr },
 	{ RandomRobo, nullptr, nullptr },
 	{ RandomSnake, nullptr, nullptr },
-	{ RandomPolice, nullptr, nullptr },
-	{ RandomAmebot, nullptr, nullptr },
+	{ RandomKeyBlock, nullptr, nullptr },
+	{ RandomLeon, nullptr, nullptr },
+	{ RandomSpring, nullptr, nullptr, },
+	{ RandomBurgerMan, nullptr, nullptr },
+	{ RandomPowerUP, nullptr, nullptr },
+	{ RandomDroppedRings, nullptr, nullptr },
+	{ RandomKeyBlock, nullptr, nullptr },
 	{ RandomUnidus, nullptr, nullptr },
+	{ RandomSpring, nullptr, nullptr, },
 	{ RandomBuyon, nullptr, nullptr },
-	{ RandomSman, nullptr, nullptr },
-	{ RandomBurgerMan, nullptr, nullptr },
-	{ RandomBurgerMan, nullptr, nullptr },
-	{ RandomBurgerMan, nullptr, nullptr },
-	{ RandomKeyBlock, nullptr, nullptr },
-	{ RandomKeyBlock, nullptr, nullptr },
-	{ RandomFruit, nullptr, nullptr },
+	{ RandomSpinnerC, nullptr, nullptr },
+	{ RandomTank, nullptr, nullptr },
+	{ RandomPowerUP, nullptr, nullptr },
+	{ BigRock, nullptr, nullptr },
+	{ RandomSpeedPad, nullptr, nullptr, },
+	{ RandomSpeedPad, nullptr, nullptr, },
+	{ RandomLifePowerup, nullptr, nullptr },
 	{ RandomHat, nullptr, nullptr },
+	{ RandomBurgerMan, nullptr, nullptr },
+	{ RandomFruit, nullptr, nullptr },
+	{ RandomSpikeBall, nullptr, nullptr, },
+	{ RandomCheckPoint, nullptr, nullptr },
+	{ RandomAmebot, nullptr, nullptr },
+	{ RandomPolice, nullptr, nullptr },
 	{ BigRock, nullptr, nullptr },
-	{ BigRock, nullptr, nullptr },
+	{ RandomBurgerMan, nullptr, nullptr },
+	{ RandomPowerUP, nullptr, nullptr },
+	{ RandomEGacha, nullptr, nullptr },
+	{ RandomSman, nullptr, nullptr },
+	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomKillMomentum, nullptr, },
-	{ nullptr, RandomVSpeed, nullptr, },
-	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomHSpeed, nullptr, },
+	{ nullptr, RandomVSpeed, nullptr, },
 	{ nullptr, RandomHSpeed, nullptr, },
 	{ nullptr, FastAccel, nullptr },
-	{ nullptr, nullptr, RandomSwapMusic},
-	{ nullptr, nullptr, ChaosPlayVoice_rng},
-	{ nullptr, nullptr, RandomSnowboard},
-	{ nullptr, nullptr, RandomTimeOfDay},
-	{ nullptr, nullptr, RandomTimeOfDay},
-	{ nullptr, nullptr, RandomTimeOfDay},
-	{ nullptr, nullptr, RandomTimeOfDay},
-	{ nullptr, nullptr, RandomTimeOfDay},
-	{ nullptr, nullptr, RandomPause},
-	{ nullptr, nullptr, RandomPause},
-	{ nullptr, nullptr, SwapCamera},
-	{ nullptr, nullptr, SwapCamera},
-	{ nullptr, nullptr, SwapCamera},
-	{ nullptr, nullptr, SwapCamera},
-	{ nullptr, nullptr, RandomDebug},
 	{ nullptr, nullptr, RandomXGravity},
-	{ nullptr, nullptr, RandomXGravity},
-	{ nullptr, nullptr, RandomYGravity},
-	{ nullptr, nullptr, RandomYGravity},
-	{ nullptr, nullptr, RandomZGravity},
-	{ nullptr, nullptr, RandomZGravity},
-	{ nullptr, nullptr, RandomDPadDownCheck},
+	{ nullptr, nullptr, SwapCamera},
 	{ nullptr, nullptr, RandomControlDisable},
-	{ nullptr, nullptr, RandomControlDisable},
-	{ nullptr, nullptr, RandomControlDisable},
-	{ nullptr, nullptr, RandomNoClip},
-	{ nullptr, nullptr, RandomNoClip},
-	{ nullptr, nullptr, RandomNoClip},
-	{ nullptr, nullptr, RandomTikalHint},
-	{ nullptr, nullptr, RandomTikalHint},
-	{ nullptr, nullptr, InputInvert},
+	{ nullptr, nullptr, RandomPause},
 	{ nullptr, nullptr, RandomTeleport},
-	{ nullptr, nullptr, RandomHurt},
-	{ nullptr, nullptr, RandomHurt},
-	{ nullptr, nullptr, RandomRotate},
-	{ nullptr, nullptr, RandomChaoo},
-	{ nullptr, nullptr, RandomPhysics},
-	{ nullptr, nullptr, UncoupleCamera},
-	{ nullptr, nullptr, Nos0und_ForYou},
-	{ nullptr, nullptr, DisablePausee},
-	{ nullptr, nullptr, AndKnuckles},
-	{ nullptr, nullptr, NoGravity},
-	{ nullptr, nullptr, NoGravity},
 	{ nullptr, nullptr, RandomBarrier},
 	{ nullptr, nullptr, RandomInvincibility},
+	{ nullptr, nullptr, RandomControlDisable},
+	{ nullptr, nullptr, NoGravity},
+	{ nullptr, nullptr, RingAllergy},
+	{ nullptr, nullptr, NoGravity},
+	{ nullptr, nullptr, RandomControlDisable},
+	{ nullptr, nullptr, RandomNoClip},
+	{ nullptr, nullptr, Nos0und_ForYou},
+	{ nullptr, nullptr, RandomPause},
+	{ nullptr, nullptr, RandomDebug},
+	{ nullptr, nullptr, RandomTimeOfDay},
+	{ nullptr, nullptr, InputInvert},
+	{ nullptr, nullptr, RandomNoClip},
+	{ nullptr, nullptr, RemovePowerUp},
+	{ nullptr, nullptr, SwapCamera},
+	{ nullptr, nullptr, RandomZGravity},
+	{ nullptr, nullptr, RandomTimeOfDay},
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
+	{ nullptr, nullptr, RandomRotate},
+	{ nullptr, nullptr, RandomNoClip},
+	{ nullptr, nullptr, RandomPhysics},
+	{ nullptr, nullptr, RandomDPadDownCheck},
+	{ nullptr, nullptr, RemovePowerUp},
+	{ nullptr, nullptr, ChaosPlayVoice_rng},
+	{ nullptr, nullptr, UncoupleCamera},
+	{ nullptr, nullptr, RandomSwapMusic},
+	{ nullptr, nullptr, RandomTimeOfDay},
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
+	{ nullptr, nullptr, RandomHurt},
+	{ nullptr, nullptr, RingAllergy},
+	{ nullptr, nullptr, RandomTimeOfDay},
+	{ nullptr, nullptr, DisablePausee},
+	{ nullptr, nullptr, SwapCamera},
+	{ nullptr, nullptr, RandomCollisionSize},
+	{ nullptr, nullptr, SwapCamera},
+	{ nullptr, nullptr, AndKnuckles},
+	{ nullptr, nullptr, RandomYGravity},
+	{ nullptr, nullptr, RandomChaoo},
+	{ nullptr, nullptr, FlipCamera},
+	{ nullptr, nullptr, RandomXGravity},
+	{ nullptr, nullptr, RandomYGravity},
+	{ nullptr, nullptr, RandomTikalHint},
+	{ nullptr, nullptr, RandomSnowboard},
+	{ nullptr, nullptr, RandomTimeOfDay},
+	{ nullptr, nullptr, RandomCollisionSize},
 	{ nullptr, nullptr, RandomMagneticBarrier},
 	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
-	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
-	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
-	{ nullptr, nullptr, RemovePowerUp},
-	{ nullptr, nullptr, RemovePowerUp},
-	{ nullptr, nullptr, RandomCollisionSize},
-	{ nullptr, nullptr, RandomCollisionSize},
-	{ nullptr, nullptr, RingAllergy},
-	{ nullptr, nullptr, RingAllergy},
+	{ nullptr, nullptr, RandomZGravity},
+	{ nullptr, nullptr, SpinCamera},
+	{ nullptr, nullptr, RandomTikalHint},
+	{ nullptr, nullptr, RandomHurt},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -739,6 +749,30 @@ extern "C"
 			strcpy_s(LastEffect, 128, "Pause Enabled");
 			DisablePause_Timer = 0;
 		}
+		if (CameraFlip_Timer <= 999 && CameraFlip_Timer != 0)
+		{
+			CameraFlip_Timer--;//subtract timer
+			SetCameraMode_(0);//Force AutoCam
+			WriteData((int*)0x03B2C68C, (int)0x8000); //force upside down
+		}
+		if (CameraFlip_Timer == 1 && CameraFlip_Timer != 0)
+		{
+			CameraReset();
+			CameraFlip_Timer = 0;//set timer to 0 
+		}
+		if (CameraSpin_Timer <= 999 && CameraSpin_Timer != 0)
+		{
+			SetCameraMode_(0);//Force AutoCam
+			CameraSpin_Val += 0x200;
+			CameraSpin_Timer--;//subtract timer
+			WriteData((int*)0x03B2C68C, (int)CameraSpin_Val); //force camera spin
+		}
+		if (CameraSpin_Timer == 1 && CameraSpin_Timer != 0)
+		{
+			CameraReset();
+			CameraSpin_Timer = 0;//set timer to 0 
+			CameraSpin_Val = 0;//set spin val to 0 
+		}
 		if (Debug_Timer <= 333 && Debug_Timer != 0)
 		{
 			Debug_Timer--;
@@ -776,7 +810,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomDroppedRings(0);
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

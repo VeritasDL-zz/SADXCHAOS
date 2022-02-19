@@ -2682,7 +2682,7 @@ DataPointer(D3DMATRIX, ProjectionMatrix, 0x3D129C0);
 DataPointer(float*, OtherFogTableA, 0x3D12A00);
 DataPointer(float*, OtherFogTableB, 0x3D12C00);
 DataArray(Float, _nj_current_matrix_no_view_, 0x3D12E00, 16);
-DataPointer(ObjectMaster*, FishingRod_ptr, 0x03C524F8);
+DataPointer(taskwk*, Big_Fish_Ptr, 0x03C524F8);
 FunctionPointer(ObjectMaster*, LoadChaoFruit, (int type, NJS_VECTOR* position, Angle angle, NJS_VECTOR* vector, void* savedata), 0x722DE0);
 FunctionPointer(ObjectMaster*, LoadChaoHat, (int type, NJS_VECTOR* position, Angle angle, NJS_VECTOR* vector, void* savedata), 0x7236F0);
 VoidFunc(PauseSound, 0x40D060);

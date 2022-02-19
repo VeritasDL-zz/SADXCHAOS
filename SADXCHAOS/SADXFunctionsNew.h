@@ -336,7 +336,7 @@ FunctionPointer(BOOL, Knuckles_KakeraGame_Set_PutEme, (uint8_t emeid, NJS_POINT3
 FunctionPointer(BOOL, Knuckles_KakeraGame_Set_CheckEme, (uint8_t emeid, NJS_POINT3* emepos), 0x476660); // Check if emerald exists and signal position to radar
 FunctionPointer(void, CreateSmoke, (NJS_POINT3* pos, NJS_POINT3* velo, float scl), 0x4B9820); // Create smoke effect
 FunctionPointer(void, CreateSmoke2, (particle_info* effect), 0x4B98E0); // Create smoke effect with custom data
-FunctionPointer(void, CreateBomb, (NJS_POINT3* pos, float scl), 0x4CACF0); // Create bomb effect
+FunctionPointer(void, CreateBomb, (NJS_VECTOR* pos, float scl), 0x4CACF0); // Create bomb effect
 
 // Object task functions
 TaskFunc(ObjectSavePoint, 0x44F540); // Checkpoint

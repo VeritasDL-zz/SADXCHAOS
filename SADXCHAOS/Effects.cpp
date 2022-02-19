@@ -11,8 +11,6 @@
 #include "Chaos.h"
 int RNG = 0;
 int RNG2 = 0;
-
-
 void DisablePausee()
 {
 	if (!PauseDisableEnabled)
@@ -257,7 +255,7 @@ void FastAccel(CharObj2* p1)
 			}
 		}
 	}
-	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
 		return;
@@ -283,7 +281,7 @@ void RandomVSpeed(CharObj2* p1)
 			}
 		}
 	}
-	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
 		return;
@@ -306,7 +304,7 @@ void RandomHSpeed(CharObj2* p1)
 			}
 		}
 	}
-	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
 		return;
@@ -317,7 +315,7 @@ void RandomHSpeed(CharObj2* p1)
 }
 void RandomHurt()
 {
-	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
 		return;
@@ -457,7 +455,7 @@ void RandomXGravity()//Updated 11/06/2021, Enabled For Now
 			}
 		}
 	}
-	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
 		return;
@@ -485,7 +483,7 @@ void RandomYGravity()
 			}
 		}
 	}
-	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
 		return;
@@ -513,7 +511,7 @@ void RandomZGravity()//Updated 11/06/2021, Enabled For Now
 			}
 		}
 	}
-	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
 		return;
@@ -529,7 +527,7 @@ void RandomZGravity()//Updated 11/06/2021, Enabled For Now
 }
 void NoGravity()
 {
-	if (CurrentCharacter == Characters_Big && FishingRod_ptr != 0x00000000)
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
 		return;
@@ -655,8 +653,6 @@ void RingAllergy()
 }
 void TeleportRandomTask()
 {
-	
-
 }
 void IncreaseCutsceneSkipTime()
 {
@@ -684,6 +680,8 @@ void RemovePowerUp()
 			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LightShoes)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LightShoes;
+				//SetEventFlag(EventFlags_Sonic_LightShoes);
+				
 				WriteData<1>((int*)0x3B18895, 0x00);
 				strcpy_s(LastEffect, 128, "Removed Light Speed Shoes");
 			}
@@ -774,4 +772,32 @@ void RandomCollisionSize()
 {
 	int CSize = rand() % 9 + (1);
 	CharObj2Ptrs[0]->PhysicsData.CollisionSize = CSize;
+	strcpy_s(LastEffect, 128, "Random Collision Size");
+}
+void FlipCamera()
+{
+	WriteData<7>((int*)0x0046261B, 0x90); //nops ASM
+	WriteData<3>((int*)0x0046620A, 0x90); //nops ASM
+	WriteData<6>((int*)0x004372DD, 0x90); //nops ASM
+	CameraFlip_Timer = 666; //need to decide time, 
+	strcpy_s(LastEffect, 128, "Flipped Camera");
+	return;
+}
+void CameraReset()
+{
+	WriteData((int*)0x0046261B, (int)0x002C42C7); //Reset Nopped ASM
+	WriteData((int*)0x0046261F, (int)0x83000000); //Reset Nopped ASM
+	WriteData((int*)0x0046620A, (int)0x8B2C4889); //Reset Nopped ASM
+	WriteData((int*)0x004372DD, (int)0xC68C3589); //Reset Nopped ASM 
+	WriteData((int*)0x004372E1, (int)0x05C703B2); //Reset Nopped ASM
+	return;
+}
+void SpinCamera()
+{
+	WriteData<7>((int*)0x0046261B, 0x90); //nops ASM
+	WriteData<3>((int*)0x0046620A, 0x90); //nops ASM
+	WriteData<6>((int*)0x004372DD, 0x90); //nops ASM
+	strcpy_s(LastEffect, 128, "Camera Spin");
+	CameraSpin_Timer = 999;
+	return;
 }

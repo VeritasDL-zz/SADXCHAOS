@@ -39,4 +39,6 @@ void TeleportRandomTask();
 void IncreaseCutsceneSkipTime();
 void RemovePowerUp();
 void RandomCollisionSize();
-
+void FlipCamera();
+void CameraReset();
+void SpinCamera();

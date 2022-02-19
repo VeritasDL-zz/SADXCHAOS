@@ -74,6 +74,8 @@ extern bool TextLoaded;
 extern bool DebugEnabled;
 extern bool AllergicToRings;
 extern bool WriteOnce;
+extern int CameraFlip_Timer;
+extern int CameraSpin_Timer;
 extern const unsigned char PLAYER_COUNT;
 extern ObjectMaster* snowboard;
 extern PVMEntry MinimalPVMs[15];
