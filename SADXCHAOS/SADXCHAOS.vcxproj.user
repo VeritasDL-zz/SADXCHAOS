@@ -3,15 +3,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerCommand>C:\Users\Veritas\Documents\Games\SadX\SADX\sonic.exe</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-c sonic -l stationsquare</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-c sonic -l finalegg -a 2</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>..\..\..\..\Games\SadX\SADX</LocalDebuggerWorkingDirectory>
     <LocalDebuggerSQLDebugging>true</LocalDebuggerSQLDebugging>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LocalDebuggerCommand>C:\Users\Veritas\Documents\Games\SadX\SADX\sonic.exe</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>
-    </LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-c sonic -l finalegg -a 1</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>..\..\..\..\Games\SadX\SADX</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
 </Project>

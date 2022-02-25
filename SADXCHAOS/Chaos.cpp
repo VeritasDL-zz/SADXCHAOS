@@ -157,15 +157,17 @@ using std::string;
 //Changed RandomDroppedRings to Use TakeRingsInterval1 rather then set rings to 0 (2/15/2022)
 //Added FlipCamera thanks to Skoob (2/18/2022)
 //added SpinCamera (2/18/2022)
-//added FlipCamera and Spin Camera to ChaosArray (2/18/2022)
+//added FlipCamera and SpinCamera to ChaosArray (2/18/2022)
 //Shuffled ChaosArray because why not (2/18/2022)
-// 
-// 
+//added DrunkCamera (2/20/2022)
+//added DrunkCamera to the array (2/25/2022)
+//added Config Option for The Three Camera Effects (2/25/2022)
+//added Custom Teleports for all three acts of Sonic's Final Egg (2/25/2022)
+//workin on adding the fans from final egg act 2 to the object spawn list, (2/25/2022)
 // 
 //Todo
 //random emblem broke 
 //Kill momentum doesn't always work?
-//boss battles, might be like the hub worlds where enemys being killed can just randomly crash even tho i load all the animal textures?
 //beat has bad texture in redmountain? 
 //gamma hs, ham crashed 7 times, in a row
 //seems to be related to gamma locking onto enemys he was never intended to? idk
@@ -205,6 +207,9 @@ int EVHandyCap = 0;
 int CameraFlip_Timer = 0;
 int CameraSpin_Timer = 0;
 int CameraSpin_Val = 0;
+int DrunkCamera_Timer = 0;
+int DrunkCam = 0;
+int Direction = 0x50;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -216,6 +221,7 @@ bool GravityChangeEnabled = true;
 bool RPhysicsEnabled = true;
 bool EggViperHandyCapEanbled = true;
 bool AllergicToRings = true;
+bool CameraEffects = true;
 char* LastEffect = new char[128];
 bool EnableFontScaling = false;
 bool SpinnerTextLoader = false;
@@ -231,6 +237,7 @@ bool BuyonTextLoader = false;
 bool AmebotTextLoader = false;
 bool FSBTextLoader = false;
 bool BugerManTextLoader = false;
+bool FanTextLoader = false;
 bool UnidusTextLoader = false;
 bool AnimalTextLoader = false;
 bool KeyBlockTextLoader = false;
@@ -309,6 +316,7 @@ extern "C"
 		RPhysicsEnabled = config->getBool("General", "RPhysicsEnabled", true);
 		AllergicToRings = config->getBool("General", "AllergicToRings", true);
 		EggViperHandyCapEanbled = config->getBool("General", "EggViperHandyCap", true);
+		CameraEffects = config->getBool("General", "CameraEffects", true);
 		delete config;
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
@@ -438,7 +446,7 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-	ChaosS ChaosArray[99]
+	ChaosS ChaosArray[101]
 	{
 	{ RandomSpring, nullptr, nullptr, },
 	{ RandomSpinnerA, nullptr, nullptr },
@@ -539,6 +547,8 @@ extern "C"
 	{ nullptr, nullptr, SpinCamera},
 	{ nullptr, nullptr, RandomTikalHint},
 	{ nullptr, nullptr, RandomHurt},
+	{ nullptr, nullptr, DrunkCamera},
+	{ nullptr, nullptr, DrunkCamera},
 	};
 
 	size_t ChaosSize = LengthOfArray(ChaosArray);
@@ -573,6 +583,7 @@ extern "C"
 			ChaoHatTextLoader = false;
 			BigRockTextLoader = false;
 			CarTextLoader = false;
+			FanTextLoader = false;
 			WriteOnce = false;
 			HatNumb = -1;
 		}
@@ -749,7 +760,7 @@ extern "C"
 			strcpy_s(LastEffect, 128, "Pause Enabled");
 			DisablePause_Timer = 0;
 		}
-		if (CameraFlip_Timer <= 999 && CameraFlip_Timer != 0)
+		if (CameraFlip_Timer <= 480 && CameraFlip_Timer != 0)
 		{
 			CameraFlip_Timer--;//subtract timer
 			SetCameraMode_(0);//Force AutoCam
@@ -757,21 +768,46 @@ extern "C"
 		}
 		if (CameraFlip_Timer == 1 && CameraFlip_Timer != 0)
 		{
-			CameraReset();
+			CameraReset();//resets camera ASM
 			CameraFlip_Timer = 0;//set timer to 0 
 		}
-		if (CameraSpin_Timer <= 999 && CameraSpin_Timer != 0)
+		if (CameraSpin_Timer <= 480 && CameraSpin_Timer != 0)
 		{
 			SetCameraMode_(0);//Force AutoCam
-			CameraSpin_Val += 0x200;
+			CameraSpin_Val += 0x300; //spins camera 
 			CameraSpin_Timer--;//subtract timer
 			WriteData((int*)0x03B2C68C, (int)CameraSpin_Val); //force camera spin
 		}
 		if (CameraSpin_Timer == 1 && CameraSpin_Timer != 0)
 		{
-			CameraReset();
+			CameraReset();//resets camera ASM
 			CameraSpin_Timer = 0;//set timer to 0 
 			CameraSpin_Val = 0;//set spin val to 0 
+		}
+		if (DrunkCamera_Timer <= 550 && DrunkCamera_Timer != 0)
+		{
+			SetCameraMode_(0);//Force AutoCam
+			CameraNOP();
+			DrunkCam = *(int*)0x03B2C68C;
+			DrunkCam += Direction;
+			if (DrunkCam >= 4269)
+			{
+				Direction = -0x40;
+			}
+			else if (DrunkCam <= -4269)
+			{
+				Direction = +0x40;
+			}
+			WriteData((int*)0x03B2C68C, (int)DrunkCam); //force camera sway
+			DrunkCamera_Timer--;//subtract timer
+		}
+		if (DrunkCamera_Timer == 1 && DrunkCamera_Timer != 0)
+		{
+			CameraReset();//resets camera ASM
+			DrunkCamera_Timer = 0;//set timer to 0 
+			DrunkCam = 0;
+			Direction = 0x50;//resets direction 
+			WriteData((int*)0x03B2C68C, (int)0x0); //force camera reset
 		}
 		if (Debug_Timer <= 333 && Debug_Timer != 0)
 		{
@@ -810,6 +846,8 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			RandomTeleport();
+			//RandomFan(0); need to fix texture
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

@@ -42,3 +42,5 @@ void RandomCollisionSize();
 void FlipCamera();
 void CameraReset();
 void SpinCamera();
+void CameraNOP();
+void DrunkCamera();

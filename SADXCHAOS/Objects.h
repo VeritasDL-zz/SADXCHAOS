@@ -14,3 +14,4 @@ void RandomSnowboard();
 void RandomSpring(EntityData1* p1);
 void RandomSpikeBall(EntityData1* p1);
 void RandomEmblem(EntityData1* p1);
+void RandomFan(EntityData1* p1);

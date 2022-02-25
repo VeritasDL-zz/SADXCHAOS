@@ -22,6 +22,28 @@ void DisablePausee()
 	DisablePause_Timer = 420;
 	strcpy_s(LastEffect, 128, "Pause Disabled");
 }
+void CameraNOP()
+{
+	WriteData<7>((int*)0x0046261B, 0x90); //nops ASM
+	WriteData<3>((int*)0x0046620A, 0x90); //nops ASM
+	WriteData<6>((int*)0x004372DD, 0x90); //nops ASM
+	WriteData<3>((int*)0x00465E83, 0x90); //nops ASM
+	WriteData<3>((int*)0x00465EDA, 0x90); //nops ASM
+	WriteData<3>((int*)0x00468299, 0x90); //nops ASM
+	return;
+}
+void CameraReset()
+{
+	WriteData((int*)0x0046261B, (int)0x002C42C7); //Reset Nopped ASM
+	WriteData((int*)0x0046261F, (int)0x83000000); //Reset Nopped ASM
+	WriteData((int*)0x0046620A, (int)0x8B2C4889); //Reset Nopped ASM
+	WriteData((int*)0x004372DD, (int)0xC68C3589); //Reset Nopped ASM 
+	WriteData((int*)0x004372E1, (int)0x05C703B2); //Reset Nopped ASM
+	WriteData((int*)0x00465E83, (int)0xD92C4A89); //Reset Nopped ASM
+	WriteData((int*)0x00465EDA, (int)0xA1909090); //Reset Nopped ASM
+	WriteData((int*)0x00468299, (int)0xE82C6989); //Reset Nopped ASM
+	return;
+}
 PhysicsData_t PhyData[38]  //credits to MainMemory For this data, https://github.com/MainMemory/SADXPhysicsSwapMod
 {
 	60,2,16,16,3,0.6,1.66,3,0.23,0.46,1.39,2.3,3.7,5.09,0.076,0.05,0.031,-0.06,-0.18,-0.17,-0.028,-0.008,-0.01,-0.4,-0.1,-0.6,-0.2825,0.3,4,10,0.08,7,5.4,
@@ -776,28 +798,36 @@ void RandomCollisionSize()
 }
 void FlipCamera()
 {
-	WriteData<7>((int*)0x0046261B, 0x90); //nops ASM
-	WriteData<3>((int*)0x0046620A, 0x90); //nops ASM
-	WriteData<6>((int*)0x004372DD, 0x90); //nops ASM
-	CameraFlip_Timer = 666; //need to decide time, 
+	if (!CameraEffects)
+	{
+		NewEffect();
+		return;
+	}
+	CameraNOP();
+	CameraFlip_Timer = 480; //need to decide time, 
 	strcpy_s(LastEffect, 128, "Flipped Camera");
-	return;
-}
-void CameraReset()
-{
-	WriteData((int*)0x0046261B, (int)0x002C42C7); //Reset Nopped ASM
-	WriteData((int*)0x0046261F, (int)0x83000000); //Reset Nopped ASM
-	WriteData((int*)0x0046620A, (int)0x8B2C4889); //Reset Nopped ASM
-	WriteData((int*)0x004372DD, (int)0xC68C3589); //Reset Nopped ASM 
-	WriteData((int*)0x004372E1, (int)0x05C703B2); //Reset Nopped ASM
 	return;
 }
 void SpinCamera()
 {
-	WriteData<7>((int*)0x0046261B, 0x90); //nops ASM
-	WriteData<3>((int*)0x0046620A, 0x90); //nops ASM
-	WriteData<6>((int*)0x004372DD, 0x90); //nops ASM
+	if (!CameraEffects)
+	{
+		NewEffect();
+		return;
+	}
+	CameraNOP();
 	strcpy_s(LastEffect, 128, "Camera Spin");
-	CameraSpin_Timer = 999;
+	CameraSpin_Timer = 480;
 	return;
+}
+void DrunkCamera()
+{
+	if (!CameraEffects)
+	{
+		NewEffect();
+		return;
+	}
+	CameraNOP();
+	strcpy_s(LastEffect, 128, "Drunk");
+	DrunkCamera_Timer = 550;
 }

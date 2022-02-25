@@ -170,6 +170,23 @@ void RandomSpeedPad(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Random SpeedPad");
 	return;
 }
+void RandomFan(EntityData1* p1)
+{
+	//need to load texture still, need to figure out fan power?
+	if (!FanTextLoader)
+	{
+		LoadPVM("OBJ_FINALEGG", &OBJ_FINALEGG_TEXLIST);
+		FanTextLoader = true;
+		TextLoaded = true;
+	}
+	task* Fan;
+	Fan = (task*)LoadObject((LoadObj)2, 4, OFun);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Fan->ocp = objCondition;
+	Fan->twp->pos = EntityData1Ptrs[0]->Position;
+	//Fan->twp->ang = PlayerTaskPtr[0]->ang;
+	strcpy_s(LastEffect, 128, "Random Fan");
+}
 void RandomBurgerMan(EntityData1* p1)
 {
 	if (!GrabAbleObjectsEnabled)

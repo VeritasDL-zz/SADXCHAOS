@@ -26,7 +26,6 @@ void InitializeRandomCoordinates()
 	{6090.589f,96.60f,1177.66f},//spring 
 	{6298.54f,316.899f,1271.01f} //life
 	};
-
 	customLocationsMap[LevelAndActIDs_EmeraldCoast2] =
 	{
 	{-986.50f,1106.5f,-2865.5f},//spawn
@@ -41,7 +40,6 @@ void InitializeRandomCoordinates()
 	{4129.233f,496.0f,-2793.12f},
 	{5378.593f,56.033f,-2648.15f}//end of level?
 	};
-
 	customLocationsMap[LevelAndActIDs_WindyValley1] =
 	{
 	{1230.0f,-484.0f,-140.0f}, //sonic spawn act 0
@@ -59,7 +57,6 @@ void InitializeRandomCoordinates()
 	{20.395f,1131.01f,19.717f},//on bridge
 	{-25.182f,1800.824f,20.471f}//top of torando
 	};
-
 	customLocationsMap[LevelAndActIDs_WindyValley3] =
 	{
 	{1095.47f,-338.0f,-1250.59f},//top of act 3 sonic/tails spawn
@@ -70,7 +67,6 @@ void InitializeRandomCoordinates()
 	{5718.33f,-6361.026f,665.40f},//near old sonic act 3 skip
 	{5780.81f,-10700.34f,-574.620f}//end of act 3
 	};
-
 	customLocationsMap[LevelAndActIDs_Casinopolis1] =
 	{
 	{75.0f,201.0f,270.0f},//sonic/knux? spawn
@@ -82,7 +78,6 @@ void InitializeRandomCoordinates()
 	{694.279f,-291.726f,-204.414f},//out of bounds on the ring platform,
 	{838.22f,-133.06f,-282.697f}//near emerald/capsul
 	};
-
 	customLocationsMap[LevelAndActIDs_Casinopolis2] =
 	{
 	{17.861f,-1840.0f,2869.292f},//sonic/tails spawn
@@ -94,7 +89,6 @@ void InitializeRandomCoordinates()
 	{-1568.430f,-2205.0f,2643.35f},//end of underground
 	{-1569.90f,-2205.0f,1824.0f}//near tails emerald/ladder up
 	};
-
 	customLocationsMap[LevelAndActIDs_IceCap1] =
 	{
 	{1579.99f,-26.32f,1074.0f}, //sonic spawn
@@ -103,7 +97,6 @@ void InitializeRandomCoordinates()
 	{643.67f,213.49f,926.17f}, //rocket end of first ice room
 	{1100.46f,336.22f,462.15f} //entering act 1
 	};
-
 	customLocationsMap[LevelAndActIDs_IceCap2] =
 	{
 	{1043.91f,-339.13f,252.92f}, //sonic spawn
@@ -113,7 +106,6 @@ void InitializeRandomCoordinates()
 	{1448.57f,576.399f,-256.989f}, //jumppad 1
 	{1106.45f,320.0f,-76.74f}//past falling bridge
 	};
-
 	customLocationsMap[LevelAndActIDs_SpeedHighway1] =
 	{
 	{-673.0f,-10.0f,5.0f},//sonic spawn
@@ -126,14 +118,12 @@ void InitializeRandomCoordinates()
 	{4272.64f,-1888.99f,4256.925f}, //rocket
 	{4038.78f,-1500.0f,4672.31f}//after rocket near end
 	};
-
 	customLocationsMap[LevelAndActIDs_SpeedHighway3] =
 	{
 	{72.0f,24.5f,192.0f},//sonic spawn
 	{-1519.54f,109.795f,-984.970f},//spring
 	{-227.27f,150.0f,-1724.74f} //end
 	};
-
 	customLocationsMap[LevelAndActIDs_TwinklePark2] =
 	{
 	{-15.041f,142.0f,-1001.32f},//after rollercoaster sonic
@@ -144,7 +134,6 @@ void InitializeRandomCoordinates()
 	{-87.82f,412.65f,14.078f},//spring
 	{102.069f,532.58f,74.430f},//spring
 	};
-
 	customLocationsMap[LevelAndActIDs_RedMountain1] =
 	{
 		{18.208f,32.314f,636.059f}, //sonic act 0 spawn
@@ -152,6 +141,39 @@ void InitializeRandomCoordinates()
 		{-804.800f,1091.28f,-199.402f},//on rock that shoots you foward
 		{-3401.674f,152.835f,-1586.210f},//on rock sonic does skip from
 		{-3822.46f,1121.60f,-1910.86f}//top of mountain 
+	};
+	customLocationsMap[LevelAndActIDs_FinalEgg1] =
+	{
+		{170.0f,-167.0f,490.0f},//sonic act 0 spawn
+		{177.9f,-99.4f,-143.9f},//sonic act 0 ontop of life box
+		{120.9f,-232.0f,-1248.8f},//sonic act 0 first checkpoint
+		{1658.36f,291.88f,-1301.19f},//sonic act 0 ontop of spring
+		{985.2f,453.81f,-293.0f},//sonic act 0 before act change
+	};
+	customLocationsMap[LevelAndActIDs_FinalEgg2] =
+	{
+		{1060.69f,580.0f,-620.0f}, //sonic act 1 spawn
+		{1059.3f,873.0f,-199.92f}, //sonic act 1 speedrun skip
+		{845.0f,-850.0f,-967.4f}, //sonic act 1 checkpoint before elevator
+		{1060.0f,-1614.8f,-895.4f}, //sonic act 1 in front of elevator
+		{899.95f,507.0f,-1142.22f}, //sonic act 1 infront of first speed tunnel
+		{1148.2f,4.0f,-618.0f}, //sonic act 1 ontop of spring after first speed tunnel checkpoint
+		{981.82f,78.5f,-1152.15f}, //sonic act 1 enterance to second speed tunnel on speedpad
+		{1108.45f,-646.52f,-625.10f}, //sonic act 1 end of second speed tunnel on top of spring
+	};
+	customLocationsMap[LevelAndActIDs_FinalEgg3] =
+	{
+		{1071.9f,6.06f,-543.2f}, //sonic act 2 just outside of elevator 
+		{1210.0f,1.16f,-984.77f}, //sonic act 2 ontop of spring
+		{1088.6f,-411.8f,-1740.5f}, //sonic act 2 middle of first gachapon room
+		{1380.45f,-265.6f,-1545.2f}, //sonic act 2 checkpoint infront of floating fans
+		{2558.98f,-403.52f,-1779.5f}, //sonic act 2 middle of second gachapon room
+		{2270.14f,-2999.17f,-1047.92f}, //sonic act 2 ontop of speed shoes at bottom of pit
+		{2269.0f,-2666.666f,-876.0f}, //sonic act 2 top of pit after fans
+		{2330.9f,-3317.666f,-250.6f}, //sonic act to middle of thrid gachapon room
+		{1746.9f,-3317.8f,-703.2f}, //sonic act 2 there the sonic doll would be for gamma
+		{1394.2f,-3298.8f,-263.7f}, //sonic act 2 checkpoint near sonic doll as gamma
+		{85.58f,-3222.1f,-785.11f}, //sonic act 2 end of level
 	};
 }
 NJS_VECTOR GetRandomCoordinates(LevelAndActIDs levelAndAct)
