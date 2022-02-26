@@ -173,6 +173,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PowerUPS.h" />
     <ClInclude Include="Teleport.h" />
+    <ClInclude Include="TextureReset.h" />
     <ClInclude Include="TikalHints.h" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +191,7 @@
     </ClCompile>
     <ClCompile Include="PowerUPS.cpp" />
     <ClCompile Include="Teleport.cpp" />
+    <ClCompile Include="TextureReset.cpp" />
     <ClCompile Include="TikalHints.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,6 +1,9 @@
 #pragma once
 #include "SADXStructs.h"
 #include "Chaos.h"
+extern float OldMaxAccel;
+extern float OldAirAccel;
+extern float OldHangTime;
 void DisablePausee();
 void RandomPhysics();
 void Nos0und_ForYou();
@@ -44,3 +47,5 @@ void CameraReset();
 void SpinCamera();
 void CameraNOP();
 void DrunkCamera();
+void WalkThruWallsNop();
+void WalkThruWallsReset();

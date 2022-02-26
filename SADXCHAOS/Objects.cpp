@@ -175,7 +175,7 @@ void RandomFan(EntityData1* p1)
 	//need to load texture still, need to figure out fan power?
 	if (!FanTextLoader)
 	{
-		LoadPVM("OBJ_FINALEGG", &OBJ_FINALEGG_TEXLIST);
+		LoadPVM("OBJ_FINALEGG", &OBJ_FINALEGG_TEXLIST); 
 		FanTextLoader = true;
 		TextLoaded = true;
 	}
@@ -184,6 +184,7 @@ void RandomFan(EntityData1* p1)
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	Fan->ocp = objCondition;
 	Fan->twp->pos = EntityData1Ptrs[0]->Position;
+	Fan->twp->pos.y = EntityData1Ptrs[0]->Position.y - 9.0f;
 	//Fan->twp->ang = PlayerTaskPtr[0]->ang;
 	strcpy_s(LastEffect, 128, "Random Fan");
 }

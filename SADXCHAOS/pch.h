@@ -16,4 +16,5 @@
 #include "PowerUPS.h"
 #include "TikalHints.h"
 #include "DebugDraw.h"
+#include "TextureReset.h"
 #endif //PCH_H

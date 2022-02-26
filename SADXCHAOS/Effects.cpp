@@ -11,6 +11,9 @@
 #include "Chaos.h"
 int RNG = 0;
 int RNG2 = 0;
+float OldMaxAccel = 0;
+float OldAirAccel = 0;
+float OldHangTime = 0;
 void DisablePausee()
 {
 	if (!PauseDisableEnabled)
@@ -42,6 +45,26 @@ void CameraReset()
 	WriteData((int*)0x00465E83, (int)0xD92C4A89); //Reset Nopped ASM
 	WriteData((int*)0x00465EDA, (int)0xA1909090); //Reset Nopped ASM
 	WriteData((int*)0x00468299, (int)0xE82C6989); //Reset Nopped ASM
+	return;
+}
+void WalkThruWallsNop()
+{
+	WriteData((int*)0x00444C1D, (int)0x90909090);
+	WriteData((int*)0x00444C21, (int)0x10C48390);
+	WriteData((int*)0x0044A66B, (int)0x90909090);
+	WriteData((int*)0x0044A66F, (int)0x14C48390);
+	WriteData((int*)0x007887D9, (int)0x90909090);
+	WriteData((int*)0x007887DD, (int)0x74C08590);
+	return;
+}
+void WalkThruWallsReset()
+{
+	WriteData((int*)0x00444C1D, (int)0xFF37EEE8);
+	WriteData((int*)0x00444C21, (int)0x10C483FF);
+	WriteData((int*)0x0044A66B, (int)0xFFA430E8);
+	WriteData((int*)0x0044A66F, (int)0x14C483FF);
+	WriteData((int*)0x007887D9, (int)0x00D042E8);
+	WriteData((int*)0x007887DD, (int)0x74C08500);
 	return;
 }
 PhysicsData_t PhyData[38]  //credits to MainMemory For this data, https://github.com/MainMemory/SADXPhysicsSwapMod
@@ -283,6 +306,10 @@ void FastAccel(CharObj2* p1)
 		return;
 	}
 	FastAccel_Timer = 400;
+	OldMaxAccel = CharObj2Ptrs[0]->PhysicsData.MaxAccel;
+	OldAirAccel = CharObj2Ptrs[0]->PhysicsData.AirAccel;
+	OldHangTime = CharObj2Ptrs[0]->PhysicsData.HangTime;
+
 	CharObj2Ptrs[0]->PhysicsData.MaxAccel = 10.0f;
 	CharObj2Ptrs[0]->PhysicsData.AirAccel = 0.10f;
 	CharObj2Ptrs[0]->PhysicsData.HangTime = 120;
@@ -624,12 +651,7 @@ void RandomNoClip()
 		}
 	}
 	NoClip_Timer = 800;
-	WriteData((int*)0x00444C1D, (int)0x90909090);
-	WriteData((int*)0x00444C21, (int)0x10C48390);
-	WriteData((int*)0x0044A66B, (int)0x90909090);
-	WriteData((int*)0x0044A66F, (int)0x14C48390);
-	WriteData((int*)0x007887D9, (int)0x90909090);
-	WriteData((int*)0x007887DD, (int)0x74C08590);
+	WalkThruWallsNop();
 	strcpy_s(LastEffect, 128, "Walk Thru Walls Enabled");
 }
 void InputInvert()

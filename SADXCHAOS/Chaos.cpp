@@ -164,6 +164,10 @@ using std::string;
 //added Config Option for The Three Camera Effects (2/25/2022)
 //added Custom Teleports for all three acts of Sonic's Final Egg (2/25/2022)
 //workin on adding the fans from final egg act 2 to the object spawn list, (2/25/2022)
+//finished RandomFan thanks to Sora! (2/25/2022)
+//moved texture reset bools to its own .cpp file (2/26/2022)
+//fixed a small "bug" with FastAccel (2/26/2022)
+//shuffled chaos array again (2/26/2022)
 // 
 //Todo
 //random emblem broke 
@@ -260,7 +264,6 @@ ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadS
 {
 	return snowboard = LoadObject(flags, index, loadSub);
 }
-
 void __cdecl Snowboard_Delete_r(ObjectMaster* obj)
 {
 	njReleaseTexture((NJS_TEXLIST*)obj->Data1->LoopData);
@@ -277,10 +280,13 @@ ObjectFuncPtr charfuncs[] = {
 	Gamma_Main,
 	Big_Main
 };
-
 void OverRideBigRockTex()
 {
 	njSetTexture(&OBJ_ICECAP_TEXLIST);
+}
+void LoadFETexObj()
+{
+	njSetTexture(&OBJ_FINALEGG_TEXLIST);
 }
 void NewEffect()
 {
@@ -302,7 +308,6 @@ extern "C"
 	{
 		// Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
 		// This is where we override functions, replace static data, etc.
-
 		const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
 		EffectMax = config->getInt("General", "EffectMax", 180);
 		DebugToScreen = config->getBool("General", "PrintToScreen", false);
@@ -325,6 +330,7 @@ extern "C"
 		WriteCall((void*)0x597B34, LoadSnowboardObject);
 		WriteCall((void*)0x597B46, LoadSnowboardObject);
 		WriteCall((void*)0x4EDD17, OverRideBigRockTex);
+		WriteCall((void*)0x5B7581, LoadFETexObj);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 		WriteData((char*)0x4EE7BB, (char)4);//big ice rock pickup ability
 		//WriteData((char*)0x639A00, (char)4);//Patch for Picking Up Car in Station Square Act 0
@@ -332,8 +338,6 @@ extern "C"
 		WriteData((int*)0x017D0A38, (int)0xC7C35000);//stops the amy key block from exploding
 		WriteData((int*)0x017D0A44, (int)0xC7C35000);//stops the amy key block from exploding
 		WriteData((int*)0x017D0A50, (int)0xC7C35000);//stops the amy key block from exploding
-
-
 
 		//all of this is taken from https://github.com/MainMemory/SADXCharSel, //Temp Disabled as of 1/22/2022
 		//WriteData((Uint8*)0x007A4DC4, PLAYER_COUNT); // Spring_Main
@@ -446,36 +450,36 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-	ChaosS ChaosArray[101]
+	ChaosS ChaosArray[102]
 	{
-	{ RandomSpring, nullptr, nullptr, },
+	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
-	{ RandomSpikeBall, nullptr, nullptr, },
-	{ RandomSpikeBall, nullptr, nullptr, },
+	{ RandomSpikeBall, nullptr, nullptr },
+	{ RandomSpikeBall, nullptr, nullptr },
 	{ RandomSpinnerB, nullptr, nullptr },
 	{ RandomRobo, nullptr, nullptr },
 	{ RandomSnake, nullptr, nullptr },
 	{ RandomKeyBlock, nullptr, nullptr },
 	{ RandomLeon, nullptr, nullptr },
-	{ RandomSpring, nullptr, nullptr, },
+	{ RandomSpring, nullptr, nullptr },
 	{ RandomBurgerMan, nullptr, nullptr },
 	{ RandomPowerUP, nullptr, nullptr },
 	{ RandomDroppedRings, nullptr, nullptr },
 	{ RandomKeyBlock, nullptr, nullptr },
 	{ RandomUnidus, nullptr, nullptr },
-	{ RandomSpring, nullptr, nullptr, },
+	{ RandomSpring, nullptr, nullptr },
 	{ RandomBuyon, nullptr, nullptr },
 	{ RandomSpinnerC, nullptr, nullptr },
 	{ RandomTank, nullptr, nullptr },
 	{ RandomPowerUP, nullptr, nullptr },
 	{ BigRock, nullptr, nullptr },
-	{ RandomSpeedPad, nullptr, nullptr, },
-	{ RandomSpeedPad, nullptr, nullptr, },
+	{ RandomSpeedPad, nullptr, nullptr },
+	{ RandomSpeedPad, nullptr, nullptr },
 	{ RandomLifePowerup, nullptr, nullptr },
 	{ RandomHat, nullptr, nullptr },
 	{ RandomBurgerMan, nullptr, nullptr },
 	{ RandomFruit, nullptr, nullptr },
-	{ RandomSpikeBall, nullptr, nullptr, },
+	{ RandomSpikeBall, nullptr, nullptr },
 	{ RandomCheckPoint, nullptr, nullptr },
 	{ RandomAmebot, nullptr, nullptr },
 	{ RandomPolice, nullptr, nullptr },
@@ -484,108 +488,80 @@ extern "C"
 	{ RandomPowerUP, nullptr, nullptr },
 	{ RandomEGacha, nullptr, nullptr },
 	{ RandomSman, nullptr, nullptr },
-	{ nullptr, RandomVSpeed, nullptr, },
-	{ nullptr, RandomKillMomentum, nullptr, },
-	{ nullptr, RandomHSpeed, nullptr, },
-	{ nullptr, RandomVSpeed, nullptr, },
-	{ nullptr, RandomHSpeed, nullptr, },
+	{ RandomFan, nullptr, nullptr },
+	{ nullptr, RandomVSpeed, nullptr },
+	{ nullptr, RandomKillMomentum, nullptr },
+	{ nullptr, RandomHSpeed, nullptr },
+	{ nullptr, RandomVSpeed, nullptr },
+	{ nullptr, RandomHSpeed, nullptr },
 	{ nullptr, FastAccel, nullptr },
-	{ nullptr, nullptr, RandomXGravity},
-	{ nullptr, nullptr, SwapCamera},
-	{ nullptr, nullptr, RandomControlDisable},
-	{ nullptr, nullptr, RandomPause},
-	{ nullptr, nullptr, RandomTeleport},
-	{ nullptr, nullptr, RandomBarrier},
-	{ nullptr, nullptr, RandomInvincibility},
-	{ nullptr, nullptr, RandomControlDisable},
-	{ nullptr, nullptr, NoGravity},
-	{ nullptr, nullptr, RingAllergy},
-	{ nullptr, nullptr, NoGravity},
-	{ nullptr, nullptr, RandomControlDisable},
-	{ nullptr, nullptr, RandomNoClip},
-	{ nullptr, nullptr, Nos0und_ForYou},
-	{ nullptr, nullptr, RandomPause},
-	{ nullptr, nullptr, RandomDebug},
-	{ nullptr, nullptr, RandomTimeOfDay},
-	{ nullptr, nullptr, InputInvert},
-	{ nullptr, nullptr, RandomNoClip},
-	{ nullptr, nullptr, RemovePowerUp},
-	{ nullptr, nullptr, SwapCamera},
-	{ nullptr, nullptr, RandomZGravity},
-	{ nullptr, nullptr, RandomTimeOfDay},
-	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
-	{ nullptr, nullptr, RandomRotate},
-	{ nullptr, nullptr, RandomNoClip},
-	{ nullptr, nullptr, RandomPhysics},
-	{ nullptr, nullptr, RandomDPadDownCheck},
-	{ nullptr, nullptr, RemovePowerUp},
-	{ nullptr, nullptr, ChaosPlayVoice_rng},
-	{ nullptr, nullptr, UncoupleCamera},
-	{ nullptr, nullptr, RandomSwapMusic},
-	{ nullptr, nullptr, RandomTimeOfDay},
-	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
-	{ nullptr, nullptr, RandomHurt},
-	{ nullptr, nullptr, RingAllergy},
-	{ nullptr, nullptr, RandomTimeOfDay},
-	{ nullptr, nullptr, DisablePausee},
-	{ nullptr, nullptr, SwapCamera},
-	{ nullptr, nullptr, RandomCollisionSize},
-	{ nullptr, nullptr, SwapCamera},
-	{ nullptr, nullptr, AndKnuckles},
-	{ nullptr, nullptr, RandomYGravity},
-	{ nullptr, nullptr, RandomChaoo},
-	{ nullptr, nullptr, FlipCamera},
-	{ nullptr, nullptr, RandomXGravity},
-	{ nullptr, nullptr, RandomYGravity},
-	{ nullptr, nullptr, RandomTikalHint},
-	{ nullptr, nullptr, RandomSnowboard},
-	{ nullptr, nullptr, RandomTimeOfDay},
-	{ nullptr, nullptr, RandomCollisionSize},
-	{ nullptr, nullptr, RandomMagneticBarrier},
-	{ nullptr, nullptr, IncreaseCutsceneSkipTime},
-	{ nullptr, nullptr, RandomZGravity},
-	{ nullptr, nullptr, SpinCamera},
-	{ nullptr, nullptr, RandomTikalHint},
-	{ nullptr, nullptr, RandomHurt},
-	{ nullptr, nullptr, DrunkCamera},
-	{ nullptr, nullptr, DrunkCamera},
+	{ nullptr, nullptr, RingAllergy },
+	{ nullptr, nullptr, RandomSnowboard },
+	{ nullptr, nullptr, RandomNoClip },
+	{ nullptr, nullptr, RandomTeleport },
+	{ nullptr, nullptr, RandomControlDisable },
+	{ nullptr, nullptr, RemovePowerUp },
+	{ nullptr, nullptr, RandomHurt },
+	{ nullptr, nullptr, NoGravity },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, RandomPause },
+	{ nullptr, nullptr, RandomMagneticBarrier },
+	{ nullptr, nullptr, RandomYGravity },
+	{ nullptr, nullptr, RandomTikalHint },
+	{ nullptr, nullptr, RandomXGravity },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, NoGravity },
+	{ nullptr, nullptr, SpinCamera },
+	{ nullptr, nullptr, RandomPhysics },
+	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, FlipCamera },
+	{ nullptr, nullptr, RandomZGravity },
+	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, RemovePowerUp },
+	{ nullptr, nullptr, AndKnuckles },
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime },
+	{ nullptr, nullptr, RandomZGravity },
+	{ nullptr, nullptr, RandomInvincibility },
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime },
+	{ nullptr, nullptr, DrunkCamera },
+	{ nullptr, nullptr, RandomNoClip },
+	{ nullptr, nullptr, RandomRotate },
+	{ nullptr, nullptr, RandomBarrier },
+	{ nullptr, nullptr, RandomHurt },
+	{ nullptr, nullptr, RandomCollisionSize },
+	{ nullptr, nullptr, RandomSwapMusic },
+	{ nullptr, nullptr, UncoupleCamera },
+	{ nullptr, nullptr, InputInvert },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, RandomPause },
+	{ nullptr, nullptr, RandomControlDisable },
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime },
+	{ nullptr, nullptr, RandomControlDisable },
+	{ nullptr, nullptr, RandomNoClip },
+	{ nullptr, nullptr, RandomXGravity },
+	{ nullptr, nullptr, RandomChaoo },
+	{ nullptr, nullptr, RandomYGravity },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, DisablePausee },
+	{ nullptr, nullptr, Nos0und_ForYou },
+	{ nullptr, nullptr, ChaosPlayVoice_rng },
+	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, RandomDebug },
+	{ nullptr, nullptr, RandomDPadDownCheck },
+	{ nullptr, nullptr, RingAllergy },
+	{ nullptr, nullptr, RandomTikalHint },
+	{ nullptr, nullptr, RandomCollisionSize },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, DrunkCamera },
 	};
-
 	size_t ChaosSize = LengthOfArray(ChaosArray);
 	__declspec(dllexport) void __cdecl OnFrame()
 	{
 		// Executed every running frame of SADX
 		if (GameState != 15 && GameState != 16 && TextLoaded)
 		{
-			SpinnerTextLoader = false;
-			LeonTextLoader = false;
-			KikiTextLoader = false;
-			RinoTextLoader = false;
-			SmanTextLoader = false;
-			EGachaTextLoader = false;
-			PoliceTextLoader = false;
-			SnakeTextLoader = false;
-			RoboTextLoader = false;
-			BuyonTextLoader = false;
-			AmebotTextLoader = false;
-			FSBTextLoader = false;
-			BugerManTextLoader = false;
-			UnidusTextLoader = false;
-			AnimalTextLoader = false;
-			ChaooManagerLoader = false;
-			KeyBlockTextLoader = false;
-			EmblemTextLoader = false;
-			IceTextLoader = false;
-			WindTextLoader = false;
-			TextLoaded = false;
-			DebugEnabled = false;
-			ChaoFruitTextLoader = false; //@temp.walker may remove
-			ChaoHatTextLoader = false;
-			BigRockTextLoader = false;
-			CarTextLoader = false;
-			FanTextLoader = false;
-			WriteOnce = false;
-			HatNumb = -1;
+			ResetTextureBools();
 		}
 		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
@@ -594,14 +570,10 @@ extern "C"
 			NoClip_Timer--;
 			if (NoClip_Timer == 1 && NoClip_Timer != 0)
 			{
-				WriteData((int*)0x00444C1D, (int)0xFF37EEE8);
-				WriteData((int*)0x00444C21, (int)0x10C483FF);
-				WriteData((int*)0x0044A66B, (int)0xFFA430E8);
-				WriteData((int*)0x0044A66F, (int)0x14C483FF);
-				WriteData((int*)0x007887D9, (int)0x00D042E8);
-				WriteData((int*)0x007887DD, (int)0x74C08500);
+				WalkThruWallsReset();
 				NoClip_Timer = 0;
 				strcpy_s(LastEffect, 128, "Walk Thru Walls Disabled");
+				return;
 			}
 		}
 		if (InputInvert_Timer <= 420 && InputInvert_Timer != 0)
@@ -692,7 +664,7 @@ extern "C"
 			}
 			DPadDown_Timer--;
 		}
-		if (DPadDown_Timer == 1 && DpadDown != 1)//if timer is less then or 1 and DPadDown is not 1 
+		if (DPadDown_Timer == 1 && DpadDown != 1)//if timer is 1 and DPadDown is not 1 
 		{
 			KillPlayer(0);
 			DPadDown_Timer = 0;
@@ -719,9 +691,9 @@ extern "C"
 		}
 		if (FastAccel_Timer <= 2 && FastAccel_Timer != 0)
 		{
-			CharObj2Ptrs[0]->PhysicsData.MaxAccel = 3.0f;
-			CharObj2Ptrs[0]->PhysicsData.AirAccel = 0.03099999949f;
-			CharObj2Ptrs[0]->PhysicsData.HangTime = 60;
+			CharObj2Ptrs[0]->PhysicsData.MaxAccel = OldMaxAccel;
+			CharObj2Ptrs[0]->PhysicsData.AirAccel = OldAirAccel;
+			CharObj2Ptrs[0]->PhysicsData.HangTime = OldHangTime;
 			strcpy_s(LastEffect, 128, "Fast Accel Disabled");
 			FastAccel_Timer = 0;
 		}
@@ -846,8 +818,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomTeleport();
-			//RandomFan(0); need to fix texture
+			RandomFan(0);
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
