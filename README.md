@@ -114,6 +114,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Flip Camera - Flips The Camera Upside down for 480 frames.
 - Spin Camera - Spins the Camera in a Circle for 480 frames.
 - Drunk Camera - Makes the Camrea Sway from Left to Right for 550 frames.
+- Random Fan - Spawns in the Fan from Final Egg Act 2 under the player
 - 
 ## Special Thanks
 Thanks to Sora for the code base and helping me with dumb questions  
