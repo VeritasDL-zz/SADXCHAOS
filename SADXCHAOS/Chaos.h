@@ -43,6 +43,7 @@ extern bool GrabAbleObjectsEnabled;
 extern bool GravityChangeEnabled;
 extern bool RPhysicsEnabled;
 extern bool EggViperHandyCapEanbled;
+extern bool RandomEmblemEnabled;
 extern char* LastEffect;
 extern bool EnableFontScaling;
 extern bool SpinnerTextLoader;

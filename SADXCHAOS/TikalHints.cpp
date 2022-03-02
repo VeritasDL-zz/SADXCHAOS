@@ -11,7 +11,7 @@ void RandomTikalHint()
 	LoadAutoHint(Hints[hintrand], Voices[hintrand]);
 	strcpy_s(LastEffect, 128, "Tikal Hint");
 }
-const HintText_Text const Hints[48][3] = {
+const HintText_Text const Hints[60][3] = {
 {
 { "Watch out for the cars!.", 120 }, // text, time
 { 0 }, //Second page
@@ -253,6 +253,66 @@ const HintText_Text const Hints[48][3] = {
 { 0 }, //Second page
 { 0 } //idk 3rd page or always null?
 },
+{
+{ "Hello there friend!\nHow are you?", 140 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "Attacking other countries;\nstealing; and killing...", 240 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "My father is coming here soon.", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "They came...\nand my Father...", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "No; don't go any closer!", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "No way!", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "I won't obey!", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "You must save Amy.\nHurry to the Mystic Ruins!", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "Go to the Captain's Room.", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "The water has been contaminated.", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "Aim for the frog\nand cast your lure!", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "The tentacle turns\nred when you hit it.", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
 };
 size_t HintSize = LengthOfArray(Hints);
 int Voices[] = {
@@ -303,5 +363,17 @@ int Voices[] = {
 389,//core
 145469,//Omochao
 69420, //skyrim intro
-42069 //skyrim adventure arrow
+42069, //skyrim adventure arrow
+733,
+1028,
+1100,
+1139,
+1213,
+1437,
+1440,
+1562,
+1692,
+1939,
+1962,
+1970
 };

@@ -2690,4 +2690,5 @@ FunctionPointer(void, KillPlayer, (uint8_t ID), 0x440CD0);
 DataArray(taskwk*, PlayerTaskPtr, 0x3B42E10, 8);
 VoidFunc(ResumeSound, 0x40D0A0);
 FunctionPointer(ObjectMaster*, LoadAutoHint, (const HintText_Text* texts, int voice), 0x7A1BE0);
+
 #endif /* SADXMODLOADER_SADXVARS_H */

@@ -83,7 +83,7 @@ void RandomWindKey(EntityData1* p1) // disabled for now 9/23/2021, updated to ta
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	WindKey->ocp = objCondition;
 	WindKey->twp->pos = EntityData1Ptrs[0]->Position;
-	strcpy_s(LastEffect, 128, "Random IceKey");
+	strcpy_s(LastEffect, 128, "Random WindKey");
 	return;
 } // disabled for now 9/23/2021
 void RandomFruit(EntityData1* p1)
@@ -95,7 +95,7 @@ void RandomFruit(EntityData1* p1)
 	}
 	if (!ChaoFruitTextLoader)
 	{
-		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST); //need to change to what ever loads the chao fruit textlist
+		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
 		TextLoaded = true;
 		ChaoFruitTextLoader = true;
 	}
@@ -172,7 +172,7 @@ void RandomSpeedPad(EntityData1* p1)
 }
 void RandomFan(EntityData1* p1)
 {
-	//need to load texture still, need to figure out fan power?
+	//need to figure out fan power?
 	if (!FanTextLoader)
 	{
 		LoadPVM("OBJ_FINALEGG", &OBJ_FINALEGG_TEXLIST); 
@@ -207,8 +207,7 @@ void RandomBurgerMan(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned BurgerMan");
 	return;
 }
-
-void RandomKeyBlock(EntityData1* p1)//updated untested
+void RandomKeyBlock(EntityData1* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
@@ -378,10 +377,16 @@ void RandomSpikeBall(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Random SpikeBall");
 	return;
 }
-void RandomEmblem(EntityData1* p1)//updated 10/04/2021 doesnt work still lol get fucked, figured out emblem id but still doesnt work, lol
+void RandomEmblem(EntityData1* p1)//UPDATED (3/1/2022) IT WORKS
 {
-	//SaveFile.Emblems[0] = SaveFile.Emblems[0] - 1;
-	//WriteData((BYTE*)0x03B2B5F6, (BYTE)0x00);//resets the emblem so it can be collected again, sonic emeraldcoast
+	if (!RandomEmblemEnabled)
+	{
+		NewEffect();
+		return;
+	}
+	CHAR FIELDEMBLEM = *(CHAR*)0x03B2B5F6;
+	FIELDEMBLEM &= ~(1 << 6);
+	WriteData((CHAR*)0x03B2B5F6, (CHAR)FIELDEMBLEM);
 	if (!EmblemTextLoader)
 	{
 		LoadPVM("EMBLEM", &EMBLEM_TEXLIST);
@@ -395,7 +400,7 @@ void RandomEmblem(EntityData1* p1)//updated 10/04/2021 doesnt work still lol get
 	Emblem->twp->pos = EntityData1Ptrs[0]->Position;
 	Emblem->twp->pos.y += rand() % 5 + 3;
 	Emblem->twp->pos.z += rand() % 100 + 1 * 9;
-	Emblem->twp->ang.x = rand() % 1000;
+	Emblem->twp->ang.x = rand() % 500 * 1.6969f; //speed it rotates at
 	Emblem->twp->value.l = 129; //Emblem ID, holy jesus 
 	strcpy_s(LastEffect, 128, "Random Emblem");
 	return;

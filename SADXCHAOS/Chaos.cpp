@@ -11,110 +11,109 @@
 using std::string;
 
 
-//changelog
-//started Mod 8/5/2021
-//added code base from Soar's scrapped "mania" mode
-//added debug print out for mods being enabled
-//added random time of day
-//added random dropped rings
-//added random Clip level (not sure if it works)
-//added randompause (not sure if it works)
-//added random char
-//added random camera (not sure if it works)
-//added random debug (not sure if it works and i need a way to turn it off after a short period
-//added random xyz gravity (havent enabled them or tested them)
-//added random barrier
-//added random mag barrier
-//added invincibility
-//added random debug
-//random powerup was crashing due to bomb power up? havent fixed
-//sometimes the other give powerup codes i have kill the player depending on the state? 
-//fixed random power up crash, by taking soras random power up code form sadxvschat
-//updated random pause to make you unpause a few times, (currently 10 frames) idk how i would make it pause, unpause, automaticly cuz setting gamestate in ONFrame just makes it happen so fast you dont even see it, 
-//removed set scale
-//removed my own random powerups, (still in code, just unused)
-//made debug last a set amount of frames (75 currently) and force the player out of debug movement.
-//added press Dpad Down or die
-//changed random camera to Swap Camera lol
-//added random control disable 
-//added Random Y Gravity
-//added Random NoClip
-//fixed Random NoClip Crash?
-//made debug mode work again
-//made debug mod last longer might make shorter
-//fixed Camera Swap Code
-//made Control Disable look better
-//made Control Disable last longer? might shorten
-//fixed random Gavity values maybe?
-//started working on random tikal hints - thanks for the help kell, main and refrag, 
-//finished random tikal hint, just need to add more hints, 
-//added more hints and the first custom hint with custom voice file!
+//Changelog
+//Started Mod 8/5/2021
+//Added code base from Soar's scrapped "mania" mode
+//Added debug print out for mods being enabled
+//Added random time of day
+//Added random dropped rings
+//Added random Clip level (not sure if it works)
+//Added randompause (not sure if it works)
+//Added random char
+//Added random camera (not sure if it works)
+//Added random debug (not sure if it works and i need a way to turn it off after a short period
+//Added random xyz gravity (havent enabled them or tested them)
+//Added random barrier
+//Added random mag barrier
+//Added invincibility
+//Added random debug
+//Random powerup was crashing due to bomb power up? havent fixed
+//Sometimes the other give powerup codes i have kill the player depending on the state? 
+//Fixed random power up crash, by taking soras random power up code form sadxvschat
+//Updated random pause to make you unpause a few times, (currently 10 frames) idk how i would make it pause, unpause, automaticly cuz setting gamestate in ONFrame just makes it happen so fast you dont even see it, 
+//Removed set scale
+//Removed my own random powerups, (still in code, just unused)
+//Made debug last a set amount of frames (75 currently) and force the player out of debug movement.
+//Added press Dpad Down or die
+//Changed random camera to Swap Camera lol
+//Added random control disable 
+//Added Random Y Gravity
+//Added Random NoClip
+//Fixed Random NoClip Crash?
+//Made debug mode work again
+//Made debug mod last longer might make shorter
+//Fixed Camera Swap Code
+//Made Control Disable look better
+//Made Control Disable last longer? might shorten
+//Fixed random Gavity values maybe?
+//Started working on random tikal hints - thanks for the help kell, main and refrag, 
+//Finished random tikal hint, just need to add more hints, 
+//Added more hints and the first custom hint with custom voice file!
 //Re-Enabled Random Dropped Rings (8/11/2021)
-//fixed a bug with RandomTimeOfDay setting the chao timer to 1800
-//fixed debug mode crash, gg 
+//Fixed a bug with RandomTimeOfDay setting the chao timer to 1800
+//Fixed debug mode crash, gg 
 //Credits to MainMemory for the Snowboard spawn Code, https://github.com/MainMemory/SADXBoardSpawner
-//cleaned up no clip code
-//cleaned up control disable code
-//changed y grav rand math
-//cleaned up ints
-//made Kill Momentum play the custom roblox OOF sound,
-//added random checkpoint (might not work as a real checkpoint but funny af)
-//added Movement Stick Invert code thanks to Sora!
-//added support for knux, amy, and metal sonic to movement debug, Tails, gamma and big dont have movement debug thanks to stars for pointing out im dumb,
-//added random rotate
-//trying to add support for editing the chaos timer, shits fucked 
-//started adding Random Telport with the help of Refrag :)
-//added Ability to edit How often things happen in the config menu
-//cleaned up debug Output a little
-//changed how long Gravity, noclip, and snowboard last before being disabled
-//finished sonic casino act 0 teleports
-//started working on casino act 1 teleport (might work for tails and sonic)
-//changed gravity random math again
-//finished Casino act 1 teleports
-//finished teleports to emeraldcoast act 0
-//finished icecap act 0 and 1 teleports
-//finished speedhighway act 0 sonic teleports
-//started working on act 2 speedhighway sonic teleports
-//added Random Life PowerUp
-//finished randomteleport crashing when not in a level/act that have teleports thanks to refrag again!
-//finished twinkle park teleports
-//added Option for Last Effect to Be Printed to Game Screen
-//changed size, color and position of Last Effect text, also render a paque/translucent box around it.
+//Cleaned up no clip code
+//Cleaned up control disable code
+//Changed y grav rand math
+//Cleaned up ints
+//Made Kill Momentum play the custom roblox OOF sound,
+//Added random checkpoint (might not work as a real checkpoint but funny af)
+//Added Movement Stick Invert code thanks to Sora!
+//Added support for knux, amy, and metal sonic to movement debug, Tails, gamma and big dont have movement debug thanks to stars for pointing out im dumb,
+//Added random rotate
+//Trying to add support for editing the chaos timer, shits fucked 
+//Started adding Random Telport with the help of Refrag :)
+//Added Ability to edit How often things happen in the config menu
+//Cleaned up debug Output a little
+//Changed how long Gravity, noclip, and snowboard last before being disabled
+//Finished sonic casino act 0 teleports
+//Started working on casino act 1 teleport (might work for tails and sonic)
+//Changed gravity random math again
+//Finished Casino act 1 teleports
+//Finished teleports to emeraldcoast act 0
+//Finished icecap act 0 and 1 teleports
+//Finished speedhighway act 0 sonic teleports
+//Started working on act 2 speedhighway sonic teleports
+//Added Random Life PowerUp
+//Finished randomteleport crashing when not in a level/act that have teleports thanks to refrag again!
+//Finished twinkle park teleports
+//Added Option for Last Effect to Be Printed to Game Screen
+//Changed size, color and position of Last Effect text, also render a paque/translucent box around it.
 //Re Enabled Random Hurt
 //Added Option to print last effet to screen
-//added Ability to spawn Enemys
-//added more Enemys lol
-//added RandomBurgerMan
-//actully enabled Random Rotate.
-//added 24 new tikal hints
-//added more new "hints"
-//sadly i have a crash with enemys in hub-worlds, only Beat, and Spinners can spawn in hubworlds currently 
-//added randomchao, thanks to sora for the help and shuch
-// 
-//added config options for, Random Enemys, Input Invert and RandomPause
-//added FastAccel (for now) 
-//added random physics thanks to MainMemory (https://github.com/MainMemory/SADXPhysicsSwapMod) and Refrag  
-//added Decoupple Camera
-//added no sound,
-//fixed a bug with fast accel
-//added Disable Pause
-//fixed a few warnings
-//added Random Key Block
-//added random colors for the random key block, 
-//added random emblem.
-//fixed a bug with the texture loader resetter 
-//added config to disable, disable pause
+//Added Ability to spawn Enemys
+//Added more Enemys lol
+//Added RandomBurgerMan
+//Actully enabled Random Rotate.
+//Added 24 new tikal hints
+//Added more new "hints"
+//Sadly i have a crash with enemys in hub-worlds, only Beat, and Spinners can spawn in hubworlds currently 
+//Added randomchao, thanks to sora for the help and shuch
+//Added config options for, Random Enemys, Input Invert and RandomPause
+//Added FastAccel (for now) 
+//Added random physics thanks to MainMemory (https://github.com/MainMemory/SADXPhysicsSwapMod) and Refrag  
+//Added Decoupple Camera
+//Added no sound,
+//Fixed a bug with fast accel
+//Added Disable Pause
+//Fixed a few warnings
+//Added Random Key Block
+//Added random colors for the random key block, 
+//Added random emblem.
+//Fixed a bug with the texture loader resetter 
+//Added config to disable, disable pause
 //Removed OOF from Kill momentum
-//updated Effect Table
+//Updated Effect Table
 //Tikal Hint now 20% less likely
 //RandomKillMomentum 20% less likly
-//changed no_s0und_ to 222 frames from 110 frames
-//ghetto fix for Y offset change with Random Phys.
-//fix for Debug Scaling thanks to PKR's Debug mod https://github.com/PiKeyAr/sadx-debug-mode/
-//fix for debug mod stacking
-//added Random Chao Fruit and Chao Hat, thanks to kell and pkr
-//changed most spawn things to using tasks, removed creation of setdata for objects that dont need it.
-//fixed RandomFallingSpikeBall moving up and down 
+//Changed no_s0und_ to 222 frames from 110 frames
+//Ghetto fix for Y offset change with Random Phys.
+//Fix for Debug Scaling thanks to PKR's Debug mod https://github.com/PiKeyAr/sadx-debug-mode/
+//Fix for debug mod stacking
+//Added Random Chao Fruit and Chao Hat, thanks to kell and pkr
+//Changed most spawn things to using tasks, removed creation of setdata for objects that dont need it.
+//Fixed RandomFallingSpikeBall moving up and down 
 //Started Working on Big Ice Cap Rock
 //Big IceCap Rock Finished
 //AndKnuckles added 
@@ -134,9 +133,9 @@ using std::string;
 //Re-enabled Random X and Z Gravity
 //Hopfully Fixed a Crash/Memory Leak with Last Effect, 
 //Still Working on Random Character 
-//split up code into multipul CPP files
-//moved Tikal Hints to its own .h/.cpp file
-//moved debug draw to its own .h/.cpp file too
+//Split up code into multipul CPP files
+//Moved Tikal Hints to its own .h/.cpp file
+//Moved debug draw to its own .h/.cpp file too
 //Added Ring Allergy and Config For Ring Allergy, 
 //Fixed Ring Allergy (I think)
 //Added A EggViper HandyCap, with config option, (1/22/2022)
@@ -146,35 +145,52 @@ using std::string;
 //Added Check for Big Fishing to make playing a big a little bit easier (1/22/2022)
 //Disabled Enemies From Spawning Durring E101R boss fight (1/25/2022)
 //fixed bug with big fishing code (1/22/2022)
-//stopped sman for spawning durring egg viper (1/22/2022)
+//Stopped sman for spawning durring egg viper (1/22/2022)
 //Added IncreaseCutsceneSkipTime - Sets Frames needed to skip to 1A2 (1/29/2022)
-//started working on remove powerup (1/29/2022)
-//still working on remove powerup (1/30/2022)
+//Started working on remove powerup (1/29/2022)
+//Still working on remove powerup (1/30/2022)
 //Created a NewEffect function and made all skipped mods call the function (1/30/2022)
-//fixed a bug with DisablePause and RingAllergy (1/30/2022)
+//Fixed a bug with DisablePause and RingAllergy (1/30/2022)
 //Enabled RingAllergy (2/1/2022)
 //Enabled BigRock (2/1/2022)
 //Changed RandomDroppedRings to Use TakeRingsInterval1 rather then set rings to 0 (2/15/2022)
 //Added FlipCamera thanks to Skoob (2/18/2022)
-//added SpinCamera (2/18/2022)
-//added FlipCamera and SpinCamera to ChaosArray (2/18/2022)
+//Added SpinCamera (2/18/2022)
+//Added FlipCamera and SpinCamera to ChaosArray (2/18/2022)
 //Shuffled ChaosArray because why not (2/18/2022)
-//added DrunkCamera (2/20/2022)
-//added DrunkCamera to the array (2/25/2022)
-//added Config Option for The Three Camera Effects (2/25/2022)
-//added Custom Teleports for all three acts of Sonic's Final Egg (2/25/2022)
-//workin on adding the fans from final egg act 2 to the object spawn list, (2/25/2022)
-//finished RandomFan thanks to Sora! (2/25/2022)
-//moved texture reset bools to its own .cpp file (2/26/2022)
-//fixed a small "bug" with FastAccel (2/26/2022)
-//shuffled chaos array again (2/26/2022)
+//Added DrunkCamera (2/20/2022)
+//Added DrunkCamera to the array (2/25/2022)
+//Added Config Option for The Three Camera Effects (2/25/2022)
+//Added Custom Teleports for all three acts of Sonic's Final Egg (2/25/2022)
+//Workin on adding the fans from final egg act 2 to the object spawn list, (2/25/2022)
+//Finished RandomFan thanks to Sora! (2/25/2022)
+//Moved texture reset bools to its own .cpp file (2/26/2022)
+//Fixed a small "bug" with FastAccel (2/26/2022)
+//Shuffled chaos array again (2/26/2022)
+//Small change to randompowerup removal (2/27/2022)
+//Added 12 new Tikal Hints (2/28/2022)
+//Fixed Random Emblem (3/1/2022)
+//Added Config Option for Random Emblem (3/1/2022) 
+// 
+// 
+//---------TO-DO---------
+// Test Stuff
+// Log Known Crashes
+// Add More Custom Tikal Hints
+// Add More Random Teleport Locations
+// More Camera Effects? (Sideways?)
+// Need to Fix Ice&Wind Key
+// Need to fix or scrap Big Car
+// 
+// 
+// 
 // 
 //Todo
-//random emblem broke 
+//Random emblem broke 
 //Kill momentum doesn't always work?
-//beat has bad texture in redmountain? 
-//gamma hs, ham crashed 7 times, in a row
-//seems to be related to gamma locking onto enemys he was never intended to? idk
+//Beat has bad texture in redmountain? 
+//Gamma hs, ham crashed 7 times, in a row
+//Seems to be related to gamma locking onto enemys he was never intended to? idk
 
 char oldRand = -1;
 int Chaos_Timer = 0;
@@ -226,6 +242,7 @@ bool RPhysicsEnabled = true;
 bool EggViperHandyCapEanbled = true;
 bool AllergicToRings = true;
 bool CameraEffects = true;
+bool RandomEmblemEnabled = true;
 char* LastEffect = new char[128];
 bool EnableFontScaling = false;
 bool SpinnerTextLoader = false;
@@ -322,6 +339,7 @@ extern "C"
 		AllergicToRings = config->getBool("General", "AllergicToRings", true);
 		EggViperHandyCapEanbled = config->getBool("General", "EggViperHandyCap", true);
 		CameraEffects = config->getBool("General", "CameraEffects", true);
+		RandomEmblemEnabled = config->getBool("General", "RandomEmblem", true);
 		delete config;
 		InitializeRandomCoordinates();
 		WriteCall((void*)0x4E9423, LoadSnowboardObject);
@@ -332,12 +350,12 @@ extern "C"
 		WriteCall((void*)0x4EDD17, OverRideBigRockTex);
 		WriteCall((void*)0x5B7581, LoadFETexObj);
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
-		WriteData((char*)0x4EE7BB, (char)4);//big ice rock pickup ability
+		WriteData((char*)0x4EE7BB, (char)4);//Big ice rock pickup ability
 		//WriteData((char*)0x639A00, (char)4);//Patch for Picking Up Car in Station Square Act 0
-		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//stops the amy key block from exploding 
-		WriteData((int*)0x017D0A38, (int)0xC7C35000);//stops the amy key block from exploding
-		WriteData((int*)0x017D0A44, (int)0xC7C35000);//stops the amy key block from exploding
-		WriteData((int*)0x017D0A50, (int)0xC7C35000);//stops the amy key block from exploding
+		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//Stops the amy key block from exploding 
+		WriteData((int*)0x017D0A38, (int)0xC7C35000);//Stops the amy key block from exploding
+		WriteData((int*)0x017D0A44, (int)0xC7C35000);//Stops the amy key block from exploding
+		WriteData((int*)0x017D0A50, (int)0xC7C35000);//Stops the amy key block from exploding
 
 		//all of this is taken from https://github.com/MainMemory/SADXCharSel, //Temp Disabled as of 1/22/2022
 		//WriteData((Uint8*)0x007A4DC4, PLAYER_COUNT); // Spring_Main
@@ -450,7 +468,7 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-	ChaosS ChaosArray[102]
+	ChaosS ChaosArray[103]
 	{
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
@@ -489,6 +507,7 @@ extern "C"
 	{ RandomEGacha, nullptr, nullptr },
 	{ RandomSman, nullptr, nullptr },
 	{ RandomFan, nullptr, nullptr },
+	{ RandomEmblem, nullptr, nullptr },
 	{ nullptr, RandomVSpeed, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr },
 	{ nullptr, RandomHSpeed, nullptr },
@@ -658,13 +677,13 @@ extern "C"
 			SetDebugFontColor(0xFFFF0000);
 			ScaleDebugFont(18);
 			DisplayDebugString(NJM_LOCATION(15, 40), "- PRESS DPAD DOWN OR DIE!!! -");
-			if (ControllerPointers[0]->HeldButtons & Buttons_Down) //checks if dpad pressed down
+			if (ControllerPointers[0]->HeldButtons & Buttons_Down) //Checks if dpad pressed down
 			{
-				DpadDown = 1; // sets dpadcheck to 1
+				DpadDown = 1; //Sets dpadcheck to 1
 			}
 			DPadDown_Timer--;
 		}
-		if (DPadDown_Timer == 1 && DpadDown != 1)//if timer is 1 and DPadDown is not 1 
+		if (DPadDown_Timer == 1 && DpadDown != 1)//If timer is 1 and DPadDown is not 1 
 		{
 			KillPlayer(0);
 			DPadDown_Timer = 0;
@@ -818,7 +837,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomFan(0);
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

@@ -309,7 +309,6 @@ void FastAccel(CharObj2* p1)
 	OldMaxAccel = CharObj2Ptrs[0]->PhysicsData.MaxAccel;
 	OldAirAccel = CharObj2Ptrs[0]->PhysicsData.AirAccel;
 	OldHangTime = CharObj2Ptrs[0]->PhysicsData.HangTime;
-
 	CharObj2Ptrs[0]->PhysicsData.MaxAccel = 10.0f;
 	CharObj2Ptrs[0]->PhysicsData.AirAccel = 0.10f;
 	CharObj2Ptrs[0]->PhysicsData.HangTime = 120;
@@ -380,7 +379,6 @@ void RandomHurt()
 		NewEffect();
 		return;
 	}
-
 }
 void RandomPowerUP(EntityData1* p1)
 {
@@ -694,6 +692,7 @@ void RingAllergy()
 	RingCount = Rings;
 	RingAllergy_Timer = 500;
 	strcpy_s(LastEffect, 128, "Ring Allergy");
+	return;
 }
 void TeleportRandomTask()
 {
@@ -710,6 +709,7 @@ void IncreaseCutsceneSkipTime()
 		WriteOnce = true;
 		WriteData((int*)0x03B2C580, (int)0x01A2);
 		strcpy_s(LastEffect, 128, "Long Cutscene Time");
+		return;
 	}
 }
 void RemovePowerUp()
@@ -725,7 +725,6 @@ void RemovePowerUp()
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LightShoes;
 				//SetEventFlag(EventFlags_Sonic_LightShoes);
-				
 				WriteData<1>((int*)0x3B18895, 0x00);
 				strcpy_s(LastEffect, 128, "Removed Light Speed Shoes");
 			}
@@ -749,7 +748,7 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Tails)
 		{
-			if (CharObj2Ptrs[0]->Upgrades & Upgrades_JetAnklet)
+			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_JetAnklet)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_JetAnklet;
 				WriteData<1>((int*)0x3B188D5, 0x00);
@@ -814,9 +813,10 @@ void RemovePowerUp()
 }
 void RandomCollisionSize()
 {
-	int CSize = rand() % 9 + (1);
+	int CSize = rand() % 9 + (1);//adds 1 to ensure CSize is never 0
 	CharObj2Ptrs[0]->PhysicsData.CollisionSize = CSize;
 	strcpy_s(LastEffect, 128, "Random Collision Size");
+	return;
 }
 void FlipCamera()
 {
@@ -826,7 +826,7 @@ void FlipCamera()
 		return;
 	}
 	CameraNOP();
-	CameraFlip_Timer = 480; //need to decide time, 
+	CameraFlip_Timer = 480;
 	strcpy_s(LastEffect, 128, "Flipped Camera");
 	return;
 }
@@ -852,4 +852,5 @@ void DrunkCamera()
 	CameraNOP();
 	strcpy_s(LastEffect, 128, "Drunk");
 	DrunkCamera_Timer = 550;
+	return;
 }
