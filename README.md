@@ -155,7 +155,7 @@ Contributions are what make the open source community such an amazing place to l
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See [License](https://github.com/VeritasDL/SADXCHAOS/blob/main/LICENSE) for more information.
+Distributed under the GNU General Public License v2.0. See [License](https://github.com/VeritasDL/SADXCHAOS/blob/main/LICENSE) for more information.
 
 
 
