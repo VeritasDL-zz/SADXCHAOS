@@ -171,6 +171,15 @@ using std::string;
 //Added 12 new Tikal Hints (2/28/2022)
 //Fixed Random Emblem (3/1/2022)
 //Added Config Option for Random Emblem (3/1/2022) 
+//Working on Random Air Craft (3/3/2022)
+//Sorta Finished Random Air Craft (3/4/2022)
+//Random AirCraft finished thanks to Sora for the help (3/5/2022)
+// 
+
+// 
+//   
+// 
+// 
 // 
 // 
 //---------TO-DO---------
@@ -215,6 +224,7 @@ int FastAccel_Timer = 0;
 int Camera_Timer = 0;
 int s0und__Timer = 0;
 int DisablePause_Timer = 0;
+int RandomSpawnAmount = 0;
 int Animaltyperand = 0;
 int EmblemID = 0;
 int CurrentLevelOld = -1;
@@ -230,6 +240,7 @@ int CameraSpin_Val = 0;
 int DrunkCamera_Timer = 0;
 int DrunkCam = 0;
 int Direction = 0x50;
+int AirCraftSpawerFollow_Timer = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -270,13 +281,13 @@ bool ChaoFruitTextLoader = false;
 bool ChaoHatTextLoader = false;
 bool BigRockTextLoader = false;
 bool CarTextLoader = false;
+bool AirCraftTextLoader = false;
 bool ShownMenu = false;
 bool TextLoaded = false;
 bool DebugEnabled = false;
 bool WriteOnce = false;
 const unsigned char PLAYER_COUNT = 4;
 ObjectMaster* snowboard;
-
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
 {
 	return snowboard = LoadObject(flags, index, loadSub);
@@ -304,6 +315,10 @@ void OverRideBigRockTex()
 void LoadFETexObj()
 {
 	njSetTexture(&OBJ_FINALEGG_TEXLIST);
+}
+void LoadSDTexObj()
+{
+	njSetTexture(&OBJ_SKYDECK_TEXLIST);
 }
 void NewEffect()
 {
@@ -347,8 +362,10 @@ extern "C"
 		WriteCall((void*)0x4E9698, LoadSnowboardObject);
 		WriteCall((void*)0x597B34, LoadSnowboardObject);
 		WriteCall((void*)0x597B46, LoadSnowboardObject);
-		WriteCall((void*)0x4EDD17, OverRideBigRockTex);
+		WriteCall((void*)0x4EDD17, OverRideBigRockTex); //fix for Big Ice Cap Rock Texture
 		WriteCall((void*)0x5B7581, LoadFETexObj);
+		WriteCall((void*)0x5F1A52, LoadSDTexObj);//fix for AirCraft Texture
+		WriteCall((void*)0x5F1A78, LoadSDTexObj); //fix for AirCraft Texture
 		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 		WriteData((char*)0x4EE7BB, (char)4);//Big ice rock pickup ability
 		//WriteData((char*)0x639A00, (char)4);//Patch for Picking Up Car in Station Square Act 0
@@ -468,7 +485,7 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-	ChaosS ChaosArray[103]
+	ChaosS ChaosArray[105]
 	{
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
@@ -508,6 +525,8 @@ extern "C"
 	{ RandomSman, nullptr, nullptr },
 	{ RandomFan, nullptr, nullptr },
 	{ RandomEmblem, nullptr, nullptr },
+	{ RandomAirCraft, nullptr, nullptr },
+	{ RandomAirCraft, nullptr, nullptr },
 	{ nullptr, RandomVSpeed, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr },
 	{ nullptr, RandomHSpeed, nullptr },
@@ -810,6 +829,19 @@ extern "C"
 			strcpy_s(LastEffect, 128, "Debug Off");
 			Debug_Timer = 0;
 			DebugEnabled = false;
+		}
+		if (AirCraftSpawerFollow_Timer <= 350 && AirCraftSpawerFollow_Timer != 0)
+		{
+			RandomSpawnAmount = rand() % 50;
+			if (RandomSpawnAmount == 0)
+			{
+				RandomAirCraft(0);
+			}
+			AirCraftSpawerFollow_Timer--;
+		}
+		if (AirCraftSpawerFollow_Timer == 1)
+		{
+			AirCraftSpawerFollow_Timer = 0;
 		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
 			Chaos_Timer++;

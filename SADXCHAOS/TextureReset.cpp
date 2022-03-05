@@ -38,6 +38,8 @@ void ResetTextureBools()
 	BigRockTextLoader = false;
 	CarTextLoader = false;
 	FanTextLoader = false;
+	AirCraftTextLoader = false;
 	WriteOnce = false;
 	HatNumb = -1;
+	AirCraftSpawerFollow_Timer = 0;
 }

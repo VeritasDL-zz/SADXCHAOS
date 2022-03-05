@@ -15,3 +15,4 @@ void RandomSpinnerB(EntityData1* p1);
 void RandomSpinnerC(EntityData1* p1);
 void RandomSman(EntityData1* p1);
 void RandomEGacha(EntityData1* p1);
+void RandomAirCraft(EntityData1* p1);

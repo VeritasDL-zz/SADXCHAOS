@@ -702,9 +702,67 @@ void RandomEGacha(EntityData1* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		GACHAPON->ocp = objCondition;
 		GACHAPON->twp->pos = EntityData1Ptrs[0]->Position;
-		GACHAPON->twp->pos.z += rand() % 30 + 1 * 9;
+		GACHAPON->twp->pos.z += rand() % 35 + 1 * 9;
 		GACHAPON->twp->pos.y += rand() % 30 + 1 * 9;
 	}
 	strcpy_s(LastEffect, 128, "Spawned Beat");
 	return;
 }
+void RandomAirCraft(EntityData1* p1) //if you use this please give me credits as this took 5 days to figure out. 
+{
+	if (!EnemysEnabled)
+	{
+		NewEffect();
+		return;
+	}
+	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	{
+		NewEffect();
+		return;
+	}
+	if (CurrentLevel == LevelIDs_EggViper)
+	{
+		NewEffect();
+		return;
+	}
+	if (!AirCraftTextLoader)
+	{
+		if (!AnimalTextLoader)
+		{
+			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
+				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
+			}
+			AnimalTextLoader = true;
+		}
+		LoadPVM("E_AIRCRAFT", &E_AIRCRAFT_TEXLIST);
+		LoadPVM("Air_signal", &AIR_SIGNAL_TEXLIST);
+		LoadPVM("OBJ_SKYDECK", &OBJ_SKYDECK_TEXLIST);
+		AirCraftTextLoader = true;
+		TextLoaded = true;
+	}
+	task* AirCraft;
+	AirCraft = (task*)LoadObject((LoadObj)2, 3, EnemyAir);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	AirCraft->ocp = objCondition;
+	AirCraft->twp->pos = EntityData1Ptrs[0]->Position;
+	AirCraft->twp->pos.z += rand() % 10 + 1 * 9;
+	AirCraft->twp->pos.y += rand() % 10 + 15 * 9;
+	AirCraft->twp->mode = 2;
+	int number = rand() % 2;
+	if (number)
+	{
+		AirCraft = (task*)LoadObject((LoadObj)2, 3, EnemyAir);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		AirCraft->ocp = objCondition;
+		AirCraft->twp->pos = EntityData1Ptrs[0]->Position;
+		AirCraft->twp->pos.z += rand() % 10 + 10 * 9;
+		AirCraft->twp->pos.y += rand() % 11 + 20 * 9;
+		AirCraft->twp->mode = 2;
+	}
+	if (AirCraftSpawerFollow_Timer == 0)
+	{
+		AirCraftSpawerFollow_Timer = 350;
+	}
+	strcpy_s(LastEffect, 128, "Spawned AirCraft");
+}
+

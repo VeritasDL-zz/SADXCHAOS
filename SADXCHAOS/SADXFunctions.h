@@ -722,6 +722,7 @@ ObjectFunc(Leon_Display_A, 0x4A83B0);
 ObjectFunc(Leon_Main, 0x4A83D0);
 ObjectFunc(Leon_Load, 0x4A85C0);
 ObjectFunc(EAclift, 0x4AA620);
+ObjectFunc(EnemyAir, 0x4AA340);
 ObjectFunc(Kiki_Display, 0x4AB2B0);
 ObjectFunc(Kiki_Main, 0x4ACF80);
 ObjectFunc(Kiki_Load, 0x4AD140);

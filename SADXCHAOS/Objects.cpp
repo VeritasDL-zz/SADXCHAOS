@@ -56,6 +56,7 @@ void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tas
 	}
 	if (!IceTextLoader)
 	{
+		//LoadPVM("HOTSHELTER2", &HOTSHELTER2_TEXLIST);
 		IceTextLoader = true;
 	}
 	task* IceKey;
