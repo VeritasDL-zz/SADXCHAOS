@@ -482,7 +482,7 @@ extern "C"
 			strcpy_s(LastEffect, 128, "Pause Enabled");
 			DisablePause_Timer = 0;
 		}
-		if (CameraFlip_Timer <= 480 && CameraFlip_Timer != 0)
+		if (CameraFlip_Timer <= 250 && CameraFlip_Timer != 0)
 		{
 			CameraFlip_Timer--;//subtract timer
 			SetCameraMode_(0);//Force AutoCam
@@ -491,7 +491,8 @@ extern "C"
 		if (CameraFlip_Timer == 1 && CameraFlip_Timer != 0)
 		{
 			CameraReset();//resets camera ASM
-			CameraFlip_Timer = 0;//set timer to 0 
+			CameraFlip_Timer = 0;//set timer to 0
+			WriteData((int*)0x03B2C68C, (int)0);
 		}
 		if (CameraSpin_Timer <= 480 && CameraSpin_Timer != 0)
 		{
@@ -505,6 +506,7 @@ extern "C"
 			CameraReset();//resets camera ASM
 			CameraSpin_Timer = 0;//set timer to 0 
 			CameraSpin_Val = 0;//set spin val to 0 
+			WriteData((int*)0x03B2C68C, (int)0);
 		}
 		if (DrunkCamera_Timer <= 550 && DrunkCamera_Timer != 0)
 		{

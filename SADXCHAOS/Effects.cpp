@@ -826,7 +826,7 @@ void FlipCamera()
 		return;
 	}
 	CameraNOP();
-	CameraFlip_Timer = 480;
+	CameraFlip_Timer = 250;
 	strcpy_s(LastEffect, 128, "Flipped Camera");
 	return;
 }
