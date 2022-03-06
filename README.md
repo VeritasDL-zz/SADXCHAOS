@@ -57,30 +57,29 @@ This is a mod for the 2004 PC Disc Version of Sonic Adventure DX.
 Download the [Latest Release Here](https://github.com/VeritasDL/SADXCHAOS/releases)
 
 ## List Of Chaos Mods
-- Random Spring - Spawns 1 or 2 random Springs which have random Rotation, Scale, and Position
-- Random SpeedPad - Spawns 1 or 2 Random SpeedPad which have random Rotation, Scale, and Position
-- Random SpikeBall - Spawns 1 or 2 Random SpikeBalls which have random Rotation, Scale, and Position
+- Random Spring - Spawns 1 or 2 random Springs. Which have random Rotation, Scale, and Position
+- Random SpeedPad - Spawns 1 or 2 Random SpeedPad. Which have random Rotation, Scale, and Position
+- Random SpikeBall - Spawns 1 or 2 Random SpikeBalls. Which have random Rotation, Scale, and Position
 - Random Kill Momentum - Sets your Speed to 0.
-- Random VSpeed - Sets your Y Speed to the Y speed Cap?
-- Random HSpeed -  Sets your H Speed to the H speed Cap?
+- Random VSpeed - Sets your Y Speed to the Y speed Cap.
+- Random HSpeed -  Sets your H Speed to the H speed Cap.
 - Random Hurt -  Randomly Hurts the player if they have rings.
 - Random PowerUP -  Randomly Gives you a PowerUP.
 - Random Time Of Day -  Randomly Sets The Time Of Day only when in Adventure fields.
 - Random Dropped Rings -  Drops a Random Amount of rings from 0 to 255, and sets current rings to 0.
-- Random Clip Level -  Changes The Render Distance (Disabled as of 8/10/2021)
-- Random Pause -  Forces The Game Paused for 5 Frames (you must unpause 5 times)
-- Random Character -  Randomly Changes what character you are playing as (Currently Disabled because the character change only happens on death/act/level change/restart)
-- Swap Camera -  Switches Camera Type
+- Random Clip Level -  Changes The Render Distance. (Disabled as of 8/10/2021)
+- Random Pause -  Forces The Game Paused for 5 Frames. (you must unpause 5 times)
+- Random Character -  Randomly Changes what character you are playing as. (Currently Disabled because the character change only happens on death/act/level change/restart)
+- Swap Camera -  Switches Camera Type.
 - Random Debug -  Enables Debug Mode for 333 Frames.
 - Random X Gravity -  Sets X Gravity to a random value for 1000 frames.
 - Random Y Gravity -  Sets Y Gravity to a random value for 1000 frames.
 - Random Z Gravity -  Sets Z Gravity to a random value for 1000 frames.
 - No Gravity - Disables Gravity for 400 frames.
-- Random Barrier -  Gives Barrier
-- Random Magnetic Barrier -  Gives Magnetic Barrier
-- Random Invincibility -  Gives Invincibility
+- Random Barrier -  Gives Barrier.
+- Random Magnetic Barrier -  Gives Magnetic Barrier.
+- Random Invincibility -  Gives Invincibility.
 - Random Control Disable -  Disabled Control for 90 Frames.
-- Small Scale -  Makes the character scale smaller (Disabled as of 8/10/2021)
 - Random Swap Music -  Switches the current music.
 - Random Voice Clip -  Plays a random voice file.
 - Dpad Down Or Die -  Player must press Dpad down within 90 frames, or they will be killed.
@@ -95,27 +94,28 @@ Download the [Latest Release Here](https://github.com/VeritasDL/SADXCHAOS/releas
 - Random Enemy - Has a chance to spawn 1 or 2 of the following,   
 RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinner, Ice Ball, Beat, Cops, Boa-Boa, Buyoon, Sweeper and Egg Keeper.
 - Random BurgerMan - Spawns in the BurgerMan Statue.
-- Fast Accel - Increases the players, MaxAccel, AirAccel and HangTime for 400 frames. (currently sets them back to sonic's default values, probably will mess with other charaters but dying/restarting fixes it for now 8/30/2021)
+- Fast Accel - Increases the players, MaxAccel, AirAccel and HangTime for 400 frames.
 - Random Physics - Sets current Physics to the physics from SADX,SA2B and Sonic Heros. Credits to MainMemory for her code and Physics data, https://github.com/MainMemory/SADXPhysicsSwapMod
 - Camera Decouple - Detaches the camera from the player for 100 frames.
 - Disable Pause - Removes the Ability to pause for 420 frames.
-- Random Key Block - Spawns in the Key Block with random color from Amys Hot Shelter
+- Random Key Block - Spawns in the Key Block with random color from Amy's Hot Shelter
 - No s0und_ For You - Disables all/most sounds for 222 frames.
-- Random Emblem - Spawns in a Emblem that the player can collect. Does Not increase emblem count. (disabled)
+- Random Emblem - Spawns in an Emblem that the player can collect. Does Not increase Emblem count. (disabled)
 - Disable Pause - Disables Ability to Pause the game for 420 frames.
-- Random Chao - Spawns in a Chao with Random Stat Levels, Stat Grades, Texture, Body Type, Hat Type, Medal Type, Shiny, Random Animal Attributes, Color and Name
+- Random Chao - Spawns in a Chao with Random Stat Levels, Stat Grades, Texture, Body Type, Hat Type, Medal Type, Shiny, Random Animal Attributes, Color and Name.
 - Random Chao Fruit - Spawns in a Random Chao Fruit.
 - Random Chao Hat - Spawns in a Random Chao Hat.
-- Random Big Rock - Spawns in The Big Rock for Big's Ice Cap, others can pick it up aswel! 
-- Ring Allergy - Kills The Player if Rings are collected for 500 Frames
-- Increase Cutscene Skip Time - Increases the time needed to Skip Sutscenes
+- Random Big Rock - Spawns in The Big Rock for Big's Ice Cap, others can pick it up as well! 
+- Ring Allergy - Kills The Player if Rings are collected for 500 Frames.
+- Increase Cutscene Skip Time - Increases the time needed to Skip Cutscenes.
 - Remove Random Powerup - A 1 in 3 Chance to Remove a Random PowerUP for Sonic, Tails, Knuckles & Big (more to come at a later date)
-- Random Collision Size - Changes Collision Size to a Number between 1 and 10
+- Random Collision Size - Changes Collision Size to a Number between 1 and 10.
 - Flip Camera - Flips The Camera Upside down for 480 frames.
 - Spin Camera - Spins the Camera in a Circle for 480 frames.
-- Drunk Camera - Makes the Camrea Sway from Left to Right for 550 frames.
-- Random Fan - Spawns in the Fan from Final Egg Act 2 under the player
-- 
+- Drunk Camera - Makes the Camera Sway from Left to Right for 550 frames.
+- Random Fan - Spawns in the Fan from Final Egg Act 2 under the player.
+- Random AirCraft - Spawns in a Random Number of AirCraft's for 350 frames.
+- Random FireBreath - Spawn in the FireBreath Statue from Red Mountain.
 ## Special Thanks
 Thanks to Sora for the code base and helping me with dumb questions  
 Huge Thanks to Refrag for helping me constantly!  
@@ -125,7 +125,7 @@ Thanks to Kell and itsEasyActually for all the help!
 Thanks to the entire SA-1 X-Hax community for everything they continue to do for this game :)  
 
 ## Additional Files
-If you don't have the US Voice Files feel free to download this .7z   
+If you don't have the US Voice files feel free to download this .7z   
 https://drive.google.com/file/d/1JAfwI9kHNAz62BczkHN0l0-3xi0Hy_3H/view?usp=sharing
 and extract them to SADX\system\sounddata\voice_us\wma
 
@@ -181,3 +181,4 @@ Project Link: [https://github.com/VeritasDL/SADXCHAOS](https://github.com/Verita
 [issues-url]: https://github.com/VeritasDL/SADXCHAOS/issues
 [license-shield]: https://img.shields.io/github/license/VeritasDL/SADXCHAOS.svg?style=for-the-badge
 [license-url]: https://github.com/VeritasDL/SADXCHAOS/blob/main/LICENSE
+
