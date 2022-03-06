@@ -286,8 +286,9 @@ void RandomRobo(taskwk* p1)//updated to task, untested 10/04/2021
 	if (!RoboTextLoader)
 	{
 		CheckAnimalTexture();
+		//LoadPVM("OBJ_FEgg", &OBJ_FINALEGG_TEXLIST);
 		LoadPVM("E_ROBO", &E_ROBO_TEXLIST);
-		SnakeTextLoader = true;
+		RoboTextLoader = true;
 		TextLoaded = true;
 	}
 	int number = rand() % 2;

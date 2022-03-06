@@ -100,9 +100,18 @@ void RandomFruit(taskwk* p1)
 		TextLoaded = true;
 		ChaoFruitTextLoader = true;
 	}
-	Int FruitType = (rand() % (12 + 1 - 3)) + 3;
-	LoadChaoFruit(FruitType, &playertwp[0]->pos, 0, nullptr, nullptr);
-	strcpy_s(LastEffect, 128, "Spawned Chao Fruit");
+	if (FruitNumb < 10)
+	{
+		Int FruitType = (rand() % (12 + 1 - 3)) + 3;
+		LoadChaoFruit(FruitType, &playertwp[0]->pos, 0, nullptr, nullptr);
+		strcpy_s(LastEffect, 128, "Spawned Chao Fruit");
+		FruitNumb++;
+	}
+	if (FruitNumb >= 10)
+	{
+		NewEffect();
+		return;
+	}
 }
 void RandomHat(taskwk* p1)
 {
@@ -113,6 +122,7 @@ void RandomHat(taskwk* p1)
 	}
 	if (!ChaoHatTextLoader)
 	{
+		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
 		ChaoMain_Constructor();
 		TextLoaded = true;
 		ChaoHatTextLoader = true;

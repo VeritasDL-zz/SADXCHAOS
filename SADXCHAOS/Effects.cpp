@@ -193,9 +193,9 @@ void RandomChaoo()
 		ChaoManager_Load();
 		ChaooManagerLoader = true;
 	}
-	int chaotype = rand() % 25;
+	int chaotype = rand() % 24;
 	ChaoData* chaodata = new ChaoData();
-	chaodata->data.Happiness = rand() % 100;
+	chaodata->data.Happiness = rand() % 99;
 	chaodata->data.Energy = rand() % 32767;
 	chaodata->data.Hunger = rand() % 32767;
 	chaodata->data.StaminaStat = rand() % 3266;
@@ -214,7 +214,7 @@ void RandomChaoo()
 	chaodata->data.RunnyNoseLevel = rand() % 200 - 100; //hopfully generates a number between -100 and +100
 	chaodata->data.SADXAnimalBehaviors = rand() % 32767; //not sure if it works
 	chaodata->data.FavoriteFruit = rand() % 7;
-	chaodata->data.Texture = rand() % 16;
+	chaodata->data.Texture = rand() % 15;
 	chaodata->data.Garden = rand() % (6 - 4 + 1) + 4;
 	chaodata->data.SADXCharacterBonds->a = rand() % 100;
 	chaodata->data.SADXCharacterBonds->b = rand() % 100;
@@ -255,14 +255,14 @@ void RandomChaoo()
 	chaodata->data.EyebrowType = (SADXAnimal)Animaltyperand;
 	RandomChaooAnimal();
 	chaodata->data.UnknownType = (SADXAnimal)Animaltyperand; //why not lol
-	chaodata->data.MouthType = rand() % 15;
-	chaodata->data.EyeType = rand() % 13;
+	chaodata->data.MouthType = rand() % 14;
+	chaodata->data.EyeType = rand() % 12;
 	chaodata->data.BallType = rand() % 3;
 	chaodata->data.Alignment = rand() % 2 - 1; //test
 	ObjectMaster* Chao = CreateChao(chaodata, 0, 0, &playertwp[0]->pos, 0);
 	//chaodata->data.Type = (ChaoType)chaotype; idk why this wasnt working disabled for now,
-	chaodata->data.Color = rand() % 15;
-	chaodata->data.BodyTypeAnimal = 127;
+	chaodata->data.Color = rand() % 14;
+	chaodata->data.BodyTypeAnimal = 126;
 	chaodata->data.Name[0] = rand() % 255;
 	chaodata->data.Name[1] = rand() % 255;
 	chaodata->data.Name[2] = rand() % 255;
@@ -282,7 +282,7 @@ void RandomChaoo()
 }
 void RandomKillMomentum(playerwk* p1)
 {
-	p1->acc = { 0, 0, 0 };
+	playerpwp[0]->spd = { 0, 0, 0 };
 	strcpy_s(LastEffect, 128, "Killed Momentum");
 	return;
 }
@@ -310,7 +310,7 @@ void FastAccel(playerwk* p1)
 	OldAirAccel = playerpwp[0]->p.air_accel;
 	OldHangTime = playerpwp[0]->p.jump2_timer;
 	playerpwp[0]->p.max_x_spd = 10.0f;
-	playerpwp[0]->p.air_accel; = 0.10f;
+	playerpwp[0]->p.air_accel = 0.10f;
 	playerpwp[0]->p.jump2_timer = 120;
 	strcpy_s(LastEffect, 128, "Fast Accel Enabled");
 	return;
@@ -334,7 +334,7 @@ void RandomVSpeed(playerwk* p1)
 		NewEffect();
 		return;
 	}
-	p1->acc.y = p1->p.lim_v_spd;
+	playerpwp[0]->spd.y = playerpwp[0]->p.lim_v_spd;
 	strcpy_s(LastEffect, 128, "Random V Speed");
 	return;
 }
@@ -357,7 +357,7 @@ void RandomHSpeed(playerwk* p1)
 		NewEffect();
 		return;
 	}
-	p1->acc.x = p1->p.lim_h_spd;
+	playerpwp[0]->spd.x = playerpwp[0]->p.lim_h_spd;
 	strcpy_s(LastEffect, 128, "Random H Speed");
 	return;
 }
@@ -813,7 +813,7 @@ void RemovePowerUp()
 }
 void RandomCollisionSize()
 {
-	int CSize = rand() % 9 + (1);//adds 1 to ensure CSize is never 0
+	int CSize = rand() % 10 + (2.5f);//adds 2.5f to ensure CSize is never 0/1
 	playerpwp[0]->p.height = CSize;
 	strcpy_s(LastEffect, 128, "Random Collision Size");
 	return;

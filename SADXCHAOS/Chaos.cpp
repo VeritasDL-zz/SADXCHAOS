@@ -182,17 +182,28 @@ using std::string;
 //Added RandomCannonS1 and RandomCannonS2 (3/5/2022)
 //Switched all Functions and chaos code that used EntityData1Ptrs[0]/EntityData1* with playertwp[0]/taskwk* (3/6/2022)
 //Switched most code that used CharObj2 to playerpwp (3/6/2022)
+//May have fixed E_Robo Texture Crash (3/6/2022)
+//Fixed a bug with updated RandomKillMomentum (3/6/2022)
+//Fixed a bug with Updated RandomVSpeed and RandomHSpeed (3/6/2022)
+//Fixed a bug with RandomCollisionSize (3/6/2022)
+//Fixed a bug with RandomChaoFruit and RandomChaoHat (3/6/2022)
 // 
 // 
+//  
 //---------TO-DO---------
 // Test Stuff
 // test new stuff fully 
 // Log Known Crashes
+// RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
+// 
 // Add More Custom Tikal Hints
 // Add More Random Teleport Locations
 // More Camera Effects? (Sideways?)
 // Need to Fix Ice&Wind Key //might scrap 
 // Need to fix or scrap Big Car //might scrap too 
+// Chao Crash? 0x33A1060
+// beat texture still broken? not sure lol (doesnt crash yet)
+// 
 // 
 // 
 // 
@@ -231,8 +242,8 @@ int Animaltyperand = 0;
 int EmblemID = 0;
 int CurrentLevelOld = -1;
 int SaveHash = -1;
-int FruitNumb = -1;
-int HatNumb = -1;
+int FruitNumb = 0;
+int HatNumb = 0;
 int RingAllergy_Timer = 0;
 int RingCount = 0;
 int EVHandyCap = 0;
@@ -425,7 +436,7 @@ extern "C"
 		//WriteData<21>((int*)0x7b52a1, 0x90);
 		//WriteData<1>((int*)0x7b43bc, 0x2); //remove Tikal debug mode //Temp Disabled as of 1/22/2022
 		srand((unsigned)time(nullptr));
-		strcpy_s(LastEffect, 128, "Chaos Edition");
+		strcpy_s(LastEffect, 128, "Chaos Edition 2.0");
 	}
 	PVMEntry MinimalPVMs[]{
 	{ "GOMA", &GOMA_TEXLIST },
