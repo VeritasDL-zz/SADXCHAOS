@@ -571,13 +571,7 @@ void RandomSman(taskwk* p1)
 	}
 	if (!SmanTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("E_SNOWMAN", &E_SNOWMAN_TEXLIST);
 		LoadNoNamePVM(&stx_ice0_TEXLIST);
 		SmanTextLoader = true;
@@ -607,6 +601,7 @@ void RandomEGacha(taskwk* p1)
 	if (!EGachaTextLoader)
 	{
 		CheckAnimalTexture();
+		LoadPVM("OBJ_FEgg", &OBJ_FINALEGG_TEXLIST);
 		LoadPVM("GACHAPON", &GACHAPON_TEXLIST);
 		EGachaTextLoader = true;
 		TextLoaded = true;

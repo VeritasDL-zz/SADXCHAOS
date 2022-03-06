@@ -196,6 +196,11 @@
     <ClCompile Include="TextureReset.cpp" />
     <ClCompile Include="TikalHints.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Change.Log">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

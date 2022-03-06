@@ -512,7 +512,7 @@ void RandomXGravity()//Updated 11/06/2021, Enabled For Now
 		NewEffect();
 		return;
 	}
-	XGravity_Timer = 1000;
+	XGravity_Timer = 500;
 	Gravity.x = (float)rand() / RAND_MAX + (-1.5);
 	strcpy_s(LastEffect, 128, "Random X Gravity");
 }
@@ -540,7 +540,7 @@ void RandomYGravity()
 		NewEffect();
 		return;
 	}
-	YGravity_Timer = 1000;
+	YGravity_Timer = 500;
 	Gravity.y = (float)rand() / RAND_MAX + (-1.5);
 	strcpy_s(LastEffect, 128, "Random Y Gravity");
 }
@@ -568,7 +568,7 @@ void RandomZGravity()//Updated 11/06/2021, Enabled For Now
 		NewEffect();
 		return;
 	}
-	ZGravity_Timer = 1000;
+	ZGravity_Timer = 500;
 	Gravity.z = (float)rand() / RAND_MAX + (-1.5);
 	strcpy_s(LastEffect, 128, "Random Z Gravity");
 }
@@ -632,7 +632,7 @@ void RandomDPadDownCheck()
 	//enable dpaddown check timer
 	DPadDown_Timer = 90; //90 frames?
 	DpadDown = 0; //resets dpad down check, 
-	strcpy_s(LastEffect, 128, "Dpad Down Or Die");
+	strcpy_s(LastEffect, 128, "DPad Down Or Die!");
 }
 void RandomNoClip()
 {
@@ -690,7 +690,7 @@ void RingAllergy()
 		}
 	}
 	RingCount = Rings;
-	RingAllergy_Timer = 500;
+	RingAllergy_Timer = 250;
 	strcpy_s(LastEffect, 128, "Ring Allergy");
 	return;
 }

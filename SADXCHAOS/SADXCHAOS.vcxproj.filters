@@ -90,4 +90,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Change.Log">
+      <Filter>Source Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

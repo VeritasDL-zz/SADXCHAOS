@@ -27,7 +27,6 @@ extern int DisablePause_Timer;
 extern int Animaltyperand;
 extern int EmblemID;
 extern int CurrentLevelOld;
-extern int SaveHash;
 extern int FruitNumb;
 extern int HatNumb;
 extern int RingAllergy_Timer;

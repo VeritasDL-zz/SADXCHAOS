@@ -147,7 +147,7 @@ void RandomCheckPoint(taskwk* p1)
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	CheckPoint->ocp = objCondition;
 	CheckPoint->twp->pos = playertwp[0]->pos;
-	CheckPoint->twp->ang = PlayerTaskPtr[0]->ang;
+	CheckPoint->twp->ang = playertwp[0]->ang;
 	strcpy_s(LastEffect, 128, "Random CheckPoint");
 }
 void RandomSpeedPad(taskwk* p1)

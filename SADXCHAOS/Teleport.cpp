@@ -18,6 +18,9 @@ void InitializeRandomCoordinates()
 	{1647.5f,115.0f,840.6f},
 	{4042.8f,8.52f,363.5f},
 	{5596.6f,3.21f,1096.52f},
+	{1017.95f,80.0f,867.33f},//ontop of speedpad 
+	{1017.0f,93.0f,1301.0f},//ontop of spring
+	{2650.12f,30.5f,369.26f},//whale bridge
 	{-643.81f,46.0f,1381.965f},//bridge
 	{-276.18f,55.228f,1205.669f},//near loop
 	{829.321f,79.94f,636.158f},//near monkeys where gamma finds froggy

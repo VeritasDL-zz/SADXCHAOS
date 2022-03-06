@@ -1,0 +1,210 @@
+Welcome To The SADX Chaos Edition Change Log File
+
+Started Mod 8/5/2021
+Added code base from Soar's scrapped "mania" mode
+Added debug print out for mods being enabled
+Added random time of day
+Added random dropped rings
+Added random Clip level (not sure if it works)
+Added randompause (not sure if it works)
+Added random char
+Added random camera (not sure if it works)
+Added random debug (not sure if it works and i need a way to turn it off after a short period
+Added random xyz gravity (havent enabled them or tested them)
+Added random barrier
+Added random mag barrier
+Added invincibility
+Added random debug
+Random powerup was crashing due to bomb power up? havent fixed
+Sometimes the other give powerup codes i have kill the player depending on the state? 
+Fixed random power up crash, by taking soras random power up code form sadxvschat
+Updated random pause to make you unpause a few times, (currently 10 frames) idk how i would make it pause, unpause, automaticly cuz setting gamestate in ONFrame just makes it happen so fast you dont even see it, 
+Removed set scale
+Removed my own random powerups, (still in code, just unused)
+Made debug last a set amount of frames (75 currently) and force the player out of debug movement.
+Added press Dpad Down or die
+Changed random camera to Swap Camera lol
+Added random control disable 
+Added Random Y Gravity
+Added Random NoClip
+Fixed Random NoClip Crash?
+Made debug mode work again
+Made debug mod last longer might make shorter
+Fixed Camera Swap Code
+Made Control Disable look better
+Made Control Disable last longer? might shorten
+Fixed random Gavity values maybe?
+Started working on random tikal hints - thanks for the help kell, main and refrag, 
+Finished random tikal hint, just need to add more hints, 
+Added more hints and the first custom hint with custom voice file!
+Re-Enabled Random Dropped Rings (8/11/2021)
+Fixed a bug with RandomTimeOfDay setting the chao timer to 1800
+Fixed debug mode crash, gg 
+Credits to MainMemory for the Snowboard spawn Code, https://github.com/MainMemory/SADXBoardSpawner
+Cleaned up no clip code
+Cleaned up control disable code
+Changed y grav rand math
+Cleaned up ints
+Made Kill Momentum play the custom roblox OOF sound,
+Added random checkpoint (might not work as a real checkpoint but funny af)
+Added Movement Stick Invert code thanks to Sora!
+Added support for knux, amy, and metal sonic to movement debug, Tails, gamma and big dont have movement debug thanks to stars for pointing out im dumb,
+Added random rotate
+Trying to add support for editing the chaos timer, shits fucked 
+Started adding Random Telport with the help of Refrag :)
+Added Ability to edit How often things happen in the config menu
+Cleaned up debug Output a little
+Changed how long Gravity, noclip, and snowboard last before being disabled
+Finished sonic casino act 0 teleports
+Started working on casino act 1 teleport (might work for tails and sonic)
+Changed gravity random math again
+Finished Casino act 1 teleports
+Finished teleports to emeraldcoast act 0
+Finished icecap act 0 and 1 teleports
+Finished speedhighway act 0 sonic teleports
+Started working on act 2 speedhighway sonic teleports
+Added Random Life PowerUp
+Finished randomteleport crashing when not in a level/act that have teleports thanks to refrag again!
+Finished twinkle park teleports
+Added Option for Last Effect to Be Printed to Game Screen
+Changed size, color and position of Last Effect text, also render a paque/translucent box around it.
+Re Enabled Random Hurt
+Added Option to print last effet to screen
+Added Ability to spawn Enemys
+Added more Enemys lol
+Added RandomBurgerMan
+Actully enabled Random Rotate.
+Added 24 new tikal hints
+Added more new "hints"
+Sadly i have a crash with enemys in hub-worlds, only Beat, and Spinners can spawn in hubworlds currently 
+Added randomchao, thanks to sora for the help and shuch
+Added config options for, Random Enemys, Input Invert and RandomPause
+Added FastAccel (for now) 
+Added random physics thanks to MainMemory (https://github.com/MainMemory/SADXPhysicsSwapMod) and Refrag  
+Added Decoupple Camera
+Added no sound,
+Fixed a bug with fast accel
+Added Disable Pause
+Fixed a few warnings
+Added Random Key Block
+Added random colors for the random key block, 
+Added random emblem.
+Fixed a bug with the texture loader resetter 
+Added config to disable, disable pause
+Removed OOF from Kill momentum
+Updated Effect Table
+Tikal Hint now 20% less likely
+RandomKillMomentum 20% less likly
+Changed no_s0und_ to 222 frames from 110 frames
+Ghetto fix for Y offset change with Random Phys.
+Fix for Debug Scaling thanks to PKR's Debug mod https://github.com/PiKeyAr/sadx-debug-mode/
+Fix for debug mod stacking
+Added Random Chao Fruit and Chao Hat, thanks to kell and pkr
+Changed most spawn things to using tasks, removed creation of setdata for objects that dont need it.
+Fixed RandomFallingSpikeBall moving up and down 
+Started Working on Big Ice Cap Rock
+Big IceCap Rock Finished
+AndKnuckles added 
+Made it So Big's Rock can be picked up by others!
+Fixed Random Chao (sorta)
+Fixed Random KeyBlock again,
+Added Config Option to Disabled Spawning of Grab-Able Objects
+Started working on bigCar
+Started Woking on Random X and Z gravity
+Added No Gravity
+Re-Enabled Random Invincibility Random Magnetic Barrier and Random Barrier
+Added Config Option For Gravity Mods
+Added Config Option for Random Physics
+Fixed a bug with Debug Movement
+Fixed a bug with Random Snowboard 
+Fixed Another Bug With Debug Movement
+Re-enabled Random X and Z Gravity
+Hopfully Fixed a Crash/Memory Leak with Last Effect, 
+Still Working on Random Character 
+Split up code into multipul CPP files
+Moved Tikal Hints to its own .h/.cpp file
+Moved debug draw to its own .h/.cpp file too
+Added Ring Allergy and Config For Ring Allergy, 
+Fixed Ring Allergy (I think)
+Added A EggViper HandyCap, with config option, (1/22/2022)
+Removed IceBall from spawning while playing as gamma (1/22/2022)
+Fixed RandomSnowboard trying to run when not playing as Sonic Or Tails (1/22/2022)
+Temp Commented out All Random Char Init Fixes (1/22/2022)
+Added Check for Big Fishing to make playing a big a little bit easier (1/22/2022)
+Disabled Enemies From Spawning Durring E101R boss fight (1/25/2022)
+fixed bug with big fishing code (1/22/2022)
+Stopped sman for spawning durring egg viper (1/22/2022)
+Added IncreaseCutsceneSkipTime - Sets Frames needed to skip to 1A2 (1/29/2022)
+Started working on remove powerup (1/29/2022)
+Still working on remove powerup (1/30/2022)
+Created a NewEffect function and made all skipped mods call the function (1/30/2022)
+Fixed a bug with DisablePause and RingAllergy (1/30/2022)
+Enabled RingAllergy (2/1/2022)
+Enabled BigRock (2/1/2022)
+Changed RandomDroppedRings to Use TakeRingsInterval1 rather then set rings to 0 (2/15/2022)
+Added FlipCamera thanks to Skoob (2/18/2022)
+Added SpinCamera (2/18/2022)
+Added FlipCamera and SpinCamera to ChaosArray (2/18/2022)
+Shuffled ChaosArray because why not (2/18/2022)
+Added DrunkCamera (2/20/2022)
+Added DrunkCamera to the array (2/25/2022)
+Added Config Option for The Three Camera Effects (2/25/2022)
+Added Custom Teleports for all three acts of Sonic's Final Egg (2/25/2022)
+Workin on adding the fans from final egg act 2 to the object spawn list, (2/25/2022)
+Finished RandomFan thanks to Sora! (2/25/2022)
+Moved texture reset bools to its own .cpp file (2/26/2022)
+Fixed a small "bug" with FastAccel (2/26/2022)
+Shuffled chaos array again (2/26/2022)
+Small change to randompowerup removal (2/27/2022)
+Added 12 new Tikal Hints (2/28/2022)
+Fixed Random Emblem (3/1/2022)
+Added Config Option for Random Emblem (3/1/2022) 
+Working on Random Air Craft (3/3/2022)
+Sorta Finished Random Air Craft (3/4/2022)
+Random AirCraft finished thanks to Sora for the help (3/5/2022)
+Moved Animal Text Loader to its own.cpp/.h file (3/5/2022)
+Switched all Enemeys to use CheckAnimalTexture(); (3/5/2022)
+Started RandomFireBreath (3/5/2022)
+Removed all use of EntityData1Ptrs[0] in use of playertwp[0] (3/5/2022)
+Finished RandomFireBreath (3/5/2022)
+Added RandomCannonS1 and RandomCannonS2 (3/5/2022)
+Switched all Functions and chaos code that used EntityData1Ptrs[0]/EntityData1* with playertwp[0]/taskwk* (3/6/2022)
+Switched most code that used CharObj2 to playerpwp (3/6/2022)
+May have fixed E_Robo Texture Crash (3/6/2022)
+Fixed a bug with updated RandomKillMomentum (3/6/2022)
+Fixed a bug with Updated RandomVSpeed and RandomHSpeed (3/6/2022)
+Fixed a bug with RandomCollisionSize (3/6/2022)
+Fixed a bug with RandomChaoFruit and RandomChaoHat (3/6/2022)
+May have fixed the texture issue with RandomEGacha (Beat) (3/6/2022)
+Added 3 Random Teleports to Sonic Emerald Coast Act 1 (3/6/2022)
+Added both RandomCannonS1 and RandomCannonS2 to Chaos Array (3/6/2022)
+Changed Ring Allergy Timer from 500 frames to 250 frames (3/6/2022)
+Changed all Gravity Timers from 1000 frames to 500 frames (3/6/2022)
+
+ 
+ 
+ 
+ 
+  
+---------TO-DO---------
+ Test Stuff
+ test new stuff fully 
+ Log Known Crashes
+ RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
+ 
+ Add More Custom Tikal Hints
+ Add More Random Teleport Locations
+ More Camera Effects? (Sideways?)
+ Need to Fix Ice&Wind Key //might scrap 
+ Need to fix or scrap Big Car //might scrap too 
+ Chao Crash? 0x33A1060
+ 
+ 
+ 
+ 
+ 
+Todo 
+Kill momentum doesn't always work?
+Beat has bad texture in redmountain? 
+Gamma hs, ham crashed 7 times, in a row
+Seems to be related to gamma locking onto enemys he was never intended to? idk
