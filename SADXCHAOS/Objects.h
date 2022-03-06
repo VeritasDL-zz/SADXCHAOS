@@ -1,17 +1,17 @@
 #pragma once
 #include "Chaos.h"
-void BigRock(EntityData1* p1);
-void BigCar(EntityData1* p1);
-void RandomIceKey(EntityData1* p1); // disabled for now 9/23/2021
-void RandomWindKey(EntityData1* p1);  // disabled for now 9/23/2021
-void RandomFruit(EntityData1* p1);
-void RandomHat(EntityData1* p1);
-void RandomCheckPoint(EntityData1* p1);
-void RandomSpeedPad(EntityData1* p1);
-void RandomBurgerMan(EntityData1* p1);
-void RandomKeyBlock(EntityData1* p1);//updated
+void BigRock(taskwk* p1);
+void BigCar(taskwk* p1);
+void RandomIceKey(taskwk* p1); // disabled for now 9/23/2021
+void RandomWindKey(taskwk* p1);  // disabled for now 9/23/2021
+void RandomFruit(taskwk* p1);
+void RandomHat(taskwk* p1);
+void RandomCheckPoint(taskwk* p1);
+void RandomSpeedPad(taskwk* p1);
+void RandomBurgerMan(taskwk* p1);
+void RandomKeyBlock(taskwk* p1);//updated
 void RandomSnowboard();
-void RandomSpring(EntityData1* p1);
-void RandomSpikeBall(EntityData1* p1);
-void RandomEmblem(EntityData1* p1);
-void RandomFan(EntityData1* p1);
+void RandomSpring(taskwk* p1);
+void RandomSpikeBall(taskwk* p1);
+void RandomEmblem(taskwk* p1);
+void RandomFan(taskwk* p1);

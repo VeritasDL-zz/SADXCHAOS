@@ -180,23 +180,24 @@ using std::string;
 //Removed all use of EntityData1Ptrs[0] in use of playertwp[0] (3/5/2022)
 //Finished RandomFireBreath (3/5/2022)
 //Added RandomCannonS1 and RandomCannonS2 (3/5/2022)
+//Switched all Functions and chaos code that used EntityData1Ptrs[0]/EntityData1* with playertwp[0]/taskwk* (3/6/2022)
 // 
 // 
 // 
 //---------TO-DO---------
 // Test Stuff
+// test new stuff fully 
 // Log Known Crashes
 // Add More Custom Tikal Hints
 // Add More Random Teleport Locations
 // More Camera Effects? (Sideways?)
-// Need to Fix Ice&Wind Key
-// Need to fix or scrap Big Car
-// AddCannon_s1 and Cannon_s2
+// Need to Fix Ice&Wind Key //might scrap 
+// Need to fix or scrap Big Car //might scrap too 
 // 
 // 
 // 
-//Todo
-//Random emblem broke 
+// 
+//Todo 
 //Kill momentum doesn't always work?
 //Beat has bad texture in redmountain? 
 //Gamma hs, ham crashed 7 times, in a row
@@ -481,7 +482,7 @@ extern "C"
 		data->Action++;
 		strcpy_s(LastEffect, 128, "Random Char");
 	}
-	typedef void(__cdecl* ChaosEnt)(EntityData1*);
+	typedef void(__cdecl* ChaosEnt)(taskwk*);
 	typedef void(__cdecl* ChaosCharObj)(CharObj2*);
 	typedef void(__cdecl* ChaosNull)();
 	struct ChaosS {
@@ -858,7 +859,7 @@ extern "C"
 				curRand = rand() % ChaosSize;
 			} while (oldRand == curRand);
 			if (ChaosArray[curRand].func != nullptr)
-				ChaosArray[curRand].func(EntityData1Ptrs[0]);
+				ChaosArray[curRand].func(playertwp[0]);
 			else if (ChaosArray[curRand].func2 != nullptr)
 				ChaosArray[curRand].func2(CharObj2Ptrs[0]);
 			else
@@ -870,7 +871,7 @@ extern "C"
 	__declspec(dllexport) void __cdecl OnInput()
 	{
 	}
-	__declspec(dllexport) void __cdecl OnControl(EntityData1* p1)
+	__declspec(dllexport) void __cdecl OnControl()
 	{
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing

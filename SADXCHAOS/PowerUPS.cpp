@@ -24,7 +24,7 @@ void RandomInvincibility()//Updated 11/06/2021, Enabled For Now
 	GiveInvincibility(0);
 	strcpy_s(LastEffect, 128, "Gave Invincibility");
 }
-void RandomLifePowerup(EntityData1* p1)
+void RandomLifePowerup(taskwk* p1)
 {
 	ExtraLifePowerup(0);
 	strcpy_s(LastEffect, 128, "Extra Life");

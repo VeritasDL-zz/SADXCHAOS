@@ -12,7 +12,7 @@
 #define LengthOfArray(x) \
 	((int)(((sizeof(x) / sizeof(x[0]))) / \
 	(size_t)(!(sizeof(x) % sizeof(x[0])))))
-void RandomTank(EntityData1* p1)
+void RandomTank(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -54,7 +54,7 @@ void RandomTank(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned RhinoTank");
 	return;
 }
-void RandomBuyon(EntityData1* p1)
+void RandomBuyon(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -96,7 +96,7 @@ void RandomBuyon(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Buyon");
 	return;
 }
-void RandomUnidus(EntityData1* p1)
+void RandomUnidus(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -140,7 +140,7 @@ void RandomUnidus(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Unidus");
 	return;
 }
-void RandomAmebot(EntityData1* p1)
+void RandomAmebot(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -182,7 +182,7 @@ void RandomAmebot(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Amebot");
 	return;
 }
-void RandomPolice(EntityData1* p1)
+void RandomPolice(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -224,7 +224,7 @@ void RandomPolice(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned The Police");
 	return;
 }
-void RandomSnake(EntityData1* p1)
+void RandomSnake(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -266,7 +266,7 @@ void RandomSnake(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Boa-Boa");
 	return;
 }
-void RandomRobo(EntityData1* p1)//updated to task, untested 10/04/2021
+void RandomRobo(taskwk* p1)//updated to task, untested 10/04/2021
 {
 	if (!EnemysEnabled)
 	{
@@ -308,7 +308,7 @@ void RandomRobo(EntityData1* p1)//updated to task, untested 10/04/2021
 	strcpy_s(LastEffect, 128, "Spawned Robo");
 	return;
 }
-void RandomLeon(EntityData1* p1)
+void RandomLeon(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -350,7 +350,7 @@ void RandomLeon(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Leon");
 	return;
 }
-void RandomKiki(EntityData1* p1)
+void RandomKiki(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -395,7 +395,7 @@ void RandomKiki(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Kiki");
 	return;
 }
-void RandomFallingSpikeBall(EntityData1* p1)
+void RandomFallingSpikeBall(taskwk* p1)
 {
 	if (!FSBTextLoader)
 	{
@@ -424,7 +424,7 @@ void RandomFallingSpikeBall(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Falling SpikeBall");
 	return;
 }
-void RandomSpinnerA(EntityData1* p1)
+void RandomSpinnerA(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -463,7 +463,7 @@ void RandomSpinnerA(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Spinner A");
 	return;
 }
-void RandomSpinnerB(EntityData1* p1)
+void RandomSpinnerB(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -507,7 +507,7 @@ void RandomSpinnerB(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Spinner B");
 	return;
 }
-void RandomSpinnerC(EntityData1* p1)
+void RandomSpinnerC(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -546,7 +546,7 @@ void RandomSpinnerC(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Spinner C");
 	return;
 }
-void RandomSman(EntityData1* p1)
+void RandomSman(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -591,7 +591,7 @@ void RandomSman(EntityData1* p1)
 	ESMAN->twp->pos.y += rand() % 2 + 1 * 9;
 	strcpy_s(LastEffect, 128, "Spawned IceBall");
 }
-void RandomEGacha(EntityData1* p1)
+void RandomEGacha(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -630,7 +630,7 @@ void RandomEGacha(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Beat");
 	return;
 }
-void RandomAirCraft(EntityData1* p1) //if you use this please give me credits as this took 5 days to figure out. 
+void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this took 5 days to figure out. 
 {
 	if (!EnemysEnabled)
 	{
@@ -681,7 +681,7 @@ void RandomAirCraft(EntityData1* p1) //if you use this please give me credits as
 	}
 	strcpy_s(LastEffect, 128, "Spawned AirCraft");
 }
-void RandomFireBreath(EntityData1* p1)
+void RandomFireBreath(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -714,7 +714,7 @@ void RandomFireBreath(EntityData1* p1)
 	FireBreath->twp->ang = playertwp[0]->ang;
 	strcpy_s(LastEffect, 128, "Spawned FireBreath");
 }
-void RandomCannonS1(EntityData1* p1)
+void RandomCannonS1(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{
@@ -747,7 +747,7 @@ void RandomCannonS1(EntityData1* p1)
 	CannonS1->twp->ang = playertwp[0]->ang;
 	strcpy_s(LastEffect, 128, "Spawned Cannon");
 }
-void RandomCannonS2(EntityData1* p1)
+void RandomCannonS2(taskwk* p1)
 {
 	if (!EnemysEnabled)
 	{

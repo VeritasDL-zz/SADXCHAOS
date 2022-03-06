@@ -380,7 +380,7 @@ void RandomHurt()
 		return;
 	}
 }
-void RandomPowerUP(EntityData1* p1)
+void RandomPowerUP(taskwk* p1)
 {
 	int id = 0;
 	if (id < 0 || id > 8) //failsafe
@@ -388,7 +388,7 @@ void RandomPowerUP(EntityData1* p1)
 	DoThingWithItemBoxPowerupIndex(id);
 	strcpy_s(LastEffect, 128, "Random PowerUp");
 }
-void MGiantScale(EntityData1* p1)
+void MGiantScale(taskwk* p1)
 {
 	for (int i = 0; i < 21; i++) {
 		SONIC_OBJECTS[i]->scl[0] = 4;
@@ -411,7 +411,7 @@ void RandomTimeOfDay() //sets time of day to a random time,
 		return;//forces another Chaos mod if not in Adventure 
 	}
 }
-void RandomDroppedRings(EntityData1* p1)
+void RandomDroppedRings(taskwk* p1)
 {
 	int randomrings = rand() % 254;
 	SpawnDroppedRings(playertwp[0]->pos.x, playertwp[0]->pos.y, playertwp[0]->pos.z, randomrings); //spawns random ammount of rings 0-255 at the player

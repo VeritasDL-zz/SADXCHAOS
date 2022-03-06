@@ -9,7 +9,7 @@
 #include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
-void BigRock(EntityData1* p1)
+void BigRock(taskwk* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
@@ -28,7 +28,7 @@ void BigRock(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Big Rock");
 	return;
 }
-void BigCar(EntityData1* p1)
+void BigCar(taskwk* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
@@ -47,7 +47,7 @@ void BigCar(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Car");
 	return;
 }
-void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
+void RandomIceKey(taskwk* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
 {
 	if (!GrabAbleObjectsEnabled)
 	{
@@ -67,7 +67,7 @@ void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tas
 	strcpy_s(LastEffect, 128, "Random IceKey");
 	return;
 }
-void RandomWindKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
+void RandomWindKey(taskwk* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
 {
 	if (!GrabAbleObjectsEnabled)
 	{
@@ -87,7 +87,7 @@ void RandomWindKey(EntityData1* p1) // disabled for now 9/23/2021, updated to ta
 	strcpy_s(LastEffect, 128, "Random WindKey");
 	return;
 } // disabled for now 9/23/2021
-void RandomFruit(EntityData1* p1)
+void RandomFruit(taskwk* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
@@ -104,7 +104,7 @@ void RandomFruit(EntityData1* p1)
 	LoadChaoFruit(FruitType, &playertwp[0]->pos, 0, nullptr, nullptr);
 	strcpy_s(LastEffect, 128, "Spawned Chao Fruit");
 }
-void RandomHat(EntityData1* p1)
+void RandomHat(taskwk* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
@@ -130,7 +130,7 @@ void RandomHat(EntityData1* p1)
 		return;
 	}
 }
-void RandomCheckPoint(EntityData1* p1)
+void RandomCheckPoint(taskwk* p1)
 {
 	task* CheckPoint;
 	CheckPoint = (task*)LoadObject((LoadObj)15, 6, CheckPoint_Main);
@@ -140,7 +140,7 @@ void RandomCheckPoint(EntityData1* p1)
 	CheckPoint->twp->ang = PlayerTaskPtr[0]->ang;
 	strcpy_s(LastEffect, 128, "Random CheckPoint");
 }
-void RandomSpeedPad(EntityData1* p1)
+void RandomSpeedPad(taskwk* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
@@ -171,7 +171,7 @@ void RandomSpeedPad(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Random SpeedPad");
 	return;
 }
-void RandomFan(EntityData1* p1)
+void RandomFan(taskwk* p1)
 {
 	//need to figure out fan power?
 	if (!FanTextLoader)
@@ -189,7 +189,7 @@ void RandomFan(EntityData1* p1)
 	//Fan->twp->ang = PlayerTaskPtr[0]->ang;
 	strcpy_s(LastEffect, 128, "Random Fan");
 }
-void RandomBurgerMan(EntityData1* p1)
+void RandomBurgerMan(taskwk* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
@@ -208,7 +208,7 @@ void RandomBurgerMan(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned BurgerMan");
 	return;
 }
-void RandomKeyBlock(EntityData1* p1)
+void RandomKeyBlock(taskwk* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
@@ -309,7 +309,7 @@ void RandomSnowboard()
 		return;
 	}
 }
-void RandomSpring(EntityData1* p1)
+void RandomSpring(taskwk* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
@@ -343,7 +343,7 @@ void RandomSpring(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Spawned Spring");
 	return;
 }
-void RandomSpikeBall(EntityData1* p1)
+void RandomSpikeBall(taskwk* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
@@ -378,7 +378,7 @@ void RandomSpikeBall(EntityData1* p1)
 	strcpy_s(LastEffect, 128, "Random SpikeBall");
 	return;
 }
-void RandomEmblem(EntityData1* p1)//UPDATED (3/1/2022) IT WORKS
+void RandomEmblem(taskwk* p1)//UPDATED (3/1/2022) IT WORKS
 {
 	if (!RandomEmblemEnabled)
 	{
