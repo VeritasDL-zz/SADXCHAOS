@@ -174,10 +174,11 @@ using std::string;
 //Working on Random Air Craft (3/3/2022)
 //Sorta Finished Random Air Craft (3/4/2022)
 //Random AirCraft finished thanks to Sora for the help (3/5/2022)
-// 
-
-// 
-//   
+//Moved Animal Text Loader to its own.cpp/.h file (3/5/2022)
+//Switched all Enemeys to use CheckAnimalTexture(); (3/5/2022)
+//Started RandomFireBreath (3/5/2022)
+//Removed all use of EntityData1Ptrs[0] in use of playertwp[0] (3/5/2022)
+//Finished RandomFireBreath (3/5/2022)
 // 
 // 
 // 
@@ -190,7 +191,7 @@ using std::string;
 // More Camera Effects? (Sideways?)
 // Need to Fix Ice&Wind Key
 // Need to fix or scrap Big Car
-// 
+// AddCannon_s1 and Cannon_s2
 // 
 // 
 // 
@@ -282,6 +283,7 @@ bool ChaoHatTextLoader = false;
 bool BigRockTextLoader = false;
 bool CarTextLoader = false;
 bool AirCraftTextLoader = false;
+bool FireBreathTextLoader = false;
 bool ShownMenu = false;
 bool TextLoaded = false;
 bool DebugEnabled = false;
@@ -442,7 +444,7 @@ extern "C"
 	void RandomChar()//Still doesnt work 1/22/2022 trying to make work but man this shits hard
 	{
 		int CurrentCharID = GetCurrentCharacterID();
-		char P1Action = EntityData1Ptrs[0]->Action;
+		char P1Action = playertwp[0]->mode;
 		CharObj2* co2 = CharObj2Ptrs[0];
 		EntityData1* P1Data = EntityData1Ptrs[0];
 		ObjectMaster* player1 = GetCharacterObject(0);
@@ -485,7 +487,7 @@ extern "C"
 		ChaosCharObj func2;
 		ChaosNull func3;
 	};
-	ChaosS ChaosArray[105]
+	ChaosS ChaosArray[107]
 	{
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
@@ -527,6 +529,8 @@ extern "C"
 	{ RandomEmblem, nullptr, nullptr },
 	{ RandomAirCraft, nullptr, nullptr },
 	{ RandomAirCraft, nullptr, nullptr },
+	{ RandomFireBreath, nullptr, nullptr },
+	{ RandomFireBreath, nullptr, nullptr },
 	{ nullptr, RandomVSpeed, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr },
 	{ nullptr, RandomHSpeed, nullptr },
@@ -720,7 +724,7 @@ extern "C"
 		{
 			SnowboardTimer = 0;
 			IssSowboarding = 0;
-			EntityData1Ptrs[0]->Action = 1;
+			playertwp[0]->mode = 1;
 			strcpy_s(LastEffect, 128, "Snowboard Off");
 		}
 		if (FastAccel_Timer <= 400 && FastAccel_Timer != 0)
@@ -825,7 +829,7 @@ extern "C"
 		}
 		if (Debug_Timer <= 2 && Debug_Timer != 0)
 		{
-			EntityData1Ptrs[0]->Action = 1;
+			playertwp[0]->mode = 1;
 			strcpy_s(LastEffect, 128, "Debug Off");
 			Debug_Timer = 0;
 			DebugEnabled = false;
@@ -869,6 +873,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			RandomFireBreath(0);
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

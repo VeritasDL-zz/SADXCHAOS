@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnimalTexture.h" />
     <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Effects.h" />
     <ClInclude Include="Enemies.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="TikalHints.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimalTextures.cpp" />
     <ClCompile Include="Chaos.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="dllmain.cpp" />

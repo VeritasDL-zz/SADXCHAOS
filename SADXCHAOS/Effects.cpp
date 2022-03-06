@@ -259,7 +259,7 @@ void RandomChaoo()
 	chaodata->data.EyeType = rand() % 13;
 	chaodata->data.BallType = rand() % 3;
 	chaodata->data.Alignment = rand() % 2 - 1; //test
-	ObjectMaster* Chao = CreateChao(chaodata, 0, 0, &EntityData1Ptrs[0]->Position, 0);
+	ObjectMaster* Chao = CreateChao(chaodata, 0, 0, &playertwp[0]->pos, 0);
 	//chaodata->data.Type = (ChaoType)chaotype; idk why this wasnt working disabled for now,
 	chaodata->data.Color = rand() % 15;
 	chaodata->data.BodyTypeAnimal = 127;
@@ -414,7 +414,7 @@ void RandomTimeOfDay() //sets time of day to a random time,
 void RandomDroppedRings(EntityData1* p1)
 {
 	int randomrings = rand() % 254;
-	SpawnDroppedRings(EntityData1Ptrs[0]->Position.x, EntityData1Ptrs[0]->Position.y, EntityData1Ptrs[0]->Position.z, randomrings); //spawns random ammount of rings 0-255 at the player
+	SpawnDroppedRings(playertwp[0]->pos.x, playertwp[0]->pos.y, playertwp[0]->pos.z, randomrings); //spawns random ammount of rings 0-255 at the player
 	TakeRingsInterval1(randomrings);
 	strcpy_s(LastEffect, 128, "Dropped Rings");
 }
@@ -472,13 +472,13 @@ void RandomDebug() //debug mode currently lasts for 75ish? frames
 	{
 	case Characters_Sonic:
 	case Characters_MetalSonic:
-		EntityData1Ptrs[0]->Action = 87;
+		playertwp[0]->mode = 87;
 		break;
 	case Characters_Knuckles:
-		EntityData1Ptrs[0]->Action = 57;
+		playertwp[0]->mode = 57;
 		break;
 	case Characters_Amy:
-		EntityData1Ptrs[0]->Action = 53;
+		playertwp[0]->mode = 53;
 		break;
 	default:
 		NewEffect();

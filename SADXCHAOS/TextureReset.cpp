@@ -39,6 +39,7 @@ void ResetTextureBools()
 	CarTextLoader = false;
 	FanTextLoader = false;
 	AirCraftTextLoader = false;
+	FireBreathTextLoader = false;
 	WriteOnce = false;
 	HatNumb = -1;
 	AirCraftSpawerFollow_Timer = 0;

@@ -17,4 +17,5 @@
 #include "TikalHints.h"
 #include "DebugDraw.h"
 #include "TextureReset.h"
+#include "AnimalTexture.h"
 #endif //PCH_H

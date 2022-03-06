@@ -79,6 +79,7 @@ extern bool DebugEnabled;
 extern bool AllergicToRings;
 extern bool WriteOnce;
 extern bool CameraEffects;
+extern bool FireBreathTextLoader;
 extern int CameraFlip_Timer;
 extern int CameraSpin_Timer;
 extern int CameraSpin_Val;

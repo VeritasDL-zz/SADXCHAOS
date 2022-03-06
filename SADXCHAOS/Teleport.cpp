@@ -198,6 +198,6 @@ void RandomTeleport()
 		NewEffect();
 		return;
 	}
-	EntityData1Ptrs[0]->Position = RandomTeleport;
+	playertwp[0]->pos = RandomTeleport;
 	strcpy_s(LastEffect, 128, "Random Teleport");
 }

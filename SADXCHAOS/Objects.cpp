@@ -24,7 +24,7 @@ void BigRock(EntityData1* p1)
 	}
 	task* BigRock;
 	BigRock = (task*)LoadObject((LoadObj)3, 3, OBiciwa);
-	BigRock->twp->pos = EntityData1Ptrs[0]->Position;
+	BigRock->twp->pos = playertwp[0]->pos;
 	strcpy_s(LastEffect, 128, "Spawned Big Rock");
 	return;
 }
@@ -43,7 +43,7 @@ void BigCar(EntityData1* p1)
 	}
 	task* Car;
 	Car = (task*)LoadObject((LoadObj)7, 3, ORotyu);
-	Car->twp->pos = EntityData1Ptrs[0]->Position;
+	Car->twp->pos = playertwp[0]->pos;
 	strcpy_s(LastEffect, 128, "Spawned Car");
 	return;
 }
@@ -63,7 +63,7 @@ void RandomIceKey(EntityData1* p1) // disabled for now 9/23/2021, updated to tas
 	IceKey = (task*)LoadObject((LoadObj)3, 3, IceKey_Main);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	IceKey->ocp = objCondition;
-	IceKey->twp->pos = EntityData1Ptrs[0]->Position;
+	IceKey->twp->pos = playertwp[0]->pos;
 	strcpy_s(LastEffect, 128, "Random IceKey");
 	return;
 }
@@ -83,7 +83,7 @@ void RandomWindKey(EntityData1* p1) // disabled for now 9/23/2021, updated to ta
 	WindKey = (task*)LoadObject((LoadObj)3, 3, OHandKey);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	WindKey->ocp = objCondition;
-	WindKey->twp->pos = EntityData1Ptrs[0]->Position;
+	WindKey->twp->pos = playertwp[0]->pos;
 	strcpy_s(LastEffect, 128, "Random WindKey");
 	return;
 } // disabled for now 9/23/2021
@@ -101,7 +101,7 @@ void RandomFruit(EntityData1* p1)
 		ChaoFruitTextLoader = true;
 	}
 	Int FruitType = (rand() % (12 + 1 - 3)) + 3;
-	LoadChaoFruit(FruitType, &EntityData1Ptrs[0]->Position, 0, nullptr, nullptr);
+	LoadChaoFruit(FruitType, &playertwp[0]->pos, 0, nullptr, nullptr);
 	strcpy_s(LastEffect, 128, "Spawned Chao Fruit");
 }
 void RandomHat(EntityData1* p1)
@@ -120,7 +120,7 @@ void RandomHat(EntityData1* p1)
 	if (HatNumb < 10)
 	{
 		int HatType = rand() % 84 + 1;//chao hat 0-84 rng,
-		LoadChaoHat(HatType, &EntityData1Ptrs[0]->Position, 0, nullptr, nullptr);
+		LoadChaoHat(HatType, &playertwp[0]->pos, 0, nullptr, nullptr);
 		strcpy_s(LastEffect, 128, "Spawned Chao Hat");
 		HatNumb++;
 	}
@@ -136,7 +136,7 @@ void RandomCheckPoint(EntityData1* p1)
 	CheckPoint = (task*)LoadObject((LoadObj)15, 6, CheckPoint_Main);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	CheckPoint->ocp = objCondition;
-	CheckPoint->twp->pos = EntityData1Ptrs[0]->Position;
+	CheckPoint->twp->pos = playertwp[0]->pos;
 	CheckPoint->twp->ang = PlayerTaskPtr[0]->ang;
 	strcpy_s(LastEffect, 128, "Random CheckPoint");
 }
@@ -159,14 +159,14 @@ void RandomSpeedPad(EntityData1* p1)
 	Speed = (task*)LoadObject((LoadObj)3, 3, DashPanel_Main);
 	Speed->twp->scl.x = rand() % 5 + 10 * 2.5;
 	Speed->twp->ang.y = rand() % 0x8000;
-	Speed->twp->pos = EntityData1Ptrs[0]->Position;
+	Speed->twp->pos = playertwp[0]->pos;
 	if (number)
 	{
 		task* Speed;
 		Speed = (task*)LoadObject((LoadObj)3, 3, DashPanel_Main);
 		Speed->twp->scl.x = rand() % 5 + 10 * 2.5;
 		Speed->twp->ang.y = rand() % 0x8000;
-		Speed->twp->pos = EntityData1Ptrs[0]->Position;
+		Speed->twp->pos = playertwp[0]->pos;
 	}
 	strcpy_s(LastEffect, 128, "Random SpeedPad");
 	return;
@@ -184,8 +184,8 @@ void RandomFan(EntityData1* p1)
 	Fan = (task*)LoadObject((LoadObj)2, 4, OFun);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	Fan->ocp = objCondition;
-	Fan->twp->pos = EntityData1Ptrs[0]->Position;
-	Fan->twp->pos.y = EntityData1Ptrs[0]->Position.y - 9.0f;
+	Fan->twp->pos = playertwp[0]->pos;
+	Fan->twp->pos.y = playertwp[0]->pos.y - 9.0f;
 	//Fan->twp->ang = PlayerTaskPtr[0]->ang;
 	strcpy_s(LastEffect, 128, "Random Fan");
 }
@@ -204,7 +204,7 @@ void RandomBurgerMan(EntityData1* p1)
 	}
 	task* BurgerMan;
 	BurgerMan = (task*)LoadObject((LoadObj)3, 3, MissionStatue_Load);
-	BurgerMan->twp->pos = EntityData1Ptrs[0]->Position;
+	BurgerMan->twp->pos = playertwp[0]->pos;
 	strcpy_s(LastEffect, 128, "Spawned BurgerMan");
 	return;
 }
@@ -223,7 +223,7 @@ void RandomKeyBlock(EntityData1* p1)
 	}
 	task* KeyBlock;
 	KeyBlock = (task*)LoadObject((LoadObj)3, 3, OBoxSwitch);
-	KeyBlock->twp->pos = EntityData1Ptrs[0]->Position;
+	KeyBlock->twp->pos = playertwp[0]->pos;
 	KeyBlock->twp->scl.x = rand() % 3;
 	strcpy_s(LastEffect, 128, "Spawned KeyBlock");
 	return;
@@ -326,7 +326,7 @@ void RandomSpring(EntityData1* p1)
 	int number = rand() % 2;
 	task* Spring;
 	Spring = (task*)LoadObject((LoadObj)2, 3, SpringB_Main);
-	Spring->twp->pos = EntityData1Ptrs[0]->Position;
+	Spring->twp->pos = playertwp[0]->pos;
 	Spring->twp->ang = { rand() % 0x8000, rand() % 0x8000, rand() % 0x8000 };
 	Spring->twp->scl.y = rand() % 4 + 1 * 2.5;
 	Spring->twp->pos.z += rand() % 10 + 1 * 9;
@@ -334,7 +334,7 @@ void RandomSpring(EntityData1* p1)
 	if (number)
 	{
 		Spring = (task*)LoadObject((LoadObj)2, 3, SpringB_Main);
-		Spring->twp->pos = EntityData1Ptrs[0]->Position;
+		Spring->twp->pos = playertwp[0]->pos;
 		Spring->twp->ang = { rand() % 0x8000, rand() % 0x8000, rand() % 0x8000 };
 		Spring->twp->scl.y = rand() % 4 + 1 * 2.5;
 		Spring->twp->pos.z += rand() % 10 + 1 * 9;
@@ -362,7 +362,7 @@ void RandomSpikeBall(EntityData1* p1)
 	spike = (task*)LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
 	spike->twp->ang.y = rand() % 80 + 1000;
 	spike->twp->scl.x = rand() % 5 + 10 * 2.5;
-	spike->twp->pos = EntityData1Ptrs[0]->Position;
+	spike->twp->pos = playertwp[0]->pos;
 	spike->twp->pos.y += 2;
 	spike->twp->pos.x += 80;
 	if (number)
@@ -371,7 +371,7 @@ void RandomSpikeBall(EntityData1* p1)
 		spike = (task*)LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
 		spike->twp->ang.y = rand() % 80 + 1000;
 		spike->twp->scl.x = rand() % 5 + 10 * 2.5;
-		spike->twp->pos = EntityData1Ptrs[0]->Position;
+		spike->twp->pos = playertwp[0]->pos;
 		spike->twp->pos.y += 2;
 		spike->twp->pos.x += rand() % 10 + 1 * 9;
 	}
@@ -398,7 +398,7 @@ void RandomEmblem(EntityData1* p1)//UPDATED (3/1/2022) IT WORKS
 	Emblem = (task*)LoadObject((LoadObj)2, 3, Emblem_Main);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	Emblem->ocp = objCondition;
-	Emblem->twp->pos = EntityData1Ptrs[0]->Position;
+	Emblem->twp->pos = playertwp[0]->pos;
 	Emblem->twp->pos.y += rand() % 5 + 3;
 	Emblem->twp->pos.z += rand() % 100 + 1 * 9;
 	Emblem->twp->ang.x = rand() % 500 * 1.6969f; //speed it rotates at

@@ -31,13 +31,7 @@ void RandomTank(EntityData1* p1)
 	}
 	if (!RinoTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("E_SAI", &E_SAI_TEXLIST);
 		RinoTextLoader = true;
 		TextLoaded = true;
@@ -47,14 +41,14 @@ void RandomTank(EntityData1* p1)
 	RhinoTank = (task*)LoadObject((LoadObj)2, 3, RhinoTank_Main);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	RhinoTank->ocp = objCondition;
-	RhinoTank->twp->pos = EntityData1Ptrs[0]->Position;
+	RhinoTank->twp->pos = playertwp[0]->pos;
 	RhinoTank->twp->pos.z += rand() % 10 + 1 * 9;
 	if (number)
 	{
 		RhinoTank = (task*)LoadObject((LoadObj)2, 3, RhinoTank_Main);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		RhinoTank->ocp = objCondition;
-		RhinoTank->twp->pos = EntityData1Ptrs[0]->Position;
+		RhinoTank->twp->pos = playertwp[0]->pos;
 		RhinoTank->twp->pos.z += rand() % 10 + 1 * 9;
 	}
 	strcpy_s(LastEffect, 128, "Spawned RhinoTank");
@@ -79,13 +73,7 @@ void RandomBuyon(EntityData1* p1)
 	}
 	if (!BuyonTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("E_BUYON", &E_BUYON_TEXLIST);
 		BuyonTextLoader = true;
 		TextLoaded = true;
@@ -95,14 +83,14 @@ void RandomBuyon(EntityData1* p1)
 	Buyon = (task*)LoadObject((LoadObj)2, 3, EBuyon);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	Buyon->ocp = objCondition;
-	Buyon->twp->pos = EntityData1Ptrs[0]->Position;
+	Buyon->twp->pos = playertwp[0]->pos;
 	Buyon->twp->pos.z += rand() % 10 + 1 * 9;
 	if (number)
 	{
 		Buyon = (task*)LoadObject((LoadObj)2, 3, EBuyon);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Buyon->ocp = objCondition;
-		Buyon->twp->pos = EntityData1Ptrs[0]->Position;
+		Buyon->twp->pos = playertwp[0]->pos;
 		Buyon->twp->pos.z += rand() % 10 + 1 * 9;
 	}
 	strcpy_s(LastEffect, 128, "Spawned Buyon");
@@ -127,13 +115,7 @@ void RandomUnidus(EntityData1* p1)
 	}
 	if (!UnidusTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("UNI_A_UNIBODY", &UNI_A_UNIBODY_TEXLIST);
 		LoadPVM("UNI_C_UNIBODY", &UNI_C_UNIBODY_TEXLIST);
 		LoadPVM("TOGEBALL_TOGEBALL", &TOGEBALL_TOGEBALL_TEXLIST);
@@ -145,14 +127,14 @@ void RandomUnidus(EntityData1* p1)
 	Unidus = (task*)LoadObject((LoadObj)2, 3, UnidusA_Main);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	Unidus->ocp = objCondition;
-	Unidus->twp->pos = EntityData1Ptrs[0]->Position;
+	Unidus->twp->pos = playertwp[0]->pos;
 	Unidus->twp->pos.z += rand() % 10 + 1 * 9;
 	if (number)
 	{
 		Unidus = (task*)LoadObject((LoadObj)2, 3, UnidusA_Main);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Unidus->ocp = objCondition;
-		Unidus->twp->pos = EntityData1Ptrs[0]->Position;
+		Unidus->twp->pos = playertwp[0]->pos;
 		Unidus->twp->pos.z += rand() % 10 + 1 * 9;
 	}
 	strcpy_s(LastEffect, 128, "Spawned Unidus");
@@ -177,13 +159,7 @@ void RandomAmebot(EntityData1* p1)
 	}
 	if (!AmebotTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("E_AMENBO", &E_AMENBO_TEXLIST);
 		AmebotTextLoader = true;
 		TextLoaded = true;
@@ -193,14 +169,14 @@ void RandomAmebot(EntityData1* p1)
 	Amebot = (task*)LoadObject((LoadObj)2, 3, Sweep_Load);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	Amebot->ocp = objCondition;
-	Amebot->twp->pos = EntityData1Ptrs[0]->Position;
+	Amebot->twp->pos = playertwp[0]->pos;
 	Amebot->twp->pos.z += rand() % 10 + 1 * 9;
 	if (number)
 	{
 		Amebot = (task*)LoadObject((LoadObj)2, 3, Sweep_Load);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Amebot->ocp = objCondition;
-		Amebot->twp->pos = EntityData1Ptrs[0]->Position;
+		Amebot->twp->pos = playertwp[0]->pos;
 		Amebot->twp->pos.z += rand() % 10 + 1 * 9;
 	}
 	strcpy_s(LastEffect, 128, "Spawned Amebot");
@@ -225,13 +201,7 @@ void RandomPolice(EntityData1* p1)
 	}
 	if (!PoliceTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("NISEPAT", &NISEPAT_TEXLIST);
 		PoliceTextLoader = true;
 		TextLoaded = true;
@@ -241,14 +211,14 @@ void RandomPolice(EntityData1* p1)
 	CopSpeeder = (task*)LoadObject((LoadObj)2, 3, EPolice);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	CopSpeeder->ocp = objCondition;
-	CopSpeeder->twp->pos = EntityData1Ptrs[0]->Position;
+	CopSpeeder->twp->pos = playertwp[0]->pos;
 	CopSpeeder->twp->pos.z += rand() % 10 + 1 * 9;
 	if (number)
 	{
 		CopSpeeder = (task*)LoadObject((LoadObj)2, 3, EPolice);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		CopSpeeder->ocp = objCondition;
-		CopSpeeder->twp->pos = EntityData1Ptrs[0]->Position;
+		CopSpeeder->twp->pos = playertwp[0]->pos;
 		CopSpeeder->twp->pos.z += rand() % 10 + 1 * 9;
 	}
 	strcpy_s(LastEffect, 128, "Spawned The Police");
@@ -273,13 +243,7 @@ void RandomSnake(EntityData1* p1)
 	}
 	if (!SnakeTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("E_SNAKE", &E_SNAKE_TEXLIST);
 		SnakeTextLoader = true;
 		TextLoaded = true;
@@ -289,14 +253,14 @@ void RandomSnake(EntityData1* p1)
 	Snake = (task*)LoadObject((LoadObj)2, 3, BoaBoa_Main);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	Snake->ocp = objCondition;
-	Snake->twp->pos = EntityData1Ptrs[0]->Position;
+	Snake->twp->pos = playertwp[0]->pos;
 	Snake->twp->pos.z += rand() % 90 + 1 * 9;
 	if (number)
 	{
 		Snake = (task*)LoadObject((LoadObj)2, 3, BoaBoa_Main);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Snake->ocp = objCondition;
-		Snake->twp->pos = EntityData1Ptrs[0]->Position;
+		Snake->twp->pos = playertwp[0]->pos;
 		Snake->twp->pos.z += rand() % 90 + 1 * 9;
 	}
 	strcpy_s(LastEffect, 128, "Spawned Boa-Boa");
@@ -321,13 +285,7 @@ void RandomRobo(EntityData1* p1)//updated to task, untested 10/04/2021
 	}
 	if (!RoboTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("E_ROBO", &E_ROBO_TEXLIST);
 		SnakeTextLoader = true;
 		TextLoaded = true;
@@ -337,14 +295,14 @@ void RandomRobo(EntityData1* p1)//updated to task, untested 10/04/2021
 	Robo = (task*)LoadObject((LoadObj)2, 3, ERobo_0);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	Robo->ocp = objCondition;
-	Robo->twp->pos = EntityData1Ptrs[0]->Position;
+	Robo->twp->pos = playertwp[0]->pos;
 	Robo->twp->pos.z += rand() % 10 + 1 * 9;
 	if (number)
 	{
 		Robo = (task*)LoadObject((LoadObj)2, 3, ERobo_0);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Robo->ocp = objCondition;
-		Robo->twp->pos = EntityData1Ptrs[0]->Position;
+		Robo->twp->pos = playertwp[0]->pos;
 		Robo->twp->pos.z += rand() % 10 + 1 * 9;
 	}
 	strcpy_s(LastEffect, 128, "Spawned Robo");
@@ -369,13 +327,7 @@ void RandomLeon(EntityData1* p1)
 	}
 	if (!LeonTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("E_LEON", &E_LEON_TEXLIST);
 		LeonTextLoader = true;
 		TextLoaded = true;
@@ -385,14 +337,14 @@ void RandomLeon(EntityData1* p1)
 	Leon = (task*)LoadObject((LoadObj)2, 3, Leon_Load);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	Leon->ocp = objCondition;
-	Leon->twp->pos = EntityData1Ptrs[0]->Position;
+	Leon->twp->pos = playertwp[0]->pos;
 	Leon->twp->pos.z += rand() % 10 + 1 * 9;
 	if (number)
 	{
 		Leon = (task*)LoadObject((LoadObj)2, 3, Leon_Load);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Leon->ocp = objCondition;
-		Leon->twp->pos = EntityData1Ptrs[0]->Position;
+		Leon->twp->pos = playertwp[0]->pos;
 		Leon->twp->pos.z += rand() % 10 + 1 * 9;
 	}
 	strcpy_s(LastEffect, 128, "Spawned Leon");
@@ -417,13 +369,7 @@ void RandomKiki(EntityData1* p1)
 	}
 	if (!KikiTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("E_SARU", &E_SARU_TEXLIST);
 		LoadPVM("E_BOMB", &E_BOMB_TEXLIST);
 		KikiTextLoader = true;
@@ -434,7 +380,7 @@ void RandomKiki(EntityData1* p1)
 	Kiki = (task*)LoadObject((LoadObj)2, 3, Kiki_Load);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	Kiki->ocp = objCondition;
-	Kiki->twp->pos = EntityData1Ptrs[0]->Position;
+	Kiki->twp->pos = playertwp[0]->pos;
 	Kiki->twp->pos.z += rand() % 10 + 1 * 9;
 	Kiki->twp->pos.y += rand() % 2 + 1 * 9;
 	if (number)
@@ -442,7 +388,7 @@ void RandomKiki(EntityData1* p1)
 		Kiki = (task*)LoadObject((LoadObj)2, 3, Kiki_Load);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Kiki->ocp = objCondition;
-		Kiki->twp->pos = EntityData1Ptrs[0]->Position;
+		Kiki->twp->pos = playertwp[0]->pos;
 		Kiki->twp->pos.z += rand() % 10 + 1 * 9;
 		Kiki->twp->pos.y += rand() % 2 + 1 * 9;
 	}
@@ -460,7 +406,7 @@ void RandomFallingSpikeBall(EntityData1* p1)
 	int number = rand() % 2;
 	task* FallingSpikeBall;
 	FallingSpikeBall = (task*)LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
-	FallingSpikeBall->twp->pos = EntityData1Ptrs[0]->Position;
+	FallingSpikeBall->twp->pos = playertwp[0]->pos;
 	FallingSpikeBall->twp->pos.z += rand() % 30 + 1 * 9;
 	FallingSpikeBall->twp->scl.z = 60;
 	FallingSpikeBall->twp->scl.x = 60;
@@ -468,7 +414,7 @@ void RandomFallingSpikeBall(EntityData1* p1)
 	if (number)
 	{
 		FallingSpikeBall = (task*)LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
-		FallingSpikeBall->twp->pos = EntityData1Ptrs[0]->Position;
+		FallingSpikeBall->twp->pos = playertwp[0]->pos;
 		FallingSpikeBall->twp->pos.y += rand() % 30 + 1 * 9;
 		FallingSpikeBall->twp->pos.z += rand() % 30 + 1 * 9;
 		FallingSpikeBall->twp->scl.z = 60;
@@ -492,13 +438,7 @@ void RandomSpinnerA(EntityData1* p1)
 	}
 	if (!SpinnerTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 		SpinnerTextLoader = true;
 		TextLoaded = true;
@@ -508,7 +448,7 @@ void RandomSpinnerA(EntityData1* p1)
 	SpinnerA = (task*)LoadObject((LoadObj)2, 3, SpinnerA_Main);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	SpinnerA->ocp = objCondition;
-	SpinnerA->twp->pos = EntityData1Ptrs[0]->Position;
+	SpinnerA->twp->pos = playertwp[0]->pos;
 	SpinnerA->twp->pos.z += rand() % 10 + 1 * 9;
 	SpinnerA->twp->pos.y += rand() % 2 + 1 * 9;
 	if (number)
@@ -516,7 +456,7 @@ void RandomSpinnerA(EntityData1* p1)
 		SpinnerA = (task*)LoadObject((LoadObj)2, 3, SpinnerA_Main);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		SpinnerA->ocp = objCondition;
-		SpinnerA->twp->pos = EntityData1Ptrs[0]->Position;
+		SpinnerA->twp->pos = playertwp[0]->pos;
 		SpinnerA->twp->pos.z += rand() % 10 + 1 * 9;
 		SpinnerA->twp->pos.y += rand() % 2 + 1 * 9;
 	}
@@ -537,13 +477,7 @@ void RandomSpinnerB(EntityData1* p1)
 	}
 	if (!SpinnerTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 		SpinnerTextLoader = true;
 		TextLoaded = true;
@@ -558,7 +492,7 @@ void RandomSpinnerB(EntityData1* p1)
 	SpinnerB = (task*)LoadObject((LoadObj)2, 3, SpinnerB_Main);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	SpinnerB->ocp = objCondition;
-	SpinnerB->twp->pos = EntityData1Ptrs[0]->Position;
+	SpinnerB->twp->pos = playertwp[0]->pos;
 	SpinnerB->twp->pos.z += rand() % 10 + 1 * 9;
 	SpinnerB->twp->pos.y += rand() % 2 + 1 * 9;
 	if (number)
@@ -566,7 +500,7 @@ void RandomSpinnerB(EntityData1* p1)
 		SpinnerB = (task*)LoadObject((LoadObj)2, 3, SpinnerB_Main);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		SpinnerB->ocp = objCondition;
-		SpinnerB->twp->pos = EntityData1Ptrs[0]->Position;
+		SpinnerB->twp->pos = playertwp[0]->pos;
 		SpinnerB->twp->pos.z += rand() % 10 + 1 * 9;
 		SpinnerB->twp->pos.y += rand() % 2 + 1 * 9;
 	}
@@ -587,13 +521,7 @@ void RandomSpinnerC(EntityData1* p1)
 	}
 	if (!SpinnerTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 		SpinnerTextLoader = true;
 		TextLoaded = true;
@@ -603,7 +531,7 @@ void RandomSpinnerC(EntityData1* p1)
 	SpinnerC = (task*)LoadObject((LoadObj)2, 3, SpinnerC_Main);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	SpinnerC->ocp = objCondition;
-	SpinnerC->twp->pos = EntityData1Ptrs[0]->Position;
+	SpinnerC->twp->pos = playertwp[0]->pos;
 	SpinnerC->twp->pos.z += rand() % 10 + 1 * 9;
 	SpinnerC->twp->pos.y += rand() % 2 + 1 * 9;
 	if (number)
@@ -611,7 +539,7 @@ void RandomSpinnerC(EntityData1* p1)
 		SpinnerC = (task*)LoadObject((LoadObj)2, 3, SpinnerC_Main);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		SpinnerC->ocp = objCondition;
-		SpinnerC->twp->pos = EntityData1Ptrs[0]->Position;
+		SpinnerC->twp->pos = playertwp[0]->pos;
 		SpinnerC->twp->pos.z += rand() % 10 + 1 * 9;
 		SpinnerC->twp->pos.y += rand() % 2 + 1 * 9;
 	}
@@ -658,7 +586,7 @@ void RandomSman(EntityData1* p1)
 	ESMAN = (task*)LoadObject((LoadObj)2, 3, ESman);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	ESMAN->ocp = objCondition;
-	ESMAN->twp->pos = EntityData1Ptrs[0]->Position;
+	ESMAN->twp->pos = playertwp[0]->pos;
 	ESMAN->twp->pos.z += rand() % 10 + 1 * 9;
 	ESMAN->twp->pos.y += rand() % 2 + 1 * 9;
 	strcpy_s(LastEffect, 128, "Spawned IceBall");
@@ -677,13 +605,7 @@ void RandomEGacha(EntityData1* p1)
 	}
 	if (!EGachaTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("GACHAPON", &GACHAPON_TEXLIST);
 		EGachaTextLoader = true;
 		TextLoaded = true;
@@ -693,7 +615,7 @@ void RandomEGacha(EntityData1* p1)
 	GACHAPON = (task*)LoadObject((LoadObj)2, 3, OEGacha);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	GACHAPON->ocp = objCondition;
-	GACHAPON->twp->pos = EntityData1Ptrs[0]->Position;
+	GACHAPON->twp->pos = playertwp[0]->pos;
 	GACHAPON->twp->pos.z += rand() % 10 + 1 * 9;
 	GACHAPON->twp->pos.y += rand() % 10 + 1 * 9;
 	if (number)
@@ -701,7 +623,7 @@ void RandomEGacha(EntityData1* p1)
 		GACHAPON = (task*)LoadObject((LoadObj)2, 3, OEGacha);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		GACHAPON->ocp = objCondition;
-		GACHAPON->twp->pos = EntityData1Ptrs[0]->Position;
+		GACHAPON->twp->pos = playertwp[0]->pos;
 		GACHAPON->twp->pos.z += rand() % 35 + 1 * 9;
 		GACHAPON->twp->pos.y += rand() % 30 + 1 * 9;
 	}
@@ -727,13 +649,7 @@ void RandomAirCraft(EntityData1* p1) //if you use this please give me credits as
 	}
 	if (!AirCraftTextLoader)
 	{
-		if (!AnimalTextLoader)
-		{
-			for (size_t j = 0; j < LengthOfArray(MinimalPVMs); ++j) {
-				LoadPVM(MinimalPVMs[j].Name, MinimalPVMs[j].TexList);
-			}
-			AnimalTextLoader = true;
-		}
+		CheckAnimalTexture();
 		LoadPVM("E_AIRCRAFT", &E_AIRCRAFT_TEXLIST);
 		LoadPVM("Air_signal", &AIR_SIGNAL_TEXLIST);
 		LoadPVM("OBJ_SKYDECK", &OBJ_SKYDECK_TEXLIST);
@@ -744,7 +660,7 @@ void RandomAirCraft(EntityData1* p1) //if you use this please give me credits as
 	AirCraft = (task*)LoadObject((LoadObj)2, 3, EnemyAir);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 	AirCraft->ocp = objCondition;
-	AirCraft->twp->pos = EntityData1Ptrs[0]->Position;
+	AirCraft->twp->pos = playertwp[0]->pos;
 	AirCraft->twp->pos.z += rand() % 10 + 1 * 9;
 	AirCraft->twp->pos.y += rand() % 10 + 15 * 9;
 	AirCraft->twp->mode = 2;
@@ -754,7 +670,7 @@ void RandomAirCraft(EntityData1* p1) //if you use this please give me credits as
 		AirCraft = (task*)LoadObject((LoadObj)2, 3, EnemyAir);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		AirCraft->ocp = objCondition;
-		AirCraft->twp->pos = EntityData1Ptrs[0]->Position;
+		AirCraft->twp->pos = playertwp[0]->pos;
 		AirCraft->twp->pos.z += rand() % 10 + 10 * 9;
 		AirCraft->twp->pos.y += rand() % 11 + 20 * 9;
 		AirCraft->twp->mode = 2;
@@ -764,5 +680,39 @@ void RandomAirCraft(EntityData1* p1) //if you use this please give me credits as
 		AirCraftSpawerFollow_Timer = 350;
 	}
 	strcpy_s(LastEffect, 128, "Spawned AirCraft");
+}
+void RandomFireBreath(EntityData1* p1)
+{
+	if (!EnemysEnabled)
+	{
+		NewEffect();
+		return;
+	}
+	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	{
+		NewEffect();
+		return;
+	}
+	if (CurrentLevel == LevelIDs_EggViper)
+	{
+		NewEffect();
+		return;
+	}
+	if (!FireBreathTextLoader)
+	{
+		CheckAnimalTexture();
+		LoadPVM("OBJ_MOUNTAIN", &OBJ_MOUNTAIN_TEXLIST);
+		FireBreathTextLoader = true;
+		TextLoaded = true;
+	}
+	task* FireBreath;
+	FireBreath = (task*)LoadObject((LoadObj)6, 3, O_honoo_Main);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	FireBreath->ocp = objCondition;
+	FireBreath->twp->pos = playertwp[0]->pos;
+	FireBreath->twp->pos.x = playertwp[0]->pos.x - 10;
+	FireBreath->twp->ang = playertwp[0]->ang;
+
+	strcpy_s(LastEffect, 128, "Spawned FireBreath");
 }
 
