@@ -179,7 +179,7 @@ using std::string;
 //Started RandomFireBreath (3/5/2022)
 //Removed all use of EntityData1Ptrs[0] in use of playertwp[0] (3/5/2022)
 //Finished RandomFireBreath (3/5/2022)
-// 
+//Added RandomCannonS1 and RandomCannonS2 (3/5/2022)
 // 
 // 
 // 
@@ -284,6 +284,8 @@ bool BigRockTextLoader = false;
 bool CarTextLoader = false;
 bool AirCraftTextLoader = false;
 bool FireBreathTextLoader = false;
+bool CannonS1TextLoader = false;
+bool CannonS2TextLoader = false;
 bool ShownMenu = false;
 bool TextLoaded = false;
 bool DebugEnabled = false;
@@ -873,7 +875,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomFireBreath(0);
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

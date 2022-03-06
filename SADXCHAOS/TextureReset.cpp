@@ -40,6 +40,7 @@ void ResetTextureBools()
 	FanTextLoader = false;
 	AirCraftTextLoader = false;
 	FireBreathTextLoader = false;
+	CannonS1TextLoader = false;
 	WriteOnce = false;
 	HatNumb = -1;
 	AirCraftSpawerFollow_Timer = 0;

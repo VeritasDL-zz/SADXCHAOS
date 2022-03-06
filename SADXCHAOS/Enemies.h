@@ -17,3 +17,5 @@ void RandomSman(EntityData1* p1);
 void RandomEGacha(EntityData1* p1);
 void RandomAirCraft(EntityData1* p1);
 void RandomFireBreath(EntityData1* p1);
+void RandomCannonS1(EntityData1* p1);
+void RandomCannonS2(EntityData1* p1);

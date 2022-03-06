@@ -712,7 +712,71 @@ void RandomFireBreath(EntityData1* p1)
 	FireBreath->twp->pos = playertwp[0]->pos;
 	FireBreath->twp->pos.x = playertwp[0]->pos.x - 10;
 	FireBreath->twp->ang = playertwp[0]->ang;
-
 	strcpy_s(LastEffect, 128, "Spawned FireBreath");
 }
-
+void RandomCannonS1(EntityData1* p1)
+{
+	if (!EnemysEnabled)
+	{
+		NewEffect();
+		return;
+	}
+	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	{
+		NewEffect();
+		return;
+	}
+	if (CurrentLevel == LevelIDs_EggViper)
+	{
+		NewEffect();
+		return;
+	}
+	if (!CannonS1TextLoader)
+	{
+		CheckAnimalTexture();
+		LoadPVM("OBJ_SKYDECK", &OBJ_SKYDECK_TEXLIST);
+		CannonS1TextLoader = true;
+		TextLoaded = true;
+	}
+	task* CannonS1;
+	CannonS1 = (task*)LoadObject((LoadObj)6, 3, Cannon_s1);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	CannonS1->ocp = objCondition;
+	CannonS1->twp->pos = playertwp[0]->pos;
+	CannonS1->twp->pos.x = playertwp[0]->pos.x - 10;
+	CannonS1->twp->ang = playertwp[0]->ang;
+	strcpy_s(LastEffect, 128, "Spawned Cannon");
+}
+void RandomCannonS2(EntityData1* p1)
+{
+	if (!EnemysEnabled)
+	{
+		NewEffect();
+		return;
+	}
+	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	{
+		NewEffect();
+		return;
+	}
+	if (CurrentLevel == LevelIDs_EggViper)
+	{
+		NewEffect();
+		return;
+	}
+	if (!CannonS2TextLoader)
+	{
+		CheckAnimalTexture();
+		LoadPVM("OBJ_SKYDECK", &OBJ_SKYDECK_TEXLIST);
+		CannonS2TextLoader = true;
+		TextLoaded = true;
+	}
+	task* CannonS2;
+	CannonS2 = (task*)LoadObject((LoadObj)6, 3, Cannon_s2);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	CannonS2->ocp = objCondition;
+	CannonS2->twp->pos = playertwp[0]->pos;
+	CannonS2->twp->pos.x = playertwp[0]->pos.x - 10;
+	CannonS2->twp->ang = playertwp[0]->ang;
+	strcpy_s(LastEffect, 128, "Spawned Cannon");
+}

@@ -80,6 +80,8 @@ extern bool AllergicToRings;
 extern bool WriteOnce;
 extern bool CameraEffects;
 extern bool FireBreathTextLoader;
+extern bool CannonS1TextLoader;
+extern bool CannonS2TextLoader;
 extern int CameraFlip_Timer;
 extern int CameraSpin_Timer;
 extern int CameraSpin_Val;
