@@ -11,7 +11,7 @@ void RandomTikalHint()
 	LoadAutoHint(Hints[hintrand], Voices[hintrand]);
 	strcpy_s(LastEffect, 128, "Tikal Hint");
 }
-const HintText_Text const Hints[60][3] = {
+const HintText_Text const Hints[67][3] = {
 {
 { "Watch out for the cars!.", 120 }, // text, time
 { 0 }, //Second page
@@ -313,6 +313,42 @@ const HintText_Text const Hints[60][3] = {
 { 0 }, //Second page
 { 0 } //idk 3rd page or always null?
 },
+{
+{ "Umm.. Which memory card?", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "Umm.. Which File?", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "Umm... Which character?", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "You don't have enough memory in the memory card.", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "I got it!", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "What a big lake!", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+{
+{ "Wow; it's dark in here!", 120 }, // text, time
+{ 0 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
+
 };
 size_t HintSize = LengthOfArray(Hints);
 int Voices[] = {
@@ -375,5 +411,14 @@ int Voices[] = {
 1692,
 1939,
 1962,
-1970
+1970,
+0126,//what mem card - big
+0127,//Which file - big
+0130,//what character - big
+0143,//not enough mem - big
+0214,//I got it - sonic
+0230,//what a big lake! - big
+287,//its so dark in here - big
+
+
 };

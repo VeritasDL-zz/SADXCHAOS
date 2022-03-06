@@ -5,7 +5,7 @@
 //A hint with \n can be 81 character (\n counts as 2)
 //A hint with no new line can be 79 charaters
 
-extern const HintText_Text const Hints[60][3];
+extern const HintText_Text const Hints[67][3];
 extern size_t HintSize;
 extern int Voices[];
 void RandomTikalHint();
