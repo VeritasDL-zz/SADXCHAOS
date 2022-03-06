@@ -181,7 +181,7 @@ using std::string;
 //Finished RandomFireBreath (3/5/2022)
 //Added RandomCannonS1 and RandomCannonS2 (3/5/2022)
 //Switched all Functions and chaos code that used EntityData1Ptrs[0]/EntityData1* with playertwp[0]/taskwk* (3/6/2022)
-// 
+//Switched most code that used CharObj2 to playerpwp (3/6/2022)
 // 
 // 
 //---------TO-DO---------
@@ -483,7 +483,7 @@ extern "C"
 		strcpy_s(LastEffect, 128, "Random Char");
 	}
 	typedef void(__cdecl* ChaosEnt)(taskwk*);
-	typedef void(__cdecl* ChaosCharObj)(CharObj2*);
+	typedef void(__cdecl* ChaosCharObj)(playerwk*);
 	typedef void(__cdecl* ChaosNull)();
 	struct ChaosS {
 		ChaosEnt func;
@@ -608,7 +608,7 @@ extern "C"
 		{
 			ResetTextureBools();
 		}
-		if (!CharObj2Ptrs[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
+		if (!playerpwp[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
 		if (NoClip_Timer <= 800 && NoClip_Timer != 0)
 		{
@@ -736,9 +736,10 @@ extern "C"
 		}
 		if (FastAccel_Timer <= 2 && FastAccel_Timer != 0)
 		{
-			CharObj2Ptrs[0]->PhysicsData.MaxAccel = OldMaxAccel;
-			CharObj2Ptrs[0]->PhysicsData.AirAccel = OldAirAccel;
-			CharObj2Ptrs[0]->PhysicsData.HangTime = OldHangTime;
+			
+			playerpwp[0]->p.max_x_spd = OldMaxAccel;
+			playerpwp[0]->p.air_accel = OldAirAccel;
+			playerpwp[0]->p.jump2_timer = OldHangTime;
 			strcpy_s(LastEffect, 128, "Fast Accel Disabled");
 			FastAccel_Timer = 0;
 		}
@@ -861,7 +862,7 @@ extern "C"
 			if (ChaosArray[curRand].func != nullptr)
 				ChaosArray[curRand].func(playertwp[0]);
 			else if (ChaosArray[curRand].func2 != nullptr)
-				ChaosArray[curRand].func2(CharObj2Ptrs[0]);
+				ChaosArray[curRand].func2(playerpwp[0]);
 			else
 				ChaosArray[curRand].func3();
 			oldRand = curRand;
@@ -876,6 +877,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			NewEffect();
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

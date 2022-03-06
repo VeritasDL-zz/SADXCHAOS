@@ -67,7 +67,7 @@ void WalkThruWallsReset()
 	WriteData((int*)0x007887DD, (int)0x74C08500);
 	return;
 }
-PhysicsData_t PhyData[38]  //credits to MainMemory For this data, https://github.com/MainMemory/SADXPhysicsSwapMod
+player_parameter PhyData[38]  //credits to MainMemory For this data, https://github.com/MainMemory/SADXPhysicsSwapMod
 {
 	60,2,16,16,3,0.6,1.66,3,0.23,0.46,1.39,2.3,3.7,5.09,0.076,0.05,0.031,-0.06,-0.18,-0.17,-0.028,-0.008,-0.01,-0.4,-0.1,-0.6,-0.2825,0.3,4,10,0.08,7,5.4,
 	60,3,16,16,3,1,1.66,3,0.23,0.46,1.39,2.3,3.7,5.09,0.076,0.06,0.031,-0.06,-0.18,-0.17,-0.028,-0.008,-0.01,-0.4,-0.1,-0.6,-0.3375,0.3,8.5,18,0.08,7,5.3,
@@ -158,10 +158,10 @@ void RandomPhysics()
 		return;
 	}
 	int Phyrand = rand() % 38;
-	int OldYOffset = CharObj2Ptrs[0]->PhysicsData.YOff; //store current Y Offset
-	PhysicsData tmp = (PhysicsData)PhyData[Phyrand];
-	memcpy(&CharObj2Ptrs[0]->PhysicsData, &tmp, sizeof(PhysicsData));
-	CharObj2Ptrs[0]->PhysicsData.YOff = OldYOffset;//restores Saved Y Offset.
+	int OldYOffset = playerpwp[0]->p.center_height; //store current Y Offset
+	player_parameter tmp = (player_parameter)PhyData[Phyrand];
+	memcpy(&playerpwp[0]->p, &tmp, sizeof(player_parameter));
+	playerpwp[0]->p.center_height = OldYOffset;//restores Saved Y Offset.
 	snprintf(LastEffect, 128, "%s Physics", Physnames[Phyrand]);
 }
 void Nos0und_ForYou()
@@ -175,7 +175,7 @@ void Nos0und_ForYou()
 }
 void UncoupleCamera()
 {
-	Camera_Data1->Action = 3; //uncouples camera from char
+	camera_twp->mode = 3; //uncouples camera from char
 	Camera_Timer = 100;
 	strcpy_s(LastEffect, 128, "Camera Detached");
 }
@@ -280,13 +280,13 @@ void RandomChaoo()
 	chaodata->data.UnknownGrade = rand() % 5;
 	strcpy_s(LastEffect, 128, "Spawned Random Chao");
 }
-void RandomKillMomentum(CharObj2* p1)
+void RandomKillMomentum(playerwk* p1)
 {
-	p1->Speed = { 0, 0, 0 };
+	p1->acc = { 0, 0, 0 };
 	strcpy_s(LastEffect, 128, "Killed Momentum");
 	return;
 }
-void FastAccel(CharObj2* p1)
+void FastAccel(playerwk* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
@@ -306,16 +306,16 @@ void FastAccel(CharObj2* p1)
 		return;
 	}
 	FastAccel_Timer = 400;
-	OldMaxAccel = CharObj2Ptrs[0]->PhysicsData.MaxAccel;
-	OldAirAccel = CharObj2Ptrs[0]->PhysicsData.AirAccel;
-	OldHangTime = CharObj2Ptrs[0]->PhysicsData.HangTime;
-	CharObj2Ptrs[0]->PhysicsData.MaxAccel = 10.0f;
-	CharObj2Ptrs[0]->PhysicsData.AirAccel = 0.10f;
-	CharObj2Ptrs[0]->PhysicsData.HangTime = 120;
+	OldMaxAccel = playerpwp[0]->p.max_x_spd;
+	OldAirAccel = playerpwp[0]->p.air_accel;
+	OldHangTime = playerpwp[0]->p.jump2_timer;
+	playerpwp[0]->p.max_x_spd = 10.0f;
+	playerpwp[0]->p.air_accel; = 0.10f;
+	playerpwp[0]->p.jump2_timer = 120;
 	strcpy_s(LastEffect, 128, "Fast Accel Enabled");
 	return;
 }
-void RandomVSpeed(CharObj2* p1)
+void RandomVSpeed(playerwk* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
@@ -334,11 +334,11 @@ void RandomVSpeed(CharObj2* p1)
 		NewEffect();
 		return;
 	}
-	p1->Speed.y = p1->PhysicsData.VSpeedCap;
+	p1->acc.y = p1->p.lim_v_spd;
 	strcpy_s(LastEffect, 128, "Random V Speed");
 	return;
 }
-void RandomHSpeed(CharObj2* p1)
+void RandomHSpeed(playerwk* p1)
 {
 	if (EggViperHandyCapEanbled)
 	{
@@ -357,7 +357,7 @@ void RandomHSpeed(CharObj2* p1)
 		NewEffect();
 		return;
 	}
-	p1->Speed.x = p1->PhysicsData.HSpeedCap;
+	p1->acc.x = p1->p.lim_h_spd;
 	strcpy_s(LastEffect, 128, "Random H Speed");
 	return;
 }
@@ -814,7 +814,7 @@ void RemovePowerUp()
 void RandomCollisionSize()
 {
 	int CSize = rand() % 9 + (1);//adds 1 to ensure CSize is never 0
-	CharObj2Ptrs[0]->PhysicsData.CollisionSize = CSize;
+	playerpwp[0]->p.height = CSize;
 	strcpy_s(LastEffect, 128, "Random Collision Size");
 	return;
 }
