@@ -44,5 +44,6 @@ void ResetTextureBools()
 	WriteOnce = false;
 	HatNumb = 0;
 	FruitNumb = 0;
+	burgerManSpawned = 0;
 	AirCraftSpawerFollow_Timer = 0;
 }

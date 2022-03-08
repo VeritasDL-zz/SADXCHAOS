@@ -182,6 +182,7 @@ Changed Ring Allergy Timer from 500 frames to 250 frames (3/6/2022)
 Changed all Gravity Timers from 1000 frames to 500 frames (3/6/2022)
 Fixed a bug with CameraSpin and CameraFlip not Resetting (3/6/2022)
 Added 7 new tikal Hints (3/6/2022)
+Started Working on RotateMa thanks to Speeps for all the help (3/7/2022)
  
  
  

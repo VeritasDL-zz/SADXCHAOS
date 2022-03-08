@@ -51,6 +51,9 @@
     <ClInclude Include="AnimalTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RotateMa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -87,6 +90,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AnimalTextures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RotateMa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

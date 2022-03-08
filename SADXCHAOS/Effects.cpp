@@ -418,10 +418,6 @@ void RandomDroppedRings(taskwk* p1)
 	TakeRingsInterval1(randomrings);
 	strcpy_s(LastEffect, 128, "Dropped Rings");
 }
-void RandomClipLevel()//currently disabled, may be removed
-{
-	ClipLevel = rand() % 3;
-}
 void RandomPause() //randomly pauses the game LOL get good
 {
 	if (!RPauseEnabled)
@@ -854,3 +850,9 @@ void DrunkCamera()
 	DrunkCamera_Timer = 550;
 	return;
 }
+
+
+
+
+
+

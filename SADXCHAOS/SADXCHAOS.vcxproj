@@ -173,6 +173,7 @@
     <ClInclude Include="Objects.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PowerUPS.h" />
+    <ClInclude Include="RotateMa.h" />
     <ClInclude Include="Teleport.h" />
     <ClInclude Include="TextureReset.h" />
     <ClInclude Include="TikalHints.h" />
@@ -192,6 +193,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PowerUPS.cpp" />
+    <ClCompile Include="RotateMa.cpp" />
     <ClCompile Include="Teleport.cpp" />
     <ClCompile Include="TextureReset.cpp" />
     <ClCompile Include="TikalHints.cpp" />

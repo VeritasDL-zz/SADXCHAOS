@@ -3001,6 +3001,13 @@ VoidFunc(InitEC0NPCData, 0x7D2720);
 VoidFunc(InitEC3NPCData, 0x7D2CF0);
 VoidFunc(InitSSNPCData, 0x7D5810);
 VoidFunc(al_xy_init, 0x7DAE80);
+//FunctionPointer(void, CreateRotaryEmerald, (float pos_x, float pos_y, float pos_z, float r, int rot_spd, task* eme1_task_p, task* eme2_task_p, task* eme3_task_p, task* eme4_task_p, task* eme5_task_p, task* eme6_task_p, task* eme7_task_p), 0x6EEF40);
+//FunctionPointer(void, SetEffectRotaryEmerald, (int eme_num, NJS_TEXLIST* ef_name, float scale, float col_a, float col_r, float col_g, float col_b), 0x6EEA30);
+DataPointer(NJS_TEXLIST, ev_effect_list19, 0x2C49740);
+//FunctionPointer(void, SplashRotaryEmerald, (float splash_spd), 0x6EEAC0);
+DataPointer(NJS_MOTION**, SS_PEOPLE_MOTIONS, 0x38F6EA4);
+
+
 
 // Bool __usercall@<eax>(NJS_TEXLIST *a1@<eax>)
 static const void *const VerifyTexListPtr = (void*)0x403250;

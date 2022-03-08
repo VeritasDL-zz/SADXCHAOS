@@ -18,4 +18,5 @@
 #include "DebugDraw.h"
 #include "TextureReset.h"
 #include "AnimalTexture.h"
+#include "RotateMa.h"
 #endif //PCH_H

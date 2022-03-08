@@ -49,6 +49,7 @@ int DrunkCamera_Timer = 0;
 int DrunkCam = 0;
 int Direction = 0x50;
 int AirCraftSpawerFollow_Timer = 0;
+int EmeraldSpin_Timer = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -98,6 +99,7 @@ bool TextLoaded = false;
 bool DebugEnabled = false;
 bool WriteOnce = false;
 ObjectMaster* snowboard;
+task* BURGER[7];
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
 {
 	return snowboard = LoadObject(flags, index, loadSub);
@@ -557,6 +559,15 @@ extern "C"
 		{
 			AirCraftSpawerFollow_Timer = 0;
 		}
+		if (EmeraldSpin_Timer <= 240 && EmeraldSpin_Timer != 0)
+		{
+			EmeraldSpin_Timer--;
+		}
+		if (EmeraldSpin_Timer == 1)
+		{
+			EmeraldSpin_Timer = 0;
+			burgerManSpawned = 0;
+		}
 		if (Chaos_Timer < EffectMax)//30 seconds is 1800
 			Chaos_Timer++;
 		if (Chaos_Timer >= EffectMax)
@@ -583,6 +594,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			EmeraldSpin();
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
