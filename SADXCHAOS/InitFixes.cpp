@@ -31,8 +31,24 @@ void LoadSDTexObj()
 {
 	njSetTexture(&OBJ_SKYDECK_TEXLIST);
 }
-void Init_Fixes()
+void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 {
+	const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
+	EffectMax = config->getInt("General", "EffectMax", 180);
+	DebugToScreen = config->getBool("General", "PrintToScreen", false);
+	TeleportEnabled = config->getBool("General", "TeleportEnabled", true);
+	EnemysEnabled = config->getBool("General", "EnemysEnabled", true);
+	InvertEnabled = config->getBool("General", "InvertEnabled", true);
+	RPauseEnabled = config->getBool("General", "PauseEnabled", true);
+	PauseDisableEnabled = config->getBool("General", "PauseDisableEnabled", true);
+	GrabAbleObjectsEnabled = config->getBool("General", "GrabAbleObjectsEnabled", true);
+	GravityChangeEnabled = config->getBool("General", "GravityChangeEnabled", true);
+	RPhysicsEnabled = config->getBool("General", "RPhysicsEnabled", true);
+	AllergicToRings = config->getBool("General", "AllergicToRings", true);
+	EggViperHandyCapEanbled = config->getBool("General", "EggViperHandyCap", true);
+	CameraEffects = config->getBool("General", "CameraEffects", true);
+	RandomEmblemEnabled = config->getBool("General", "RandomEmblem", true);
+	delete config;
 	InitializeRandomCoordinates();
 	WriteCall((void*)0x4E9423, LoadSnowboardObject);
 	WriteCall((void*)0x4E967E, LoadSnowboardObject);
