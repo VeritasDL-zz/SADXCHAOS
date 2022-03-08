@@ -101,24 +101,6 @@ extern "C"
 {
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
 	{
-		// Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
-		// This is where we override functions, replace static data, etc.
-		//const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
-		//EffectMax = config->getInt("General", "EffectMax", 180);
-		//DebugToScreen = config->getBool("General", "PrintToScreen", false);
-		//TeleportEnabled = config->getBool("General", "TeleportEnabled", true);
-		//EnemysEnabled = config->getBool("General", "EnemysEnabled", true);
-		//InvertEnabled = config->getBool("General", "InvertEnabled", true);
-		//RPauseEnabled = config->getBool("General", "PauseEnabled", true);
-		//PauseDisableEnabled = config->getBool("General", "PauseDisableEnabled", true);
-		//GrabAbleObjectsEnabled = config->getBool("General", "GrabAbleObjectsEnabled", true);
-		//GravityChangeEnabled = config->getBool("General", "GravityChangeEnabled", true);
-		//RPhysicsEnabled = config->getBool("General", "RPhysicsEnabled", true);
-		//AllergicToRings = config->getBool("General", "AllergicToRings", true);
-		//EggViperHandyCapEanbled = config->getBool("General", "EggViperHandyCap", true);
-		//CameraEffects = config->getBool("General", "CameraEffects", true);
-		//RandomEmblemEnabled = config->getBool("General", "RandomEmblem", true);
-		//delete config;
 		Init_Fixes(path, helperFunctions);
 		strcpy_s(LastEffect, 128, "Chaos Edition 2.0");
 	}
@@ -253,7 +235,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			BurgerManSpin();//need to finish
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
