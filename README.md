@@ -67,15 +67,14 @@ Download the [Latest Release Here](https://github.com/VeritasDL/SADXCHAOS/releas
 - Random Hurt -  Randomly Hurts the player if they have rings.
 - Random PowerUP -  Randomly Gives you a PowerUP.
 - Random Time Of Day -  Randomly Sets The Time Of Day only when in Adventure fields.
-- Random Dropped Rings -  Drops a Random Amount of rings from 0 to 255, and sets current rings to 0.
-- Random Clip Level -  Changes The Render Distance. (Disabled as of 8/10/2021)
+- Random Dropped Rings -  Drops a Random Amount of rings from 0 to 255, Drains Rings Based On Amount Dropped.
 - Random Pause -  Forces The Game Paused for 5 Frames. (you must unpause 5 times)
 - Random Character -  Randomly Changes what character you are playing as. (Currently Disabled because the character change only happens on death/act/level change/restart)
 - Swap Camera -  Switches Camera Type.
 - Random Debug -  Enables Debug Mode for 333 Frames.
-- Random X Gravity -  Sets X Gravity to a random value for 1000 frames.
-- Random Y Gravity -  Sets Y Gravity to a random value for 1000 frames.
-- Random Z Gravity -  Sets Z Gravity to a random value for 1000 frames.
+- Random X Gravity -  Sets X Gravity to a random value for 500 frames.
+- Random Y Gravity -  Sets Y Gravity to a random value for 500 frames.
+- Random Z Gravity -  Sets Z Gravity to a random value for 500 frames.
 - No Gravity - Disables Gravity for 400 frames.
 - Random Barrier -  Gives Barrier.
 - Random Magnetic Barrier -  Gives Magnetic Barrier.
@@ -101,13 +100,13 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Disable Pause - Removes the Ability to pause for 420 frames.
 - Random Key Block - Spawns in the Key Block with random color from Amy's Hot Shelter
 - No s0und_ For You - Disables all/most sounds for 222 frames.
-- Random Emblem - Spawns in an Emblem that the player can collect. Does Not increase Emblem count. (disabled)
+- Random Emblem - Spawns in an Emblem that the player can collect. Does Not increase Emblem count.
 - Disable Pause - Disables Ability to Pause the game for 420 frames.
 - Random Chao - Spawns in a Chao with Random Stat Levels, Stat Grades, Texture, Body Type, Hat Type, Medal Type, Shiny, Random Animal Attributes, Color and Name.
 - Random Chao Fruit - Spawns in a Random Chao Fruit.
 - Random Chao Hat - Spawns in a Random Chao Hat.
 - Random Big Rock - Spawns in The Big Rock for Big's Ice Cap, others can pick it up as well! 
-- Ring Allergy - Kills The Player if Rings are collected for 500 Frames.
+- Ring Allergy - Kills The Player if Rings are collected for 250 Frames.
 - Increase Cutscene Skip Time - Increases the time needed to Skip Cutscenes.
 - Remove Random Powerup - A 1 in 3 Chance to Remove a Random PowerUP for Sonic, Tails, Knuckles & Big (more to come at a later date)
 - Random Collision Size - Changes Collision Size to a Number between 1 and 10.
@@ -117,12 +116,16 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random Fan - Spawns in the Fan from Final Egg Act 2 under the player.
 - Random AirCraft - Spawns in a Random Number of AirCraft's for 350 frames.
 - Random FireBreath - Spawn in the FireBreath Statue from Red Mountain.
+- Random CannonS1 - Spawns in a Cannon from Sky Deck.
+- Random CannonS2 - Spawns in a Cannon from Sky Deck.
+- BurgerSpin - Spawns in 7 BurgerMen that spin around the player, Check out Her Github. https://github.com/SPEEPSHighway Or Her Meme Maker Mod. https://gamebanana.com/mods/49984
 ## Special Thanks
-Thanks to Sora for the code base and helping me with dumb questions  
+Thanks to Sora for the code base and helping me with dumb questions.  
 Huge Thanks to Refrag for helping me constantly!  
 Thanks to MainMemory for letting me use her snowboard and physics code!  
 Thanks to PkR for letting me use his DrawDebugRectangle and ScaleDebugFont Code from https://github.com/PiKeyAr/sadx-debug-mode/  
 Thanks to Kell and itsEasyActually for all the help!  
+Thanks to Speeps for letting me use her BurgerSpin Code. https://github.com/SPEEPSHighway  
 Thanks to the entire SA-1 X-Hax community for everything they continue to do for this game :)  
 
 ## Additional Files
