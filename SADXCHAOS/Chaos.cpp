@@ -169,23 +169,6 @@ extern "C"
 		srand((unsigned)time(nullptr));
 		strcpy_s(LastEffect, 128, "Chaos Edition 2.0");
 	}
-	PVMEntry MinimalPVMs[]{
-	{ "GOMA", &GOMA_TEXLIST },
-	{ "PEN", &PEN_TEXLIST },
-	{ "RAKO", &RAKO_TEXLIST },
-	{ "KUJA", &KUJA_TEXLIST },
-	{ "TUBA", &TUBA_TEXLIST },
-	{ "OUM", &OUM_TEXLIST },
-	{ "BANB", &BANB_TEXLIST },
-	{ "USA", &USA_TEXLIST },
-	{ "WARA", &WARA_TEXLIST },
-	{ "GORI", &GORI_TEXLIST },
-	{ "LION", &LION_TEXLIST },
-	{ "ZOU", &ZOU_TEXLIST },
-	{ "MOGU", &MOGU_TEXLIST },
-	{ "KOAR", &KOAR_TEXLIST },
-	{ "SUKA", &SUKA_TEXLIST },
-	};
 	typedef void(__cdecl* ChaosEnt)(taskwk*);
 	typedef void(__cdecl* ChaosCharObj)(playerwk*);
 	typedef void(__cdecl* ChaosNull)();
