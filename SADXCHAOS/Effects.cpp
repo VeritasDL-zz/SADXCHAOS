@@ -14,6 +14,11 @@ int RNG2 = 0;
 float OldMaxAccel = 0;
 float OldAirAccel = 0;
 float OldHangTime = 0;
+void NewEffect()
+{
+	Chaos_Timer = EffectMax;
+	return;
+}
 void DisablePausee()
 {
 	if (!PauseDisableEnabled)

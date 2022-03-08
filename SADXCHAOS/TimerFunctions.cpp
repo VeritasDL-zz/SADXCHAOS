@@ -9,6 +9,32 @@
 #include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
+void ChaosTimer()
+{
+	if (Chaos_Timer < EffectMax)//30 seconds is 1800
+	{
+		Chaos_Timer++;
+	}
+	if (Chaos_Timer >= EffectMax)
+	{
+		char curRand = 0;
+		do {
+			curRand = rand() % ChaosSize;
+		} while (oldRand == curRand);
+		if (ChaosArray[curRand].func != nullptr)
+			ChaosArray[curRand].func(playertwp[0]);
+		else if (ChaosArray[curRand].func2 != nullptr)
+			ChaosArray[curRand].func2(playerpwp[0]);
+		else
+			ChaosArray[curRand].func3();
+		oldRand = curRand;
+		Chaos_Timer = 0;
+	}
+}
+
+
+
+
 
 void NoClipTimerCheck()
 {

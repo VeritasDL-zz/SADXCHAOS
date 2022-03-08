@@ -20,4 +20,5 @@
 #include "AnimalTexture.h"
 #include "RotateMa.h"
 #include "TimerFunctions.h"
+#include "InitFixes.h"
 #endif //PCH_H

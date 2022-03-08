@@ -48,4 +48,5 @@ void CameraNOP();
 void DrunkCamera();
 void WalkThruWallsNop();
 void WalkThruWallsReset();
-void EmeraldSpin();
+void BurgerManSpin();
+void NewEffect();

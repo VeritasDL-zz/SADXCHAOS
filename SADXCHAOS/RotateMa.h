@@ -1,5 +1,6 @@
 #pragma once
 #include "Chaos.h"
 void deleteRotaryEmeraldTask();
-void EmeraldSpin();
+void BurgerManSpin();
 extern int burgerManSpawned;
+extern int TestSpawned;

@@ -36,7 +36,6 @@ int DisablePause_Timer = 0;
 int RandomSpawnAmount = 0;
 int Animaltyperand = 0;
 int EmblemID = 0;
-int CurrentLevelOld = -1;
 int FruitNumb = 0;
 int HatNumb = 0;
 int RingAllergy_Timer = 0;
@@ -94,39 +93,10 @@ bool AirCraftTextLoader = false;
 bool FireBreathTextLoader = false;
 bool CannonS1TextLoader = false;
 bool CannonS2TextLoader = false;
-bool ShownMenu = false;
 bool TextLoaded = false;
 bool DebugEnabled = false;
 bool WriteOnce = false;
 ObjectMaster* snowboard;
-task* BURGER[7];
-ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
-{
-	return snowboard = LoadObject(flags, index, loadSub);
-}
-void __cdecl Snowboard_Delete_r(ObjectMaster* obj)
-{
-	njReleaseTexture((NJS_TEXLIST*)obj->Data1->LoopData);
-	if (obj == snowboard)
-		snowboard = nullptr;
-}
-void OverRideBigRockTex()
-{
-	njSetTexture(&OBJ_ICECAP_TEXLIST);
-}
-void LoadFETexObj()
-{
-	njSetTexture(&OBJ_FINALEGG_TEXLIST);
-}
-void LoadSDTexObj()
-{
-	njSetTexture(&OBJ_SKYDECK_TEXLIST);
-}
-void NewEffect()
-{
-	Chaos_Timer = EffectMax;
-	return;
-}
 extern "C"
 {
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
@@ -149,34 +119,9 @@ extern "C"
 		CameraEffects = config->getBool("General", "CameraEffects", true);
 		RandomEmblemEnabled = config->getBool("General", "RandomEmblem", true);
 		delete config;
-		InitializeRandomCoordinates();
-		WriteCall((void*)0x4E9423, LoadSnowboardObject);
-		WriteCall((void*)0x4E967E, LoadSnowboardObject);
-		WriteCall((void*)0x4E9698, LoadSnowboardObject);
-		WriteCall((void*)0x597B34, LoadSnowboardObject);
-		WriteCall((void*)0x597B46, LoadSnowboardObject);
-		WriteCall((void*)0x4EDD17, OverRideBigRockTex); //fix for Big Ice Cap Rock Texture
-		WriteCall((void*)0x5B7581, LoadFETexObj);
-		WriteCall((void*)0x5F1A52, LoadSDTexObj);//fix for AirCraft Texture
-		WriteCall((void*)0x5F1A78, LoadSDTexObj); //fix for AirCraft Texture
-		WriteJump(Snowboard_Delete, Snowboard_Delete_r);
-		WriteData((char*)0x4EE7BB, (char)4);//Big ice rock pickup ability
-		//WriteData((char*)0x639A00, (char)4);//Patch for Picking Up Car in Station Square Act 0
-		WriteData((int*)0x017D0A2C, (int)0xC7C35000);//Stops the amy key block from exploding 
-		WriteData((int*)0x017D0A38, (int)0xC7C35000);//Stops the amy key block from exploding
-		WriteData((int*)0x017D0A44, (int)0xC7C35000);//Stops the amy key block from exploding
-		WriteData((int*)0x017D0A50, (int)0xC7C35000);//Stops the amy key block from exploding
-		srand((unsigned)time(nullptr));
+		Init_Fixes();
 		strcpy_s(LastEffect, 128, "Chaos Edition 2.0");
 	}
-	typedef void(__cdecl* ChaosEnt)(taskwk*);
-	typedef void(__cdecl* ChaosCharObj)(playerwk*);
-	typedef void(__cdecl* ChaosNull)();
-	struct ChaosS {
-		ChaosEnt func;
-		ChaosCharObj func2;
-		ChaosNull func3;
-	};
 	ChaosS ChaosArray[109]
 	{
 	{ RandomSpring, nullptr, nullptr },
@@ -299,35 +244,16 @@ extern "C"
 		}
 		if (!playerpwp[0] || GameState != 15 || CurrentLevel == LevelIDs_SkyChase1 || CurrentLevel == LevelIDs_SkyChase2 || CurrentLevel >= LevelIDs_SSGarden)
 			return;
+		ChaosTimer();
 		CheckAllEffectsTimer();
 		DebugPrintOutCheck();
-		if (Chaos_Timer < EffectMax)//30 seconds is 1800
-			Chaos_Timer++;
-		if (Chaos_Timer >= EffectMax)
-		{
-			char curRand = 0;
-			do {
-				curRand = rand() % ChaosSize;
-			} while (oldRand == curRand);
-			if (ChaosArray[curRand].func != nullptr)
-				ChaosArray[curRand].func(playertwp[0]);
-			else if (ChaosArray[curRand].func2 != nullptr)
-				ChaosArray[curRand].func2(playerpwp[0]);
-			else
-				ChaosArray[curRand].func3();
-			oldRand = curRand;
-			Chaos_Timer = 0;
-		}
-	}
-	__declspec(dllexport) void __cdecl OnInput()
-	{
 	}
 	__declspec(dllexport) void __cdecl OnControl()
 	{
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			EmeraldSpin();
+			BurgerManSpin();//need to finish
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

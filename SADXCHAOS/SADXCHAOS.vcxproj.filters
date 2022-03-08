@@ -57,6 +57,9 @@
     <ClInclude Include="TimerFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InitFixes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TimerFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InitFixes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
