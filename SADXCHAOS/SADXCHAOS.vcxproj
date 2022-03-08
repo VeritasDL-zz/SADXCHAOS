@@ -177,6 +177,7 @@
     <ClInclude Include="Teleport.h" />
     <ClInclude Include="TextureReset.h" />
     <ClInclude Include="TikalHints.h" />
+    <ClInclude Include="TimerFunctions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimalTextures.cpp" />
@@ -197,6 +198,7 @@
     <ClCompile Include="Teleport.cpp" />
     <ClCompile Include="TextureReset.cpp" />
     <ClCompile Include="TikalHints.cpp" />
+    <ClCompile Include="TimerFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Change.Log">

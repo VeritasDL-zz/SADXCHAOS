@@ -35,3 +35,14 @@ void DrawDebugRectangle(float leftchars, float topchars, float numchars_horz, fl
 	njColorBlendingMode(0, NJD_COLOR_BLENDING_SRCALPHA);
 	njColorBlendingMode(NJD_DESTINATION_COLOR, NJD_COLOR_BLENDING_INVSRCALPHA);
 }
+
+void DebugPrintOutCheck()
+{
+	if (DebugToScreen)
+	{
+		ScaleDebugFont(15);
+		SetDebugFontColor(0xFFFFFFFF);
+		DrawDebugRectangle(0.30f, 7.90f, 17.9f, 6.2f);
+		DisplayDebugStringFormatted(NJM_LOCATION(0, 7), " %s", LastEffect);
+	}
+}

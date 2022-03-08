@@ -19,4 +19,5 @@
 #include "TextureReset.h"
 #include "AnimalTexture.h"
 #include "RotateMa.h"
+#include "TimerFunctions.h"
 #endif //PCH_H
