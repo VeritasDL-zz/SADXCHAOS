@@ -214,6 +214,9 @@ void RingAllergyTimerCheck()
 		if (Rings != RingCount)
 		{
 			KillPlayer(0);
+			RingCount = 0;
+			Rings = 0;
+			RingAllergy_Timer = 0; //temp may remove,
 		}
 		RingAllergy_Timer--;
 	}

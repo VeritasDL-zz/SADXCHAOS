@@ -188,6 +188,8 @@ Moved ALL timer check code from chaos.cpp to its own TimerFunctions.cpp/.h files
 Moved PVMEntry MinimalPVMs[] to AnimalTextures.cpp
 Moved Most Code inside of Init into InitFixes.cpp/.h (3/8/2022)
 Moved ChaosTimer to TimerFunctions.cpp/.h (3/8/2022)
+Fixed a bug with RingAllergy (3/8/2022)
+
 
  
  
@@ -203,7 +205,7 @@ Moved ChaosTimer to TimerFunctions.cpp/.h (3/8/2022)
  More Camera Effects? (Sideways?)
  Need to Fix Ice&Wind Key //might scrap 
  Need to fix or scrap Big Car //might scrap too 
- Chao Crash? 0x33A1060
+ Chao Crash? 0x33A1060 //fixed sorta i think (3/6/2022)
  
  
  
