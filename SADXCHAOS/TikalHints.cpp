@@ -412,13 +412,11 @@ int Voices[] = {
 1939,
 1962,
 1970,
-0126,//what mem card - big
-0127,//Which file - big
-0130,//what character - big
-0143,//not enough mem - big
-0214,//I got it - sonic
-0230,//what a big lake! - big
-287,//its so dark in here - big
-
-
+126,//what mem card - big
+127,//Which file - big
+130,//what character - big
+143,//not enough mem - big
+214,//I got it - sonic
+230,//what a big lake! - big
+287//its so dark in here - big
 };

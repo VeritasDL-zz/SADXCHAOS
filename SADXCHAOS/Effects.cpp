@@ -213,53 +213,47 @@ void RandomChaoo()
 	chaodata->data.RunLevel = rand() % 99;
 	chaodata->data.SwimStat = rand() % 3266;
 	chaodata->data.SwimLevel = rand() % 99;
-	chaodata->data.UnknownStat = rand() % 3266; //why not lol
 	chaodata->data.UnknownLevel = rand() % 99;
 	chaodata->data.IntelligenceLevel = rand() % 99;
-	chaodata->data.RunnyNoseLevel = rand() % 200 - 100; //hopfully generates a number between -100 and +100
-	chaodata->data.SADXAnimalBehaviors = rand() % 32767; //not sure if it works
 	chaodata->data.FavoriteFruit = rand() % 7;
 	chaodata->data.Texture = rand() % 15;
-	chaodata->data.Garden = rand() % (6 - 4 + 1) + 4;
-	chaodata->data.SADXCharacterBonds->a = rand() % 100;
-	chaodata->data.SADXCharacterBonds->b = rand() % 100;
 	int bodychangechance = rand() % 10;
 	if (bodychangechance == 1)
 	{
 		int bodyrand = rand() % 3;
 		chaodata->data.BodyType = (SADXBodyType)bodyrand;
 	}
-	int headgearchance = rand() % 10;
+	/*int headgearchance = rand() % 10;
 	if (headgearchance == 1)
 	{
 		chaodata->data.Headgear = rand() % 84;
-	}
-	int medalchance = rand() % 4;
+	}*/
+	/*int medalchance = rand() % 4;
 	if (medalchance == 1)
 	{
 		chaodata->data.Medal = rand() % 15;
-	}
+	}*/
 	int shinychance = rand() % 4;
 	if (shinychance == 1)
 	{
 		chaodata->data.Shiny = 1;
 	}
-	RandomChaooAnimal();
-	chaodata->data.ArmType = (SADXAnimal)Animaltyperand;
-	RandomChaooAnimal();
-	chaodata->data.WingType = (SADXAnimal)Animaltyperand;
-	RandomChaooAnimal();
-	chaodata->data.TailType = (SADXAnimal)Animaltyperand;
-	RandomChaooAnimal();
-	chaodata->data.LegType = (SADXAnimal)Animaltyperand;
-	RandomChaooAnimal();
-	chaodata->data.EarType = (SADXAnimal)Animaltyperand;
-	RandomChaooAnimal();
-	chaodata->data.ForeheadType = (SADXAnimal)Animaltyperand;
-	RandomChaooAnimal();
-	chaodata->data.EyebrowType = (SADXAnimal)Animaltyperand;
-	RandomChaooAnimal();
-	chaodata->data.UnknownType = (SADXAnimal)Animaltyperand; //why not lol
+	//RandomChaooAnimal();
+	//chaodata->data.ArmType = (SADXAnimal)Animaltyperand;
+	//RandomChaooAnimal();
+	//chaodata->data.WingType = (SADXAnimal)Animaltyperand;
+	//RandomChaooAnimal();
+	//chaodata->data.TailType = (SADXAnimal)Animaltyperand;
+	//RandomChaooAnimal();
+	//chaodata->data.LegType = (SADXAnimal)Animaltyperand;
+	//RandomChaooAnimal();
+	//chaodata->data.EarType = (SADXAnimal)Animaltyperand;
+	//RandomChaooAnimal();
+	//chaodata->data.ForeheadType = (SADXAnimal)Animaltyperand;
+	//RandomChaooAnimal();
+	//chaodata->data.EyebrowType = (SADXAnimal)Animaltyperand;
+	//RandomChaooAnimal();
+	//chaodata->data.UnknownType = (SADXAnimal)Animaltyperand; //why not lol
 	chaodata->data.MouthType = rand() % 14;
 	chaodata->data.EyeType = rand() % 12;
 	chaodata->data.BallType = rand() % 3;
@@ -267,7 +261,7 @@ void RandomChaoo()
 	ObjectMaster* Chao = CreateChao(chaodata, 0, 0, &playertwp[0]->pos, 0);
 	//chaodata->data.Type = (ChaoType)chaotype; idk why this wasnt working disabled for now,
 	chaodata->data.Color = rand() % 14;
-	chaodata->data.BodyTypeAnimal = 126;
+	//chaodata->data.BodyTypeAnimal = 120;
 	chaodata->data.Name[0] = rand() % 255;
 	chaodata->data.Name[1] = rand() % 255;
 	chaodata->data.Name[2] = rand() % 255;
@@ -282,7 +276,6 @@ void RandomChaoo()
 	chaodata->data.RunGrade = rand() % 5;
 	chaodata->data.StaminaGrade = rand() % 5;
 	chaodata->data.SwimGrade = rand() % 5;
-	chaodata->data.UnknownGrade = rand() % 5;
 	strcpy_s(LastEffect, 128, "Spawned Random Chao");
 }
 void RandomKillMomentum(playerwk* p1)
