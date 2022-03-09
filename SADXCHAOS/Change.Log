@@ -208,8 +208,10 @@ Fixed a bug with RingAllergy (3/8/2022)
  Chao Crash? 0x33A1060 //fixed sorta i think (3/6/2022)
  
  
- 
- 
+ Iceball Crash, Sonic EC 0x0044CE56 didnt have debug crash log enabled 
+ E_Robo texture Crash? Sonic EC collected 130 emblem 0x94A318
+ emblem texture crash? sonic SpeedHighway 0x9740DC
+ texture issue? 0x0078CF24  debug crash output 0091CD18 `Sonic_LSShoeIndices`
  
 Todo 
 Kill momentum doesn't always work?

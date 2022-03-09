@@ -11,7 +11,7 @@
 #include "Chaos.h"
 void ChaosTimer()
 {
-	if (Chaos_Timer < EffectMax)//30 seconds is 1800
+ 	if (Chaos_Timer < EffectMax)//30 seconds is 1800
 	{
 		Chaos_Timer++;
 	}
@@ -216,7 +216,7 @@ void RingAllergyTimerCheck()
 			KillPlayer(0);
 			RingCount = 0;
 			Rings = 0;
-			RingAllergy_Timer = 0; //temp may remove,
+			RingAllergy_Timer = 2; //temp may remove,
 		}
 		RingAllergy_Timer--;
 	}
