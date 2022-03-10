@@ -243,6 +243,5 @@ void TestSpin()
 	default:
 		break;
 	}
-	//EmeraldSpin_Timer = 240;
 	strcpy_s(LastEffect, 128, "Test Ring");
 }

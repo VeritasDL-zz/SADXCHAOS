@@ -189,7 +189,9 @@ Moved PVMEntry MinimalPVMs[] to AnimalTextures.cpp
 Moved Most Code inside of Init into InitFixes.cpp/.h (3/8/2022)
 Moved ChaosTimer to TimerFunctions.cpp/.h (3/8/2022)
 Fixed a bug with RingAllergy (3/8/2022)
-
+Changed EnableFontScaling to true. (3/9/2022)
+Removed Unused Int (3/9/2022)
+Added CannonS2TextLoader to TexturesReset.cpp (3/9/2022)
 
  
  

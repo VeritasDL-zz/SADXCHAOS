@@ -322,18 +322,6 @@ void AirCraftSpawnerTimerCheck()
 		AirCraftSpawerFollow_Timer = 0;
 	}
 }
-void SpinMaTimerCheck()
-{
-	if (EmeraldSpin_Timer <= 240 && EmeraldSpin_Timer != 0)
-	{
-		EmeraldSpin_Timer--;
-	}
-	if (EmeraldSpin_Timer == 1)
-	{
-		EmeraldSpin_Timer = 0;
-		burgerManSpawned = 0;
-	}
-}
 void CheckAllEffectsTimer()
 {
 	NoClipTimerCheck();
@@ -352,5 +340,4 @@ void CheckAllEffectsTimer()
 	CustomCameraEffectsTimersCheck();
 	DebugTimerCheck();
 	AirCraftSpawnerTimerCheck();
-	SpinMaTimerCheck();
 }

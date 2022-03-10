@@ -16,6 +16,5 @@ void PauseDisableTimerCheck();
 void CustomCameraEffectsTimersCheck();
 void DebugTimerCheck();
 void AirCraftSpawnerTimerCheck();
-void SpinMaTimerCheck();
 void CheckAllEffectsTimer();
 void ChaosTimer();
