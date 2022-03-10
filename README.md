@@ -120,7 +120,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random CannonS2 - Spawns in a Cannon from Sky Deck.
 - BurgerSpin - Spawns in 7 BurgerMen that spin around the player, Check out Her Github. https://github.com/SPEEPSHighway Or Her Meme Maker Mod. https://gamebanana.com/mods/49984
 ## Special Thanks
-Thanks to Sora for the code base and helping me with dumb questions.  
+Thanks to Sora for the code base, Letting me use FreeMovements & helping me with dumb questions.  
 Huge Thanks to Refrag for helping me constantly!  
 Thanks to MainMemory for letting me use her snowboard and physics code!  
 Thanks to PkR for letting me use his DrawDebugRectangle and ScaleDebugFont Code from https://github.com/PiKeyAr/sadx-debug-mode/  
