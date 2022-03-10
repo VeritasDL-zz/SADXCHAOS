@@ -432,13 +432,13 @@ void SwapCamera()//Swaps Camera lmfao
 	{
 		SetCameraMode_(1);
 	}
-	else if (GetCameraMode_() == 1) //new code
+	else if (GetCameraMode_() == 1)
 	{
 		SetCameraMode_(0);
 	}
 	strcpy_s(LastEffect, 128, "Camera Swapped");
 }
-void RandomDebug() //debug mode currently lasts for 75ish? frames
+void RandomDebug()
 {
 	if (DebugEnabled)
 	{
@@ -491,7 +491,7 @@ void RandomDebug() //debug mode currently lasts for 75ish? frames
 	DebugEnabled = true;
 	strcpy_s(LastEffect, 128, "Debug Mode Enabled");
 }
-void RandomXGravity()//Updated 11/06/2021, Enabled For Now
+void RandomXGravity()
 {
 	if (EggViperHandyCapEanbled)
 	{
@@ -547,7 +547,7 @@ void RandomYGravity()
 	Gravity.y = (float)rand() / RAND_MAX + (-1.5);
 	strcpy_s(LastEffect, 128, "Random Y Gravity");
 }
-void RandomZGravity()//Updated 11/06/2021, Enabled For Now
+void RandomZGravity()
 {
 	if (EggViperHandyCapEanbled)
 	{
@@ -790,7 +790,7 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Amy)
 		{
-			//need to test what power ups i can re-get
+			//need to test what power ups you can re-get
 		}
 		if (CurrentCharacter == Characters_Big)
 		{
@@ -811,6 +811,10 @@ void RemovePowerUp()
 				NewEffect();
 				return;
 			}
+		}
+		if (CurrentCharacter == Characters_Gamma)
+		{
+			//need to test what power ups you can re-get
 		}
 	}
 	else
