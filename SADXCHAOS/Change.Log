@@ -192,6 +192,12 @@ Fixed a bug with RingAllergy (3/8/2022)
 Changed EnableFontScaling to true. (3/9/2022)
 Removed Unused Int (3/9/2022)
 Added CannonS2TextLoader to TexturesReset.cpp (3/9/2022)
+Removed Unused XYZ-Gravity Floats (3/9/2022)
+Removed EmeraldSpin_Timer (3/9/2022)
+Added FreeMoevement.cpp/.h thanks to Sora (https://github.com/Sora-yx/sadx-debug-mode) (3/9/2022)
+Updated RandomDebug To Support Tails, Big and Gamma Thanks to Sora-yx! (3/9/2022)
+Tweaked The Camera Effects (3/9/2022)
+Tweaked Ring Allergy (3/9/2022)
 
  
  

@@ -204,7 +204,6 @@ void BurgerManSpin()
 	default:
 		break;
 	}
-	EmeraldSpin_Timer = 240;
 	strcpy_s(LastEffect, 128, "Burger Man Ring");
 }
 void TestSpin()

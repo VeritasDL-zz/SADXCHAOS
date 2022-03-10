@@ -44,7 +44,6 @@ int DrunkCamera_Timer = 0;
 int DrunkCam = 0;
 int Direction = 0x50;
 int AirCraftSpawerFollow_Timer = 0;
-int EmeraldSpin_Timer = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;
@@ -98,6 +97,7 @@ extern "C"
 	__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
 	{
 		Init_Fixes(path, helperFunctions);
+		init_FreeMovements();
 		strcpy_s(LastEffect, 128, "Chaos Edition 2.0");
 	}
 	ChaosS ChaosArray[109]
@@ -231,6 +231,7 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+			RandomDebug();
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

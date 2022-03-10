@@ -468,11 +468,20 @@ void RandomDebug() //debug mode currently lasts for 75ish? frames
 	case Characters_MetalSonic:
 		playertwp[0]->mode = 87;
 		break;
+	case Characters_Tails:
+		playertwp[0]->mode = 110;
+		break;
 	case Characters_Knuckles:
 		playertwp[0]->mode = 57;
 		break;
 	case Characters_Amy:
 		playertwp[0]->mode = 53;
+		break;
+	case Characters_Big:
+		playertwp[0]->mode = 110;
+		break;
+	case Characters_Gamma:
+		playertwp[0]->mode = 110;
 		break;
 	default:
 		NewEffect();
@@ -671,6 +680,11 @@ void RingAllergy()
 		NewEffect();
 		return;
 	}
+	if (RingAllergy_Timer != 0)
+	{
+		NewEffect();//stops from getting ringallergy when already having it
+		return; 
+	}
 	if (EggViperHandyCapEanbled)
 	{
 		if (CurrentLevel == LevelIDs_EggViper)
@@ -831,6 +845,7 @@ void SpinCamera()
 		NewEffect();
 		return;
 	}
+	CheckCameraEffects();
 	CameraNOP();
 	strcpy_s(LastEffect, 128, "Camera Spin");
 	CameraSpin_Timer = 480;
@@ -843,9 +858,19 @@ void DrunkCamera()
 		NewEffect();
 		return;
 	}
+	CheckCameraEffects();
 	CameraNOP();
 	strcpy_s(LastEffect, 128, "Drunk");
 	DrunkCamera_Timer = 550;
+	return;
+}
+void CheckCameraEffects()
+{
+	if (DrunkCamera_Timer != 0 && CameraSpin_Timer != 0)
+	{
+		NewEffect();
+		return;
+	}
 	return;
 }
 

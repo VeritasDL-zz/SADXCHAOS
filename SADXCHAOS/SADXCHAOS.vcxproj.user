@@ -3,7 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerCommand>C:\Users\Veritas\Documents\Games\SadX\SADX\sonic.exe</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-c sonic -l lostworld -s 03</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-c big -l mysticruins -s 03</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>..\..\..\..\Games\SadX\SADX</LocalDebuggerWorkingDirectory>
     <LocalDebuggerSQLDebugging>true</LocalDebuggerSQLDebugging>
   </PropertyGroup>

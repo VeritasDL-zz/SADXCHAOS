@@ -7,6 +7,8 @@
 #ifndef PCH_H
 #define PCH_H
 #include "SADXModLoader.h"
+#include "Trampoline.h"
+#include "MemAccess.h"
 // add headers that you want to pre-compile here
 #include "framework.h"
 #include "Enemies.h"
@@ -21,4 +23,5 @@
 #include "RotateMa.h"
 #include "TimerFunctions.h"
 #include "InitFixes.h"
+#include "FreeMovements.h"
 #endif //PCH_H

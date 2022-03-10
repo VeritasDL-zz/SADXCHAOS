@@ -170,6 +170,7 @@
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Chaos.h" />
+    <ClInclude Include="FreeMovements.h" />
     <ClInclude Include="InitFixes.h" />
     <ClInclude Include="Objects.h" />
     <ClInclude Include="pch.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Effects.cpp" />
     <ClCompile Include="Enemies.cpp" />
+    <ClCompile Include="FreeMovements.cpp" />
     <ClCompile Include="InitFixes.cpp" />
     <ClCompile Include="Objects.cpp" />
     <ClCompile Include="pch.cpp">
@@ -201,6 +203,7 @@
     <ClCompile Include="TextureReset.cpp" />
     <ClCompile Include="TikalHints.cpp" />
     <ClCompile Include="TimerFunctions.cpp" />
+    <ClCompile Include="Trampoline.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Change.Log">

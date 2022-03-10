@@ -77,7 +77,6 @@ extern int CameraFlip_Timer;
 extern int CameraSpin_Timer;
 extern int CameraSpin_Val;
 extern int DrunkCamera_Timer;
-extern int EmeraldSpin_Timer;
 extern int RandomSpawnAmount;
 extern int DrunkCam;
 extern int Direction;
