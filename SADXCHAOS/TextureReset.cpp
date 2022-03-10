@@ -41,6 +41,7 @@ void ResetTextureBools()
 	AirCraftTextLoader = false;
 	FireBreathTextLoader = false;
 	CannonS1TextLoader = false;
+	CannonS2TextLoader = false;
 	WriteOnce = false;
 	HatNumb = 0;
 	FruitNumb = 0;

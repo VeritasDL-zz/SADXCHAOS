@@ -25,7 +25,6 @@ extern int Camera_Timer;
 extern int s0und__Timer;
 extern int DisablePause_Timer;
 extern int Animaltyperand;
-extern int EmblemID;
 extern int FruitNumb;
 extern int HatNumb;
 extern int RingAllergy_Timer;

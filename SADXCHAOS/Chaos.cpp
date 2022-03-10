@@ -35,7 +35,6 @@ int s0und__Timer = 0;
 int DisablePause_Timer = 0;
 int RandomSpawnAmount = 0;
 int Animaltyperand = 0;
-int EmblemID = 0;
 int FruitNumb = 0;
 int HatNumb = 0;
 int RingAllergy_Timer = 0;
@@ -63,7 +62,7 @@ bool AllergicToRings = true;
 bool CameraEffects = true;
 bool RandomEmblemEnabled = true;
 char* LastEffect = new char[128];
-bool EnableFontScaling = false;
+bool EnableFontScaling = true;
 bool SpinnerTextLoader = false;
 bool LeonTextLoader = false;
 bool RinoTextLoader = false;
@@ -235,7 +234,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomTikalHint();
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
