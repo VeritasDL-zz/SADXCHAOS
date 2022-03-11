@@ -134,7 +134,7 @@ FunctionPointer(void, SetInputP, (uint8_t pno, int8_t mode), 0x441260);
 FunctionPointer(void, SetPositionP, (uint8_t pno, float x, float y, float z), 0x441780);
 FunctionPointer(void, SetRotationP, (uint8_t pno, Angle angx, Angle angy, Angle angz), 0x4415F0);
 FunctionPointer(void, PSetMotion, (mtnjvwk* mjp), 0x44A800);
-
+FunctionPointer(void, setDrop, (taskwk* a1, int a2, float a3, float a4), 0x7AD1C0);
 static const void* const KnucklesCheckInputPtr = (void*)0x476970;
 static inline signed int KnucklesCheckInput(taskwk* twp, motionwk2* mwp, playerwk* pwp)
 

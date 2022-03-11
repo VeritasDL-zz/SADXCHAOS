@@ -830,6 +830,15 @@ void RandomCollisionSize()
 	strcpy_s(LastEffect, 128, "Random Collision Size");
 	return;
 }
+void CheckCameraEffects()
+{
+	if (DrunkCamera_Timer != 0 && CameraSpin_Timer != 0)
+	{
+		NewEffect();
+		return;
+	}
+	return;
+}
 void FlipCamera()
 {
 	if (!CameraEffects)
@@ -868,18 +877,39 @@ void DrunkCamera()
 	DrunkCamera_Timer = 550;
 	return;
 }
-void CheckCameraEffects()
+
+
+ObjectFunc(dispChaos0DropWater, 0x7ACDD0);
+void ChaosWaterDrop()
 {
-	if (DrunkCamera_Timer != 0 && CameraSpin_Timer != 0)
+	//if (!BigRockTextLoader)
+//	{
+	LoadPVM("Chaos_effect", &CHAOS_EFFECT_TEXLIST);
+	//BigRockTextLoader = true;
+	TextLoaded = true;
+//}
+
+	
+	//task* WaterDrop;
+	setDrop(playertwp[0], 15, playertwp[0]->pos.x, playertwp[0]->pos.z);
+	//WaterDrop = (task*)LoadObject((LoadObj)3, 5, dispChaos0DropWater);
+	//WaterDrop->twp->pos = playertwp[0]->pos;
+	strcpy_s(LastEffect, 128, "Spawned Water Drop");
+	return;
+}
+
+void Set_Sonic_Ice()
+{
+	if (CurrentCharacter != Characters_Sonic && CurrentCharacter != Characters_Knuckles)
 	{
 		NewEffect();
 		return;
 	}
-	return;
+	LoadNoNamePVM(&stx_ice0_TEXLIST);
+	TextLoaded = true;
+	DisableControl_Timer = 70;
+	ControlEnabled = 0;
+	ForcePlayerAction(0, 38); //forces frozen state for sonic/Knuckles
+	SetSonicIce(playertwp[0]->counter.b[0]);
+
 }
-
-
-
-
-
-

@@ -50,3 +50,6 @@ void WalkThruWallsNop();
 void WalkThruWallsReset();
 void BurgerManSpin();
 void NewEffect();
+void ChaosWaterDrop();
+void CheckCameraEffects();
+void Set_Sonic_Ice();

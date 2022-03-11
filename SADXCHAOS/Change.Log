@@ -198,6 +198,8 @@ Added FreeMoevement.cpp/.h thanks to Sora (https://github.com/Sora-yx/sadx-debug
 Updated RandomDebug To Support Tails, Big and Gamma Thanks to Sora-yx! (3/9/2022)
 Tweaked The Camera Effects (3/9/2022)
 Tweaked Ring Allergy (3/9/2022)
+Added Set_Sonic_Ice (only supports sonic and knuckles) (3/11/2022)
+Couldnt Get dispChaos0DropWater to work, will prob remove (3/11/2022)
 
  
  
@@ -214,8 +216,8 @@ Tweaked Ring Allergy (3/9/2022)
  Amy Power Ups
  Gamma Power Ups
 
- KnuEffectPutRingSpring ?
- SetSonicIce ?
+ KnuEffectPutRingSpring 
+
  Need to Fix Ice&Wind Key //might scrap 
  Need to fix or scrap Big Car //might scrap too 
  Chao Crash? 0x33A1060 //fixed sorta i think (3/6/2022)

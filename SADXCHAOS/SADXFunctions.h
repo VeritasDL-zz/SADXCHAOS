@@ -3003,7 +3003,7 @@ VoidFunc(InitSSNPCData, 0x7D5810);
 VoidFunc(al_xy_init, 0x7DAE80);
 DataPointer(NJS_TEXLIST, ev_effect_list19, 0x2C49740);
 DataPointer(NJS_MOTION**, SS_PEOPLE_MOTIONS, 0x38F6EA4);
-
+FunctionPointer(void, SetSonicIce, (int a1), 0x4A2550);
 
 
 // Bool __usercall@<eax>(NJS_TEXLIST *a1@<eax>)
