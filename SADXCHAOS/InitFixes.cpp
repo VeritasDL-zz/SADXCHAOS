@@ -9,7 +9,7 @@
 #include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
-
+int EffectMax = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;
 bool EnemysEnabled = true;

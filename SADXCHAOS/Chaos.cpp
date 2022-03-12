@@ -11,17 +11,7 @@
 using std::string;
 //Changelog Is Now Located inside Of Change.Log
 char oldRand = -1;
-int DpadDown = 0;
-int IssSowboarding = 0;
-int EffectMax = 0;
-int RandomSpawnAmount = 0;
-int Animaltyperand = 0;
-int RingCount = 0;
-int EVHandyCap = 0;
-int DrunkCam = 0;
-int Direction = 0x50;
 char* LastEffect = new char[128];
-bool DebugEnabled = false;
 ObjectMaster* snowboard;
 extern "C"
 {

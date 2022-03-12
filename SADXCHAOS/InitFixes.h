@@ -1,6 +1,7 @@
 #pragma once
 #include "SADXStructs.h"
 #include "pch.h"
+extern int EffectMax;
 extern bool DebugToScreen;
 extern bool TeleportEnabled;
 extern bool EnemysEnabled;

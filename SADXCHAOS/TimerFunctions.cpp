@@ -31,10 +31,11 @@ int CameraFlip_Timer = 0;
 int CameraSpin_Timer = 0;
 int CameraSpin_Val = 0;
 int DrunkCamera_Timer = 0;
+int DrunkCam = 0;
+int Direction = 0x50;
 int AirCraftSpawerFollow_Timer = 0;
-
-
-
+int RandomSpawnAmount = 0;
+bool DebugEnabled = false;
 int SideWaysCamera_Timer = 0;
 void ChaosTimer()
 {

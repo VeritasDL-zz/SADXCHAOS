@@ -11,7 +11,12 @@
 #include "Chaos.h"
 int RNG = 0;
 int RNG2 = 0;
+int DpadDown = 0;
+int RingCount = 0;
+int IssSowboarding = 0;
 int CameraSide = 0;
+int Animaltyperand = 0;
+int EVHandyCap = 0;
 float OldMaxAccel = 0;
 float OldAirAccel = 0;
 float OldHangTime = 0;

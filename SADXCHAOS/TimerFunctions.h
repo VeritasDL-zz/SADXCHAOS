@@ -22,8 +22,11 @@ extern int CameraFlip_Timer;
 extern int CameraSpin_Timer;
 extern int DrunkCamera_Timer;
 extern int SnowboardTimer;
-
+extern int CameraSpin_Val;
+extern int DrunkCam;
+extern int Direction;
 extern int SideWaysCamera_Timer;
+extern bool DebugEnabled;
 void NoClipTimerCheck();
 void InputInvertTimerCheck();
 void CameraDeattchTimerCheck();
