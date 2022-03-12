@@ -11,41 +11,17 @@
 using std::string;
 //Changelog Is Now Located inside Of Change.Log
 char oldRand = -1;
-int Chaos_Timer = 0;
-int Debug_Timer = 0;
-int Pause_Timer = 0;
-int DPadDown_Timer = 0;
 int DpadDown = 0;
-int DisableControl_Timer = 0;
-int XGravity_Timer = 0;
-int YGravity_Timer = 0;
-int ZGravity_Timer = 0;
-int NoGravityTimer = 0;
-int NoClip_Timer = 0;
-int SnowboardTimer = 0;
 int IssSowboarding = 0;
-int InputInvert_Timer = 0;
 int EffectMax = 0;
-int FastAccel_Timer = 0;
-int Camera_Timer = 0;
-int s0und__Timer = 0;
-int DisablePause_Timer = 0;
 int RandomSpawnAmount = 0;
 int Animaltyperand = 0;
-int RingAllergy_Timer = 0;
 int RingCount = 0;
 int EVHandyCap = 0;
-int CameraFlip_Timer = 0;
-int CameraSpin_Timer = 0;
-int CameraSpin_Val = 0;
-int DrunkCamera_Timer = 0;
 int DrunkCam = 0;
 int Direction = 0x50;
-int AirCraftSpawerFollow_Timer = 0;
 char* LastEffect = new char[128];
-bool EnableFontScaling = true;
 bool DebugEnabled = false;
-
 ObjectMaster* snowboard;
 extern "C"
 {
@@ -55,7 +31,7 @@ extern "C"
 		init_FreeMovements();
 		strcpy_s(LastEffect, 128, "Chaos Edition 2.0");
 	}
-	ChaosS ChaosArray[115]
+	ChaosS ChaosArray[116]
 	{
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
@@ -172,6 +148,7 @@ extern "C"
 	{ nullptr, nullptr, RingAllergy },
 	{ nullptr, nullptr, NoGravity },
 	{ nullptr, nullptr, RandomControlDisable },
+	{ nullptr, nullptr, SideWaysCamera },
 	};
 	size_t ChaosSize = LengthOfArray(ChaosArray);
 	__declspec(dllexport) void __cdecl OnFrame()

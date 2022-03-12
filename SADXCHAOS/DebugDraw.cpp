@@ -9,6 +9,7 @@
 #include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
+bool EnableFontScaling = true;
 void ScaleDebugFont(int scale)//thanks to PkR for this code https://github.com/PiKeyAr/sadx-debug-mode/
 {
 	float FontScale;

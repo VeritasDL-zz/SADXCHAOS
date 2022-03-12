@@ -9,6 +9,32 @@
 #include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
+
+int Chaos_Timer = 0;
+int Debug_Timer = 0;
+int Pause_Timer = 0;
+int DPadDown_Timer = 0;
+int DisableControl_Timer = 0;
+int XGravity_Timer = 0;
+int YGravity_Timer = 0;
+int ZGravity_Timer = 0;
+int NoGravityTimer = 0;
+int NoClip_Timer = 0;
+int SnowboardTimer = 0;
+int InputInvert_Timer = 0;
+int FastAccel_Timer = 0;
+int Camera_Timer = 0;
+int s0und__Timer = 0;
+int DisablePause_Timer = 0;
+int RingAllergy_Timer = 0;
+int CameraFlip_Timer = 0;
+int CameraSpin_Timer = 0;
+int CameraSpin_Val = 0;
+int DrunkCamera_Timer = 0;
+int AirCraftSpawerFollow_Timer = 0;
+
+
+
 int SideWaysCamera_Timer = 0;
 void ChaosTimer()
 {
