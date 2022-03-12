@@ -108,7 +108,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random Big Rock - Spawns in The Big Rock for Big's Ice Cap, others can pick it up as well! 
 - Ring Allergy - Kills The Player if Rings are collected for 250 Frames.
 - Increase Cutscene Skip Time - Increases the time needed to Skip Cutscenes.
-- Remove Random Powerup - A 1 in 3 Chance to Remove a Random PowerUP for Sonic, Tails, Knuckles & Big (more to come at a later date)
+- Remove Random Powerup - A 1 in 3 Chance to Remove a Random PowerUP for Sonic, Tails, Knuckles & Big
 - Random Collision Size - Changes Collision Size to a Number between 1 and 10.
 - Flip Camera - Flips The Camera Upside down for 480 frames.
 - Spin Camera - Spins the Camera in a Circle for 480 frames.
