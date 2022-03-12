@@ -416,3 +416,19 @@ void RandomEmblem(taskwk* p1)//UPDATED (3/1/2022) IT WORKS
 	strcpy_s(LastEffect, 128, "Random Emblem");
 	return;
 }
+void RandomBarrel(taskwk* p1)
+{
+	if (!BarrelTextLoader)
+	{
+		LoadPVM("Obj_twinkle", &OBJ_TWINKLE_TEXLIST);
+		BarrelTextLoader = true;
+		TextLoaded = true;
+	}
+	task* Barrel;
+	Barrel = (task*)LoadObject((LoadObj)3, 3, OBarrel);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Barrel->ocp = objCondition;
+	Barrel->twp->pos = playertwp[0]->pos;
+	strcpy_s(LastEffect, 128, "Random Barrel");
+	return;
+}

@@ -32,8 +32,6 @@ int s0und__Timer = 0;
 int DisablePause_Timer = 0;
 int RandomSpawnAmount = 0;
 int Animaltyperand = 0;
-int FruitNumb = 0;
-int HatNumb = 0;
 int RingAllergy_Timer = 0;
 int RingCount = 0;
 int EVHandyCap = 0;
@@ -44,56 +42,10 @@ int DrunkCamera_Timer = 0;
 int DrunkCam = 0;
 int Direction = 0x50;
 int AirCraftSpawerFollow_Timer = 0;
-bool DebugToScreen = false;
-bool TeleportEnabled = true;
-bool EnemysEnabled = true;
-bool InvertEnabled = true;
-bool RPauseEnabled = true;
-bool PauseDisableEnabled = true;
-bool GrabAbleObjectsEnabled = true;
-bool GravityChangeEnabled = true;
-bool RPhysicsEnabled = true;
-bool EggViperHandyCapEanbled = true;
-bool AllergicToRings = true;
-bool UpsideDownCameraEnabled = true;
-bool DrunkCameraEnabled = true;
-bool SpinCameraEnabled = true;
-bool RandomEmblemEnabled = true;
 char* LastEffect = new char[128];
 bool EnableFontScaling = true;
-bool SpinnerTextLoader = false;
-bool LeonTextLoader = false;
-bool RinoTextLoader = false;
-bool KikiTextLoader = false;
-bool SmanTextLoader = false;
-bool EGachaTextLoader = false;
-bool PoliceTextLoader = false;
-bool SnakeTextLoader = false;
-bool RoboTextLoader = false;
-bool BuyonTextLoader = false;
-bool AmebotTextLoader = false;
-bool FSBTextLoader = false;
-bool BugerManTextLoader = false;
-bool FanTextLoader = false;
-bool UnidusTextLoader = false;
-bool AnimalTextLoader = false;
-bool KeyBlockTextLoader = false;
-bool ChaooManagerLoader = false;
-bool EmblemTextLoader = false;
-bool IceTextLoader = false;
-bool WindTextLoader = false;
-bool ChaoFruitTextLoader = false;
-bool ChaoHatTextLoader = false;
-bool BigRockTextLoader = false;
-bool CarTextLoader = false;
-bool AirCraftTextLoader = false;
-bool FireBreathTextLoader = false;
-bool CannonS1TextLoader = false;
-bool CannonS2TextLoader = false;
-bool KnuxEffTextLoader = false;
-bool TextLoaded = false;
 bool DebugEnabled = false;
-bool WriteOnce = false;
+
 ObjectMaster* snowboard;
 extern "C"
 {
@@ -103,7 +55,7 @@ extern "C"
 		init_FreeMovements();
 		strcpy_s(LastEffect, 128, "Chaos Edition 2.0");
 	}
-	ChaosS ChaosArray[109]
+	ChaosS ChaosArray[115]
 	{
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
@@ -149,71 +101,77 @@ extern "C"
 	{ RandomFireBreath, nullptr, nullptr },
 	{ RandomCannonS1, nullptr, nullptr },
 	{ RandomCannonS2, nullptr, nullptr },
+	{ RandomBarrel, nullptr, nullptr },
+	{ RandomKnuxRingSpring, nullptr, nullptr },
 	{ nullptr, RandomVSpeed, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr },
 	{ nullptr, RandomHSpeed, nullptr },
 	{ nullptr, RandomVSpeed, nullptr },
 	{ nullptr, RandomHSpeed, nullptr },
 	{ nullptr, FastAccel, nullptr },
-	{ nullptr, nullptr, RingAllergy },
-	{ nullptr, nullptr, RandomSnowboard },
-	{ nullptr, nullptr, RandomNoClip },
-	{ nullptr, nullptr, RandomTeleport },
-	{ nullptr, nullptr, RandomControlDisable },
-	{ nullptr, nullptr, RemovePowerUp },
-	{ nullptr, nullptr, RandomHurt },
-	{ nullptr, nullptr, NoGravity },
-	{ nullptr, nullptr, RandomTimeOfDay },
-	{ nullptr, nullptr, RandomPause },
-	{ nullptr, nullptr, RandomMagneticBarrier },
-	{ nullptr, nullptr, RandomYGravity },
-	{ nullptr, nullptr, RandomTikalHint },
-	{ nullptr, nullptr, RandomXGravity },
-	{ nullptr, nullptr, RandomTimeOfDay },
-	{ nullptr, nullptr, SwapCamera },
-	{ nullptr, nullptr, NoGravity },
-	{ nullptr, nullptr, SpinCamera },
-	{ nullptr, nullptr, RandomPhysics },
-	{ nullptr, nullptr, SwapCamera },
-	{ nullptr, nullptr, FlipCamera },
-	{ nullptr, nullptr, RandomZGravity },
-	{ nullptr, nullptr, SwapCamera },
-	{ nullptr, nullptr, RemovePowerUp },
-	{ nullptr, nullptr, AndKnuckles },
-	{ nullptr, nullptr, IncreaseCutsceneSkipTime },
-	{ nullptr, nullptr, RandomZGravity },
-	{ nullptr, nullptr, RandomInvincibility },
-	{ nullptr, nullptr, IncreaseCutsceneSkipTime },
+	{ nullptr, nullptr, RandomBarrier },
+	{ nullptr, nullptr, RandomDPadDownCheck },
 	{ nullptr, nullptr, DrunkCamera },
+	{ nullptr, nullptr, ChaosPlayVoice_rng },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, Nos0und_ForYou },
+	{ nullptr, nullptr, RandomCollisionSize },
+	{ nullptr, nullptr, RandomControlDisable },
+	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, RandomZGravity },
 	{ nullptr, nullptr, RandomNoClip },
 	{ nullptr, nullptr, RandomRotate },
-	{ nullptr, nullptr, RandomBarrier },
-	{ nullptr, nullptr, RandomHurt },
-	{ nullptr, nullptr, RandomCollisionSize },
-	{ nullptr, nullptr, RandomSwapMusic },
-	{ nullptr, nullptr, UncoupleCamera },
-	{ nullptr, nullptr, InputInvert },
+	{ nullptr, nullptr, RandomTikalHint },
 	{ nullptr, nullptr, RandomTimeOfDay },
 	{ nullptr, nullptr, RandomPause },
-	{ nullptr, nullptr, RandomControlDisable },
-	{ nullptr, nullptr, IncreaseCutsceneSkipTime },
-	{ nullptr, nullptr, RandomControlDisable },
-	{ nullptr, nullptr, RandomNoClip },
-	{ nullptr, nullptr, RandomXGravity },
-	{ nullptr, nullptr, RandomChaoo },
-	{ nullptr, nullptr, RandomYGravity },
-	{ nullptr, nullptr, RandomTimeOfDay },
-	{ nullptr, nullptr, DisablePausee },
-	{ nullptr, nullptr, Nos0und_ForYou },
-	{ nullptr, nullptr, ChaosPlayVoice_rng },
-	{ nullptr, nullptr, SwapCamera },
-	{ nullptr, nullptr, RandomDebug },
-	{ nullptr, nullptr, RandomDPadDownCheck },
-	{ nullptr, nullptr, RingAllergy },
-	{ nullptr, nullptr, RandomTikalHint },
 	{ nullptr, nullptr, RandomCollisionSize },
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime },
+	{ nullptr, nullptr, RandomYGravity },
+	{ nullptr, nullptr, AndKnuckles },
+	{ nullptr, nullptr, RandomMagneticBarrier },
+	{ nullptr, nullptr, RandomZGravity },
+	{ nullptr, nullptr, RandomNoClip },
 	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, NoGravity },
+	{ nullptr, nullptr, BurgerManSpin },
 	{ nullptr, nullptr, DrunkCamera },
+	{ nullptr, nullptr, RandomSnowboard },
+	{ nullptr, nullptr, RandomNoClip },
+	{ nullptr, nullptr, RandomPause },
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime },
+	{ nullptr, nullptr, RandomXGravity },
+	{ nullptr, nullptr, RandomHurt },
+	{ nullptr, nullptr, RemovePowerUp },
+	{ nullptr, nullptr, RandomXGravity },
+	{ nullptr, nullptr, RandomPhysics },
+	{ nullptr, nullptr, RandomHurt },
+	{ nullptr, nullptr, InputInvert },
+	{ nullptr, nullptr, Set_Sonic_Ice },
+	{ nullptr, nullptr, SpinCamera },
+	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, RandomYGravity },
+	{ nullptr, nullptr, RandomTikalHint },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, RingAllergy },
+	{ nullptr, nullptr, RandomTeleport },
+	{ nullptr, nullptr, RandomSwapMusic },
+	{ nullptr, nullptr, IncreaseCutsceneSkipTime },
+	{ nullptr, nullptr, DisablePausee },
+	{ nullptr, nullptr, Set_Sonic_Ice },
+	{ nullptr, nullptr, RandomDebug },
+	{ nullptr, nullptr, RandomInvincibility },
+	{ nullptr, nullptr, BurgerManSpin },
+	{ nullptr, nullptr, RemovePowerUp },
+	{ nullptr, nullptr, FlipCamera },
+	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, RandomControlDisable },
+	{ nullptr, nullptr, RandomTimeOfDay },
+	{ nullptr, nullptr, RandomChaoo },
+	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, UncoupleCamera },
+	{ nullptr, nullptr, RingAllergy },
+	{ nullptr, nullptr, NoGravity },
+	{ nullptr, nullptr, RandomControlDisable },
 	};
 	size_t ChaosSize = LengthOfArray(ChaosArray);
 	__declspec(dllexport) void __cdecl OnFrame()

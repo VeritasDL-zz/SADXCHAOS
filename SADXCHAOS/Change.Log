@@ -202,11 +202,16 @@ Added Set_Sonic_Ice (only supports sonic and knuckles) (3/11/2022)
 Couldnt Get dispChaos0DropWater to work, will prob remove (3/11/2022)
 Added Seprate Config Options for Drunk,Spin and Flip Camera Effects (3/11/2022)
 Added RandomKnuxRingSpring (3/11/2022)
- 
- 
+Removed dispChaos0DropWater (3/11/2022)
+Added RandomBarrel (3/12/2022)
+Moved All Texture bools to TextureReset.cpp/.h (3/12/2022)
+Added RamdomBarrel, RandomKnuxRingSpring, BurgerManSpin, RandomBarrel And Set_Sonic_Ice To Chaos Array (3/12/2022)
+Shuffled Chaos Array Again (3/12/2022)
+Cleaned up Chaos.cpp again (3/12/2022)
   
 ---------TO-DO---------
- add Set_Sonic_Ice and RandomKnuxRingSpring to array
+ add Set_Sonic_Ice RandomKnuxRingSpring and RandomBarrel to array
+ RandomBarrel config? 
  Test Stuff
  test new stuff fully 
  Log Known Crashes

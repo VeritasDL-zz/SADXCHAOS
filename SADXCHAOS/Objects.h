@@ -15,3 +15,4 @@ void RandomSpring(taskwk* p1);
 void RandomSpikeBall(taskwk* p1);
 void RandomEmblem(taskwk* p1);
 void RandomFan(taskwk* p1);
+void RandomBarrel(taskwk* p1);

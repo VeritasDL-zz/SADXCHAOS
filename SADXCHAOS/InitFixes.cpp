@@ -9,6 +9,24 @@
 #include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
+
+bool DebugToScreen = false;
+bool TeleportEnabled = true;
+bool EnemysEnabled = true;
+bool InvertEnabled = true;
+bool RPauseEnabled = true;
+bool PauseDisableEnabled = true;
+bool GrabAbleObjectsEnabled = true;
+bool GravityChangeEnabled = true;
+bool RPhysicsEnabled = true;
+bool EggViperHandyCapEanbled = true;
+bool AllergicToRings = true;
+bool UpsideDownCameraEnabled = true;
+bool DrunkCameraEnabled = true;
+bool SpinCameraEnabled = true;
+bool RandomEmblemEnabled = true;
+
+
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
 {
 	return snowboard = LoadObject(flags, index, loadSub);
@@ -35,6 +53,10 @@ void OverRideEmeraldShardObj()
 {
 	njSetTexture(&OBJ_RUIN_TEXLIST);
 }
+void OverRideTPBarrelObj()
+{
+	njSetTexture(&OBJ_TWINKLE_TEXLIST);
+}
 void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 {
 	const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
@@ -56,18 +78,22 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	RandomEmblemEnabled = config->getBool("General", "RandomEmblem", true);
 	delete config;
 	InitializeRandomCoordinates();
-	WriteCall((void*)0x4E9423, LoadSnowboardObject);
-	WriteCall((void*)0x4E967E, LoadSnowboardObject);
-	WriteCall((void*)0x4E9698, LoadSnowboardObject);
-	WriteCall((void*)0x597B34, LoadSnowboardObject);
-	WriteCall((void*)0x597B46, LoadSnowboardObject);
+	WriteCall((void*)0x4E9423, LoadSnowboardObject);//fix for snowboard texture
+	WriteCall((void*)0x4E967E, LoadSnowboardObject);//fix for snowboard texture
+	WriteCall((void*)0x4E9698, LoadSnowboardObject);//fix for snowboard texture
+	WriteCall((void*)0x597B34, LoadSnowboardObject);//fix for snowboard texture
+	WriteCall((void*)0x597B46, LoadSnowboardObject);//fix for snowboard texture
 	WriteCall((void*)0x4EDD17, OverRideBigRockTex); //fix for Big Ice Cap Rock Texture
-	WriteCall((void*)0x5B7581, LoadFETexObj);
+	WriteCall((void*)0x5B7581, LoadFETexObj);//fix for Fan Texture
 	WriteCall((void*)0x5F1A52, LoadSDTexObj);//fix for AirCraft Texture
-	WriteCall((void*)0x5F1A78, LoadSDTexObj); //fix for AirCraft Texture
+	WriteCall((void*)0x5F1A78, LoadSDTexObj);//fix for AirCraft Texture
 	WriteCall((void*)0x6F4BD5, OverRideEmeraldShardObj);//test
 	WriteCall((void*)0x6F4D81, OverRideEmeraldShardObj);//test
 	WriteCall((void*)0x6F4EE0, OverRideEmeraldShardObj);//test
+	WriteCall((void*)0x624047, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
+	WriteCall((void*)0x623CD1, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
+	WriteData<1>((int*)0x624150, 0x25);//TwinklePark Barrel Timer Hack
+	WriteData<1>((int*)0x624151, 0x00);//TwinklePark Barrel Timer Hack
 	WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 	WriteData((char*)0x4EE7BB, (char)4);//Big ice rock pickup ability
 	//WriteData((char*)0x639A00, (char)4);//Patch for Picking Up Car in Station Square Act 0

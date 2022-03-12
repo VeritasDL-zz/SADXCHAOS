@@ -11,7 +11,7 @@
 #include "Chaos.h"
 void ChaosTimer()
 {
- 	if (Chaos_Timer < EffectMax)//30 seconds is 1800
+	if (Chaos_Timer < EffectMax)//30 seconds is 1800
 	{
 		Chaos_Timer++;
 	}
@@ -31,11 +31,6 @@ void ChaosTimer()
 		Chaos_Timer = 0;
 	}
 }
-
-
-
-
-
 void NoClipTimerCheck()
 {
 	if (NoClip_Timer <= 800 && NoClip_Timer != 0)
