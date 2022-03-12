@@ -195,6 +195,11 @@ void RandomTeleport()
 		NewEffect();
 		return;
 	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	NJS_VECTOR RandomTeleport = GetRandomCoordinates((LevelAndActIDs)(GetLevelAndAct()));
 	if (RandomTeleport.x == 0.0f && RandomTeleport.y == 0.0f && RandomTeleport.z == 0.0f)
 	{

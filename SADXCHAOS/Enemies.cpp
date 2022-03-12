@@ -643,6 +643,11 @@ void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this
 		NewEffect();
 		return;
 	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	if (!AirCraftTextLoader)
 	{
 		CheckAnimalTexture();
@@ -694,6 +699,11 @@ void RandomFireBreath(taskwk* p1)
 		NewEffect();
 		return;
 	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	if (!FireBreathTextLoader)
 	{
 		CheckAnimalTexture();
@@ -727,6 +737,11 @@ void RandomCannonS1(taskwk* p1)
 		NewEffect();
 		return;
 	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	if (!CannonS1TextLoader)
 	{
 		CheckAnimalTexture();
@@ -756,6 +771,11 @@ void RandomCannonS2(taskwk* p1)
 		return;
 	}
 	if (CurrentLevel == LevelIDs_EggViper)
+	{
+		NewEffect();
+		return;
+	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
 		return;

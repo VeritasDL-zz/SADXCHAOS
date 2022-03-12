@@ -211,6 +211,7 @@ Cleaned up Chaos.cpp again (3/12/2022)
 Removed Three UnFinished Effects (Big Car, Ice Key And Wind Key due to bugs I couldn't fix) (3/12/2022)
 Added SideWays Camera and config for it (3/12/2022)
 Moved more stuff out of Chaos.cpp (3/12/2022)
+Added Big Fishing check to a few missing functions (3/12/2022)
 
 
 

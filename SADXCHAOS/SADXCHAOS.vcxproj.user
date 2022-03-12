@@ -10,7 +10,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LocalDebuggerCommand>C:\Users\Veritas\Documents\Games\SadX\SADX\sonic.exe</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-c sonic -l finalegg -a 1</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>
+    </LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>..\..\..\..\Games\SadX\SADX</LocalDebuggerWorkingDirectory>
   </PropertyGroup>
 </Project>

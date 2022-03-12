@@ -387,15 +387,6 @@ void RandomPowerUP(taskwk* p1)
 	DoThingWithItemBoxPowerupIndex(id);
 	strcpy_s(LastEffect, 128, "Random PowerUp");
 }
-void MGiantScale(taskwk* p1)
-{
-	for (int i = 0; i < 21; i++) {
-		SONIC_OBJECTS[i]->scl[0] = 4;
-		SONIC_OBJECTS[i]->scl[1] = 4;
-		SONIC_OBJECTS[i]->scl[2] = 4;
-	}
-	return;
-}
 void RandomTimeOfDay() //sets time of day to a random time,
 {
 	if (GameMode == GameModes_Adventure_Field)//made it so it only changes if you are in adventure field
@@ -444,6 +435,11 @@ void RandomDebug()
 	if (DebugEnabled)
 	{
 		NewEffect(); //get new chaos effect because debug movement is enabled already
+		return;
+	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
 		return;
 	}
 	if (EggViperHandyCapEanbled)
@@ -670,6 +666,11 @@ void InputInvert()
 }
 void RandomRotate()
 {
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	int Rotaterand = rand() % 65535;
 	RotatePlayer(0, Rotaterand);
 	strcpy_s(LastEffect, 128, "Random Rotation");
@@ -677,6 +678,11 @@ void RandomRotate()
 void RingAllergy()
 {
 	if (!AllergicToRings)
+	{
+		NewEffect();
+		return;
+	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
 		return;
@@ -790,6 +796,11 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Big)
 		{
+			if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+			{
+				NewEffect();
+				return;
+			}
 			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LifeRing)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LifeRing;
