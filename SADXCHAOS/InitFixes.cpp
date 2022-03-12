@@ -25,6 +25,7 @@ bool UpsideDownCameraEnabled = true;
 bool DrunkCameraEnabled = true;
 bool SpinCameraEnabled = true;
 bool RandomEmblemEnabled = true;
+bool SideWaysCameraEnabled = true;
 
 
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
@@ -60,8 +61,8 @@ void OverRideTPBarrelObj()
 void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 {
 	const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
-	EffectMax = config->getInt("General", "EffectMax", 180);
-	DebugToScreen = config->getBool("General", "PrintToScreen", false);
+	EffectMax = config->getInt("Timer", "EffectMax", 180);
+	DebugToScreen = config->getBool("Debug", "PrintToScreen", false);
 	TeleportEnabled = config->getBool("General", "TeleportEnabled", true);
 	EnemysEnabled = config->getBool("General", "EnemysEnabled", true);
 	InvertEnabled = config->getBool("General", "InvertEnabled", true);
@@ -72,10 +73,12 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	RPhysicsEnabled = config->getBool("General", "RPhysicsEnabled", true);
 	AllergicToRings = config->getBool("General", "AllergicToRings", true);
 	EggViperHandyCapEanbled = config->getBool("General", "EggViperHandyCap", true);
+	RandomEmblemEnabled = config->getBool("General", "RandomEmblem", true);
 	UpsideDownCameraEnabled = config->getBool("Camera", "UpsideDownCameraEnabled", true);
 	DrunkCameraEnabled = config->getBool("Camera", "DrunkCameraEnabled", true);
 	SpinCameraEnabled = config->getBool("Camera", "SpinCameraEnabled", true);
-	RandomEmblemEnabled = config->getBool("General", "RandomEmblem", true);
+	SideWaysCameraEnabled = config->getBool("Camera", "SideWaysCameraEnabled", true);
+
 	delete config;
 	InitializeRandomCoordinates();
 	WriteCall((void*)0x4E9423, LoadSnowboardObject);//fix for snowboard texture

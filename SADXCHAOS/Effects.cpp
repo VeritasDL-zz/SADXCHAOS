@@ -11,6 +11,7 @@
 #include "Chaos.h"
 int RNG = 0;
 int RNG2 = 0;
+int CameraSide = 0;
 float OldMaxAccel = 0;
 float OldAirAccel = 0;
 float OldHangTime = 0;
@@ -823,7 +824,7 @@ void RandomCollisionSize()
 }
 void CheckCameraEffects()
 {
-	if (DrunkCamera_Timer != 0 && CameraSpin_Timer != 0)
+	if (DrunkCamera_Timer != 0 && CameraSpin_Timer != 0 && CameraFlip_Timer != 0 && SideWaysCamera_Timer != 0)
 	{
 		NewEffect();
 		return;
@@ -837,6 +838,7 @@ void FlipCamera()
 		NewEffect();
 		return;
 	}
+	CheckCameraEffects();
 	CameraNOP();
 	CameraFlip_Timer = 250;
 	strcpy_s(LastEffect, 128, "Flipped Camera");
@@ -852,7 +854,7 @@ void SpinCamera()
 	CheckCameraEffects();
 	CameraNOP();
 	strcpy_s(LastEffect, 128, "Camera Spin");
-	CameraSpin_Timer = 480;
+	CameraSpin_Timer = 240;
 	return;
 }
 void DrunkCamera()
@@ -865,9 +867,25 @@ void DrunkCamera()
 	CheckCameraEffects();
 	CameraNOP();
 	strcpy_s(LastEffect, 128, "Drunk");
-	DrunkCamera_Timer = 550;
+	DrunkCamera_Timer = 275;
 	return;
 }
+
+void SideWaysCamera()
+{
+	if (!SideWaysCameraEnabled)
+	{
+		NewEffect();
+		return;
+	}
+	CheckCameraEffects();
+	CameraNOP();
+	strcpy_s(LastEffect, 128, "SideWays Camera");
+	CameraSide = rand() % 2;
+	SideWaysCamera_Timer = 240;
+	return;
+}
+
 void Set_Sonic_Ice()
 {
 	if (CurrentCharacter != Characters_Sonic && CurrentCharacter != Characters_Knuckles)

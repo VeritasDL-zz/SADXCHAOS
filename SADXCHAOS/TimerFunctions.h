@@ -1,5 +1,6 @@
 #pragma once
 #include "Chaos.h"
+extern int SideWaysCamera_Timer;
 void NoClipTimerCheck();
 void InputInvertTimerCheck();
 void CameraDeattchTimerCheck();

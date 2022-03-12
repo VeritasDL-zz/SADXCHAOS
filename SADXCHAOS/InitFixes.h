@@ -12,4 +12,5 @@ extern bool GravityChangeEnabled;
 extern bool RPhysicsEnabled;
 extern bool EggViperHandyCapEanbled;
 extern bool RandomEmblemEnabled;
+extern bool SideWaysCameraEnabled;
 void Init_Fixes(const char* path, const HelperFunctions& helperFunctions);

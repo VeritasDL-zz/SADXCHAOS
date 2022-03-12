@@ -28,65 +28,6 @@ void BigRock(taskwk* p1)
 	strcpy_s(LastEffect, 128, "Spawned Big Rock");
 	return;
 }
-void BigCar(taskwk* p1)
-{
-	if (!GrabAbleObjectsEnabled)
-	{
-		NewEffect();
-		return;
-	}
-	if (!CarTextLoader)
-	{
-		//LoadPVM("OBJ_ICECAP", &OBJ_ICECAP_TEXLIST);
-		CarTextLoader = true;
-		TextLoaded = true;
-	}
-	task* Car;
-	Car = (task*)LoadObject((LoadObj)7, 3, ORotyu);
-	Car->twp->pos = playertwp[0]->pos;
-	strcpy_s(LastEffect, 128, "Spawned Car");
-	return;
-}
-void RandomIceKey(taskwk* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
-{
-	if (!GrabAbleObjectsEnabled)
-	{
-		NewEffect();
-		return;
-	}
-	if (!IceTextLoader)
-	{
-		//LoadPVM("HOTSHELTER2", &HOTSHELTER2_TEXLIST);
-		IceTextLoader = true;
-	}
-	task* IceKey;
-	IceKey = (task*)LoadObject((LoadObj)3, 3, IceKey_Main);
-	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-	IceKey->ocp = objCondition;
-	IceKey->twp->pos = playertwp[0]->pos;
-	strcpy_s(LastEffect, 128, "Random IceKey");
-	return;
-}
-void RandomWindKey(taskwk* p1) // disabled for now 9/23/2021, updated to tasks, still disabled
-{
-	if (!GrabAbleObjectsEnabled)
-	{
-		NewEffect();
-		return;
-	}
-	if (!WindTextLoader)
-	{
-		LoadPVM("HANDKEY", &RUIN01_TEXLIST);
-		WindTextLoader = true;
-	}
-	task* WindKey;
-	WindKey = (task*)LoadObject((LoadObj)3, 3, OHandKey);
-	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-	WindKey->ocp = objCondition;
-	WindKey->twp->pos = playertwp[0]->pos;
-	strcpy_s(LastEffect, 128, "Random WindKey");
-	return;
-} // disabled for now 9/23/2021
 void RandomFruit(taskwk* p1)
 {
 	if (!GrabAbleObjectsEnabled)

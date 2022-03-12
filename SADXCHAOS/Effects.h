@@ -4,6 +4,7 @@
 extern float OldMaxAccel;
 extern float OldAirAccel;
 extern float OldHangTime;
+extern int CameraSide;
 void DisablePausee();
 void RandomPhysics();
 void Nos0und_ForYou();
@@ -46,6 +47,7 @@ void CameraReset();
 void SpinCamera();
 void CameraNOP();
 void DrunkCamera();
+void SideWaysCamera();
 void WalkThruWallsNop();
 void WalkThruWallsReset();
 void BurgerManSpin();

@@ -9,6 +9,7 @@
 #include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
+int SideWaysCamera_Timer = 0;
 void ChaosTimer()
 {
 	if (Chaos_Timer < EffectMax)//30 seconds is 1800
@@ -247,7 +248,7 @@ void CustomCameraEffectsTimersCheck()
 		CameraFlip_Timer = 0;//set timer to 0
 		WriteData((int*)0x03B2C68C, (int)0);
 	}
-	if (CameraSpin_Timer <= 480 && CameraSpin_Timer != 0)
+	if (CameraSpin_Timer <= 240 && CameraSpin_Timer != 0)
 	{
 		SetCameraMode_(0);//Force AutoCam
 		CameraSpin_Val += 0x300; //spins camera 
@@ -261,7 +262,7 @@ void CustomCameraEffectsTimersCheck()
 		CameraSpin_Val = 0;//set spin val to 0 
 		WriteData((int*)0x03B2C68C, (int)0);
 	}
-	if (DrunkCamera_Timer <= 550 && DrunkCamera_Timer != 0)
+	if (DrunkCamera_Timer <= 275 && DrunkCamera_Timer != 0)
 	{
 		SetCameraMode_(0);//Force AutoCam
 		CameraNOP();
@@ -284,6 +285,28 @@ void CustomCameraEffectsTimersCheck()
 		DrunkCamera_Timer = 0;//set timer to 0 
 		DrunkCam = 0;
 		Direction = 0x50;//resets direction 
+		WriteData((int*)0x03B2C68C, (int)0x0); //force camera reset
+	}
+	if (SideWaysCamera_Timer <= 240 && SideWaysCamera_Timer != 0)
+	{
+		SetCameraMode_(0);//Force AutoCam
+		CameraNOP();
+		
+		if (CameraSide == 0)
+		{
+			WriteData((int*)0x03B2C68C, (int)-0x4000); //force camera sideways
+		}
+		if (CameraSide == 1)
+		{
+			WriteData((int*)0x03B2C68C, (int)0x4000); //force camera sideways
+		}
+
+		SideWaysCamera_Timer--;//subtract timer
+	}
+	if (SideWaysCamera_Timer == 1 && SideWaysCamera_Timer != 0)
+	{
+		CameraReset();//resets camera ASM
+		SideWaysCamera_Timer = 0;//set timer to 0 
 		WriteData((int*)0x03B2C68C, (int)0x0); //force camera reset
 	}
 }

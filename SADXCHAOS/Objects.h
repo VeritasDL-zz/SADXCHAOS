@@ -1,9 +1,6 @@
 #pragma once
 #include "Chaos.h"
 void BigRock(taskwk* p1);
-void BigCar(taskwk* p1);
-void RandomIceKey(taskwk* p1);
-void RandomWindKey(taskwk* p1);
 void RandomFruit(taskwk* p1);
 void RandomHat(taskwk* p1);
 void RandomCheckPoint(taskwk* p1);

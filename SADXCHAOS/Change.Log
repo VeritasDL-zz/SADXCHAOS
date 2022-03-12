@@ -208,10 +208,15 @@ Moved All Texture bools to TextureReset.cpp/.h (3/12/2022)
 Added RamdomBarrel, RandomKnuxRingSpring, BurgerManSpin, RandomBarrel And Set_Sonic_Ice To Chaos Array (3/12/2022)
 Shuffled Chaos Array Again (3/12/2022)
 Cleaned up Chaos.cpp again (3/12/2022)
-  
+Removed Three UnFinished Effects (Big Car, Ice Key And Wind Key due to bugs I couldn't fix) (3/12/2022)
+Added SideWays Camera and config for it (3/12/2022)
+
+
+
+
+
 ---------TO-DO---------
- add Set_Sonic_Ice RandomKnuxRingSpring and RandomBarrel to array
- RandomBarrel config? 
+Add Sideways camera to Chaos Array
  Test Stuff
  test new stuff fully 
  Log Known Crashes
@@ -219,9 +224,7 @@ Cleaned up Chaos.cpp again (3/12/2022)
  
  Add More Custom Tikal Hints
  Add More Random Teleport Locations
- More Camera Effects? (Sideways?)
 
- Need to Fix Ice&Wind Key //might scrap 
  Need to fix or scrap Big Car //might scrap too 
  Chao Crash? 0x33A1060 //fixed sorta i think (3/6/2022)
  
