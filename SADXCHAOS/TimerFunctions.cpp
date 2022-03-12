@@ -132,7 +132,7 @@ void DisableControlTimerCheck()
 	{
 		ControlEnabled = 1;
 		DisableControl_Timer = 0;
-		strcpy_s(LastEffect, 128, "Control Enabled");
+		//strcpy_s(LastEffect, 128, "Control Enabled");
 	}
 }
 void DpadDownOrDieTimerCheck()

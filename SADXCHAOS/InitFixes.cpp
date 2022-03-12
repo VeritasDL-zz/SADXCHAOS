@@ -31,6 +31,10 @@ void LoadSDTexObj()
 {
 	njSetTexture(&OBJ_SKYDECK_TEXLIST);
 }
+void OverRideEmeraldShardObj()
+{
+	njSetTexture(&OBJ_RUIN_TEXLIST);
+}
 void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 {
 	const IniFile* config = new IniFile(std::string(path) + "\\config.ini");
@@ -46,7 +50,9 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	RPhysicsEnabled = config->getBool("General", "RPhysicsEnabled", true);
 	AllergicToRings = config->getBool("General", "AllergicToRings", true);
 	EggViperHandyCapEanbled = config->getBool("General", "EggViperHandyCap", true);
-	CameraEffects = config->getBool("General", "CameraEffects", true);
+	UpsideDownCameraEnabled = config->getBool("Camera", "UpsideDownCameraEnabled", true);
+	DrunkCameraEnabled = config->getBool("Camera", "DrunkCameraEnabled", true);
+	SpinCameraEnabled = config->getBool("Camera", "SpinCameraEnabled", true);
 	RandomEmblemEnabled = config->getBool("General", "RandomEmblem", true);
 	delete config;
 	InitializeRandomCoordinates();
@@ -59,6 +65,9 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	WriteCall((void*)0x5B7581, LoadFETexObj);
 	WriteCall((void*)0x5F1A52, LoadSDTexObj);//fix for AirCraft Texture
 	WriteCall((void*)0x5F1A78, LoadSDTexObj); //fix for AirCraft Texture
+	WriteCall((void*)0x6F4BD5, OverRideEmeraldShardObj);//test
+	WriteCall((void*)0x6F4D81, OverRideEmeraldShardObj);//test
+	WriteCall((void*)0x6F4EE0, OverRideEmeraldShardObj);//test
 	WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 	WriteData((char*)0x4EE7BB, (char)4);//Big ice rock pickup ability
 	//WriteData((char*)0x639A00, (char)4);//Patch for Picking Up Car in Station Square Act 0

@@ -50,6 +50,7 @@ void WalkThruWallsNop();
 void WalkThruWallsReset();
 void BurgerManSpin();
 void NewEffect();
-void ChaosWaterDrop();
 void CheckCameraEffects();
 void Set_Sonic_Ice();
+void EmeraldShardMa();
+void RandomKnuxRingSpring(taskwk* p1);

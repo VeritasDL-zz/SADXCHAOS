@@ -415,5 +415,4 @@ void RandomEmblem(taskwk* p1)//UPDATED (3/1/2022) IT WORKS
 	Emblem->twp->value.l = 129; //Emblem ID, holy jesus 
 	strcpy_s(LastEffect, 128, "Random Emblem");
 	return;
-	
 }

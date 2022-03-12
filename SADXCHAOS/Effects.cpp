@@ -732,7 +732,6 @@ void RemovePowerUp()
 			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LightShoes)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LightShoes;
-				//SetEventFlag(EventFlags_Sonic_LightShoes);
 				WriteData<1>((int*)0x3B18895, 0x00);
 				strcpy_s(LastEffect, 128, "Removed Light Speed Shoes");
 			}
@@ -788,10 +787,6 @@ void RemovePowerUp()
 				return;
 			}
 		}
-		if (CurrentCharacter == Characters_Amy)
-		{
-			//need to test what power ups you can re-get
-		}
 		if (CurrentCharacter == Characters_Big)
 		{
 			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LifeRing)
@@ -811,10 +806,6 @@ void RemovePowerUp()
 				NewEffect();
 				return;
 			}
-		}
-		if (CurrentCharacter == Characters_Gamma)
-		{
-			//need to test what power ups you can re-get
 		}
 	}
 	else
@@ -841,7 +832,7 @@ void CheckCameraEffects()
 }
 void FlipCamera()
 {
-	if (!CameraEffects)
+	if (!UpsideDownCameraEnabled)
 	{
 		NewEffect();
 		return;
@@ -853,7 +844,7 @@ void FlipCamera()
 }
 void SpinCamera()
 {
-	if (!CameraEffects)
+	if (!SpinCameraEnabled)
 	{
 		NewEffect();
 		return;
@@ -866,7 +857,7 @@ void SpinCamera()
 }
 void DrunkCamera()
 {
-	if (!CameraEffects)
+	if (!DrunkCameraEnabled)
 	{
 		NewEffect();
 		return;
@@ -877,27 +868,6 @@ void DrunkCamera()
 	DrunkCamera_Timer = 550;
 	return;
 }
-
-
-ObjectFunc(dispChaos0DropWater, 0x7ACDD0);
-void ChaosWaterDrop()
-{
-	//if (!BigRockTextLoader)
-//	{
-	LoadPVM("Chaos_effect", &CHAOS_EFFECT_TEXLIST);
-	//BigRockTextLoader = true;
-	TextLoaded = true;
-//}
-
-	
-	//task* WaterDrop;
-	setDrop(playertwp[0], 15, playertwp[0]->pos.x, playertwp[0]->pos.z);
-	//WaterDrop = (task*)LoadObject((LoadObj)3, 5, dispChaos0DropWater);
-	//WaterDrop->twp->pos = playertwp[0]->pos;
-	strcpy_s(LastEffect, 128, "Spawned Water Drop");
-	return;
-}
-
 void Set_Sonic_Ice()
 {
 	if (CurrentCharacter != Characters_Sonic && CurrentCharacter != Characters_Knuckles)
@@ -905,11 +875,34 @@ void Set_Sonic_Ice()
 		NewEffect();
 		return;
 	}
-	LoadNoNamePVM(&stx_ice0_TEXLIST);
-	TextLoaded = true;
+	if (!IceTextLoader)
+	{
+		LoadNoNamePVM(&stx_ice0_TEXLIST);
+		TextLoaded = true;
+	}
 	DisableControl_Timer = 70;
 	ControlEnabled = 0;
 	ForcePlayerAction(0, 38); //forces frozen state for sonic/Knuckles
 	SetSonicIce(playertwp[0]->counter.b[0]);
+	strcpy_s(LastEffect, 128, "Froze Player");
+}
+void EmeraldShardMa()
+{
+	LoadPVM("Obj_ruin", &OBJ_RUIN_TEXLIST); //test for shard texture loading or not
+	EmeraldShard_Create(20);
+	WriteData<4>((int*)0x3C851D0, 0x00); //3C851D0 needs to be 0 to spawn more
 
+}
+void RandomKnuxRingSpring(taskwk* p1)
+{
+	if (!KnuxEffTextLoader)
+	{
+		LoadPVM("Knu_eff", &KNU_EFF_TEXLIST);
+		KnuxEffTextLoader = true;
+		TextLoaded = true;
+	}
+	task* KnuxRingSpring;
+	KnuxRingSpring = (task*)LoadObject((LoadObj)2, 6, KnuEffectRingSpring);
+	KnuxRingSpring->twp->pos = playertwp[0]->pos;
+	strcpy_s(LastEffect, 128, "Dug Up Rings");
 }

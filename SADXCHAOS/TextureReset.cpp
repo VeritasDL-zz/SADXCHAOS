@@ -42,6 +42,8 @@ void ResetTextureBools()
 	FireBreathTextLoader = false;
 	CannonS1TextLoader = false;
 	CannonS2TextLoader = false;
+	KnuxEffTextLoader = false;
+	IceTextLoader = false;
 	WriteOnce = false;
 	HatNumb = 0;
 	FruitNumb = 0;

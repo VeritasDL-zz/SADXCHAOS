@@ -55,7 +55,9 @@ bool GravityChangeEnabled = true;
 bool RPhysicsEnabled = true;
 bool EggViperHandyCapEanbled = true;
 bool AllergicToRings = true;
-bool CameraEffects = true;
+bool UpsideDownCameraEnabled = true;
+bool DrunkCameraEnabled = true;
+bool SpinCameraEnabled = true;
 bool RandomEmblemEnabled = true;
 char* LastEffect = new char[128];
 bool EnableFontScaling = true;
@@ -88,6 +90,7 @@ bool AirCraftTextLoader = false;
 bool FireBreathTextLoader = false;
 bool CannonS1TextLoader = false;
 bool CannonS2TextLoader = false;
+bool KnuxEffTextLoader = false;
 bool TextLoaded = false;
 bool DebugEnabled = false;
 bool WriteOnce = false;
@@ -231,7 +234,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			Set_Sonic_Ice();
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

@@ -3004,7 +3004,8 @@ VoidFunc(al_xy_init, 0x7DAE80);
 DataPointer(NJS_TEXLIST, ev_effect_list19, 0x2C49740);
 DataPointer(NJS_MOTION**, SS_PEOPLE_MOTIONS, 0x38F6EA4);
 FunctionPointer(void, SetSonicIce, (int a1), 0x4A2550);
-
+FunctionPointer(void, EmeraldShard_Create, (int num), 0x6F53B0);
+ObjectFunc(KnuEffectRingSpring, 0x4C1FC0);
 
 // Bool __usercall@<eax>(NJS_TEXLIST *a1@<eax>)
 static const void *const VerifyTexListPtr = (void*)0x403250;

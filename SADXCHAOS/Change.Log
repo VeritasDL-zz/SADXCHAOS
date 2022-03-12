@@ -200,11 +200,13 @@ Tweaked The Camera Effects (3/9/2022)
 Tweaked Ring Allergy (3/9/2022)
 Added Set_Sonic_Ice (only supports sonic and knuckles) (3/11/2022)
 Couldnt Get dispChaos0DropWater to work, will prob remove (3/11/2022)
-
+Added Seprate Config Options for Drunk,Spin and Flip Camera Effects (3/11/2022)
+Added RandomKnuxRingSpring (3/11/2022)
  
  
   
 ---------TO-DO---------
+ add Set_Sonic_Ice and RandomKnuxRingSpring to array
  Test Stuff
  test new stuff fully 
  Log Known Crashes
@@ -213,80 +215,16 @@ Couldnt Get dispChaos0DropWater to work, will prob remove (3/11/2022)
  Add More Custom Tikal Hints
  Add More Random Teleport Locations
  More Camera Effects? (Sideways?)
- Amy Power Ups
- Gamma Power Ups
-
- KnuEffectPutRingSpring 
 
  Need to Fix Ice&Wind Key //might scrap 
  Need to fix or scrap Big Car //might scrap too 
  Chao Crash? 0x33A1060 //fixed sorta i think (3/6/2022)
- 
  
  Iceball Crash, Sonic EC 0x0044CE56 didnt have debug crash log enabled 
  E_Robo texture Crash? Sonic EC collected 130 emblem 0x94A318
  emblem texture crash? sonic SpeedHighway 0x9740DC
  texture issue? 0x0078CF24  debug crash output 0091CD18 `Sonic_LSShoeIndices`
  snowboard texture crash? 91CBD4 sonic speedhighway
-
- Sonic SH texlist crash, big chunk of console output 3/9/2022
-Texlist change: 97E538 //0097E538 NJS_TEXLIST (No-Name?)
-Texlist change: 267068C //off_267068C (unknown?) (ONeon1_TEXLIST?)
-Texlist change: 2670694 //off_2670694 (unknown?) (ONeon2_TEXLIST?)
-Texlist change: 267068C //off_267068C (unknown?) (ONeon1_TESTLIST?)
-Texlist change: 16F7E2C //mi_3dasu_TEXLIST //dont think its this
-Texlist change: 8B1CD8 //OBJ_REGULAR_TEXLIST
-Texlist change: 26703F0 //OBJ_HIGHWAY_TEXLIST
-Texlist change: 26706A4 //off_26706A4 (unknown?) (ONeon4_TEXLIST?)
-Texlist change: 267069C //off_267069C (unknown?) (ONeon3_TEXLIST?)
-Texlist change: 267068C //off_267068C (unknown?) (ONeon1_TEXLIST?)
-Texlist change: 26703F0 //OBJ_HIGHWAY_TEXLIST
-Texlist change: 2670694 //off_2670694 (unknown?) (ONeon2_TEXLIST?)
-Texlist change: 26703F0 //OBJ_HIGHWAY_TEXLIST
-Texlist change: 267068C //off_267068C (unknown?) (ONeon1_TEXLIST?)
-Texlist change: 26703F0 //OBJ_HIGHWAY_TEXLIST
-Texlist change: 19C929C //GACHAPON_TEXLIST (might be the crash?) //might not be?
-Texlist change: 8B1CD8 //OBJ_REGULAR_TEXLIST
-Texlist change: 19C929C //GACHAPON_TEXLIST (might be the crash?) //might not be?
-Texlist change: 8B1CD8 //OBJ_REGULAR_TEXLIST
-Texlist change: 26703F0 //OBJ_HIGHWAY_TEXLIST
-Texlist change: 9740DC //EMBLEM_TEXLIST (might be the crash?) //might not be?
-Texlist change: 26703F0 //OBJ_HIGHWAY_TEXLIST
-Texlist change: 8B1CD8 //OBJ_REGULAR_TEXLIST
-Texlist change: 26703F0 //OBJ_HIGHWAY_TEXLIST
-Texlist change: 8B1CD8 //OBJ_REGULAR_TEXLIST
-Texlist change: 26703F0 //OBJ_HIGHWAY_TEXLIST
-Texlist change: 267069C //off_267069C (unknown?) (ONeon3_TEXLIST?)
-Texlist change: 267068C //off_267068C (unknown?) (ONeon1_TESTLIST?)
-Texlist change: 2670694 //off_2670694 (unknown?) (ONeon2_TEXLIST?)
-Texlist change: 8B1CD8 //OBJ_REGULAR_TEXLIST
-Texlist change: 26703F0 //OBJ_HIGHWAY_TEXLIST
-Texlist change: 26706A4 //off_26706A4 (unknown?) (ONeon4_TEXLIST?)
-Texlist change: 267069C //off_267069C (unknown?) (ONeon3_TEXLIST?)
-Texlist change: 26703F0 //OBJ_HIGHWAY_TEXLIST
-Texlist change: 94A2B0 //CON_REGULAR_TEXLIST
-Texlist change: 912DFC //Hud_RingTimeLife_TEXLIST
-Texlist change: 91CB58 //SONIC_TEXLIST
-Texlist change: 26A02B8 //bg_highway_TEXLIST
-Texlist change: 26A02FC //bg_highway01_TEXLIST
-Texlist change: 2592E8C //HIGHWAY01_TEXLIST
-Texlist change: 91CD74 //Sonic_LSShoeIndices
-
-
-
-MemoryCard Init
-Texlist change: 91CB58
-Texlist change: 26A02B8
-Texlist change: 26A02FC
-Texlist change: 2592E8C
-Texlist change: 33A1038
-Texlist change: 33A1048
-Texlist change: 33A1038
-Texlist change: 33A1048
-Texlist change: 33A1038
-Texlist change: 33A1060 // not this 
-
-
 
 Todo 
 Kill momentum doesn't always work?

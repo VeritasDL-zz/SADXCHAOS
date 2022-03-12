@@ -2,14 +2,14 @@
 #include "Chaos.h"
 void BigRock(taskwk* p1);
 void BigCar(taskwk* p1);
-void RandomIceKey(taskwk* p1); // disabled for now 9/23/2021
-void RandomWindKey(taskwk* p1);  // disabled for now 9/23/2021
+void RandomIceKey(taskwk* p1);
+void RandomWindKey(taskwk* p1);
 void RandomFruit(taskwk* p1);
 void RandomHat(taskwk* p1);
 void RandomCheckPoint(taskwk* p1);
 void RandomSpeedPad(taskwk* p1);
 void RandomBurgerMan(taskwk* p1);
-void RandomKeyBlock(taskwk* p1);//updated
+void RandomKeyBlock(taskwk* p1);
 void RandomSnowboard();
 void RandomSpring(taskwk* p1);
 void RandomSpikeBall(taskwk* p1);
