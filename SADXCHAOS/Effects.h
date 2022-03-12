@@ -61,3 +61,4 @@ void CheckCameraEffects();
 void Set_Sonic_Ice();
 void EmeraldShardMa();
 void RandomKnuxRingSpring(taskwk* p1);
+void EggViperHandiCapCheck();

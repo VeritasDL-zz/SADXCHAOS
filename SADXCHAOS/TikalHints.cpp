@@ -348,7 +348,6 @@ const HintText_Text const Hints[67][3] = {
 { 0 }, //Second page
 { 0 } //idk 3rd page or always null?
 },
-
 };
 size_t HintSize = LengthOfArray(Hints);
 int Voices[] = {

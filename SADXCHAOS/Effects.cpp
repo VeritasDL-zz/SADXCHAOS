@@ -36,6 +36,22 @@ void DisablePausee()
 	DisablePause_Timer = 420;
 	strcpy_s(LastEffect, 128, "Pause Disabled");
 }
+void EggViperHandiCapCheck()
+{
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
+	return;
+}
 void CameraNOP()
 {
 	WriteData<7>((int*)0x0046261B, 0x90); //nops ASM
@@ -229,45 +245,17 @@ void RandomChaoo()
 		int bodyrand = rand() % 3;
 		chaodata->data.BodyType = (SADXBodyType)bodyrand;
 	}
-	/*int headgearchance = rand() % 10;
-	if (headgearchance == 1)
-	{
-		chaodata->data.Headgear = rand() % 84;
-	}*/
-	/*int medalchance = rand() % 4;
-	if (medalchance == 1)
-	{
-		chaodata->data.Medal = rand() % 15;
-	}*/
 	int shinychance = rand() % 4;
 	if (shinychance == 1)
 	{
 		chaodata->data.Shiny = 1;
 	}
-	//RandomChaooAnimal();
-	//chaodata->data.ArmType = (SADXAnimal)Animaltyperand;
-	//RandomChaooAnimal();
-	//chaodata->data.WingType = (SADXAnimal)Animaltyperand;
-	//RandomChaooAnimal();
-	//chaodata->data.TailType = (SADXAnimal)Animaltyperand;
-	//RandomChaooAnimal();
-	//chaodata->data.LegType = (SADXAnimal)Animaltyperand;
-	//RandomChaooAnimal();
-	//chaodata->data.EarType = (SADXAnimal)Animaltyperand;
-	//RandomChaooAnimal();
-	//chaodata->data.ForeheadType = (SADXAnimal)Animaltyperand;
-	//RandomChaooAnimal();
-	//chaodata->data.EyebrowType = (SADXAnimal)Animaltyperand;
-	//RandomChaooAnimal();
-	//chaodata->data.UnknownType = (SADXAnimal)Animaltyperand; //why not lol
 	chaodata->data.MouthType = rand() % 14;
 	chaodata->data.EyeType = rand() % 12;
 	chaodata->data.BallType = rand() % 3;
 	chaodata->data.Alignment = rand() % 2 - 1; //test
 	ObjectMaster* Chao = CreateChao(chaodata, 0, 0, &playertwp[0]->pos, 0);
-	//chaodata->data.Type = (ChaoType)chaotype; idk why this wasnt working disabled for now,
 	chaodata->data.Color = rand() % 14;
-	//chaodata->data.BodyTypeAnimal = 120;
 	chaodata->data.Name[0] = rand() % 255;
 	chaodata->data.Name[1] = rand() % 255;
 	chaodata->data.Name[2] = rand() % 255;
@@ -292,18 +280,7 @@ void RandomKillMomentum(playerwk* p1)
 }
 void FastAccel(playerwk* p1)
 {
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
@@ -321,18 +298,7 @@ void FastAccel(playerwk* p1)
 }
 void RandomVSpeed(playerwk* p1)
 {
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
@@ -344,18 +310,7 @@ void RandomVSpeed(playerwk* p1)
 }
 void RandomHSpeed(playerwk* p1)
 {
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
@@ -447,18 +402,7 @@ void RandomDebug()
 		NewEffect();
 		return;
 	}
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	if (IssSowboarding == 1)//get new effect because user is on snowboard
 	{
 		NewEffect();
@@ -495,18 +439,7 @@ void RandomDebug()
 }
 void RandomXGravity()
 {
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
@@ -523,18 +456,7 @@ void RandomXGravity()
 }
 void RandomYGravity()
 {
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
@@ -551,18 +473,7 @@ void RandomYGravity()
 }
 void RandomZGravity()
 {
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
 	{
 		NewEffect();
@@ -641,18 +552,7 @@ void RandomDPadDownCheck()
 }
 void RandomNoClip()
 {
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	NoClip_Timer = 800;
 	WalkThruWallsNop();
 	strcpy_s(LastEffect, 128, "Walk Thru Walls Enabled");
@@ -697,18 +597,7 @@ void RingAllergy()
 		NewEffect();//stops from getting ringallergy when already having it
 		return; 
 	}
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	RingCount = Rings;
 	RingAllergy_Timer = 250;
 	strcpy_s(LastEffect, 128, "Ring Allergy");

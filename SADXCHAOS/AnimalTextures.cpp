@@ -1,13 +1,4 @@
 #include "pch.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <vector>
-#include <IniFile.hpp>
 #include "Chaos.h"
 PVMEntry MinimalPVMs[]{
 { "GOMA", &GOMA_TEXLIST },
@@ -26,7 +17,6 @@ PVMEntry MinimalPVMs[]{
 { "KOAR", &KOAR_TEXLIST },
 { "SUKA", &SUKA_TEXLIST },
 };
-
 void CheckAnimalTexture()
 {
 	if (!AnimalTextLoader)

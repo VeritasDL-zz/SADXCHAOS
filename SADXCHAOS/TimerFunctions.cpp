@@ -9,7 +9,6 @@
 #include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
-
 int Chaos_Timer = 0;
 int Debug_Timer = 0;
 int Pause_Timer = 0;

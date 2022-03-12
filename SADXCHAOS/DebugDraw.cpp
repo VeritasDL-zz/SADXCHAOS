@@ -36,7 +36,6 @@ void DrawDebugRectangle(float leftchars, float topchars, float numchars_horz, fl
 	njColorBlendingMode(0, NJD_COLOR_BLENDING_SRCALPHA);
 	njColorBlendingMode(NJD_DESTINATION_COLOR, NJD_COLOR_BLENDING_INVSRCALPHA);
 }
-
 void DebugPrintOutCheck()
 {
 	if (DebugToScreen)

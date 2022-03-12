@@ -26,8 +26,6 @@ bool DrunkCameraEnabled = true;
 bool SpinCameraEnabled = true;
 bool RandomEmblemEnabled = true;
 bool SideWaysCameraEnabled = true;
-
-
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
 {
 	return snowboard = LoadObject(flags, index, loadSub);
@@ -78,7 +76,6 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	DrunkCameraEnabled = config->getBool("Camera", "DrunkCameraEnabled", true);
 	SpinCameraEnabled = config->getBool("Camera", "SpinCameraEnabled", true);
 	SideWaysCameraEnabled = config->getBool("Camera", "SideWaysCameraEnabled", true);
-
 	delete config;
 	InitializeRandomCoordinates();
 	WriteCall((void*)0x4E9423, LoadSnowboardObject);//fix for snowboard texture
@@ -99,7 +96,6 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	WriteData<1>((int*)0x624151, 0x00);//TwinklePark Barrel Timer Hack
 	WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 	WriteData((char*)0x4EE7BB, (char)4);//Big ice rock pickup ability
-	//WriteData((char*)0x639A00, (char)4);//Patch for Picking Up Car in Station Square Act 0
 	WriteData((int*)0x017D0A2C, (int)0xC7C35000);//Stops the amy key block from exploding 
 	WriteData((int*)0x017D0A38, (int)0xC7C35000);//Stops the amy key block from exploding
 	WriteData((int*)0x017D0A44, (int)0xC7C35000);//Stops the amy key block from exploding

@@ -1,5 +1,4 @@
 #pragma once
-
 void RandomTank(taskwk* p1);
 void RandomBuyon(taskwk* p1);
 void RandomUnidus(taskwk* p1);

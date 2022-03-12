@@ -1,21 +1,17 @@
 #include "pch.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <vector>
-#include <IniFile.hpp>
 #include "Chaos.h"
-void BigRock(taskwk* p1)
+void GrabObjectEnableCheck()
 {
 	if (!GrabAbleObjectsEnabled)
 	{
 		NewEffect();
 		return;
 	}
+	return;
+}
+void BigRock(taskwk* p1)
+{
+	GrabObjectEnableCheck();
 	if (!BigRockTextLoader)
 	{
 		LoadPVM("OBJ_ICECAP", &OBJ_ICECAP_TEXLIST);
@@ -30,11 +26,7 @@ void BigRock(taskwk* p1)
 }
 void RandomFruit(taskwk* p1)
 {
-	if (!GrabAbleObjectsEnabled)
-	{
-		NewEffect();
-		return;
-	}
+	GrabObjectEnableCheck();
 	if (!ChaoFruitTextLoader)
 	{
 		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
@@ -56,11 +48,7 @@ void RandomFruit(taskwk* p1)
 }
 void RandomHat(taskwk* p1)
 {
-	if (!GrabAbleObjectsEnabled)
-	{
-		NewEffect();
-		return;
-	}
+	GrabObjectEnableCheck();
 	if (!ChaoHatTextLoader)
 	{
 		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
@@ -93,18 +81,7 @@ void RandomCheckPoint(taskwk* p1)
 }
 void RandomSpeedPad(taskwk* p1)
 {
-	if (EggViperHandyCapEanbled)
-	{
-		int EVHandyCap = rand() % 5;
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	int number = rand() % 2;
 	task* Speed;
 	Speed = (task*)LoadObject((LoadObj)3, 3, DashPanel_Main);
@@ -137,16 +114,11 @@ void RandomFan(taskwk* p1)
 	Fan->ocp = objCondition;
 	Fan->twp->pos = playertwp[0]->pos;
 	Fan->twp->pos.y = playertwp[0]->pos.y - 9.0f;
-	//Fan->twp->ang = PlayerTaskPtr[0]->ang;
 	strcpy_s(LastEffect, 128, "Random Fan");
 }
 void RandomBurgerMan(taskwk* p1)
 {
-	if (!GrabAbleObjectsEnabled)
-	{
-		NewEffect();
-		return;
-	}
+	GrabObjectEnableCheck();
 	if (!BugerManTextLoader)
 	{
 		LoadPVM("MI_3DASU", &mi_3dasu_TEXLIST);
@@ -161,11 +133,7 @@ void RandomBurgerMan(taskwk* p1)
 }
 void RandomKeyBlock(taskwk* p1)
 {
-	if (!GrabAbleObjectsEnabled)
-	{
-		NewEffect();
-		return;
-	}
+	GrabObjectEnableCheck();
 	if (!KeyBlockTextLoader)
 	{
 		LoadPVM("HOTSHELTER2", &HOTSHELTER2_TEXLIST);
@@ -186,18 +154,7 @@ void RandomSnowboard()
 		NewEffect();
 		return;
 	}
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	if (DebugEnabled)
 	{
 		NewEffect();
@@ -226,7 +183,6 @@ void RandomSnowboard()
 			if (obj->Data1->Action >= 48 && obj->Data1->Action <= 54)
 			{
 				ForcePlayerAction(0, 24);
-				// fix a bug where Tails' physics data doesn't get reset to normal
 				((EntityData2*)obj->Data2)->CharacterData->PhysicsData.CollisionSize = PhysicsArray[Characters_Tails].CollisionSize;
 				((EntityData2*)obj->Data2)->CharacterData->PhysicsData.YOff = PhysicsArray[Characters_Tails].YOff;
 				((EntityData2*)obj->Data2)->CharacterData->PhysicsData.JumpSpeed = PhysicsArray[Characters_Tails].JumpSpeed;
@@ -262,18 +218,7 @@ void RandomSnowboard()
 }
 void RandomSpring(taskwk* p1)
 {
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	int number = rand() % 2;
 	task* Spring;
 	Spring = (task*)LoadObject((LoadObj)2, 3, SpringB_Main);
@@ -296,18 +241,7 @@ void RandomSpring(taskwk* p1)
 }
 void RandomSpikeBall(taskwk* p1)
 {
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
+	EggViperHandiCapCheck();
 	int number = rand() % 2;
 	task* spike;
 	spike = (task*)LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);
