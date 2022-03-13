@@ -106,19 +106,23 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random Chao Fruit - Spawns in a Random Chao Fruit.
 - Random Chao Hat - Spawns in a Random Chao Hat.
 - Random Big Rock - Spawns in The Big Rock for Big's Ice Cap, others can pick it up as well! 
+- Random Barrel - Spawns in the Exploding Barrel From Twinkle Park.
 - Ring Allergy - Kills The Player if Rings are collected for 250 Frames.
 - Increase Cutscene Skip Time - Increases the time needed to Skip Cutscenes.
 - Remove Random Powerup - A 1 in 3 Chance to Remove a Random PowerUP for Sonic, Tails, Knuckles & Big
 - Random Collision Size - Changes Collision Size to a Number between 1 and 10.
-- Flip Camera - Flips The Camera Upside down for 480 frames.
-- Spin Camera - Spins the Camera in a Circle for 480 frames.
-- Drunk Camera - Makes the Camera Sway from Left to Right for 550 frames.
+- Flip Camera - Flips The Camera Upside down for 250 frames.
+- Spin Camera - Spins the Camera in a Circle for 240 frames.
+- Drunk Camera - Makes the Camera Sway from Left to Right for 275 frames.
+- SideWays Camera - Flips the Camera to either Side for 240 frames.
 - Random Fan - Spawns in the Fan from Final Egg Act 2 under the player.
 - Random AirCraft - Spawns in a Random Number of AirCraft's for 350 frames.
 - Random FireBreath - Spawn in the FireBreath Statue from Red Mountain.
 - Random CannonS1 - Spawns in a Cannon from Sky Deck.
 - Random CannonS2 - Spawns in a Cannon from Sky Deck.
 - BurgerSpin - Spawns in 7 BurgerMen that spin around the player, Check out Her Github. https://github.com/SPEEPSHighway Or Her Meme Maker Mod. https://gamebanana.com/mods/49984
+- Random Dug Up Rings - Digs up Rings like Knuckles would
+- Random Set Ice - Freezes Sonic Or Knuckles in a ice block for 70 frames.
 ## Special Thanks
 Thanks to Sora for the code base, Letting me use FreeMovements & helping me with dumb questions.  
 Huge Thanks to Refrag for helping me constantly!  
