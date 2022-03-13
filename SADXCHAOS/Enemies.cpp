@@ -3,21 +3,45 @@
 #define LengthOfArray(x) \
 	((int)(((sizeof(x) / sizeof(x[0]))) / \
 	(size_t)(!(sizeof(x) % sizeof(x[0])))))
-void RandomTank(taskwk* p1)
+bool EnemyCheck()
 {
 	if (!EnemysEnabled)
 	{
 		NewEffect();
-		return;
+		return false;
 	}
+	return true;
+}
+bool E101RCheck()
+{
 	if (CurrentLevel == LevelIDs_E101R)
 	{
 		NewEffect();
-		return;
+		return true;
 	}
+	return false;
+}
+bool AdventureCheck()
+{
 	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
 		NewEffect();
+		return true;
+	}
+	return false;
+}
+void RandomTank(taskwk* p1)
+{
+	if (!EnemyCheck())
+	{
+		return;
+	}
+	if (E101RCheck())
+	{
+		return;
+	}
+	if (AdventureCheck())
+	{
 		return;
 	}
 	if (!RinoTextLoader)
@@ -47,19 +71,16 @@ void RandomTank(taskwk* p1)
 }
 void RandomBuyon(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!BuyonTextLoader)
@@ -89,19 +110,16 @@ void RandomBuyon(taskwk* p1)
 }
 void RandomUnidus(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!UnidusTextLoader)
@@ -133,19 +151,16 @@ void RandomUnidus(taskwk* p1)
 }
 void RandomAmebot(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!AmebotTextLoader)
@@ -175,19 +190,16 @@ void RandomAmebot(taskwk* p1)
 }
 void RandomPolice(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!PoliceTextLoader)
@@ -217,19 +229,16 @@ void RandomPolice(taskwk* p1)
 }
 void RandomSnake(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!SnakeTextLoader)
@@ -259,19 +268,16 @@ void RandomSnake(taskwk* p1)
 }
 void RandomRobo(taskwk* p1)//updated to task, untested 10/04/2021
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!RoboTextLoader)
@@ -302,19 +308,16 @@ void RandomRobo(taskwk* p1)//updated to task, untested 10/04/2021
 }
 void RandomLeon(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!LeonTextLoader)
@@ -344,19 +347,16 @@ void RandomLeon(taskwk* p1)
 }
 void RandomKiki(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!KikiTextLoader)
@@ -418,14 +418,12 @@ void RandomFallingSpikeBall(taskwk* p1)
 }
 void RandomSpinnerA(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!SpinnerTextLoader)
@@ -457,14 +455,12 @@ void RandomSpinnerA(taskwk* p1)
 }
 void RandomSpinnerB(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!SpinnerTextLoader)
@@ -473,11 +469,6 @@ void RandomSpinnerB(taskwk* p1)
 		LoadPVM("SUPI_SUPI", &SUPI_SUPI_TEXLIST);
 		SpinnerTextLoader = true;
 		TextLoaded = true;
-	}
-	if (CurrentLevel == LevelIDs_E101R)
-	{
-		NewEffect();
-		return;
 	}
 	int number = rand() % 2;
 	task* SpinnerB;
@@ -501,14 +492,12 @@ void RandomSpinnerB(taskwk* p1)
 }
 void RandomSpinnerC(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!SpinnerTextLoader)
@@ -540,17 +529,15 @@ void RandomSpinnerC(taskwk* p1)
 }
 void RandomSman(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
+		return;
+	}
+	if (AdventureCheck())
+	{
 		return;
 	}
 	if (CurrentCharacter == Characters_Gamma)
-	{
-		NewEffect();
-		return;
-	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
 	{
 		NewEffect();
 		return;
@@ -579,14 +566,12 @@ void RandomSman(taskwk* p1)
 }
 void RandomEGacha(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_E101R)
+	if (E101RCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!EGachaTextLoader)
@@ -619,14 +604,12 @@ void RandomEGacha(taskwk* p1)
 }
 void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this took 5 days to figure out. 
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_EggViper)
@@ -675,14 +658,12 @@ void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this
 }
 void RandomFireBreath(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_EggViper)
@@ -713,14 +694,12 @@ void RandomFireBreath(taskwk* p1)
 }
 void RandomCannonS1(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_EggViper)
@@ -751,14 +730,12 @@ void RandomCannonS1(taskwk* p1)
 }
 void RandomCannonS2(taskwk* p1)
 {
-	if (!EnemysEnabled)
+	if (!EnemyCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (GameMode == GameModes_Adventure_Field)//sadly i havent stopped enemys from crashing when in Hub worlds
+	if (AdventureCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_EggViper)

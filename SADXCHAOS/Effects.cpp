@@ -848,7 +848,6 @@ void DrunkCamera()
 	DrunkCamera_Timer = 275;
 	return;
 }
-
 void SideWaysCamera()
 {
 	if (!SideWaysCameraEnabled)
