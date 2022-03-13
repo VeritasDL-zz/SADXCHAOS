@@ -1,5 +1,6 @@
 #pragma once
 #include "Chaos.h"
+extern bool EggViperHandiCapCheck();
 void BigRock(taskwk* p1);
 void RandomFruit(taskwk* p1);
 void RandomHat(taskwk* p1);

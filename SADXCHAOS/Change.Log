@@ -218,6 +218,8 @@ More Clean Up (3/12/2022)
 Moved Big Fishing Check to its own function (3/12/2022)
 Well Moved back tons of shit into the functions i removed them from, (3/12/2022)
 Fixed AdventureCheck E101RCheck and EnemyCheck thanks to refrag for the help! (3/12/2022) 
+Fixed GammaCheck and EggViperCheck (3/12/2022)
+Fixed BigFishingCheck (3/12/2022)
 
 ---------TO-DO---------
 

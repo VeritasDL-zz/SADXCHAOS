@@ -30,6 +30,24 @@ bool AdventureCheck()
 	}
 	return false;
 }
+bool GammaCheck()
+{
+	if (CurrentCharacter == Characters_Gamma)
+	{
+		NewEffect();
+		return true;
+	}
+	return false;
+}
+bool EggViperCheck()
+{
+	if (CurrentLevel == LevelIDs_EggViper)
+	{
+		NewEffect();
+		return true;
+	}
+	return false;
+}
 void RandomTank(taskwk* p1)
 {
 	if (!EnemyCheck())
@@ -537,14 +555,12 @@ void RandomSman(taskwk* p1)
 	{
 		return;
 	}
-	if (CurrentCharacter == Characters_Gamma)
+	if (GammaCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_EggViper)
+	if (EggViperCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!SmanTextLoader)
@@ -612,14 +628,12 @@ void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this
 	{
 		return;
 	}
-	if (CurrentLevel == LevelIDs_EggViper)
+	if (EggViperCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!AirCraftTextLoader)
@@ -666,14 +680,12 @@ void RandomFireBreath(taskwk* p1)
 	{
 		return;
 	}
-	if (CurrentLevel == LevelIDs_EggViper)
+	if (EggViperCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!FireBreathTextLoader)
@@ -702,14 +714,12 @@ void RandomCannonS1(taskwk* p1)
 	{
 		return;
 	}
-	if (CurrentLevel == LevelIDs_EggViper)
+	if (EggViperCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!CannonS1TextLoader)
@@ -738,14 +748,12 @@ void RandomCannonS2(taskwk* p1)
 	{
 		return;
 	}
-	if (CurrentLevel == LevelIDs_EggViper)
+	if (EggViperCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!CannonS2TextLoader)

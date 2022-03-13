@@ -1,10 +1,34 @@
 #include "pch.h"
 #include "Chaos.h"
-void BigRock(taskwk* p1)
+bool GrabAbleObjects()
 {
 	if (!GrabAbleObjectsEnabled)
 	{
 		NewEffect();
+		return false;
+	}
+	return true;
+}
+bool EggViperHandiCapCheck()
+{
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return true;
+			}
+		}
+	}
+	return false;
+}
+void BigRock(taskwk* p1)
+{
+	if (!GrabAbleObjects())
+	{
 		return;
 	}
 	if (!BigRockTextLoader)
@@ -21,9 +45,8 @@ void BigRock(taskwk* p1)
 }
 void RandomFruit(taskwk* p1)
 {
-	if (!GrabAbleObjectsEnabled)
+	if (!GrabAbleObjects())
 	{
-		NewEffect();
 		return;
 	}
 	if (!ChaoFruitTextLoader)
@@ -47,9 +70,8 @@ void RandomFruit(taskwk* p1)
 }
 void RandomHat(taskwk* p1)
 {
-	if (!GrabAbleObjectsEnabled)
+	if (!GrabAbleObjects())
 	{
-		NewEffect();
 		return;
 	}
 	if (!ChaoHatTextLoader)
@@ -84,17 +106,9 @@ void RandomCheckPoint(taskwk* p1)
 }
 void RandomSpeedPad(taskwk* p1)
 {
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
 	int number = rand() % 2;
 	task* Speed;
@@ -132,9 +146,8 @@ void RandomFan(taskwk* p1)
 }
 void RandomBurgerMan(taskwk* p1)
 {
-	if (!GrabAbleObjectsEnabled)
+	if (!GrabAbleObjects())
 	{
-		NewEffect();
 		return;
 	}
 	if (!BugerManTextLoader)
@@ -151,9 +164,8 @@ void RandomBurgerMan(taskwk* p1)
 }
 void RandomKeyBlock(taskwk* p1)
 {
-	if (!GrabAbleObjectsEnabled)
+	if (!GrabAbleObjects())
 	{
-		NewEffect();
 		return;
 	}
 	if (!KeyBlockTextLoader)
@@ -176,17 +188,9 @@ void RandomSnowboard()
 		NewEffect();
 		return;
 	}
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
 	if (DebugEnabled)
 	{
@@ -251,17 +255,9 @@ void RandomSnowboard()
 }
 void RandomSpring(taskwk* p1)
 {
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
 	int number = rand() % 2;
 	task* Spring;
@@ -285,17 +281,9 @@ void RandomSpring(taskwk* p1)
 }
 void RandomSpikeBall(taskwk* p1)
 {
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
 	int number = rand() % 2;
 	task* spike;

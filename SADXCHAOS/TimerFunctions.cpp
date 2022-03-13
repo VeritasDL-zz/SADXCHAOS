@@ -326,7 +326,6 @@ void CustomCameraEffectsTimersCheck()
 		{
 			WriteData((int*)0x03B2C68C, (int)0x4000); //force camera sideways
 		}
-
 		SideWaysCamera_Timer--;//subtract timer
 	}
 	if (SideWaysCamera_Timer == 1 && SideWaysCamera_Timer != 0)

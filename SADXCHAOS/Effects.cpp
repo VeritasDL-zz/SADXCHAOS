@@ -69,6 +69,15 @@ void WalkThruWallsReset()
 	WriteData((int*)0x007887DD, (int)0x74C08500);
 	return;
 }
+bool BigFishingCheck()
+{
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return true;
+	}
+	return false;
+}
 player_parameter PhyData[38]  //credits to MainMemory For this data, https://github.com/MainMemory/SADXPhysicsSwapMod
 {
 	60,2,16,16,3,0.6,1.66,3,0.23,0.46,1.39,2.3,3.7,5.09,0.076,0.05,0.031,-0.06,-0.18,-0.17,-0.028,-0.008,-0.01,-0.4,-0.1,-0.6,-0.2825,0.3,4,10,0.08,7,5.4,
@@ -255,21 +264,12 @@ void RandomKillMomentum(playerwk* p1)
 }
 void FastAccel(playerwk* p1)
 {
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	FastAccel_Timer = 400;
@@ -284,21 +284,12 @@ void FastAccel(playerwk* p1)
 }
 void RandomVSpeed(playerwk* p1)
 {
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	playerpwp[0]->spd.y = playerpwp[0]->p.lim_v_spd;
@@ -307,21 +298,12 @@ void RandomVSpeed(playerwk* p1)
 }
 void RandomHSpeed(playerwk* p1)
 {
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	playerpwp[0]->spd.x = playerpwp[0]->p.lim_h_spd;
@@ -330,9 +312,8 @@ void RandomHSpeed(playerwk* p1)
 }
 void RandomHurt()
 {
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (Rings > 0)
@@ -405,22 +386,13 @@ void RandomDebug()
 		NewEffect(); //get new chaos effect because debug movement is enabled already
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
 	if (IssSowboarding == 1)//get new effect because user is on snowboard
 	{
@@ -458,21 +430,12 @@ void RandomDebug()
 }
 void RandomXGravity()
 {
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!GravityChangeEnabled)
@@ -486,21 +449,12 @@ void RandomXGravity()
 }
 void RandomYGravity()
 {
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!GravityChangeEnabled)
@@ -514,21 +468,12 @@ void RandomYGravity()
 }
 void RandomZGravity()
 {
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!GravityChangeEnabled)
@@ -542,9 +487,8 @@ void RandomZGravity()
 }
 void NoGravity()
 {
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (!GravityChangeEnabled)
@@ -604,17 +548,9 @@ void RandomDPadDownCheck()
 }
 void RandomNoClip()
 {
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
 	NoClip_Timer = 800;
 	WalkThruWallsNop();
@@ -634,9 +570,8 @@ void InputInvert()
 }
 void RandomRotate()
 {
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
 	int Rotaterand = rand() % 65535;
@@ -655,22 +590,13 @@ void RingAllergy()
 		NewEffect();//stops from getting ringallergy when already having it
 		return; 
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	if (BigFishingCheck())
 	{
-		NewEffect();
 		return;
 	}
-	if (EggViperHandyCapEanbled)
+	if (EggViperHandiCapCheck())
 	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
+		return;
 	}
 	RingCount = Rings;
 	RingAllergy_Timer = 250;
@@ -760,11 +686,10 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Big)
 		{
-			if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-			{
-				NewEffect();
-				return;
-			}
+	if (BigFishingCheck())
+	{
+		return;
+	}
 			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LifeRing)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LifeRing;
