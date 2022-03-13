@@ -1,12 +1,4 @@
 #include "pch.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
 std::unordered_map<LevelAndActIDs, std::vector<NJS_VECTOR>> customLocationsMap;
@@ -195,11 +187,7 @@ void RandomTeleport()
 		NewEffect();
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	NJS_VECTOR RandomTeleport = GetRandomCoordinates((LevelAndActIDs)(GetLevelAndAct()));
 	if (RandomTeleport.x == 0.0f && RandomTeleport.y == 0.0f && RandomTeleport.z == 0.0f)
 	{

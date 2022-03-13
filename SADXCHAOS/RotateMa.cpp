@@ -1,13 +1,4 @@
 #include "pch.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <vector>
-#include <IniFile.hpp>
 #include "Chaos.h"
 //Rotate Ma Balls - Ha Got em Again!
 //Credits to Speeps for all of this Code, Check out Her Github https://github.com/SPEEPSHighway Or Her Meme Maker Mod https://github.com/SPEEPSHighway/MemeMaker

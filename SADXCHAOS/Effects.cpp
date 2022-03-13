@@ -1,13 +1,4 @@
 #include "pch.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <vector>
-#include <IniFile.hpp>
 #include "Chaos.h"
 int RNG = 0;
 int RNG2 = 0;
@@ -49,6 +40,15 @@ void EggViperHandiCapCheck()
 				return;
 			}
 		}
+	}
+	return;
+}
+void BigFishingCheck()
+{
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
 	}
 	return;
 }
@@ -281,11 +281,7 @@ void RandomKillMomentum(playerwk* p1)
 void FastAccel(playerwk* p1)
 {
 	EggViperHandiCapCheck();
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	FastAccel_Timer = 400;
 	OldMaxAccel = playerpwp[0]->p.max_x_spd;
 	OldAirAccel = playerpwp[0]->p.air_accel;
@@ -299,11 +295,7 @@ void FastAccel(playerwk* p1)
 void RandomVSpeed(playerwk* p1)
 {
 	EggViperHandiCapCheck();
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	playerpwp[0]->spd.y = playerpwp[0]->p.lim_v_spd;
 	strcpy_s(LastEffect, 128, "Random V Speed");
 	return;
@@ -311,22 +303,14 @@ void RandomVSpeed(playerwk* p1)
 void RandomHSpeed(playerwk* p1)
 {
 	EggViperHandiCapCheck();
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	playerpwp[0]->spd.x = playerpwp[0]->p.lim_h_spd;
 	strcpy_s(LastEffect, 128, "Random H Speed");
 	return;
 }
 void RandomHurt()
 {
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	if (Rings > 0)
 	{
 		HurtCharacter(0);
@@ -397,11 +381,7 @@ void RandomDebug()
 		NewEffect(); //get new chaos effect because debug movement is enabled already
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	EggViperHandiCapCheck();
 	if (IssSowboarding == 1)//get new effect because user is on snowboard
 	{
@@ -440,11 +420,7 @@ void RandomDebug()
 void RandomXGravity()
 {
 	EggViperHandiCapCheck();
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	if (!GravityChangeEnabled)
 	{
 		NewEffect();
@@ -457,11 +433,7 @@ void RandomXGravity()
 void RandomYGravity()
 {
 	EggViperHandiCapCheck();
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	if (!GravityChangeEnabled)
 	{
 		NewEffect();
@@ -474,11 +446,7 @@ void RandomYGravity()
 void RandomZGravity()
 {
 	EggViperHandiCapCheck();
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	if (!GravityChangeEnabled)
 	{
 		NewEffect();
@@ -490,11 +458,7 @@ void RandomZGravity()
 }
 void NoGravity()
 {
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	if (!GravityChangeEnabled)
 	{
 		NewEffect();
@@ -571,11 +535,7 @@ void InputInvert()
 }
 void RandomRotate()
 {
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	int Rotaterand = rand() % 65535;
 	RotatePlayer(0, Rotaterand);
 	strcpy_s(LastEffect, 128, "Random Rotation");
@@ -587,24 +547,17 @@ void RingAllergy()
 		NewEffect();
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
 	if (RingAllergy_Timer != 0)
 	{
 		NewEffect();//stops from getting ringallergy when already having it
 		return; 
 	}
+	BigFishingCheck();
 	EggViperHandiCapCheck();
 	RingCount = Rings;
 	RingAllergy_Timer = 250;
 	strcpy_s(LastEffect, 128, "Ring Allergy");
 	return;
-}
-void TeleportRandomTask()
-{
 }
 void IncreaseCutsceneSkipTime()
 {
@@ -623,9 +576,8 @@ void IncreaseCutsceneSkipTime()
 }
 void RemovePowerUp()
 {
-	RNG = rand() % 3; //retail value
+	RNG = rand() % 3;
 	RNG2 = rand() % 3;
-	//RNG = 0; //DEBUG TESTING
 	if (RNG == 0)
 	{
 		if (CurrentCharacter == Characters_Sonic)
@@ -690,11 +642,7 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Big)
 		{
-			if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-			{
-				NewEffect();
-				return;
-			}
+			BigFishingCheck();
 			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LifeRing)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LifeRing;

@@ -1,12 +1,5 @@
 #include "pch.h"
-#include <stdlib.h>
-#include <stdio.h>
 #include <time.h>
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <vector>
 #include <IniFile.hpp>
 #include "Chaos.h"
 int EffectMax = 0;

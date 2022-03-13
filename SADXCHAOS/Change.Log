@@ -213,11 +213,12 @@ Added SideWays Camera and config for it (3/12/2022)
 Moved more stuff out of Chaos.cpp (3/12/2022)
 Added Big Fishing check to a few missing functions (3/12/2022)
 Moved even more stuff out of Chaos.cpp (3/12/2022)
-
-
+Added Sideways camera to Chaos Array (3/12/2022)
+More Clean Up (3/12/2022)
+Moved Big Fishing Check to its own function (3/12/2022)
 
 ---------TO-DO---------
-Add Sideways camera to Chaos Array
+
  Test Stuff
  test new stuff fully 
  Log Known Crashes
@@ -225,18 +226,14 @@ Add Sideways camera to Chaos Array
  
  Add More Custom Tikal Hints
  Add More Random Teleport Locations
-
- Need to fix or scrap Big Car //might scrap too 
  Chao Crash? 0x33A1060 //fixed sorta i think (3/6/2022)
- 
  Iceball Crash, Sonic EC 0x0044CE56 didnt have debug crash log enabled 
  E_Robo texture Crash? Sonic EC collected 130 emblem 0x94A318
  emblem texture crash? sonic SpeedHighway 0x9740DC
  texture issue? 0x0078CF24  debug crash output 0091CD18 `Sonic_LSShoeIndices`
  snowboard texture crash? 91CBD4 sonic speedhighway
-
-Todo 
-Kill momentum doesn't always work?
-Beat has bad texture in redmountain? 
-Gamma hs, ham crashed 7 times, in a row
-Seems to be related to gamma locking onto enemys he was never intended to? idk
+ Todo 
+ Kill momentum doesn't always work?
+ Beat has bad texture
+ Gamma hs, ham crashed 7 times, in a row
+ Seems to be related to gamma locking onto enemys he was never intended to? idk

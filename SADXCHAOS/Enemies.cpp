@@ -1,13 +1,4 @@
 #include "pch.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-#include <vector>
-#include <IniFile.hpp>
 #include "Chaos.h"
 #define LengthOfArray(x) \
 	((int)(((sizeof(x) / sizeof(x[0]))) / \
@@ -643,11 +634,7 @@ void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this
 		NewEffect();
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	if (!AirCraftTextLoader)
 	{
 		CheckAnimalTexture();
@@ -699,11 +686,7 @@ void RandomFireBreath(taskwk* p1)
 		NewEffect();
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	if (!FireBreathTextLoader)
 	{
 		CheckAnimalTexture();
@@ -737,11 +720,7 @@ void RandomCannonS1(taskwk* p1)
 		NewEffect();
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	if (!CannonS1TextLoader)
 	{
 		CheckAnimalTexture();
@@ -775,11 +754,7 @@ void RandomCannonS2(taskwk* p1)
 		NewEffect();
 		return;
 	}
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
+	BigFishingCheck();
 	if (!CannonS2TextLoader)
 	{
 		CheckAnimalTexture();
