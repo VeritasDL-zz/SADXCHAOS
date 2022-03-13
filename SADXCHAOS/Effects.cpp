@@ -27,31 +27,6 @@ void DisablePausee()
 	DisablePause_Timer = 420;
 	strcpy_s(LastEffect, 128, "Pause Disabled");
 }
-void EggViperHandiCapCheck()
-{
-	if (EggViperHandyCapEanbled)
-	{
-		if (CurrentLevel == LevelIDs_EggViper)
-		{
-			int EVHandyCap = rand() % 5;
-			if (EVHandyCap != 0)
-			{
-				NewEffect();
-				return;
-			}
-		}
-	}
-	return;
-}
-void BigFishingCheck()
-{
-	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
-	{
-		NewEffect();
-		return;
-	}
-	return;
-}
 void CameraNOP()
 {
 	WriteData<7>((int*)0x0046261B, 0x90); //nops ASM
@@ -280,8 +255,23 @@ void RandomKillMomentum(playerwk* p1)
 }
 void FastAccel(playerwk* p1)
 {
-	EggViperHandiCapCheck();
-	BigFishingCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	FastAccel_Timer = 400;
 	OldMaxAccel = playerpwp[0]->p.max_x_spd;
 	OldAirAccel = playerpwp[0]->p.air_accel;
@@ -294,23 +284,57 @@ void FastAccel(playerwk* p1)
 }
 void RandomVSpeed(playerwk* p1)
 {
-	EggViperHandiCapCheck();
-	BigFishingCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	playerpwp[0]->spd.y = playerpwp[0]->p.lim_v_spd;
 	strcpy_s(LastEffect, 128, "Random V Speed");
 	return;
 }
 void RandomHSpeed(playerwk* p1)
 {
-	EggViperHandiCapCheck();
-	BigFishingCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	playerpwp[0]->spd.x = playerpwp[0]->p.lim_h_spd;
 	strcpy_s(LastEffect, 128, "Random H Speed");
 	return;
 }
 void RandomHurt()
 {
-	BigFishingCheck();
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	if (Rings > 0)
 	{
 		HurtCharacter(0);
@@ -381,8 +405,23 @@ void RandomDebug()
 		NewEffect(); //get new chaos effect because debug movement is enabled already
 		return;
 	}
-	BigFishingCheck();
-	EggViperHandiCapCheck();
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
 	if (IssSowboarding == 1)//get new effect because user is on snowboard
 	{
 		NewEffect();
@@ -419,8 +458,23 @@ void RandomDebug()
 }
 void RandomXGravity()
 {
-	EggViperHandiCapCheck();
-	BigFishingCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	if (!GravityChangeEnabled)
 	{
 		NewEffect();
@@ -432,8 +486,23 @@ void RandomXGravity()
 }
 void RandomYGravity()
 {
-	EggViperHandiCapCheck();
-	BigFishingCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	if (!GravityChangeEnabled)
 	{
 		NewEffect();
@@ -445,8 +514,23 @@ void RandomYGravity()
 }
 void RandomZGravity()
 {
-	EggViperHandiCapCheck();
-	BigFishingCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	if (!GravityChangeEnabled)
 	{
 		NewEffect();
@@ -458,7 +542,11 @@ void RandomZGravity()
 }
 void NoGravity()
 {
-	BigFishingCheck();
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	if (!GravityChangeEnabled)
 	{
 		NewEffect();
@@ -516,7 +604,18 @@ void RandomDPadDownCheck()
 }
 void RandomNoClip()
 {
-	EggViperHandiCapCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
 	NoClip_Timer = 800;
 	WalkThruWallsNop();
 	strcpy_s(LastEffect, 128, "Walk Thru Walls Enabled");
@@ -535,7 +634,11 @@ void InputInvert()
 }
 void RandomRotate()
 {
-	BigFishingCheck();
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
 	int Rotaterand = rand() % 65535;
 	RotatePlayer(0, Rotaterand);
 	strcpy_s(LastEffect, 128, "Random Rotation");
@@ -552,8 +655,23 @@ void RingAllergy()
 		NewEffect();//stops from getting ringallergy when already having it
 		return; 
 	}
-	BigFishingCheck();
-	EggViperHandiCapCheck();
+	if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+	{
+		NewEffect();
+		return;
+	}
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
 	RingCount = Rings;
 	RingAllergy_Timer = 250;
 	strcpy_s(LastEffect, 128, "Ring Allergy");
@@ -642,7 +760,11 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Big)
 		{
-			BigFishingCheck();
+			if (CurrentCharacter == Characters_Big && Big_Fish_Ptr != 0x00000000)
+			{
+				NewEffect();
+				return;
+			}
 			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LifeRing)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LifeRing;
@@ -675,15 +797,6 @@ void RandomCollisionSize()
 	strcpy_s(LastEffect, 128, "Random Collision Size");
 	return;
 }
-void CheckCameraEffects()
-{
-	if (DrunkCamera_Timer != 0 && CameraSpin_Timer != 0 && CameraFlip_Timer != 0 && SideWaysCamera_Timer != 0)
-	{
-		NewEffect();
-		return;
-	}
-	return;
-}
 void FlipCamera()
 {
 	if (!UpsideDownCameraEnabled)
@@ -691,7 +804,11 @@ void FlipCamera()
 		NewEffect();
 		return;
 	}
-	CheckCameraEffects();
+	if (DrunkCamera_Timer != 0 && CameraSpin_Timer != 0 && CameraFlip_Timer != 0 && SideWaysCamera_Timer != 0)
+	{
+		NewEffect();
+		return;
+	}
 	CameraNOP();
 	CameraFlip_Timer = 250;
 	strcpy_s(LastEffect, 128, "Flipped Camera");
@@ -704,7 +821,11 @@ void SpinCamera()
 		NewEffect();
 		return;
 	}
-	CheckCameraEffects();
+	if (DrunkCamera_Timer != 0 && CameraSpin_Timer != 0 && CameraFlip_Timer != 0 && SideWaysCamera_Timer != 0)
+	{
+		NewEffect();
+		return;
+	}
 	CameraNOP();
 	strcpy_s(LastEffect, 128, "Camera Spin");
 	CameraSpin_Timer = 240;
@@ -717,7 +838,11 @@ void DrunkCamera()
 		NewEffect();
 		return;
 	}
-	CheckCameraEffects();
+	if (DrunkCamera_Timer != 0 && CameraSpin_Timer != 0 && CameraFlip_Timer != 0 && SideWaysCamera_Timer != 0)
+	{
+		NewEffect();
+		return;
+	}
 	CameraNOP();
 	strcpy_s(LastEffect, 128, "Drunk");
 	DrunkCamera_Timer = 275;
@@ -731,7 +856,11 @@ void SideWaysCamera()
 		NewEffect();
 		return;
 	}
-	CheckCameraEffects();
+	if (DrunkCamera_Timer != 0 && CameraSpin_Timer != 0 && CameraFlip_Timer != 0 && SideWaysCamera_Timer != 0)
+	{
+		NewEffect();
+		return;
+	}
 	CameraNOP();
 	strcpy_s(LastEffect, 128, "SideWays Camera");
 	CameraSide = rand() % 2;

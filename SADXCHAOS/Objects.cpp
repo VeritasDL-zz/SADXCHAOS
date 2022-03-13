@@ -1,17 +1,12 @@
 #include "pch.h"
 #include "Chaos.h"
-void GrabObjectEnableCheck()
+void BigRock(taskwk* p1)
 {
 	if (!GrabAbleObjectsEnabled)
 	{
 		NewEffect();
 		return;
 	}
-	return;
-}
-void BigRock(taskwk* p1)
-{
-	GrabObjectEnableCheck();
 	if (!BigRockTextLoader)
 	{
 		LoadPVM("OBJ_ICECAP", &OBJ_ICECAP_TEXLIST);
@@ -26,7 +21,11 @@ void BigRock(taskwk* p1)
 }
 void RandomFruit(taskwk* p1)
 {
-	GrabObjectEnableCheck();
+	if (!GrabAbleObjectsEnabled)
+	{
+		NewEffect();
+		return;
+	}
 	if (!ChaoFruitTextLoader)
 	{
 		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
@@ -48,7 +47,11 @@ void RandomFruit(taskwk* p1)
 }
 void RandomHat(taskwk* p1)
 {
-	GrabObjectEnableCheck();
+	if (!GrabAbleObjectsEnabled)
+	{
+		NewEffect();
+		return;
+	}
 	if (!ChaoHatTextLoader)
 	{
 		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
@@ -81,7 +84,18 @@ void RandomCheckPoint(taskwk* p1)
 }
 void RandomSpeedPad(taskwk* p1)
 {
-	EggViperHandiCapCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
 	int number = rand() % 2;
 	task* Speed;
 	Speed = (task*)LoadObject((LoadObj)3, 3, DashPanel_Main);
@@ -118,7 +132,11 @@ void RandomFan(taskwk* p1)
 }
 void RandomBurgerMan(taskwk* p1)
 {
-	GrabObjectEnableCheck();
+	if (!GrabAbleObjectsEnabled)
+	{
+		NewEffect();
+		return;
+	}
 	if (!BugerManTextLoader)
 	{
 		LoadPVM("MI_3DASU", &mi_3dasu_TEXLIST);
@@ -133,7 +151,11 @@ void RandomBurgerMan(taskwk* p1)
 }
 void RandomKeyBlock(taskwk* p1)
 {
-	GrabObjectEnableCheck();
+	if (!GrabAbleObjectsEnabled)
+	{
+		NewEffect();
+		return;
+	}
 	if (!KeyBlockTextLoader)
 	{
 		LoadPVM("HOTSHELTER2", &HOTSHELTER2_TEXLIST);
@@ -154,7 +176,18 @@ void RandomSnowboard()
 		NewEffect();
 		return;
 	}
-	EggViperHandiCapCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
 	if (DebugEnabled)
 	{
 		NewEffect();
@@ -218,7 +251,18 @@ void RandomSnowboard()
 }
 void RandomSpring(taskwk* p1)
 {
-	EggViperHandiCapCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
 	int number = rand() % 2;
 	task* Spring;
 	Spring = (task*)LoadObject((LoadObj)2, 3, SpringB_Main);
@@ -241,7 +285,18 @@ void RandomSpring(taskwk* p1)
 }
 void RandomSpikeBall(taskwk* p1)
 {
-	EggViperHandiCapCheck();
+	if (EggViperHandyCapEanbled)
+	{
+		if (CurrentLevel == LevelIDs_EggViper)
+		{
+			int EVHandyCap = rand() % 5;
+			if (EVHandyCap != 0)
+			{
+				NewEffect();
+				return;
+			}
+		}
+	}
 	int number = rand() % 2;
 	task* spike;
 	spike = (task*)LoadObject((LoadObj)6, 3, SwingSpikeBall_Load);

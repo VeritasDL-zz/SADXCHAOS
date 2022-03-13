@@ -216,6 +216,7 @@ Moved even more stuff out of Chaos.cpp (3/12/2022)
 Added Sideways camera to Chaos Array (3/12/2022)
 More Clean Up (3/12/2022)
 Moved Big Fishing Check to its own function (3/12/2022)
+Well Moved back tons of shit into the functions i removed them from, (3/12/2022)
 
 ---------TO-DO---------
 
