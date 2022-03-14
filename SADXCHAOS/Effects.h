@@ -1,6 +1,5 @@
 #pragma once
 #include "SADXStructs.h"
-#include "Chaos.h"
 extern float OldMaxAccel;
 extern float OldAirAccel;
 extern float OldHangTime;

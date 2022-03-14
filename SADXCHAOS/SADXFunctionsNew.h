@@ -740,4 +740,7 @@ FunctionPointer(SEQ_SECTIONTBL*, SeqGetSectionList, (int playerno), 0x44EAF0); /
 FunctionPointer(void, SeqSetTime, (Sint8 time), 0x412C00); // Set time of dat
 FunctionPointer(Sint8, SeqGetTime, (), 0x412C10); // Get time of day
 
+
+
+
 #endif /* SADXMODLOADER_SADXFUNCTIONSNEW_H */

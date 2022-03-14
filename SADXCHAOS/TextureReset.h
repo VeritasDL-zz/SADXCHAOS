@@ -1,5 +1,4 @@
 #pragma once
-#include "Chaos.h"
 extern bool SpinnerTextLoader;
 extern bool LeonTextLoader;
 extern bool RinoTextLoader;

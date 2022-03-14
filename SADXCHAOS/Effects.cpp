@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "Chaos.h"
 int RNG = 0;
 int RNG2 = 0;
 int DpadDown = 0;
@@ -686,10 +685,10 @@ void RemovePowerUp()
 		}
 		if (CurrentCharacter == Characters_Big)
 		{
-	if (BigFishingCheck())
-	{
-		return;
-	}
+			if (BigFishingCheck())
+			{
+				return;
+			}
 			if (RNG2 == 0 && CharObj2Ptrs[0]->Upgrades & Upgrades_LifeRing)
 			{
 				CharObj2Ptrs[0]->Upgrades &= ~Upgrades_LifeRing;

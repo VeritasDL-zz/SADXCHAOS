@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "Chaos.h"
 #define LengthOfArray(x) \
 	((int)(((sizeof(x) / sizeof(x[0]))) / \
 	(size_t)(!(sizeof(x) % sizeof(x[0])))))

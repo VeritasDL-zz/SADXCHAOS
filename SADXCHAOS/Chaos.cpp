@@ -19,7 +19,7 @@ extern "C"
 	{
 		Init_Fixes(path, helperFunctions);
 		init_FreeMovements();
-		strcpy_s(LastEffect, 128, "Chaos Edition 2.0 - Beta");
+		strcpy_s(LastEffect, 128, "Chaos Edition 2.0b2");
 	}
 	ChaosS ChaosArray[116]
 	{
@@ -159,7 +159,6 @@ extern "C"
 		 //Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomSpeedPad(0);
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

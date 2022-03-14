@@ -1,7 +1,6 @@
 #include "pch.h"
 #include <time.h>
 #include <IniFile.hpp>
-#include "Chaos.h"
 int EffectMax = 0;
 bool DebugToScreen = false;
 bool TeleportEnabled = true;

@@ -1,5 +1,4 @@
 #pragma once
-#include "Chaos.h"
 extern bool EggViperHandiCapCheck();
 void BigRock(taskwk* p1);
 void RandomFruit(taskwk* p1);
@@ -14,4 +13,4 @@ void RandomSpikeBall(taskwk* p1);
 void RandomEmblem(taskwk* p1);
 void RandomFan(taskwk* p1);
 void RandomBarrel(taskwk* p1);
-void GrabObjectEnableCheck();
+bool GrabAbleObjects();
