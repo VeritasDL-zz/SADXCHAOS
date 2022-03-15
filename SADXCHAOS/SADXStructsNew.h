@@ -1596,6 +1596,15 @@ struct stcAnim
 	char s8Frame;
 };
 
+struct RotaryEmeraldWork
+{
+	task* eme_task_p[7];
+	NJS_POINT3 eme_pos[7];
+	NJS_POINT3 eme_spd[7];
+	int eme_theta[7];
+	int base_theta;
+};
+
 #pragma pack(pop)
 
 #endif /* SADXMODLOADER_SADXSTRUCTSNEW_H */

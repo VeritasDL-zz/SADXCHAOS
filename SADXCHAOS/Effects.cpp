@@ -790,7 +790,6 @@ void SideWaysCamera()
 	SideWaysCamera_Timer = 240;
 	return;
 }
-
 void Set_Sonic_Ice()
 {
 	if (CurrentCharacter != Characters_Sonic && CurrentCharacter != Characters_Knuckles)
@@ -814,7 +813,6 @@ void EmeraldShardMa()
 	LoadPVM("Obj_ruin", &OBJ_RUIN_TEXLIST); //test for shard texture loading or not
 	EmeraldShard_Create(20);
 	WriteData<4>((int*)0x3C851D0, 0x00); //3C851D0 needs to be 0 to spawn more
-
 }
 void RandomKnuxRingSpring(taskwk* p1)
 {
@@ -828,4 +826,9 @@ void RandomKnuxRingSpring(taskwk* p1)
 	KnuxRingSpring = (task*)LoadObject((LoadObj)2, 6, KnuEffectRingSpring);
 	KnuxRingSpring->twp->pos = playertwp[0]->pos;
 	strcpy_s(LastEffect, 128, "Dug Up Rings");
+}
+void RandomRingLine()
+{
+	
+	CreateLineRing(&playertwp[0]->pos, playertwp[0], 10);
 }

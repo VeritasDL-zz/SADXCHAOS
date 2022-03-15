@@ -37,6 +37,7 @@ extern bool CannonS2TextLoader;
 extern bool KnuxEffTextLoader;
 extern bool IceTextLoader;
 extern bool BarrelTextLoader;
+extern bool BurgerSpinTextLoader;
 extern bool WriteOnce;
 extern int FruitNumb;
 extern int HatNumb;

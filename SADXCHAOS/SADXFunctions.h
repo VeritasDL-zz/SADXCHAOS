@@ -3006,6 +3006,7 @@ DataPointer(NJS_MOTION**, SS_PEOPLE_MOTIONS, 0x38F6EA4);
 FunctionPointer(void, SetSonicIce, (int a1), 0x4A2550);
 FunctionPointer(void, EmeraldShard_Create, (int num), 0x6F53B0);
 ObjectFunc(KnuEffectRingSpring, 0x4C1FC0);
+FunctionPointer(void, CreateLineRing, (NJS_POINT3 *pos, taskwk *twp, int num), 0x79B140);
 
 // Bool __usercall@<eax>(NJS_TEXLIST *a1@<eax>)
 static const void *const VerifyTexListPtr = (void*)0x403250;

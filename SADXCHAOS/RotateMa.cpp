@@ -4,15 +4,16 @@
 //Credits to Speeps for all of this Code, Check out Her Github https://github.com/SPEEPSHighway Or Her Meme Maker Mod https://github.com/SPEEPSHighway/MemeMaker
 int burgerManSpawned = 0;
 int TestSpawned = 0;
-struct RotaryEmeraldWork
-{
-	task* eme_task_p[7];
-	NJS_POINT3 eme_pos[7];
-	NJS_POINT3 eme_spd[7];
-	int eme_theta[7];
-	int base_theta;
-};
+RotaryEmeraldWork* rEmeWk;
 task* g_RotaryEmerald_p;
+task* BURGER1;
+task* BURGER2;
+task* BURGER3;
+task* BURGER4;
+task* BURGER5;
+task* BURGER6;
+task* BURGER7;
+NJS_ACTION burgerRing{};
 float g_RotaryCircleR = 50.0f;
 const int g_EmeraldDTheta[7] = { 0, 0x2492, 0x4924, 0x6DB6, 0x9249, 0xB6DB, 0xDB6D };
 int g_EmeraldRotSpd = 0x56;
@@ -94,19 +95,24 @@ void __cdecl destRotaryEmeraldTask(task* tp)
 	for (int i = 0; i < 7; i++)
 	{
 		effect_delete(i);
+		//FreeMemory(BURGER[i]);
 	}
 	if (rEmeWk)
 	{
 		FreeMemory(rEmeWk);
+		
 	}
 }
 void __cdecl deleteRotaryEmeraldTask()
 {
-	RotaryEmeraldWork* rEmeWk;
 	if (g_RotaryEmerald_p)
 	{
+		if (g_RotaryEmerald_p->twp == 0x0)
+		{
+			return;
+		}
 		rEmeWk = (RotaryEmeraldWork*)g_RotaryEmerald_p->twp->value.ptr;
-		for (int i = 0; i < 7; i++) 
+		for (int i = 0; i < 6; i++) 
 		{
 			if (rEmeWk->eme_task_p[i])
 			{
@@ -123,9 +129,9 @@ void __cdecl initRotaryEmeraldTask(task* tp)
 	tp->disp = 0;
 	tp->dest = destRotaryEmeraldTask;
 }
+
 void __cdecl createRotaryEmeraldTask(float pos_x, float pos_y, float pos_z, task** eme_task_p)
 {
-	RotaryEmeraldWork* rEmeWk;
 	taskwk* twp;
 	g_RotaryEmerald_p = CreateElementalTask(2, 5, initRotaryEmeraldTask);
 	rEmeWk = (RotaryEmeraldWork*)AllocateMemory(0xE4);
@@ -161,41 +167,61 @@ void __cdecl CreateRotaryEmerald(float pos_x, float pos_y, float pos_z, float r,
 }
 void BurgerManSpin()
 {
-	LoadPVM("SS_PEOPLE", ADV00_TEXLISTS[6]);
-	task* BURGER[7]{};
-	NJS_ACTION burgerRing;
-	switch (burgerManSpawned) {
-	case 0:
-		for (int i = 0; i < 7; i++) 
-		{
-			EV_CreateObject(&BURGER[i], playertwp[0]->pos.x + (i * 10.0f), playertwp[0]->pos.y + 10.0f, playertwp[0]->pos.z, 0, 0, 0);
-			EV_SetMode(BURGER[i], 0);
-			burgerRing.object = MODEL_SS_PEOPLE_OBJECTS[12];
-			burgerRing.motion = SS_PEOPLE_MOTIONS[19];
-			EV_SetAction((task*)BURGER[i], &burgerRing, ADV00_TEXLISTS[6], 0.0f, 1, 0);
-			CreateRotaryEmerald(playertwp[0]->pos.x, playertwp[0]->pos.y + 10.0f, playertwp[0]->pos.z, 10.0f, 800, BURGER[0], BURGER[1], BURGER[2], BURGER[3], BURGER[4], BURGER[5], BURGER[6]);
-			//SetEffectRotaryEmerald(1, &ev_effect_list19, 0.5, 1.0, 1.0, 0.0, 0.0); //Used for the Colored Orbs
-			//SetEffectRotaryEmerald(2, &ev_effect_list19, 0.5, 1.0, 0.0, 1.0, 0.0); //Used for the Colored Orbs
-			//SetEffectRotaryEmerald(3, &ev_effect_list19, 0.5, 1.0, 1.0, 1.0, 1.0); //Used for the Colored Orbs
-			//SetEffectRotaryEmerald(4, &ev_effect_list19, 0.5, 1.0, 1.0, 1.0, 0.0); //Used for the Colored Orbs
-			//SetEffectRotaryEmerald(5, &ev_effect_list19, 0.5, 1.0, 1.0, 0.0, 1.0); //Used for the Colored Orbs
-			//SetEffectRotaryEmerald(6, &ev_effect_list19, 0.5, 1.0, 0.0, 1.0, 1.0); //Used for the Colored Orbs
-			//SetEffectRotaryEmerald(7, &ev_effect_list19, 0.5, 1.0, 0.0, 0.0, 1.0); //Used for the Colored Orbs
-		}
+	if (!BurgerSpinTextLoader)
+	{
+		LoadPVM("SS_PEOPLE", ADV00_TEXLISTS[6]);
+		BurgerSpinTextLoader = true;
+	}
+	if (burgerManSpawned == 0)
+	{
+		burgerRing.object = MODEL_SS_PEOPLE_OBJECTS[12];
+		burgerRing.motion = SS_PEOPLE_MOTIONS[19];
+		EV_CreateObject(&BURGER1,playertwp[0]->pos.x + 10.0f,playertwp[0]->pos.y + 10.0f,playertwp[0]->pos.z,0, 0, 0);
+		EV_CreateObject(&BURGER2,playertwp[0]->pos.x + 10.0f,playertwp[0]->pos.y + 10.0f,playertwp[0]->pos.z,0, 0, 0);
+		EV_CreateObject(&BURGER3,playertwp[0]->pos.x + 10.0f,playertwp[0]->pos.y + 10.0f,playertwp[0]->pos.z,0, 0, 0);
+		EV_CreateObject(&BURGER4,playertwp[0]->pos.x + 10.0f,playertwp[0]->pos.y + 10.0f,playertwp[0]->pos.z,0, 0, 0);
+		EV_CreateObject(&BURGER5,playertwp[0]->pos.x + 10.0f,playertwp[0]->pos.y + 10.0f,playertwp[0]->pos.z,0, 0, 0);
+		EV_CreateObject(&BURGER6,playertwp[0]->pos.x + 10.0f,playertwp[0]->pos.y + 10.0f,playertwp[0]->pos.z,0, 0, 0);
+		EV_CreateObject(&BURGER7,playertwp[0]->pos.x + 10.0f,playertwp[0]->pos.y + 10.0f,playertwp[0]->pos.z,0, 0, 0);
+		EV_SetMode(BURGER1, 0);
+		EV_SetMode(BURGER2, 0);
+		EV_SetMode(BURGER3, 0);
+		EV_SetMode(BURGER4, 0);
+		EV_SetMode(BURGER5, 0);
+		EV_SetMode(BURGER6, 0);
+		EV_SetMode(BURGER7, 0);
+		EV_SetAction((task*)BURGER1, &burgerRing, ADV00_TEXLISTS[6], 0.0f, 1, 0);
+		EV_SetAction((task*)BURGER2, &burgerRing, ADV00_TEXLISTS[6], 0.0f, 1, 0);
+		EV_SetAction((task*)BURGER3, &burgerRing, ADV00_TEXLISTS[6], 0.0f, 1, 0);
+		EV_SetAction((task*)BURGER4, &burgerRing, ADV00_TEXLISTS[6], 0.0f, 1, 0);
+		EV_SetAction((task*)BURGER5, &burgerRing, ADV00_TEXLISTS[6], 0.0f, 1, 0);
+		EV_SetAction((task*)BURGER6, &burgerRing, ADV00_TEXLISTS[6], 0.0f, 1, 0);
+		EV_SetAction((task*)BURGER7, &burgerRing, ADV00_TEXLISTS[6], 0.0f, 1, 0);
+		CreateRotaryEmerald(PlayerPtrs[0]->Data1->Position.x, PlayerPtrs[0]->Data1->Position.y + 10.0f, PlayerPtrs[0]->Data1->Position.z, 10.0f, 800,BURGER1,BURGER2,BURGER3,BURGER4,BURGER5,BURGER6,BURGER7);
+		//SetEffectRotaryEmerald(1, &ev_effect_list19, 0.5, 1.0, 1.0, 0.0, 0.0); //Used for the Colored Orbs
+		//SetEffectRotaryEmerald(2, &ev_effect_list19, 0.5, 1.0, 0.0, 1.0, 0.0); //Used for the Colored Orbs
+		//SetEffectRotaryEmerald(3, &ev_effect_list19, 0.5, 1.0, 1.0, 1.0, 1.0); //Used for the Colored Orbs
+		//SetEffectRotaryEmerald(4, &ev_effect_list19, 0.5, 1.0, 1.0, 1.0, 0.0); //Used for the Colored Orbs
+		//SetEffectRotaryEmerald(5, &ev_effect_list19, 0.5, 1.0, 1.0, 0.0, 1.0); //Used for the Colored Orbs
+		//SetEffectRotaryEmerald(6, &ev_effect_list19, 0.5, 1.0, 0.0, 1.0, 1.0); //Used for the Colored Orbs
+		//SetEffectRotaryEmerald(7, &ev_effect_list19, 0.5, 1.0, 0.0, 0.0, 1.0); //Used for the Colored Orbs
 		burgerManSpawned = 1;
-		break;
-	case 1:
-		SplashRotaryEmerald(100.0f);
-		burgerManSpawned = 2;
-		break;
-	case 2:
-		deleteRotaryEmeraldTask();
-		burgerManSpawned = 0;
-		break;
-	default:
-		break;
+		TextLoaded = true;
 	}
 	strcpy_s(LastEffect, 128, "Burger Man Ring");
+	BurgerSpin_Timer = 420; //temp.walker need to test.
+}
+void BurgerManSpinDelete()
+{
+	deleteRotaryEmeraldTask();
+	EV_FreeObject(&BURGER1);
+	EV_FreeObject(&BURGER2);
+	EV_FreeObject(&BURGER3);
+	EV_FreeObject(&BURGER4);
+	EV_FreeObject(&BURGER5);
+	EV_FreeObject(&BURGER6);
+	EV_FreeObject(&BURGER7);
+	burgerManSpawned = 0;
 }
 void TestSpin()
 {

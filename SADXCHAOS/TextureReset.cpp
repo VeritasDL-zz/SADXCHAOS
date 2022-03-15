@@ -30,6 +30,7 @@ bool CannonS1TextLoader = false;
 bool CannonS2TextLoader = false;
 bool KnuxEffTextLoader = false;
 bool BarrelTextLoader = false;
+bool BurgerSpinTextLoader = false;
 bool TextLoaded = false;
 bool WriteOnce = false;
 int FruitNumb = 0;
@@ -73,7 +74,22 @@ void ResetTextureBools()
 	WriteOnce = false;
 	HatNumb = 0;
 	FruitNumb = 0;
-	burgerManSpawned = 0;
+	if (BurgerSpinTextLoader && burgerManSpawned != 0)
+	{
+		deleteRotaryEmeraldTask();
+		burgerManSpawned = 0;
+	}
+	BurgerSpinTextLoader = false;
+	deleteRotaryEmeraldTask();
+	EV_FreeObject(&BURGER1);
+	EV_FreeObject(&BURGER2);
+	EV_FreeObject(&BURGER3);
+	EV_FreeObject(&BURGER4);
+	EV_FreeObject(&BURGER5);
+	EV_FreeObject(&BURGER6);
+	EV_FreeObject(&BURGER7);
 	AirCraftSpawerFollow_Timer = 0;
+	g_RotaryEmerald_p = 0;
+	burgerManSpawned = 0;
 	FreeChaoTexlists();
 }

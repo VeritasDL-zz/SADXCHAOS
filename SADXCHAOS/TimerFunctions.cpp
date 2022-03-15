@@ -26,6 +26,8 @@ int AirCraftSpawerFollow_Timer = 0;
 int RandomSpawnAmount = 0;
 bool DebugEnabled = false;
 int SideWaysCamera_Timer = 0;
+int BurgerSpin_Timer = 0;
+
 void ChaosTimer()
 {
 	if (Chaos_Timer < EffectMax)//30 seconds is 1800
@@ -355,6 +357,18 @@ void AirCraftSpawnerTimerCheck()
 		AirCraftSpawerFollow_Timer = 0;
 	}
 }
+void BurgerSpinDeleteTimerCheck() //need to fix
+{
+	if (BurgerSpin_Timer <= 420 && BurgerSpin_Timer != 0)
+	{
+		BurgerSpin_Timer--;
+	}
+	if (BurgerSpin_Timer == 1)
+	{
+		BurgerManSpinDelete(); //to end the burgerspin
+		BurgerSpin_Timer = 0;
+	}
+}
 void CheckAllEffectsTimer()
 {
 	NoClipTimerCheck();
@@ -373,4 +387,5 @@ void CheckAllEffectsTimer()
 	CustomCameraEffectsTimersCheck();
 	DebugTimerCheck();
 	AirCraftSpawnerTimerCheck();
+	BurgerSpinDeleteTimerCheck(); //temp.walker may have fixed this
 }
