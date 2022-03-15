@@ -829,6 +829,12 @@ void RandomKnuxRingSpring(taskwk* p1)
 }
 void RandomRingLine()
 {
-	
-	CreateLineRing(&playertwp[0]->pos, playertwp[0], 10);
+	task* RingLine;
+	RingLine = (task*)LoadObject((LoadObj)2, 3, RingGroup_Main);
+	RingLine->twp->mode = 1;
+	RingLine->twp->scl.x = 0;
+	RingLine->twp->scl.z = 10;
+	RingLine->twp->pos = playertwp[0]->pos;
+	RingLine->twp->pos.y = +15;
+
 }

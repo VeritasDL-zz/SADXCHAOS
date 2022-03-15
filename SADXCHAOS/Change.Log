@@ -221,6 +221,8 @@ Fixed AdventureCheck E101RCheck and EnemyCheck thanks to refrag for the help! (3
 Fixed GammaCheck and EggViperCheck (3/12/2022)
 Fixed BigFishingCheck (3/12/2022)
 Fixed "ALL" bugs with Buger Man Ring, Hopfully (3/14/2022)
+Fixed a bug with RandomBarrel Thank to Black_Doom for Reporting! (3/15/2022)
+
 
 
 ---------TO-DO---------
@@ -230,6 +232,8 @@ Fixed "ALL" bugs with Buger Man Ring, Hopfully (3/14/2022)
  Log Known Crashes
  RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
  
+
+
  Add More Custom Tikal Hints
  Add More Random Teleport Locations
  Chao Crash? 0x33A1060 //fixed sorta i think (3/6/2022)

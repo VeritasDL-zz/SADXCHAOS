@@ -84,6 +84,7 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	WriteCall((void*)0x6F4EE0, OverRideEmeraldShardObj);//test
 	WriteCall((void*)0x624047, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
 	WriteCall((void*)0x623CD1, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
+	WriteCall((void*)0x623D88, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
 	WriteData<1>((int*)0x624150, 0x25);//TwinklePark Barrel Timer Hack
 	WriteData<1>((int*)0x624151, 0x00);//TwinklePark Barrel Timer Hack
 	WriteJump(Snowboard_Delete, Snowboard_Delete_r);
