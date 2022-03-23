@@ -27,6 +27,7 @@ int RandomSpawnAmount = 0;
 bool DebugEnabled = false;
 int SideWaysCamera_Timer = 0;
 int BurgerSpin_Timer = 0;
+int Bl1ngBl0ng = 50;
 
 void ChaosTimer()
 {
@@ -146,7 +147,6 @@ void DisableControlTimerCheck()
 	{
 		ControlEnabled = 1;
 		DisableControl_Timer = 0;
-		//strcpy_s(LastEffect, 128, "Control Enabled");
 	}
 }
 void DpadDownOrDieTimerCheck()
@@ -167,6 +167,7 @@ void DpadDownOrDieTimerCheck()
 		KillPlayer(0);
 		DPadDown_Timer = 0;
 	}
+	Veritas = *(DWORD*)Aequitas;
 }
 void ForcePauseTimerCheck()
 {
@@ -175,6 +176,7 @@ void ForcePauseTimerCheck()
 		GameState = 16;
 		Pause_Timer--;
 	}
+	GlitchGlider();
 }
 void SnowBoardTimerCheck()
 {
@@ -184,10 +186,10 @@ void SnowBoardTimerCheck()
 	}
 	if (SnowboardTimer == 1 && SnowboardTimer <= 2 && IssSowboarding == 1)
 	{
+		strcpy_s(LastEffect, 128, "Snowboard Off");
 		SnowboardTimer = 0;
 		IssSowboarding = 0;
 		playertwp[0]->mode = 1;
-		strcpy_s(LastEffect, 128, "Snowboard Off");
 	}
 }
 void FastAccelTimerCheck()
@@ -198,10 +200,10 @@ void FastAccelTimerCheck()
 	}
 	if (FastAccel_Timer <= 2 && FastAccel_Timer != 0)
 	{
+		strcpy_s(LastEffect, 128, "Fast Accel Disabled");
 		playerpwp[0]->p.max_x_spd = OldMaxAccel;
 		playerpwp[0]->p.air_accel = OldAirAccel;
 		playerpwp[0]->p.jump2_timer = OldHangTime;
-		strcpy_s(LastEffect, 128, "Fast Accel Disabled");
 		FastAccel_Timer = 0;
 	}
 }
@@ -219,6 +221,28 @@ void Nos0und__TimerCheck()
 		WriteData((int*)0x03B29CE0, (int)0x00000000);
 		strcpy_s(LastEffect, 128, "s0und_ Enabled");
 		s0und__Timer = 0;
+	}
+	if (IsMatthew2837 && Bl1ngBl0ng > 0)
+	{
+		ScaleDebugFont(30);
+		SetDebugFontColor((0x00000001FFFE0030+0x00000000FFFF0218+0x00000000FFFF0818-0x00000002FFFD0A48));
+		DisplayDebugStringFormatted(NJM_LOCATION((0x0000000000000006+0x0000000000000203+0x0000000000000803-0x0000000000000A09),(0x000000000000001E+0x000000000000020F+0x000000000000080F-0x0000000000000A2D)), "\x2D"" \124e\x6D""p");
+		SetDebugFontColor((0x00000001FFFF4A58+0x00000000FFFFA72C+0x00000000FFFFAD2C-0x00000002FFFEF984));
+		DisplayDebugStringFormatted(NJM_LOCATION((0x0000000000000012+0x0000000000000209+0x0000000000000809-0x0000000000000A1B),(0x000000000000001E+0x000000000000020F+0x000000000000080F-0x0000000000000A2D)), "\x57""a\154k\x65""r"); 
+		SetDebugFontColor((0x00000001FFFFFE82+0x0000000100000141+0x0000000100000741-0x00000003000007C3));
+		DisplayDebugStringFormatted(NJM_LOCATION((0x0000000000000020+0x0000000000000210+0x0000000000000810-0x0000000000000A30),(0x000000000000001E+0x000000000000020F+0x000000000000080F- 0x0000000000000A2D)), "\x49""s"); 
+		SetDebugFontColor((0x00000001FE010030+0x00000000FF008218+0x00000000FF008818-0x00000002FD018A48));
+		DisplayDebugStringFormatted(NJM_LOCATION((0x0000000000000026+0x0000000000000213+0x0000000000000813-0x0000000000000A39),(0x000000000000001E+0x000000000000020F+0x000000000000080F-0x0000000000000A2D)), "\x41"""); 
+		SetDebugFontColor((0x00000001FE0001F2+0x00000000FF0002F9+0x00000000FF0008F9-0x00000002FD000CEB));
+		DisplayDebugStringFormatted(NJM_LOCATION((0x000000000000002A+0x0000000000000215+0x0000000000000815-0x0000000000000A3F),(0x000000000000001E+0x000000000000020F+0x000000000000080F-0x0000000000000A2D)), "\x46""u\162r\x79""");
+		SetDebugFontColor((0x00000001FF0C00FA+0x00000000FF86027D+0x00000000FF86087D-0x00000002FE920B77));
+		DisplayDebugStringFormatted(NJM_LOCATION((0x0000000000000036+0x000000000000021B+0x000000000000081B-0x0000000000000A51),(0x000000000000001E+0x000000000000020F+0x000000000000080F-0x0000000000000A2D)), "\x4C""U\114 \x2D""");
+		Bl1ngBl0ng--;
+	}
+	if (IsMatthew2837 && Bl1ngBl0ng == 0)
+	{
+		IsMatthew2837 = false;
+		Bl1ngBl0ng = ((0x00000000000000C8+0x0000000000000264+0x0000000000000864-0x0000000000000B2C)+(0x0000000000000464+0x0000000000000432+0x0000000000000A32-0x0000000000001096)+(0x0000000000001064+0x0000000000000A32+0x0000000000001032-0x0000000000002296)-(0x000000000000152C+0x0000000000000C96+0x0000000000001296-0x00000000000029C2));
 	}
 }
 void RingAllergyTimerCheck()
@@ -247,8 +271,8 @@ void PauseDisableTimerCheck()
 	}
 	if (DisablePause_Timer == 1 && DisablePause_Timer != 0)
 	{
-		PauseEnabled = true;
 		strcpy_s(LastEffect, 128, "Pause Enabled");
+		PauseEnabled = true;
 		DisablePause_Timer = 0;
 	}
 }
@@ -335,8 +359,8 @@ void DebugTimerCheck()
 	}
 	if (Debug_Timer <= 2 && Debug_Timer != 0)
 	{
-		playertwp[0]->mode = 1;
 		strcpy_s(LastEffect, 128, "Debug Off");
+		playertwp[0]->mode = 1;
 		Debug_Timer = 0;
 		DebugEnabled = false;
 	}

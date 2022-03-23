@@ -222,8 +222,11 @@ Fixed GammaCheck and EggViperCheck (3/12/2022)
 Fixed BigFishingCheck (3/12/2022)
 Fixed "ALL" bugs with Buger Man Ring, Hopfully (3/14/2022)
 Fixed a bug with RandomBarrel Thank to Black_Doom for Reporting! (3/15/2022)
-
-
+Changed Random BurgerMan to use the Burger Shop Statue code and texture rather then the Mission Mode Burger Man Mission Code and Texture (3/20/2022)
+Moved A bunch of the Debug Effect Print's to the top of the effect function (3/22/2022)
+Added Config Options for ANDKnuckles, RandomSwapMusic, RandomVoice, DetachCamera and SoundDisable (3/22/2022)
+Fixed a bug with CannonS1/CannonS2 Texture check code (3/22/2022)
+Removed Temp.Walker (XX/XX/XXXX)
 
 ---------TO-DO---------
 
@@ -232,7 +235,19 @@ Fixed a bug with RandomBarrel Thank to Black_Doom for Reporting! (3/15/2022)
  Log Known Crashes
  RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
  
+ Crash on Big Ice Rock? not sure why `0x0078CF24  https://puu.sh/IPOeV/2466bf618f.png` 
 
+ sonic.exe.4416.dmp - Texture Crash (cant tell which from this crash log they are hard to catch without using PKR's Debug mod with Texture Crash logs enabled (which only prints to console lol so dont worry about them
+ sonic.exe.12004.dmp - 0x0046E08D - seems to be related to Big's Fishing Hud (some weird math ill have to find it in the Xbox Symbols to understand it better) 
+ sonic.exe.21672.dmp - Invalid Memory Crash (says crashed at address 0xFFFFFFFFC4E0C2D6)
+ sonic.exe.23264.dmp - 0x005934D5 - Object Crash (Evidently I fixed this on 3/20/2022 (line 225) lmfao)
+ sonic.exe.24756.dmp - Invalid Memory Crash (says crashed at 0x61cf321D with exception 0xC0000005 (access violation error code)
+ sonic.exe.29448.dmp - Invalid Memory Crash (says crashed at 0x61cf321D with exception 0xC0000005 (access violation error code)
+
+
+
+ Some enemies do no spawn in Egg Viper. Like, the game said it spawned Robos and Police, but I didn't see them 
+ Spawned Random Chao in Tails' Ice Cap, game crashed. I was also with no snowboard. Idk, might be important
 
  Add More Custom Tikal Hints
  Add More Random Teleport Locations

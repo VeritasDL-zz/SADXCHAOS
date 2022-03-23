@@ -2223,6 +2223,7 @@ ObjectFunc(OBall_0, 0x623BB0);
 ObjectFunc(OBarrel_Display, 0x623CC0);
 ObjectFunc(OBarrel_Delete, 0x623D70);
 ObjectFunc(OBarrel, 0x624020);
+
 ObjectFunc(OShutter, 0x624380);
 ObjectFunc(OMonitor, 0x6247C0);
 ObjectFunc(Obj_HedgehogHammer, 0x624A70);
@@ -3004,6 +3005,7 @@ VoidFunc(al_xy_init, 0x7DAE80);
 DataPointer(NJS_TEXLIST, ev_effect_list19, 0x2C49740);
 DataPointer(NJS_MOTION**, SS_PEOPLE_MOTIONS, 0x38F6EA4);
 FunctionPointer(void, SetSonicIce, (int a1), 0x4A2550);
+ObjectFunc(EggCannon, 0x523E60);
 FunctionPointer(void, EmeraldShard_Create, (int num), 0x6F53B0);
 ObjectFunc(KnuEffectRingSpring, 0x4C1FC0);
 FunctionPointer(void, CreateLineRing, (NJS_POINT3 *pos, taskwk *twp, int num), 0x79B140);

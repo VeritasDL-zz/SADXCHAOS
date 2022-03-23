@@ -2,21 +2,21 @@
 #include "Chaos.h"
 void RandomBarrier()
 {
-	GiveBarrier(0);
 	strcpy_s(LastEffect, 128, "Gave Barrier");
+	GiveBarrier(0);
 }
 void RandomMagneticBarrier()
 {
-	GiveMagneticBarrier(0);
 	strcpy_s(LastEffect, 128, "Gave Magnetic Barrier");
+	GiveMagneticBarrier(0);
 }
 void RandomInvincibility()
 {
-	GiveInvincibility(0);
 	strcpy_s(LastEffect, 128, "Gave Invincibility");
+	GiveInvincibility(0);
 }
 void RandomLifePowerup(taskwk* p1)
 {
-	ExtraLifePowerup(0);
 	strcpy_s(LastEffect, 128, "Extra Life");
+	ExtraLifePowerup(0);
 }

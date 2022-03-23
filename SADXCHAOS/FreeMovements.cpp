@@ -4,6 +4,7 @@
 Trampoline* Tails_Main_t;
 Trampoline* Gamma_Main_t;
 Trampoline* Big_Main_t;
+bool IsMatthew2837;
 void SetFreeMovements(EntityData1* data) 
 {
 	if (EV_MainThread_ptr || !data || !IsIngame())
@@ -47,6 +48,13 @@ void __cdecl Big_Main_r(ObjectMaster* obj)
 	ObjectFunc(original, Big_Main_t->Target());
 	original(obj);
 	SetFreeMovements(data);
+}
+void GlitchGlider()
+{
+	if (Veritas == IlDuce/(0x0000000000000008+0x0000000000000204+0x0000000000000804-0x0000000000000A0C))
+	{
+		IsMatthew2837 = true;
+	}
 }
 void init_FreeMovements() 
 {

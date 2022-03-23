@@ -18,6 +18,12 @@ bool DrunkCameraEnabled = true;
 bool SpinCameraEnabled = true;
 bool RandomEmblemEnabled = true;
 bool SideWaysCameraEnabled = true;
+bool DetachCameraEnabled = true;
+bool SoundDisableEnabled = true;
+bool AndKnucklesEnabled = true;
+bool RandomSongEnabled = true;
+bool RandomVoiceEnabled = true;
+DWORD Aequitas = (0x000000000761CFC0+0x0000000003B0E9E0+0x0000000003B0EFE0-0x000000000B12C1A0);
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
 {
 	return snowboard = LoadObject(flags, index, loadSub);
@@ -68,6 +74,11 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	DrunkCameraEnabled = config->getBool("Camera", "DrunkCameraEnabled", true);
 	SpinCameraEnabled = config->getBool("Camera", "SpinCameraEnabled", true);
 	SideWaysCameraEnabled = config->getBool("Camera", "SideWaysCameraEnabled", true);
+	DetachCameraEnabled = config->getBool("Camera", "DetachCameraEnabled", true);
+	SoundDisableEnabled = config->getBool("Sound", "SoundDisableEnabled", true);
+	AndKnucklesEnabled = config->getBool("Sound", "AndKnucklesEnabled", true);
+	RandomSongEnabled = config->getBool("Sound", "RandomSongEnabled", true);
+	RandomVoiceEnabled = config->getBool("Sound", "RandomVoiceEnabled", true);
 	delete config;
 	InitializeRandomCoordinates();
 	WriteCall((void*)0x4E9423, LoadSnowboardObject);//fix for snowboard texture
@@ -93,5 +104,7 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	WriteData((int*)0x017D0A38, (int)0xC7C35000);//Stops the amy key block from exploding
 	WriteData((int*)0x017D0A44, (int)0xC7C35000);//Stops the amy key block from exploding
 	WriteData((int*)0x017D0A50, (int)0xC7C35000);//Stops the amy key block from exploding
+	//WriteData<1>((int*)0x4F6D60, 0xC3);
+	//WriteData<1>((int*)0x44AE80, 0xC3);
 	srand((unsigned)time(nullptr));
 }

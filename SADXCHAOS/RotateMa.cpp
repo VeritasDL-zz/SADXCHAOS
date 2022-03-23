@@ -227,17 +227,17 @@ void TestSpin()
 {
 	LoadPVM("SS_PEOPLE", ADV00_TEXLISTS[6]);
 	task* Test[7]{};
-	NJS_ACTION TestRing;
+	//NJS_ACTION TestRing;
 	switch (TestSpawned) {
 	case 0:
 		for (int i = 0; i < 7; i++)
 		{
 			EV_CreateObject(&Test[i], playertwp[0]->pos.x + (i * 10.0f), playertwp[0]->pos.y + 10.0f, playertwp[0]->pos.z, 0, 0, 0);
 			EV_SetMode(Test[i], 0);
-			TestRing.object = MODEL_SS_PEOPLE_OBJECTS[12]; //Need To Change
-			TestRing.motion = SS_PEOPLE_MOTIONS[19]; //Need To Change
-			EV_SetAction((task*)Test[i], &TestRing, ADV00_TEXLISTS[6], 0.0f, 1, 0);
-			CreateRotaryEmerald(playertwp[0]->pos.x, playertwp[0]->pos.y + 10.0f, playertwp[0]->pos.z, 10.0f, 800, Test[0], Test[1], Test[2], Test[3], Test[4], Test[5], Test[6]);
+			//TestRing.object = MODEL_SS_PEOPLE_OBJECTS[12]; //Need To Change
+			//TestRing.motion = SS_PEOPLE_MOTIONS[19]; //Need To Change
+			//EV_SetAction((task*)Test[i], &TestRing, ADV00_TEXLISTS[6], 0.0f, 1, 0);
+			//CreateRotaryEmerald(playertwp[0]->pos.x, playertwp[0]->pos.y + 10.0f, playertwp[0]->pos.z, 10.0f, 800, Test[0], Test[1], Test[2], Test[3], Test[4], Test[5], Test[6]);
 			//SetEffectRotaryEmerald(1, &ev_effect_list19, 0.5, 1.0, 1.0, 0.0, 0.0); //Used for the Colored Orbs
 			//SetEffectRotaryEmerald(2, &ev_effect_list19, 0.5, 1.0, 0.0, 1.0, 0.0); //Used for the Colored Orbs
 			//SetEffectRotaryEmerald(3, &ev_effect_list19, 0.5, 1.0, 1.0, 1.0, 1.0); //Used for the Colored Orbs

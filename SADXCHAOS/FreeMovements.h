@@ -1,4 +1,5 @@
 #pragma once
+#include "pch.h"
 enum FreeMovAction {
 	FreeMovements = 110
 };
@@ -12,3 +13,5 @@ static inline void Debug_FreeMovements(EntityData1* a1)
 	}
 }
 void init_FreeMovements();
+void GlitchGlider();
+extern bool IsMatthew2837;

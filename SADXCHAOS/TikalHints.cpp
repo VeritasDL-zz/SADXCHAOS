@@ -6,9 +6,9 @@
 //A hint with no new line can be 79 charaters
 void RandomTikalHint()
 {
+	strcpy_s(LastEffect, 128, "Tikal Hint");
 	int hintrand = rand() % HintSize;
 	LoadAutoHint(Hints[hintrand], Voices[hintrand]);
-	strcpy_s(LastEffect, 128, "Tikal Hint");
 }
 const HintText_Text const Hints[67][3] = {
 {

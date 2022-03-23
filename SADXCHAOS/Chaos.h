@@ -3,6 +3,7 @@
 #include "SADXStructs.h"
 extern char oldRand;
 extern char* LastEffect;
+extern uint32_t Veritas;
 extern ObjectMaster* snowboard;
 extern size_t ChaosSize;
 typedef void(__cdecl* ChaosEnt)(taskwk*);

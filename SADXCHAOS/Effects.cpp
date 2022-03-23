@@ -22,9 +22,9 @@ void DisablePausee()
 		NewEffect();
 		return;
 	}
+	strcpy_s(LastEffect, 128, "Pause Disabled");
 	PauseEnabled = false;
 	DisablePause_Timer = 420;
-	strcpy_s(LastEffect, 128, "Pause Disabled");
 }
 void CameraNOP()
 {
@@ -168,26 +168,37 @@ void RandomPhysics()
 		return;
 	}
 	int Phyrand = rand() % 38;
+	snprintf(LastEffect, 128, "%s Physics", Physnames[Phyrand]);
 	int OldYOffset = playerpwp[0]->p.center_height; //store current Y Offset
 	player_parameter tmp = (player_parameter)PhyData[Phyrand];
 	memcpy(&playerpwp[0]->p, &tmp, sizeof(player_parameter));
 	playerpwp[0]->p.center_height = OldYOffset;//restores Saved Y Offset.
-	snprintf(LastEffect, 128, "%s Physics", Physnames[Phyrand]);
 }
 void Nos0und_ForYou()
 {
+	if (!SoundDisableEnabled)
+	{
+		NewEffect();
+		return;
+	}
+	strcpy_s(LastEffect, 128, "s0und_ Disabled");
 	PauseSound();
 	EnableBGM = 0;
 	VoicesEnabled = false;
 	WriteData((int*)0x03B29CE0, (int)0xFFFFFFFF);
-	strcpy_s(LastEffect, 128, "s0und_ Disabled");
 	s0und__Timer = 222;
 }
 void UncoupleCamera()
 {
+	if (!DetachCameraEnabled)
+	{
+		NewEffect();
+		return;
+	}
+	strcpy_s(LastEffect, 128, "Camera Detached");
 	camera_twp->mode = 3; //uncouples camera from char
 	Camera_Timer = 100;
-	strcpy_s(LastEffect, 128, "Camera Detached");
+
 }
 void RandomChaooAnimal()
 {
@@ -237,6 +248,7 @@ void RandomChaoo()
 	chaodata->data.EyeType = rand() % 12;
 	chaodata->data.BallType = rand() % 3;
 	chaodata->data.Alignment = rand() % 2 - 1; //test
+	strcpy_s(LastEffect, 128, "Spawned Random Chao");
 	ObjectMaster* Chao = CreateChao(chaodata, 0, 0, &playertwp[0]->pos, 0);
 	chaodata->data.Color = rand() % 14;
 	chaodata->data.Name[0] = rand() % 255;
@@ -253,7 +265,6 @@ void RandomChaoo()
 	chaodata->data.RunGrade = rand() % 5;
 	chaodata->data.StaminaGrade = rand() % 5;
 	chaodata->data.SwimGrade = rand() % 5;
-	strcpy_s(LastEffect, 128, "Spawned Random Chao");
 }
 void RandomKillMomentum(playerwk* p1)
 {
@@ -271,6 +282,7 @@ void FastAccel(playerwk* p1)
 	{
 		return;
 	}
+	strcpy_s(LastEffect, 128, "Fast Accel Enabled");
 	FastAccel_Timer = 400;
 	OldMaxAccel = playerpwp[0]->p.max_x_spd;
 	OldAirAccel = playerpwp[0]->p.air_accel;
@@ -278,7 +290,6 @@ void FastAccel(playerwk* p1)
 	playerpwp[0]->p.max_x_spd = 10.0f;
 	playerpwp[0]->p.air_accel = 0.10f;
 	playerpwp[0]->p.jump2_timer = 120;
-	strcpy_s(LastEffect, 128, "Fast Accel Enabled");
 	return;
 }
 void RandomVSpeed(playerwk* p1)
@@ -291,8 +302,8 @@ void RandomVSpeed(playerwk* p1)
 	{
 		return;
 	}
-	playerpwp[0]->spd.y = playerpwp[0]->p.lim_v_spd;
 	strcpy_s(LastEffect, 128, "Random V Speed");
+	playerpwp[0]->spd.y = playerpwp[0]->p.lim_v_spd;
 	return;
 }
 void RandomHSpeed(playerwk* p1)
@@ -509,6 +520,11 @@ void RandomControlDisable()
 }
 void AndKnuckles()
 {
+	if (!AndKnucklesEnabled)
+	{
+		NewEffect();
+		return;
+	}
 	int Knuckles = rand() % 4;
 	if (Knuckles == 0)
 	{
@@ -524,18 +540,28 @@ void AndKnuckles()
 }
 void RandomSwapMusic()
 {
+	if (!RandomSongEnabled)
+	{
+		NewEffect();
+		return;
+	}
+	strcpy_s(LastEffect, 128, "Random Song");
 	do {
-		CurrentSong = rand() % 125;
+		CurrentSong = rand() % 124;
 	} while (LastSong == CurrentSong);
 	LastSong = CurrentSong;
-	strcpy_s(LastEffect, 128, "Random Song");
 	return;
 }
 void ChaosPlayVoice_rng()
 {
+	if (!RandomVoiceEnabled)
+	{
+		NewEffect();
+		return;
+	}
+	strcpy_s(LastEffect, 128, "Random Voice");
 	int Voice = rand() % 2043;
 	PlayVoice(Voice);
-	strcpy_s(LastEffect, 128, "Random Voice");
 	return;
 }
 void RandomDPadDownCheck()
@@ -611,9 +637,9 @@ void IncreaseCutsceneSkipTime()
 	}
 	if (!WriteOnce) //temp.walker may not need, may remove check
 	{
+		strcpy_s(LastEffect, 128, "Long Cutscene Time");
 		WriteOnce = true;
 		WriteData((int*)0x03B2C580, (int)0x01A2);
-		strcpy_s(LastEffect, 128, "Long Cutscene Time");
 		return;
 	}
 }
@@ -716,9 +742,9 @@ void RemovePowerUp()
 }
 void RandomCollisionSize()
 {
+	strcpy_s(LastEffect, 128, "Random Collision Size");
 	int CSize = rand() % 10 + (2.5f);//adds 2.5f to ensure CSize is never 0/1
 	playerpwp[0]->p.height = CSize;
-	strcpy_s(LastEffect, 128, "Random Collision Size");
 	return;
 }
 void FlipCamera()
@@ -802,11 +828,11 @@ void Set_Sonic_Ice()
 		LoadNoNamePVM(&stx_ice0_TEXLIST);
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Froze Player");
 	DisableControl_Timer = 70;
 	ControlEnabled = 0;
 	ForcePlayerAction(0, 38); //forces frozen state for sonic/Knuckles
 	SetSonicIce(playertwp[0]->counter.b[0]);
-	strcpy_s(LastEffect, 128, "Froze Player");
 }
 void EmeraldShardMa()
 {
@@ -822,10 +848,10 @@ void RandomKnuxRingSpring(taskwk* p1)
 		KnuxEffTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Dug Up Rings");
 	task* KnuxRingSpring;
 	KnuxRingSpring = (task*)LoadObject((LoadObj)2, 6, KnuEffectRingSpring);
 	KnuxRingSpring->twp->pos = playertwp[0]->pos;
-	strcpy_s(LastEffect, 128, "Dug Up Rings");
 }
 void RandomRingLine()
 {
@@ -836,5 +862,4 @@ void RandomRingLine()
 	RingLine->twp->scl.z = 10;
 	RingLine->twp->pos = playertwp[0]->pos;
 	RingLine->twp->pos.y = +15;
-
 }

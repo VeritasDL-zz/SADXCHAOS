@@ -12,6 +12,7 @@ using std::string;
 //Changelog Is Now Located inside Of Change.Log
 char oldRand = -1;
 char* LastEffect = new char[128];
+uint32_t Veritas;
 ObjectMaster* snowboard;
 extern "C"
 {
@@ -19,7 +20,7 @@ extern "C"
 	{
 		Init_Fixes(path, helperFunctions);
 		init_FreeMovements();
-		strcpy_s(LastEffect, 128, "Chaos Edition 2.0 b 4");
+		strcpy_s(LastEffect, 128, "Chaos Edition 2.0 b 6");
 	}
 	ChaosS ChaosArray[116]
 	{
@@ -158,12 +159,14 @@ extern "C"
 		ChaosTimer();
 		CheckAllEffectsTimer();
 		DebugPrintOutCheck();
+		Veritas = *(DWORD*)Aequitas;
 	}
 	__declspec(dllexport) void __cdecl OnControl()
 	{
-		 //Executed when the game processes input
+		//Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
+		
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

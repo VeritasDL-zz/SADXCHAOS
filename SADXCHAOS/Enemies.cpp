@@ -68,6 +68,7 @@ void RandomTank(taskwk* p1)
 		RinoTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned RhinoTank");
 	int number = rand() % 2;
 	task* RhinoTank;
 	RhinoTank = (task*)LoadObject((LoadObj)2, 3, RhinoTank_Main);
@@ -83,7 +84,6 @@ void RandomTank(taskwk* p1)
 		RhinoTank->twp->pos = playertwp[0]->pos;
 		RhinoTank->twp->pos.z += rand() % 10 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned RhinoTank");
 	return;
 }
 void RandomBuyon(taskwk* p1)
@@ -107,6 +107,7 @@ void RandomBuyon(taskwk* p1)
 		BuyonTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Buyon");
 	int number = rand() % 2;
 	task* Buyon;
 	Buyon = (task*)LoadObject((LoadObj)2, 3, EBuyon);
@@ -122,7 +123,6 @@ void RandomBuyon(taskwk* p1)
 		Buyon->twp->pos = playertwp[0]->pos;
 		Buyon->twp->pos.z += rand() % 10 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Buyon");
 	return;
 }
 void RandomUnidus(taskwk* p1)
@@ -148,6 +148,7 @@ void RandomUnidus(taskwk* p1)
 		UnidusTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Unidus");
 	int number = rand() % 2;
 	task* Unidus;
 	Unidus = (task*)LoadObject((LoadObj)2, 3, UnidusA_Main);
@@ -163,7 +164,6 @@ void RandomUnidus(taskwk* p1)
 		Unidus->twp->pos = playertwp[0]->pos;
 		Unidus->twp->pos.z += rand() % 10 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Unidus");
 	return;
 }
 void RandomAmebot(taskwk* p1)
@@ -187,6 +187,7 @@ void RandomAmebot(taskwk* p1)
 		AmebotTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Amebot");
 	int number = rand() % 2;
 	task* Amebot;
 	Amebot = (task*)LoadObject((LoadObj)2, 3, Sweep_Load);
@@ -202,7 +203,6 @@ void RandomAmebot(taskwk* p1)
 		Amebot->twp->pos = playertwp[0]->pos;
 		Amebot->twp->pos.z += rand() % 10 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Amebot");
 	return;
 }
 void RandomPolice(taskwk* p1)
@@ -226,6 +226,7 @@ void RandomPolice(taskwk* p1)
 		PoliceTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Police Dispatched.");
 	int number = rand() % 2;
 	task* CopSpeeder;
 	CopSpeeder = (task*)LoadObject((LoadObj)2, 3, EPolice);
@@ -241,7 +242,6 @@ void RandomPolice(taskwk* p1)
 		CopSpeeder->twp->pos = playertwp[0]->pos;
 		CopSpeeder->twp->pos.z += rand() % 10 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned The Police");
 	return;
 }
 void RandomSnake(taskwk* p1)
@@ -265,6 +265,7 @@ void RandomSnake(taskwk* p1)
 		SnakeTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Snake");
 	int number = rand() % 2;
 	task* Snake;
 	Snake = (task*)LoadObject((LoadObj)2, 3, BoaBoa_Main);
@@ -280,10 +281,9 @@ void RandomSnake(taskwk* p1)
 		Snake->twp->pos = playertwp[0]->pos;
 		Snake->twp->pos.z += rand() % 90 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Boa-Boa");
 	return;
 }
-void RandomRobo(taskwk* p1)//updated to task, untested 10/04/2021
+void RandomRobo(taskwk* p1)
 {
 	if (!EnemyCheck())
 	{
@@ -305,6 +305,7 @@ void RandomRobo(taskwk* p1)//updated to task, untested 10/04/2021
 		RoboTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Robo");
 	int number = rand() % 2;
 	task* Robo;
 	Robo = (task*)LoadObject((LoadObj)2, 3, ERobo_0);
@@ -320,7 +321,6 @@ void RandomRobo(taskwk* p1)//updated to task, untested 10/04/2021
 		Robo->twp->pos = playertwp[0]->pos;
 		Robo->twp->pos.z += rand() % 10 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Robo");
 	return;
 }
 void RandomLeon(taskwk* p1)
@@ -344,6 +344,7 @@ void RandomLeon(taskwk* p1)
 		LeonTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Leon");
 	int number = rand() % 2;
 	task* Leon;
 	Leon = (task*)LoadObject((LoadObj)2, 3, Leon_Load);
@@ -359,7 +360,6 @@ void RandomLeon(taskwk* p1)
 		Leon->twp->pos = playertwp[0]->pos;
 		Leon->twp->pos.z += rand() % 10 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Leon");
 	return;
 }
 void RandomKiki(taskwk* p1)
@@ -384,6 +384,7 @@ void RandomKiki(taskwk* p1)
 		KikiTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Kiki");
 	int number = rand() % 2;
 	task* Kiki;
 	Kiki = (task*)LoadObject((LoadObj)2, 3, Kiki_Load);
@@ -401,7 +402,6 @@ void RandomKiki(taskwk* p1)
 		Kiki->twp->pos.z += rand() % 10 + 1 * 9;
 		Kiki->twp->pos.y += rand() % 2 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Kiki");
 	return;
 }
 void RandomFallingSpikeBall(taskwk* p1)
@@ -414,6 +414,7 @@ void RandomFallingSpikeBall(taskwk* p1)
 	}
 	int number = rand() % 2;
 	task* FallingSpikeBall;
+	strcpy_s(LastEffect, 128, "Falling SpikeBall");
 	FallingSpikeBall = (task*)LoadObject((LoadObj)2, 3, FallingSpikeBall_Load);
 	FallingSpikeBall->twp->pos = playertwp[0]->pos;
 	FallingSpikeBall->twp->pos.z += rand() % 30 + 1 * 9;
@@ -430,7 +431,6 @@ void RandomFallingSpikeBall(taskwk* p1)
 		FallingSpikeBall->twp->scl.x = 60;
 		FallingSpikeBall->twp->scl.y = 1;
 	}
-	strcpy_s(LastEffect, 128, "Falling SpikeBall");
 	return;
 }
 void RandomSpinnerA(taskwk* p1)
@@ -450,6 +450,7 @@ void RandomSpinnerA(taskwk* p1)
 		SpinnerTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Spinner A");
 	int number = rand() % 2;
 	task* SpinnerA;
 	SpinnerA = (task*)LoadObject((LoadObj)2, 3, SpinnerA_Main);
@@ -467,7 +468,6 @@ void RandomSpinnerA(taskwk* p1)
 		SpinnerA->twp->pos.z += rand() % 10 + 1 * 9;
 		SpinnerA->twp->pos.y += rand() % 2 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Spinner A");
 	return;
 }
 void RandomSpinnerB(taskwk* p1)
@@ -487,6 +487,7 @@ void RandomSpinnerB(taskwk* p1)
 		SpinnerTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Spinner B");
 	int number = rand() % 2;
 	task* SpinnerB;
 	SpinnerB = (task*)LoadObject((LoadObj)2, 3, SpinnerB_Main);
@@ -504,7 +505,6 @@ void RandomSpinnerB(taskwk* p1)
 		SpinnerB->twp->pos.z += rand() % 10 + 1 * 9;
 		SpinnerB->twp->pos.y += rand() % 2 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Spinner B");
 	return;
 }
 void RandomSpinnerC(taskwk* p1)
@@ -524,6 +524,7 @@ void RandomSpinnerC(taskwk* p1)
 		SpinnerTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Spinner C");
 	int number = rand() % 2;
 	task* SpinnerC;
 	SpinnerC = (task*)LoadObject((LoadObj)2, 3, SpinnerC_Main);
@@ -541,7 +542,6 @@ void RandomSpinnerC(taskwk* p1)
 		SpinnerC->twp->pos.z += rand() % 10 + 1 * 9;
 		SpinnerC->twp->pos.y += rand() % 2 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Spinner C");
 	return;
 }
 void RandomSman(taskwk* p1)
@@ -570,6 +570,7 @@ void RandomSman(taskwk* p1)
 		SmanTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned IceBall");
 	task* ESMAN;
 	ESMAN = (task*)LoadObject((LoadObj)2, 3, ESman);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
@@ -577,7 +578,6 @@ void RandomSman(taskwk* p1)
 	ESMAN->twp->pos = playertwp[0]->pos;
 	ESMAN->twp->pos.z += rand() % 10 + 1 * 9;
 	ESMAN->twp->pos.y += rand() % 2 + 1 * 9;
-	strcpy_s(LastEffect, 128, "Spawned IceBall");
 }
 void RandomEGacha(taskwk* p1)
 {
@@ -597,6 +597,7 @@ void RandomEGacha(taskwk* p1)
 		EGachaTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Beat");
 	int number = rand() % 2;
 	task* GACHAPON;
 	GACHAPON = (task*)LoadObject((LoadObj)2, 3, OEGacha);
@@ -614,7 +615,6 @@ void RandomEGacha(taskwk* p1)
 		GACHAPON->twp->pos.z += rand() % 35 + 1 * 9;
 		GACHAPON->twp->pos.y += rand() % 30 + 1 * 9;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Beat");
 	return;
 }
 void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this took 5 days to figure out. 
@@ -644,6 +644,7 @@ void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this
 		AirCraftTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned AirCraft");
 	task* AirCraft;
 	AirCraft = (task*)LoadObject((LoadObj)2, 3, EnemyAir);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
@@ -667,7 +668,6 @@ void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this
 	{
 		AirCraftSpawerFollow_Timer = 350;
 	}
-	strcpy_s(LastEffect, 128, "Spawned AirCraft");
 }
 void RandomFireBreath(taskwk* p1)
 {
@@ -694,6 +694,7 @@ void RandomFireBreath(taskwk* p1)
 		FireBreathTextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned FireBreath");
 	task* FireBreath;
 	FireBreath = (task*)LoadObject((LoadObj)6, 3, O_honoo_Main);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
@@ -701,7 +702,6 @@ void RandomFireBreath(taskwk* p1)
 	FireBreath->twp->pos = playertwp[0]->pos;
 	FireBreath->twp->pos.x = playertwp[0]->pos.x - 10;
 	FireBreath->twp->ang = playertwp[0]->ang;
-	strcpy_s(LastEffect, 128, "Spawned FireBreath");
 }
 void RandomCannonS1(taskwk* p1)
 {
@@ -721,13 +721,14 @@ void RandomCannonS1(taskwk* p1)
 	{
 		return;
 	}
-	if (!CannonS1TextLoader)
+	if (!CannonS1TextLoader && !CannonS2TextLoader)
 	{
 		CheckAnimalTexture();
 		LoadPVM("OBJ_SKYDECK", &OBJ_SKYDECK_TEXLIST);
 		CannonS1TextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Cannon");
 	task* CannonS1;
 	CannonS1 = (task*)LoadObject((LoadObj)6, 3, Cannon_s1);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
@@ -735,7 +736,6 @@ void RandomCannonS1(taskwk* p1)
 	CannonS1->twp->pos = playertwp[0]->pos;
 	CannonS1->twp->pos.x = playertwp[0]->pos.x - 10;
 	CannonS1->twp->ang = playertwp[0]->ang;
-	strcpy_s(LastEffect, 128, "Spawned Cannon");
 }
 void RandomCannonS2(taskwk* p1)
 {
@@ -755,13 +755,14 @@ void RandomCannonS2(taskwk* p1)
 	{
 		return;
 	}
-	if (!CannonS2TextLoader)
+	if (!CannonS2TextLoader && !CannonS1TextLoader)
 	{
 		CheckAnimalTexture();
 		LoadPVM("OBJ_SKYDECK", &OBJ_SKYDECK_TEXLIST);
 		CannonS2TextLoader = true;
 		TextLoaded = true;
 	}
+	strcpy_s(LastEffect, 128, "Spawned Cannon");
 	task* CannonS2;
 	CannonS2 = (task*)LoadObject((LoadObj)6, 3, Cannon_s2);
 	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
@@ -769,5 +770,4 @@ void RandomCannonS2(taskwk* p1)
 	CannonS2->twp->pos = playertwp[0]->pos;
 	CannonS2->twp->pos.x = playertwp[0]->pos.x - 10;
 	CannonS2->twp->ang = playertwp[0]->ang;
-	strcpy_s(LastEffect, 128, "Spawned Cannon");
 }

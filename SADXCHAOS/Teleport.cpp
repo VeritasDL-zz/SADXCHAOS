@@ -196,6 +196,6 @@ void RandomTeleport()
 		NewEffect();
 		return;
 	}
-	playertwp[0]->pos = RandomTeleport;
 	strcpy_s(LastEffect, 128, "Random Teleport");
+	playertwp[0]->pos = RandomTeleport;
 }
