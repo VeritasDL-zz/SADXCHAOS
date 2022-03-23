@@ -848,10 +848,18 @@ void RandomKnuxRingSpring(taskwk* p1)
 		KnuxEffTextLoader = true;
 		TextLoaded = true;
 	}
-	strcpy_s(LastEffect, 128, "Dug Up Rings");
-	task* KnuxRingSpring;
-	KnuxRingSpring = (task*)LoadObject((LoadObj)2, 6, KnuEffectRingSpring);
-	KnuxRingSpring->twp->pos = playertwp[0]->pos;
+	if (KNU_EFF_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Dug Up Rings");
+		task* KnuxRingSpring;
+		KnuxRingSpring = (task*)LoadObject((LoadObj)2, 6, KnuEffectRingSpring);
+		KnuxRingSpring->twp->pos = playertwp[0]->pos;
+	}
+	else //new effect dueo texlist not being loaded
+	{
+		NewEffect();
+		return;
+	}
 }
 void RandomRingLine()
 {

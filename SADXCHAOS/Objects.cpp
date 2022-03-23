@@ -37,11 +37,19 @@ void BigRock(taskwk* p1)
 		BigRockTextLoader = true;
 		TextLoaded = true;
 	}
-	strcpy_s(LastEffect, 128, "Spawned Big Rock");
-	task* BigRock;
-	BigRock = (task*)LoadObject((LoadObj)3, 3, OBiciwa);
-	BigRock->twp->pos = playertwp[0]->pos;
-	return;
+	if (OBJ_ICECAP_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Spawned Big Rock");
+		task* BigRock;
+		BigRock = (task*)LoadObject((LoadObj)3, 3, OBiciwa);
+		BigRock->twp->pos = playertwp[0]->pos;
+		return;
+	}
+	else //new effect dueo texlist not being loaded
+	{
+		NewEffect();
+		return;
+	}
 }
 void RandomFruit(taskwk* p1)
 {
@@ -55,14 +63,22 @@ void RandomFruit(taskwk* p1)
 		TextLoaded = true;
 		ChaoFruitTextLoader = true;
 	}
-	if (FruitNumb < 10)
+	if (AL_OBJECT_TEXLIST.textures->texaddr)
 	{
-		Int FruitType = (rand() % (12 + 1 - 3)) + 3;
-		strcpy_s(LastEffect, 128, "Spawned Chao Fruit");
-		LoadChaoFruit(FruitType, &playertwp[0]->pos, 0, nullptr, nullptr);
-		FruitNumb++;
+		if (FruitNumb < 10)
+		{
+			Int FruitType = (rand() % (12 + 1 - 3)) + 3;
+			strcpy_s(LastEffect, 128, "Spawned Chao Fruit");
+			LoadChaoFruit(FruitType, &playertwp[0]->pos, 0, nullptr, nullptr);
+			FruitNumb++;
+		}
+		if (FruitNumb >= 10)
+		{
+			NewEffect();
+			return;
+		}
 	}
-	if (FruitNumb >= 10)
+	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
 		return;
@@ -81,14 +97,22 @@ void RandomHat(taskwk* p1)
 		TextLoaded = true;
 		ChaoHatTextLoader = true;
 	}
-	if (HatNumb < 10)
+	if (AL_OBJECT_TEXLIST.textures->texaddr)
 	{
-		int HatType = rand() % 83 + 1;//chao hat 0-84 rng,
-		strcpy_s(LastEffect, 128, "Spawned Chao Hat");
-		LoadChaoHat(HatType, &playertwp[0]->pos, 0, nullptr, nullptr);
-		HatNumb++;
+		if (HatNumb < 10)
+		{
+			int HatType = rand() % 83 + 1;//chao hat 0-84 rng,
+			strcpy_s(LastEffect, 128, "Spawned Chao Hat");
+			LoadChaoHat(HatType, &playertwp[0]->pos, 0, nullptr, nullptr);
+			HatNumb++;
+		}
+		if (HatNumb >= 10)
+		{
+			NewEffect();
+			return;
+		}
 	}
-	if (HatNumb >= 10)
+	else
 	{
 		NewEffect();
 		return;
@@ -136,13 +160,21 @@ void RandomFan(taskwk* p1)
 		FanTextLoader = true;
 		TextLoaded = true;
 	}
-	strcpy_s(LastEffect, 128, "Random Fan");
-	task* Fan;
-	Fan = (task*)LoadObject((LoadObj)2, 4, OFun);
-	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-	Fan->ocp = objCondition;
-	Fan->twp->pos = playertwp[0]->pos;
-	Fan->twp->pos.y = playertwp[0]->pos.y - 9.0f;
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Fan");
+		task* Fan;
+		Fan = (task*)LoadObject((LoadObj)2, 4, OFun);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Fan->ocp = objCondition;
+		Fan->twp->pos = playertwp[0]->pos;
+		Fan->twp->pos.y = playertwp[0]->pos.y - 9.0f;
+	}
+	else
+	{
+		NewEffect();
+		return;
+	}
 }
 void RandomBurgerMan(taskwk* p1)
 {
@@ -176,12 +208,20 @@ void RandomKeyBlock(taskwk* p1)
 		KeyBlockTextLoader = true;
 		TextLoaded = true;
 	}
-	strcpy_s(LastEffect, 128, "Spawned KeyBlock");
-	task* KeyBlock;
-	KeyBlock = (task*)LoadObject((LoadObj)3, 3, OBoxSwitch);
-	KeyBlock->twp->pos = playertwp[0]->pos;
-	KeyBlock->twp->scl.x = rand() % 3;
-	return;
+	if (HOTSHELTER2_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Spawned KeyBlock");
+		task* KeyBlock;
+		KeyBlock = (task*)LoadObject((LoadObj)3, 3, OBoxSwitch);
+		KeyBlock->twp->pos = playertwp[0]->pos;
+		KeyBlock->twp->scl.x = rand() % 3;
+		return;
+	}
+	else //new effect dueo texlist not being loaded
+	{
+		NewEffect();
+		return;
+	}
 }
 void RandomSnowboard()
 {
@@ -324,17 +364,25 @@ void RandomEmblem(taskwk* p1)//UPDATED (3/1/2022) IT WORKS
 		EmblemTextLoader = true;
 		TextLoaded = true;
 	}
-	strcpy_s(LastEffect, 128, "Random Emblem");
-	task* Emblem;
-	Emblem = (task*)LoadObject((LoadObj)2, 3, Emblem_Main);
-	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-	Emblem->ocp = objCondition;
-	Emblem->twp->pos = playertwp[0]->pos;
-	Emblem->twp->pos.y += rand() % 5 + 3;
-	Emblem->twp->pos.z += rand() % 100 + 1 * 9;
-	Emblem->twp->ang.x = rand() % 500 * 1.6969f; //speed it rotates at
-	Emblem->twp->value.l = 129; //Emblem ID, holy jesus 
-	return;
+	if (EMBLEM_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Emblem");
+		task* Emblem;
+		Emblem = (task*)LoadObject((LoadObj)2, 3, Emblem_Main);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Emblem->ocp = objCondition;
+		Emblem->twp->pos = playertwp[0]->pos;
+		Emblem->twp->pos.y += rand() % 5 + 3;
+		Emblem->twp->pos.z += rand() % 100 + 1 * 9;
+		Emblem->twp->ang.x = rand() % 500 * 1.6969f; //speed it rotates at
+		Emblem->twp->value.l = 129; //Emblem ID, holy jesus 
+		return;
+	}
+	else //new effect dueo texlist not being loaded
+	{
+		NewEffect();
+		return;
+	}
 }
 void RandomBarrel(taskwk* p1)
 {
@@ -344,11 +392,19 @@ void RandomBarrel(taskwk* p1)
 		BarrelTextLoader = true;
 		TextLoaded = true;
 	}
-	strcpy_s(LastEffect, 128, "Random Barrel");
-	task* Barrel;
-	Barrel = (task*)LoadObject((LoadObj)3, 3, OBarrel);
-	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-	Barrel->ocp = objCondition;
-	Barrel->twp->pos = playertwp[0]->pos;
-	return;
+	if (OBJ_TWINKLE_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Barrel");
+		task* Barrel;
+		Barrel = (task*)LoadObject((LoadObj)3, 3, OBarrel);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Barrel->ocp = objCondition;
+		Barrel->twp->pos = playertwp[0]->pos;
+		return;
+	}
+	else //new effect dueo texlist not being loaded
+	{
+		NewEffect();
+		return;
+	}
 }

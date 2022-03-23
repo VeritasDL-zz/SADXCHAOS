@@ -227,6 +227,7 @@ Moved A bunch of the Debug Effect Print's to the top of the effect function (3/2
 Added Config Options for ANDKnuckles, RandomSwapMusic, RandomVoice, DetachCamera and SoundDisable (3/22/2022)
 Fixed a bug with CannonS1/CannonS2 Texture check code (3/22/2022)
 Removed Temp.Walker (XX/XX/XXXX)
+Added "waiting for textures to loaded" (calls a new effect if texlist is not loaded) (3/23/2022) (need to test as of 3/23/2022)
 
 ---------TO-DO---------
 
