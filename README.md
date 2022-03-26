@@ -122,7 +122,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random CannonS2 - Spawns in a Cannon from Sky Deck.
 - BurgerSpin - Spawns in 7 BurgerMen that spin around the player, Check out Her Github. https://github.com/SPEEPSHighway Or Her Meme Maker Mod. https://gamebanana.com/mods/49984
 - Random Dug Up Rings - Digs up Rings like Knuckles would
-- Random Set Ice - Freezes Sonic Or Knuckles in a ice block for 70 frames.
+- Random Set Ice - Freezes Sonic Or Knuckles in a ice block.
 ## Special Thanks
 Thanks to Sora for the code base, Letting me use FreeMovements & helping me with dumb questions.  
 Huge Thanks to Refrag for helping me constantly!  
