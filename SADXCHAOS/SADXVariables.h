@@ -1794,6 +1794,7 @@ DataArray(NJS_VECTOR, Chao_MRChaoSpawnPoints, 0x33A0C78, 16);
 DataArray(ChaoTreeSpawn, ChaoTreeSpawns, 0x33A0D78, 3);
 DataPointer(char **, AL_PVPs, 0x33A0F28);
 DataArray(NJS_TEXLIST, ChaoTexLists, 0x33A1038, 7);
+DataArray(NJS_TEXLIST, texlist_al_dx_parts_tex, 0x33A1340, 129);
 DataArray(NJS_TEXNAME, AL_OBJECT_TEXNAME, 0x33A1070, 32);
 DataPointer(NJS_TEXLIST, AL_OBJECT_TEXLIST, 0x33A11F0);
 DataPointer(NJS_TEXLIST, AL_TOY_TEXLIST, 0x33A11F8);

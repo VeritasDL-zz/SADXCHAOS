@@ -209,8 +209,18 @@ void RandomChaoo()
 {
 	if (!ChaooManagerLoader)
 	{
-		ChaoMain_Constructor();
-		al_confirmload_load();
+		//ChaoMain_Constructor();
+		FreeChaoTextures();
+		ResetModules();
+		LoadChaoTexlist("AL_DX_PARTS_TEX", &texlist_al_dx_parts_tex, 0);
+		LoadChaoTexlist("AL_BODY", ChaoTexLists, 0);
+		LoadChaoTexlist("AL_jewel", &ChaoTexLists[4], 0);
+		LoadChaoTexlist("AL_ICON", &ChaoTexLists[3], 0);
+		LoadChaoTexlist("AL_EYE", &ChaoTexLists[2], 0);
+		LoadChaoTexlist("AL_MOUTH", &ChaoTexLists[5], 0);
+		LoadChaoPVPs();
+		//al_confirmload_load(); //maybe disable? not sure
+		LoadPVM("AL_TEX_COMMON", &ChaoTexLists[1]); //from al_confirmload_load
 		ChaoManager_Load();
 		ChaooManagerLoader = true;
 	}
@@ -547,7 +557,7 @@ void RandomSwapMusic()
 	}
 	strcpy_s(LastEffect, 128, "Random Song");
 	do {
-		CurrentSong = rand() % 124;
+		CurrentSong = rand() % 100;
 	} while (LastSong == CurrentSong);
 	LastSong = CurrentSong;
 	return;
@@ -560,14 +570,14 @@ void ChaosPlayVoice_rng()
 		return;
 	}
 	strcpy_s(LastEffect, 128, "Random Voice");
-	int Voice = rand() % 2043;
+	int Voice = rand() % 2024;
 	PlayVoice(Voice);
 	return;
 }
 void RandomDPadDownCheck()
 {
 	//enable dpaddown check timer
-	DPadDown_Timer = 90; //90 frames?
+	DPadDown_Timer = 90; //90 frames
 	DpadDown = 0; //resets dpad down check, 
 	strcpy_s(LastEffect, 128, "DPad Down Or Die!");
 }
@@ -635,7 +645,7 @@ void IncreaseCutsceneSkipTime()
 		NewEffect();
 		return;
 	}
-	if (!WriteOnce) //temp.walker may not need, may remove check
+	if (!WriteOnce)
 	{
 		strcpy_s(LastEffect, 128, "Long Cutscene Time");
 		WriteOnce = true;
@@ -860,14 +870,4 @@ void RandomKnuxRingSpring(taskwk* p1)
 		NewEffect();
 		return;
 	}
-}
-void RandomRingLine()
-{
-	task* RingLine;
-	RingLine = (task*)LoadObject((LoadObj)2, 3, RingGroup_Main);
-	RingLine->twp->mode = 1;
-	RingLine->twp->scl.x = 0;
-	RingLine->twp->scl.z = 10;
-	RingLine->twp->pos = playertwp[0]->pos;
-	RingLine->twp->pos.y = +15;
 }

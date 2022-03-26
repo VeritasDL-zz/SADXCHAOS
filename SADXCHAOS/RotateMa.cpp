@@ -209,7 +209,7 @@ void BurgerManSpin()
 		TextLoaded = true;
 	}
 	strcpy_s(LastEffect, 128, "Burger Man Ring");
-	BurgerSpin_Timer = 420; //temp.walker need to test.
+	BurgerSpin_Timer = 420;
 }
 void BurgerManSpinDelete()
 {

@@ -100,10 +100,14 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	WriteData<1>((int*)0x624151, 0x00);//TwinklePark Barrel Timer Hack
 	WriteJump(Snowboard_Delete, Snowboard_Delete_r);
 	WriteData((char*)0x4EE7BB, (char)4);//Big ice rock pickup ability
-	WriteData((int*)0x017D0A2C, (int)0xC7C35000);//Stops the amy key block from exploding 
-	WriteData((int*)0x017D0A38, (int)0xC7C35000);//Stops the amy key block from exploding
-	WriteData((int*)0x017D0A44, (int)0xC7C35000);//Stops the amy key block from exploding
-	WriteData((int*)0x017D0A50, (int)0xC7C35000);//Stops the amy key block from exploding
+	WriteData((int*)0x17D0A2C, (int)0xC7C35000);//Stops the amy key block from exploding 
+	WriteData((int*)0x17D0A38, (int)0xC7C35000);//Stops the amy key block from exploding
+	WriteData((int*)0x17D0A44, (int)0xC7C35000);//Stops the amy key block from exploding
+	WriteData((int*)0x17D0A50, (int)0xC7C35000);//Stops the amy key block from exploding
+	WriteData<5>((int*)0x4B4924, 0x90);//EmblemCollected_Load ControlDisable Nop
+	WriteData<5>((int*)0x4B46C5, 0x90);//EmblemCollected_Main ControlDisable Nop
+	WriteData<5>((int*)0x4B4924, 0x90);//InitGGMessage CameraSetEventCameraFunc Nop
+	WriteData((int*)0x80F060, (int)0x47C35000);//FinalEgg Fan Set Accend Height Max Bypass //Temp.walker need to test (3/26/2022)
 	//WriteData<1>((int*)0x4F6D60, 0xC3);
 	//WriteData<1>((int*)0x44AE80, 0xC3);
 	srand((unsigned)time(nullptr));

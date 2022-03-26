@@ -411,5 +411,5 @@ void CheckAllEffectsTimer()
 	CustomCameraEffectsTimersCheck();
 	DebugTimerCheck();
 	AirCraftSpawnerTimerCheck();
-	BurgerSpinDeleteTimerCheck(); //temp.walker may have fixed this
+	BurgerSpinDeleteTimerCheck();
 }

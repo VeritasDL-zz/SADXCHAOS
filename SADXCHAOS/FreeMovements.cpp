@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Chaos.h"
-//thanks to sora for lettimg me use this Sora (https://github.com/Sora-yx/sadx-debug-mode)
+//thanks to sora for lettimg me use this.  (https://github.com/Sora-yx/sadx-debug-mode)
 Trampoline* Tails_Main_t;
 Trampoline* Gamma_Main_t;
 Trampoline* Big_Main_t;

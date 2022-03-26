@@ -93,7 +93,16 @@ void RandomHat(taskwk* p1)
 	if (!ChaoHatTextLoader)
 	{
 		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
-		ChaoMain_Constructor();
+		//ChaoMain_Constructor();
+		FreeChaoTextures();
+		ResetModules();
+		LoadChaoTexlist("AL_DX_PARTS_TEX", &texlist_al_dx_parts_tex, 0);
+		LoadChaoTexlist("AL_BODY", ChaoTexLists, 0);
+		LoadChaoTexlist("AL_jewel", &ChaoTexLists[4], 0);
+		LoadChaoTexlist("AL_ICON", &ChaoTexLists[3], 0);
+		LoadChaoTexlist("AL_EYE", &ChaoTexLists[2], 0);
+		LoadChaoTexlist("AL_MOUTH", &ChaoTexLists[5], 0);
+		LoadChaoPVPs();
 		TextLoaded = true;
 		ChaoHatTextLoader = true;
 	}
@@ -153,7 +162,6 @@ void RandomSpeedPad(taskwk* p1)
 }
 void RandomFan(taskwk* p1)
 {
-	//need to figure out fan power?
 	if (!FanTextLoader)
 	{
 		LoadPVM("OBJ_FINALEGG", &OBJ_FINALEGG_TEXLIST); 
@@ -169,6 +177,8 @@ void RandomFan(taskwk* p1)
 		Fan->ocp = objCondition;
 		Fan->twp->pos = playertwp[0]->pos;
 		Fan->twp->pos.y = playertwp[0]->pos.y - 9.0f;
+		float CustomFanAcc = (float(rand()) / float((RAND_MAX)) * 0.99);
+		WriteData((float*)0x1AC4854, CustomFanAcc);
 	}
 	else
 	{
@@ -348,7 +358,7 @@ void RandomSpikeBall(taskwk* p1)
 	}
 	return;
 }
-void RandomEmblem(taskwk* p1)//UPDATED (3/1/2022) IT WORKS
+void RandomEmblem(taskwk* p1)
 {
 	if (!RandomEmblemEnabled)
 	{
