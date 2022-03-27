@@ -165,6 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimalTexture.h" />
+    <ClInclude Include="Cart.h" />
     <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Effects.h" />
     <ClInclude Include="Enemies.h" />
@@ -183,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimalTextures.cpp" />
+    <ClCompile Include="Cart.cpp" />
     <ClCompile Include="Chaos.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="dllmain.cpp" />

@@ -377,14 +377,14 @@ void RandomDroppedRings(taskwk* p1)
 	TakeRingsInterval1(randomrings);
 	strcpy_s(LastEffect, 128, "Dropped Rings");
 }
-void RandomPause() //randomly pauses the game LOL get good
+void RandomPause()
 {
 	if (!RPauseEnabled)
 	{
 		NewEffect();
 		return;
 	}
-	Pause_Timer = 5; //how long in frames? to pause unpause?
+	Pause_Timer = 5;
 	strcpy_s(LastEffect, 128, "Random Pause");
 }
 void SwapCamera()//Swaps Camera lmfao

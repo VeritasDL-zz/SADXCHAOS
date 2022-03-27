@@ -418,3 +418,55 @@ void RandomBarrel(taskwk* p1)
 		return;
 	}
 }
+void RandomConveyorBelt(taskwk* p1)
+{
+	if (!ConveyorTextLoader)
+	{
+		LoadPVM("Obj_finalegg", &OBJ_FINALEGG_TEXLIST);
+		ConveyorTextLoader = true;
+		TextLoaded = true;
+	}
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Conveyor Belt");
+		task* Conveyor;
+		Conveyor = (task*)LoadObject((LoadObj)6, 3, OConv_belt);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Conveyor->ocp = objCondition;
+		Conveyor->twp->pos = playertwp[0]->pos;
+		Conveyor->twp->pos.y = playertwp[0]->pos.y - 1;
+		Conveyor->twp->scl.z = (float(rand()) / float((RAND_MAX)) * 1.3);
+		Conveyor->twp->ang = playertwp[0]->ang;
+		Conveyor->twp->ang.x = rand() % 119 + (-59);
+		return;
+	}
+	else //new effect dueo texlist not being loaded
+	{
+		NewEffect();
+		return;
+	}
+}
+void RandomConveyorStop(taskwk* p1)
+{
+	if (!ConveyorTextLoader)
+	{
+		LoadPVM("Obj_finalegg", &OBJ_FINALEGG_TEXLIST);
+		ConveyorTextLoader = true;
+		TextLoaded = true;
+	}
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Spawned Conveyor Spike");
+		task* ConveyorStop;
+		ConveyorStop = (task*)LoadObject((LoadObj)2, 3, OConv_stop);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		ConveyorStop->ocp = objCondition;
+		ConveyorStop->twp->pos = playertwp[0]->pos;
+		return;
+	}
+	else //new effect dueo texlist not being loaded
+	{
+		NewEffect();
+		return;
+	}
+}

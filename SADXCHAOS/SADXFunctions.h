@@ -524,7 +524,7 @@ FunctionPointer(void, PositionPlayer, (Uint8 charIndex, float x, float y, float 
 FunctionPointer(int, IsPlayerInsideSphere, (NJS_VECTOR *x_1, float radius), 0x441840);
 FunctionPointer(int, GetCharacterID, (char index), 0x441970);
 FunctionPointer(Bool, GetBufferedPositionAndRotation, (unsigned __int8 CharIndex, char a2, NJS_VECTOR *out_position, Rotation3 *out_rotation), 0x4419C0);
-FunctionPointer(ObjectMaster *, GetCharacterObject, (unsigned __int8 character), 0x441AC0);
+FunctionPointer(ObjectMaster*, GetCharacterObject, (unsigned __int8 character), 0x441AC0);
 FunctionPointer(CharObj2 *, GetCharObj2, (char index), 0x441B00);
 FunctionPointer(int, GetPlayerCount, (), 0x441B10);
 FunctionPointer(Sint32, GetTargetableCharacter, (unsigned __int8 pnum), 0x441BF0);

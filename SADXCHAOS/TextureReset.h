@@ -38,6 +38,8 @@ extern bool KnuxEffTextLoader;
 extern bool IceTextLoader;
 extern bool BarrelTextLoader;
 extern bool BurgerSpinTextLoader;
+extern bool ConveyorTextLoader;
+extern bool CartTextLoader;
 extern bool WriteOnce;
 extern int FruitNumb;
 extern int HatNumb;

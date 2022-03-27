@@ -27,6 +27,7 @@ int RandomSpawnAmount = 0;
 bool DebugEnabled = false;
 int SideWaysCamera_Timer = 0;
 int BurgerSpin_Timer = 0;
+int Cart_Timer = 0;
 int Bl1ngBl0ng = 50;
 
 void ChaosTimer()
@@ -393,6 +394,18 @@ void BurgerSpinDeleteTimerCheck() //need to fix
 		BurgerSpin_Timer = 0;
 	}
 }
+void CartTimerCheck()
+{
+	if (Cart_Timer <= 1111 && Cart_Timer != 0)
+	{
+		Cart_Timer--;
+	}
+	if (Cart_Timer == 1)
+	{
+		DeleteCartAndExitPlayer();
+		Cart_Timer = 0;
+	}
+}
 void CheckAllEffectsTimer()
 {
 	NoClipTimerCheck();
@@ -412,4 +425,5 @@ void CheckAllEffectsTimer()
 	DebugTimerCheck();
 	AirCraftSpawnerTimerCheck();
 	BurgerSpinDeleteTimerCheck();
+	CartTimerCheck();
 }

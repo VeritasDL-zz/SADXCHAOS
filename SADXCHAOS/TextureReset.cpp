@@ -31,6 +31,8 @@ bool CannonS2TextLoader = false;
 bool KnuxEffTextLoader = false;
 bool BarrelTextLoader = false;
 bool BurgerSpinTextLoader = false;
+bool ConveyorTextLoader = false;
+bool CartTextLoader = false;
 bool TextLoaded = false;
 bool WriteOnce = false;
 int FruitNumb = 0;
@@ -71,6 +73,8 @@ void ResetTextureBools()
 	KnuxEffTextLoader = false;
 	IceTextLoader = false;
 	BarrelTextLoader = false;
+	ConveyorTextLoader = false;
+	CartTextLoader = false;
 	WriteOnce = false;
 	HatNumb = 0;
 	FruitNumb = 0;

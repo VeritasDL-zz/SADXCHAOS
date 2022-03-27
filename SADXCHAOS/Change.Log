@@ -231,9 +231,11 @@ Added "waiting for textures to loaded" (calls a new effect if texlist is not loa
 Attemped to fix a Crash with Random Chao (3/24/2022)
 Added Random Fan Power to RandomFan (3/25/2022)
 Removed Control Disable and Camera Lock when collecting Emblems (RandomEmblem "Imporvement" (I guess it makes it less? of a headache when you collect a emblem and if unlocking GG game))
-Removed Temp.Walker again (3/25/2022)
+Removed Temp.Walker (3/25/2022)
 Added Bypass for Fan Max Push Height (3/26/2022)
-
+Added and fixed RandomConveyorBelt (3/26/2022)
+Added RandomConveyorStop (3/26/2022) //temp.walker need to fix rotation issue, 
+Added RandomCart Thanks to Sora_yx https://github.com/Sora-yx/SADX-Randomizer (3/26/2022) (will port to use task* at some point)
 
 
 
@@ -243,13 +245,15 @@ Added Bypass for Fan Max Push Height (3/26/2022)
  Test Stuff
  test new stuff fully 
  Log Known Crashes
-
+ 
+ Convert Cart to Task LOL this sucks
  RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
 
  sonic.exe.12004.dmp - 0x0046E08D - seems to be related to Big's Fishing Hud (some weird math ill have to find it in the Xbox Symbols to understand it better) 
  sonic.exe.21672.dmp - Invalid Memory Crash (says crashed at address 0xFFFFFFFFC4E0C2D6)
  sonic.exe.24756.dmp - Invalid Memory Crash (says crashed at 0x61cf321D with exception 0xC0000005 (access violation error code)
- sonic.exe.29448.dmp - Invalid Memory Crash (says crashed at 0x61cf321D with exception 0xC0000005 (access violation error code)
+
+
 
  Some enemies do no spawn in Egg Viper. Like, the game said it spawned Robos and Police, but I didn't see them 
  Spawned Random Chao in Tails' Ice Cap, game crashed. I was also with no snowboard. Idk, might be important
@@ -260,7 +264,6 @@ Added Bypass for Fan Max Push Height (3/26/2022)
  Beat has bad texture
  Gamma hs, ham crashed 7 times, in a row
  Seems to be related to gamma locking onto enemys he was never intended to? idk
-
 
 
 

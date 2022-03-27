@@ -22,11 +22,10 @@ extern "C"
 		init_FreeMovements();
 		strcpy_s(LastEffect, 128, "Chaos Edition 2.0 b 6");
 	}
-	ChaosS ChaosArray[116]
+	ChaosS ChaosArray[119]
 	{
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
-	{ RandomSpikeBall, nullptr, nullptr },
 	{ RandomSpikeBall, nullptr, nullptr },
 	{ RandomSpinnerB, nullptr, nullptr },
 	{ RandomRobo, nullptr, nullptr },
@@ -36,12 +35,14 @@ extern "C"
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomBurgerMan, nullptr, nullptr },
 	{ RandomPowerUP, nullptr, nullptr },
+	{ RandomConveyorBelt, nullptr, nullptr },
 	{ RandomDroppedRings, nullptr, nullptr },
 	{ RandomKeyBlock, nullptr, nullptr },
 	{ RandomUnidus, nullptr, nullptr },
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomBuyon, nullptr, nullptr },
 	{ RandomSpinnerC, nullptr, nullptr },
+	{ RandomFireBreath, nullptr, nullptr },
 	{ RandomTank, nullptr, nullptr },
 	{ RandomPowerUP, nullptr, nullptr },
 	{ BigRock, nullptr, nullptr },
@@ -54,8 +55,10 @@ extern "C"
 	{ RandomSpikeBall, nullptr, nullptr },
 	{ RandomCheckPoint, nullptr, nullptr },
 	{ RandomAmebot, nullptr, nullptr },
+	{ RandomConveyorBelt, nullptr, nullptr },
 	{ RandomPolice, nullptr, nullptr },
 	{ BigRock, nullptr, nullptr },
+	{ RandomCannonS2, nullptr, nullptr },
 	{ RandomBurgerMan, nullptr, nullptr },
 	{ RandomPowerUP, nullptr, nullptr },
 	{ RandomEGacha, nullptr, nullptr },
@@ -63,11 +66,10 @@ extern "C"
 	{ RandomFan, nullptr, nullptr },
 	{ RandomEmblem, nullptr, nullptr },
 	{ RandomAirCraft, nullptr, nullptr },
+	{ RandomSpikeBall, nullptr, nullptr },
 	{ RandomAirCraft, nullptr, nullptr },
 	{ RandomFireBreath, nullptr, nullptr },
-	{ RandomFireBreath, nullptr, nullptr },
 	{ RandomCannonS1, nullptr, nullptr },
-	{ RandomCannonS2, nullptr, nullptr },
 	{ RandomBarrel, nullptr, nullptr },
 	{ RandomKnuxRingSpring, nullptr, nullptr },
 	{ nullptr, RandomVSpeed, nullptr },
@@ -135,6 +137,7 @@ extern "C"
 	{ nullptr, nullptr, RandomTimeOfDay },
 	{ nullptr, nullptr, RandomChaoo },
 	{ nullptr, nullptr, SwapCamera },
+	{ nullptr, nullptr, Load_Cart_R },
 	{ nullptr, nullptr, UncoupleCamera },
 	{ nullptr, nullptr, RingAllergy },
 	{ nullptr, nullptr, NoGravity },
@@ -166,7 +169,6 @@ extern "C"
 		//Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomFan(0);
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

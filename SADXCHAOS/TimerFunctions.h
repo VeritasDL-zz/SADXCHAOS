@@ -27,6 +27,7 @@ extern int DrunkCam;
 extern int Direction;
 extern int SideWaysCamera_Timer;
 extern int BurgerSpin_Timer;
+extern int Cart_Timer;
 extern bool DebugEnabled;
 void NoClipTimerCheck();
 void InputInvertTimerCheck();

@@ -81,6 +81,7 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	RandomVoiceEnabled = config->getBool("Sound", "RandomVoiceEnabled", true);
 	delete config;
 	InitializeRandomCoordinates();
+	init_CartStuff(); //temp.walker need to test 3/26/2022 //sora credit
 	WriteCall((void*)0x4E9423, LoadSnowboardObject);//fix for snowboard texture
 	WriteCall((void*)0x4E967E, LoadSnowboardObject);//fix for snowboard texture
 	WriteCall((void*)0x4E9698, LoadSnowboardObject);//fix for snowboard texture
@@ -88,17 +89,19 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	WriteCall((void*)0x597B46, LoadSnowboardObject);//fix for snowboard texture
 	WriteCall((void*)0x4EDD17, OverRideBigRockTex); //fix for Big Ice Cap Rock Texture
 	WriteCall((void*)0x5B7581, LoadFETexObj);//fix for Fan Texture
+	WriteCall((void*)0x5BD65B, LoadFETexObj);//fix for Conveyor Texture
+	WriteCall((void*)0x5BD271, LoadFETexObj);//fix for Conveyor Stop Texture
 	WriteCall((void*)0x5F1A52, LoadSDTexObj);//fix for AirCraft Texture
 	WriteCall((void*)0x5F1A78, LoadSDTexObj);//fix for AirCraft Texture
-	WriteCall((void*)0x6F4BD5, OverRideEmeraldShardObj);//test
-	WriteCall((void*)0x6F4D81, OverRideEmeraldShardObj);//test
-	WriteCall((void*)0x6F4EE0, OverRideEmeraldShardObj);//test
+	WriteCall((void*)0x6F4BD5, OverRideEmeraldShardObj);//attempt to fix EmeraldShard Texture
+	WriteCall((void*)0x6F4D81, OverRideEmeraldShardObj);//attempt to fix EmeraldShard Texture
+	WriteCall((void*)0x6F4EE0, OverRideEmeraldShardObj);//attempt to fix EmeraldShard Texture
 	WriteCall((void*)0x624047, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
 	WriteCall((void*)0x623CD1, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
 	WriteCall((void*)0x623D88, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
 	WriteData<1>((int*)0x624150, 0x25);//TwinklePark Barrel Timer Hack
 	WriteData<1>((int*)0x624151, 0x00);//TwinklePark Barrel Timer Hack
-	WriteJump(Snowboard_Delete, Snowboard_Delete_r);
+	WriteJump(Snowboard_Delete, Snowboard_Delete_r);//fix for snowboard texture delete
 	WriteData((char*)0x4EE7BB, (char)4);//Big ice rock pickup ability
 	WriteData((int*)0x17D0A2C, (int)0xC7C35000);//Stops the amy key block from exploding 
 	WriteData((int*)0x17D0A38, (int)0xC7C35000);//Stops the amy key block from exploding
@@ -108,7 +111,7 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	WriteData<5>((int*)0x4B46C5, 0x90);//EmblemCollected_Main ControlDisable Nop
 	WriteData<5>((int*)0x4B4924, 0x90);//InitGGMessage CameraSetEventCameraFunc Nop
 	WriteData((int*)0x80F060, (int)0x47C35000);//FinalEgg Fan Set Accend Height Max Bypass //Temp.walker need to test (3/26/2022)
-	//WriteData<1>((int*)0x4F6D60, 0xC3);
-	//WriteData<1>((int*)0x44AE80, 0xC3);
+	//WriteData<1>((int*)0x4F6D60, 0xC3); //EC ACT 0 Stuff from sora for testing
+	//WriteData<1>((int*)0x44AE80, 0xC3); //EC ACT 0 Stuff from sora for testing
 	srand((unsigned)time(nullptr));
 }

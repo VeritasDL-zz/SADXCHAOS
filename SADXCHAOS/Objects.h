@@ -15,3 +15,5 @@ void RandomEmblem(taskwk* p1);
 void RandomFan(taskwk* p1);
 void RandomBarrel(taskwk* p1);
 bool GrabAbleObjects();
+void RandomConveyorBelt(taskwk* p1);
+void RandomConveyorStop(taskwk* p1);
