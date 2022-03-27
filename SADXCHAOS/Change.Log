@@ -238,7 +238,7 @@ Added RandomConveyorStop (3/26/2022)
 Added RandomCart Thanks to Sora_yx https://github.com/Sora-yx/SADX-Randomizer (3/26/2022) (will port to use task* at some point)
 Fix for Debug Mode while in RandomCart Thanks to Skoob for pointing this out (3/27/2022)
 Enabled debug .pdb generation (3/27/2022)
-
+Added Force Cart Entry to RandomCart (3/27/2022)
 
 ---------TO-DO---------
 

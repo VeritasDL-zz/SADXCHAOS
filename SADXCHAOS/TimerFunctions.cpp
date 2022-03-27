@@ -403,6 +403,8 @@ void CartTimerCheck()
 	if (Cart_Timer == 1)
 	{
 		DeleteCartAndExitPlayer();
+		WriteData<1>((void*)0x798306, 0x85); //Jump auto in the cart
+		WriteData<1>((void*)0x7983c4, 0x7C); //Jump auto in the cart
 		Cart_Timer = 0;
 	}
 }
