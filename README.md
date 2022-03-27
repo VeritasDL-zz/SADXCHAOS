@@ -115,7 +115,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Spin Camera - Spins the Camera in a Circle for 240 frames.
 - Drunk Camera - Makes the Camera Sway from Left to Right for 275 frames.
 - SideWays Camera - Flips the Camera to either Side for 240 frames.
-- Random Fan - Spawns in the Fan from Final Egg Act 2 under the player.
+- Random Fan - Spawns in the Fan from Final Egg Act 2 under the player, with Random Fan Speed.
 - Random AirCraft - Spawns in a Random Number of AirCraft's for 350 frames.
 - Random FireBreath - Spawn in the FireBreath Statue from Red Mountain.
 - Random CannonS1 - Spawns in a Cannon from Sky Deck.
@@ -123,8 +123,15 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - BurgerSpin - Spawns in 7 BurgerMen that spin around the player, Check out Her Github. https://github.com/SPEEPSHighway Or Her Meme Maker Mod. https://gamebanana.com/mods/49984
 - Random Dug Up Rings - Digs up Rings like Knuckles would
 - Random Set Ice - Freezes Sonic Or Knuckles in a ice block.
+- Random Conveyor Belt - Spawns in the moving Conveyor Belt from Final Egg With random Size and speed
+- Random Conveyor Spike - Spawns in the Conveyor Spike from Final Egg
+- Random Cart - Spawns in the TinklePark Cart, The Player can choose to ride in it on 2000 Frames
+
+
+
+
 ## Special Thanks
-Thanks to Sora for the code base, Letting me use FreeMovements & helping me with dumb questions.  
+Thanks to Sora for the code base, Letting me use FreeMovements, Cart Spawner code & helping me with dumb questions.  
 Huge Thanks to Refrag for helping me constantly!  
 Thanks to MainMemory for letting me use her snowboard and physics code!  
 Thanks to PkR for letting me use his DrawDebugRectangle and ScaleDebugFont Code from https://github.com/PiKeyAr/sadx-debug-mode/  
