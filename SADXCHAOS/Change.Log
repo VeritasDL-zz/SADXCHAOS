@@ -236,7 +236,7 @@ Added Bypass for Fan Max Push Height (3/26/2022)
 Added and fixed RandomConveyorBelt (3/26/2022)
 Added RandomConveyorStop (3/26/2022)
 Added RandomCart Thanks to Sora_yx https://github.com/Sora-yx/SADX-Randomizer (3/26/2022) (will port to use task* at some point)
-
+Fix for Debug Mode while in RandomCart Thanks to Skoob for pointing this out (3/27/2022)
 
 
 

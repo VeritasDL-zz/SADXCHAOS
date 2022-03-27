@@ -419,6 +419,11 @@ void RandomDebug()
 		NewEffect();
 		return;
 	}
+	if (CurrentCart)
+	{
+		NewEffect();
+		return;
+	}
 	switch (CurrentCharacter)
 	{
 	case Characters_Sonic:

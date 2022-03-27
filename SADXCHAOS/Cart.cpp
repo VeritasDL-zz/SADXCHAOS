@@ -81,6 +81,10 @@ void LoadRemoveCartIceCap()
 	DeleteCartAndExitPlayer();
 	return;
 }
+void RandomCart()
+{
+	Load_Cart_R();
+}
 void Load_Cart_R()
 {
 	ObjectMaster* play1 = GetCharacterObject(0);

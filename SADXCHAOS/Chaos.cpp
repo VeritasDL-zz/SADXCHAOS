@@ -137,7 +137,7 @@ extern "C"
 	{ nullptr, nullptr, RandomTimeOfDay },
 	{ nullptr, nullptr, RandomChaoo },
 	{ nullptr, nullptr, SwapCamera },
-	{ nullptr, nullptr, Load_Cart_R },
+	{ nullptr, nullptr, RandomCart },
 	{ nullptr, nullptr, UncoupleCamera },
 	{ nullptr, nullptr, RingAllergy },
 	{ nullptr, nullptr, NoGravity },
@@ -169,7 +169,7 @@ extern "C"
 		//Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomConveyorStop(0);
+			
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
