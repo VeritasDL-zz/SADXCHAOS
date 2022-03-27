@@ -1,5 +1,4 @@
 #include "pch.h"
-
 //Credits to Sora_yx for this code https://github.com/Sora-yx/SADX-Randomizer
 ObjectMaster* CurrentCart = nullptr;
 Trampoline* LevelItem_Delete_t;
@@ -7,7 +6,8 @@ DataPointer(char, FlagAutoPilotCart, 0x3D08E00);
 FunctionPointer(void, RemovePlayerFromObject, (unsigned __int8 playerID, float speedX, float speedY, float speedZ), 0x441820);
 VoidFunc(CameraReleasEvent, 0x436140);
 ObjectFunc(UpdateSetDataAndDelete, 0x46C150);
-enum Color {
+enum Color 
+{
 	BlackColor, BlueColor, GreenColor, LightBlueColor, OrangeColor, PurpleColor, RedColor
 };
 int AmyCartImprovement() 
@@ -24,7 +24,7 @@ void Delete_Cart_r(ObjectMaster* obj)
 	{
 		if (obj == CurrentCart) 
 		{
-			if (obj->SETData.SETData) 
+			if (obj->SETData.SETData)
 			{
 				if (obj->SETData.SETData->SETEntry)
 					obj->SETData.SETData->SETEntry = nullptr;

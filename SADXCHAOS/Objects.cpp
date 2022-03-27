@@ -1,4 +1,5 @@
 #include "pch.h"
+#include <cmath>
 uint32_t IlDuce = (0x0000000000183A88+0x00000000000C1F44+0x00000000000C2544-0x00000000002461CC);
 bool GrabAbleObjects()
 {
@@ -456,12 +457,21 @@ void RandomConveyorStop(taskwk* p1)
 	}
 	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
 	{
-		strcpy_s(LastEffect, 128, "Spawned Conveyor Spike");
+		strcpy_s(LastEffect, 128, "Spawned Spike");
 		task* ConveyorStop;
-		ConveyorStop = (task*)LoadObject((LoadObj)2, 3, OConv_stop);
+		ConveyorStop = (task*)LoadObject((LoadObj)3, 3, OConv_stop);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		ConveyorStop->ocp = objCondition;
 		ConveyorStop->twp->pos = playertwp[0]->pos;
+		ConveyorStop->twp->pos.x =+ playertwp[0]->pos.x + 69;
+		ConveyorStop->twp->pos.z =+ playertwp[0]->pos.z + 69;
+		ConveyorStop->twp->pos.y =- playertwp[0]->pos.y - 30;
+		double gradientZ = (ConveyorStop->twp->pos.z - playertwp[0]->pos.z);
+		double gradientX = (ConveyorStop->twp->pos.x - playertwp[0]->pos.x);
+		double angle = round((M_PI / 2 - atan2(gradientZ, gradientX)) * 10430.378);
+		if (playertwp[0]->pos.z < ConveyorStop->twp->pos.z)
+			angle += 32768;
+		ConveyorStop->twp->ang.y = angle;
 		return;
 	}
 	else //new effect dueo texlist not being loaded

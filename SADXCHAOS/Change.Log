@@ -234,7 +234,7 @@ Removed Control Disable and Camera Lock when collecting Emblems (RandomEmblem "I
 Removed Temp.Walker (3/25/2022)
 Added Bypass for Fan Max Push Height (3/26/2022)
 Added and fixed RandomConveyorBelt (3/26/2022)
-Added RandomConveyorStop (3/26/2022) //temp.walker need to fix rotation issue, 
+Added RandomConveyorStop (3/26/2022)
 Added RandomCart Thanks to Sora_yx https://github.com/Sora-yx/SADX-Randomizer (3/26/2022) (will port to use task* at some point)
 
 

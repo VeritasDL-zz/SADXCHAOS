@@ -75,6 +75,7 @@ FunctionPointer(int, CheckCollisionP, (NJS_POINT3* vp, float d), 0x441840); // C
 FunctionPointer(int, CheckCollisionCylinderP, (NJS_POINT3* vp, float r, float h), 0x4418D0); // Check if a player is in a cylinder, returns 0 or player id + 1
 FunctionPointer(void, AddSetStage, (char Gap), 0x46BF70); // Release objects and request act change
 VoidFunc(ResetRenderingParameter, 0x7AF430);
+ObjectFunc(savepointExit, 0x4BFDA0);
 
 // Lighting
 FunctionPointer(void, lig_setLight, (NJS_POINT3* v, double r, double g, double b, double spe, double dif, double amb), 0x412740); // Converts legacy NJS_LIGHT data to palette generation data
@@ -135,6 +136,9 @@ FunctionPointer(void, SetPositionP, (uint8_t pno, float x, float y, float z), 0x
 FunctionPointer(void, SetRotationP, (uint8_t pno, Angle angx, Angle angy, Angle angz), 0x4415F0);
 FunctionPointer(void, PSetMotion, (mtnjvwk* mjp), 0x44A800);
 FunctionPointer(void, setDrop, (taskwk* a1, int a2, float a3, float a4), 0x7AD1C0);
+FunctionPointer(void, Mov_TurnToPlayer2, (task* tp, int rot_spd, int player_num), 0x740220); //chao turn to player2 from symbols 
+FunctionPointer(int, Al_TurnToTask, (task* pMyTask, task* pTargetTask, int RotSpd), 0x723EC0); //chao turn to task from symbols 
+
 static const void* const KnucklesCheckInputPtr = (void*)0x476970;
 static inline signed int KnucklesCheckInput(taskwk* twp, motionwk2* mwp, playerwk* pwp)
 
