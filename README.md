@@ -125,7 +125,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random Set Ice - Freezes Sonic Or Knuckles in a ice block.
 - Random Conveyor Belt - Spawns in the moving Conveyor Belt from Final Egg With random Size and speed
 - Random Conveyor Spike - Spawns in the Conveyor Spike from Final Egg
-- Random Cart - Spawns in the TinklePark Cart, The Player can choose to ride in it on 2000 Frames
+- Random Cart - Spawns in the TinklePark Cart and Forces the player in it for 2000 Frames
 
 
 
