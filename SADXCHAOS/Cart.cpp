@@ -169,7 +169,7 @@ void Load_Cart_R()
 			CurrentCart->SETData.SETData->SETEntry->Properties.x = 1.00000000;
 			CurrentCart->SETData.SETData->SETEntry->Properties.y = 1.00000000;
 			CurrentCart->SETData.SETData->SETEntry->Properties.z = 0.000000000;
-			Cart_Timer = 1111;
+			Cart_Timer = 2000;
 		}
 	}
 	else

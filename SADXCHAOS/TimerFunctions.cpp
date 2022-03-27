@@ -396,7 +396,7 @@ void BurgerSpinDeleteTimerCheck() //need to fix
 }
 void CartTimerCheck()
 {
-	if (Cart_Timer <= 1111 && Cart_Timer != 0)
+	if (Cart_Timer <= 2000 && Cart_Timer != 0)
 	{
 		Cart_Timer--;
 	}
