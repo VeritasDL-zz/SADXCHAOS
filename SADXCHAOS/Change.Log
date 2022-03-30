@@ -1,4 +1,4 @@
-Welcome To The SADX Chaos Edition Change Log File
+Welcome To The SADX Chaos Edition Change.Log File
 
 Started Mod 8/5/2021
 Added code base from Soar's scrapped "mania" mode
@@ -244,46 +244,21 @@ Atempting a hacky Fix for PressD-pad down or die font not rendering some times t
 Adjusted RandomCart to not spawn durring Cutscenes? and added it to the Egg-Viper HandiCap list (3/30/2022) //temp.walker need to test
 Adjusted RandomControlDisable To not trigger while in cutscene (3/30/2022)
 Added One New TikalHint (3/30/2022)
-
-
-
-
-
+Sadly Had to move Dpad-Down Or Die Text to the far left of the screen (3/30/2022)
 
 
 ---------TO-DO---------
-
  Test Stuff
  test new stuff fully 
  Log Known Crashes
  
  Convert Cart to Task LOL this sucks
  RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
-
- sonic.exe.12004.dmp - 0x0046E08D - seems to be related to Big's Fishing Hud (some weird math ill have to find it in the Xbox Symbols to understand it better) 
- sonic.exe.21672.dmp - Invalid Memory Crash (says crashed at address 0xFFFFFFFFC4E0C2D6)
- sonic.exe.24756.dmp - Invalid Memory Crash (says crashed at 0x61cf321D with exception 0xC0000005 (access violation error code)
-
-
-
- Some enemies do no spawn in Egg Viper. Like, the game said it spawned Robos and Police, but I didn't see them 
- Spawned Random Chao in Tails' Ice Cap, game crashed. I was also with no snowboard. Idk, might be important
  Add More Custom Tikal Hints
  Add More Random Teleport Locations
 
  Todo 
  Beat has bad texture
- Gamma hs, ham crashed 7 times, in a row
- Seems to be related to gamma locking onto enemys he was never intended to? idk
-
-
-
-
-
 
 
  Random Info Storage
-OFunExec ` 05B74FF SetAscendPowerP(0, 0, SLODWORD(v6), 0);` 005B74CF OFunAccRate (0x01AC4858)  005B74D5 OFunAcc (0x01AC4854) 
-0x1AC4854 - Fan Acc - default 0.60000002 
-0x1AC4858 - Fan Acc Rate - default 0.02
-0x80F060 = 576.0 //max height fan can push you? 

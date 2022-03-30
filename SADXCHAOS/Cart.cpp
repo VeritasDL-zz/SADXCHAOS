@@ -188,7 +188,7 @@ void Load_Cart_R()
 			CurrentCart->SETData.SETData->SETEntry->Properties.x = 1.00000000;
 			CurrentCart->SETData.SETData->SETEntry->Properties.y = 1.00000000;
 			CurrentCart->SETData.SETData->SETEntry->Properties.z = 0.000000000;
-			Cart_Timer = 1800;
+			Cart_Timer = 1000;
 			WriteData<1>((void*)0x798306, 0x84); //Jump auto in the cart
 			WriteData<1>((void*)0x7983c4, 0x7F); //Jump auto in the cart
 		}

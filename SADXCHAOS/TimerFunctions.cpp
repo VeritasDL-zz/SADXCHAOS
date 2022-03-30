@@ -156,7 +156,7 @@ void DpadDownOrDieTimerCheck()
 	{
 		SetDebugFontColor(0xFFFF0000);
 		ScaleDebugFont(18);
-		DisplayDebugString(NJM_LOCATION(15, 40), "- PRESS DPAD DOWN OR DIE!!! -");
+		DisplayDebugString(NJM_LOCATION(15, 0), "- PRESS DPAD DOWN OR DIE!!! -");
 		if (ControllerPointers[0]->HeldButtons & Buttons_Down) //Checks if dpad pressed down
 		{
 			DpadDown = 1; //Sets dpadcheck to 1
@@ -166,11 +166,7 @@ void DpadDownOrDieTimerCheck()
 	if (DPadDown_Timer == 1 && DpadDown != 1)//If timer is 1 and DPadDown is not 1 
 	{
 		KillPlayer(0);
-	}
-	if (DPadDown_Timer == 1)
-	{
 		DPadDown_Timer = 0;
-		EnableFontScaling = true; //temp.walker need to test this hacky fix
 	}
 	Veritas = *(DWORD*)Aequitas;
 }
@@ -400,7 +396,7 @@ void BurgerSpinDeleteTimerCheck() //need to fix
 }
 void CartTimerCheck()
 {
-	if (Cart_Timer <= 1800 && Cart_Timer != 0)
+	if (Cart_Timer <= 1000 && Cart_Timer != 0)
 	{
 		Cart_Timer--;
 	}

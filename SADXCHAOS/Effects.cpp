@@ -586,10 +586,8 @@ void ChaosPlayVoice_rng()
 }
 void RandomDPadDownCheck()
 {
-	//enable dpaddown check timer
 	DPadDown_Timer = 90; //90 frames
 	DpadDown = 0; //resets dpad down check, 
-	EnableFontScaling = false;
 	strcpy_s(LastEffect, 128, "DPad Down Or Die!");
 }
 void RandomNoClip()
