@@ -112,7 +112,7 @@ copy "C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SAD
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;SADXCHAOS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;SADXCHAOS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions);_USE_MATH_DEFINES</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -128,7 +128,8 @@ copy "C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SAD
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);$(SolutionDir)bin\ModLoaderCommon.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Release\SADXCHAOS.dll" "C:\Users\Veritas\Documents\Games\SadX\SADX\mods\ChaosMode"</Command>
+      <Command>copy "C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Release\SADXCHAOS.dll" "C:\Users\Veritas\Documents\Games\SadX\SADX\mods\ChaosMode"
+copy "C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Release\SADXCHAOS.pdb" "C:\Users\Veritas\Documents\Games\SadX\SADX\mods\ChaosMode"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

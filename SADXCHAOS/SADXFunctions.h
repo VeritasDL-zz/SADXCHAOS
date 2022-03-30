@@ -3008,6 +3008,7 @@ FunctionPointer(void, SetSonicIce, (int a1), 0x4A2550);
 ObjectFunc(EggCannon, 0x523E60);
 FunctionPointer(void, EmeraldShard_Create, (int num), 0x6F53B0);
 ObjectFunc(KnuEffectRingSpring, 0x4C1FC0);
+ObjectFunc(AlrConfetti_Main, 0x733860);
 FunctionPointer(void, CreateLineRing, (NJS_POINT3 *pos, taskwk *twp, int num), 0x79B140);
 
 // Bool __usercall@<eax>(NJS_TEXLIST *a1@<eax>)

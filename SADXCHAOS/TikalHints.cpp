@@ -349,6 +349,21 @@ const HintText_Text const Hints[67][3] = {
 },
 };
 size_t HintSize = LengthOfArray(Hints);
+
+//Custom Hint Idea List
+//SimpleFlips Quotes
+//Regrag
+//Katie4
+//Skoob
+//Nimputs
+//Niczur
+//Me?
+//WitherMan
+//GPRO? LMFAO NO
+//CJBQUILLIX??!?!?!?
+//
+
+
 int Voices[] = {
 1857,
 181,

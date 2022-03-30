@@ -529,6 +529,11 @@ void NoGravity()
 }
 void RandomControlDisable()
 {
+	if (EV_MainThread_ptr != 0) //check if in cutscene
+	{
+		NewEffect();
+		return;
+	}
 	DisableControl_Timer = 90;
 	ControlEnabled = 0;
 	strcpy_s(LastEffect, 128, "Control Disabled");
@@ -584,6 +589,7 @@ void RandomDPadDownCheck()
 	//enable dpaddown check timer
 	DPadDown_Timer = 90; //90 frames
 	DpadDown = 0; //resets dpad down check, 
+	EnableFontScaling = false;
 	strcpy_s(LastEffect, 128, "DPad Down Or Die!");
 }
 void RandomNoClip()

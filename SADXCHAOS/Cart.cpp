@@ -83,6 +83,25 @@ void LoadRemoveCartIceCap()
 }
 void RandomCart()
 {
+	if (EV_MainThread_ptr != 0) //check if in cutscene
+	{
+		NewEffect();
+		return;
+	}
+	if (EggViperHandiCapCheck())//egg viper handicap check
+	{
+		return;
+	}
+	if (!ControlEnabled) //temp.walker need to test to make sure it isnt called when control is disabled
+	{
+		NewEffect();
+		return;
+	}
+	if (Cart_Timer != 0)//temp.walker test to stop more carts from spawning while already in a cart?
+	{
+		NewEffect();
+		return;
+	}
 	Load_Cart_R();
 }
 void Load_Cart_R()
@@ -169,7 +188,7 @@ void Load_Cart_R()
 			CurrentCart->SETData.SETData->SETEntry->Properties.x = 1.00000000;
 			CurrentCart->SETData.SETData->SETEntry->Properties.y = 1.00000000;
 			CurrentCart->SETData.SETData->SETEntry->Properties.z = 0.000000000;
-			Cart_Timer = 2000;
+			Cart_Timer = 1800;
 			WriteData<1>((void*)0x798306, 0x84); //Jump auto in the cart
 			WriteData<1>((void*)0x7983c4, 0x7F); //Jump auto in the cart
 		}

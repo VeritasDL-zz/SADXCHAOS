@@ -166,7 +166,11 @@ void DpadDownOrDieTimerCheck()
 	if (DPadDown_Timer == 1 && DpadDown != 1)//If timer is 1 and DPadDown is not 1 
 	{
 		KillPlayer(0);
+	}
+	if (DPadDown_Timer == 1)
+	{
 		DPadDown_Timer = 0;
+		EnableFontScaling = true; //temp.walker need to test this hacky fix
 	}
 	Veritas = *(DWORD*)Aequitas;
 }
@@ -396,7 +400,7 @@ void BurgerSpinDeleteTimerCheck() //need to fix
 }
 void CartTimerCheck()
 {
-	if (Cart_Timer <= 2000 && Cart_Timer != 0)
+	if (Cart_Timer <= 1800 && Cart_Timer != 0)
 	{
 		Cart_Timer--;
 	}
