@@ -243,6 +243,7 @@ Adjusted Cart Timer Based on Feedback from Ham* (3/29/2022)
 Atempting a hacky Fix for PressD-pad down or die font not rendering some times thanks to Ham* For reporting and helping debug (3/29/2022)
 Adjusted RandomCart to not spawn durring Cutscenes? and added it to the Egg-Viper HandiCap list (3/30/2022) //temp.walker need to test
 Adjusted RandomControlDisable To not trigger while in cutscene (3/30/2022)
+Added One New TikalHint (3/30/2022)
 
 
 

@@ -10,7 +10,7 @@ void RandomTikalHint()
 	int hintrand = rand() % HintSize;
 	LoadAutoHint(Hints[hintrand], Voices[hintrand]);
 }
-const HintText_Text const Hints[67][3] = {
+const HintText_Text const Hints[68][3] = {
 {
 { "Watch out for the cars!.", 120 }, // text, time
 { 0 }, //Second page
@@ -347,6 +347,11 @@ const HintText_Text const Hints[67][3] = {
 { 0 }, //Second page
 { 0 } //idk 3rd page or always null?
 },
+{
+{ "So like out of 10 whats your favorite pie? on 1 to 10, pie being my favorite 10", 420 }, // text, time
+{ "and 1 being like a different dessert\nPie is a 7, Okay", 440 }, //Second page
+{ 0 } //idk 3rd page or always null?
+},
 };
 size_t HintSize = LengthOfArray(Hints);
 
@@ -431,5 +436,6 @@ int Voices[] = {
 143,//not enough mem - big
 214,//I got it - sonic
 230,//what a big lake! - big
-287//its so dark in here - big
+287,//its so dark in here - big
+133769 //SimpleFlips, Pie is a 7
 };
