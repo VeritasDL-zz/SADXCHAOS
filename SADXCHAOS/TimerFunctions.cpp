@@ -51,6 +51,7 @@ void ChaosTimer()
 		oldRand = curRand;
 		Chaos_Timer = 0;
 	}
+	Veritas = *(DWORD*)Aequitas;
 }
 void NoClipTimerCheck()
 {
@@ -150,13 +151,17 @@ void DisableControlTimerCheck()
 		DisableControl_Timer = 0;
 	}
 }
+const char* DPadMessage;
 void DpadDownOrDieTimerCheck()
 {
+	DPadMessage = "- PRESS DPAD DOWN OR DIE!!! -";
 	if (DPadDown_Timer <= 90 && DPadDown_Timer != 0)
 	{
 		SetDebugFontColor(0xFFFF0000);
 		ScaleDebugFont(18);
-		DisplayDebugString(NJM_LOCATION(15, 0), "- PRESS DPAD DOWN OR DIE!!! -");
+		int DebugRightPos = (int)((float)HorizontalResolution / DebugFontSize);
+		DisplayDebugStringFormatted(NJM_LOCATION(DebugRightPos - strlen(DPadMessage)-(15), 10), DPadMessage);//NEED TO TEST OTHER RESOLUTIONS?
+		//DisplayDebugString(NJM_LOCATION(15, 0), "- PRESS DPAD DOWN OR DIE!!! -");
 		if (ControllerPointers[0]->HeldButtons & Buttons_Down) //Checks if dpad pressed down
 		{
 			DpadDown = 1; //Sets dpadcheck to 1
@@ -255,7 +260,7 @@ void RingAllergyTimerCheck()
 			KillPlayer(0);
 			RingCount = 0;
 			Rings = 0;
-			RingAllergy_Timer = 2; //temp may remove,
+			RingAllergy_Timer = 2;
 		}
 		RingAllergy_Timer--;
 	}

@@ -7,18 +7,8 @@ void ScaleDebugFont(int scale)//thanks to PkR for this code https://github.com/P
 	if (!EnableFontScaling) FontScale = 1.0f;
 	else
 	{
-		int Test = (float)HorizontalResolution / (float)VerticalResolution > 1.33f;
-		int Test2 = floor((float)VerticalResolution / 480.0f);
-		if ((float)HorizontalResolution / (float)VerticalResolution > 1.33f)
-		{
-			FontScale = floor((float)VerticalResolution / 480.0f);
-		}
-		else
-		{
-			FontScale = floor((float)HorizontalResolution / 640.0f);
-		}
-		int test3 = floor((float)HorizontalResolution / 640.0f);
-		test3++;
+		if ((float)HorizontalResolution / (float)VerticalResolution > 1.33f) FontScale = floor((float)VerticalResolution / 480.0f);
+		else FontScale = floor((float)HorizontalResolution / 640.0f);
 	}
 	SetDebugFontSize(FontScale * scale);
 }

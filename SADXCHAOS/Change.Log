@@ -245,6 +245,7 @@ Adjusted RandomCart to not spawn durring Cutscenes? and added it to the Egg-Vipe
 Adjusted RandomControlDisable To not trigger while in cutscene (3/30/2022)
 Added One New TikalHint (3/30/2022)
 Sadly Had to move Dpad-Down Or Die Text to the far left of the screen (3/30/2022)
+Fixed DpadDown Or Die Text thanks to PKR (3/31/2022)
 
 
 ---------TO-DO---------

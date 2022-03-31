@@ -162,7 +162,7 @@ extern "C"
 		ChaosTimer();
 		CheckAllEffectsTimer();
 		DebugPrintOutCheck();
-		Veritas = *(DWORD*)Aequitas;
+
 	}
 	__declspec(dllexport) void __cdecl OnControl()
 	{
