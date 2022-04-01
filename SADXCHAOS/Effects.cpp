@@ -880,3 +880,27 @@ void RandomKnuxRingSpring(taskwk* p1)
 		return;
 	}
 }
+void RandomWaterPiller(taskwk* p1)
+{
+	float Randomscale = rand() % 3 + 1;
+	if (!WaterPillerTextLoader)
+	{
+		LoadPVM("L_SIBUKI", &texlist_l_sibuki);
+		WaterPillerTextLoader = true;
+		TextLoaded = true;
+	}
+	if (texlist_l_sibuki.textures->texaddr)
+	{
+		if (!p_WaterPillarTask)
+		{
+			strcpy_s(LastEffect, 128, "Random Water Piller");
+			WaterPillarOn(playertwp[0]->pos.x, playertwp[0]->pos.y, playertwp[0]->pos.z, 1, Randomscale);
+			WaterPiller_Timer = 420;
+		}
+	}
+	else
+	{
+		NewEffect();
+		return;
+	}
+}

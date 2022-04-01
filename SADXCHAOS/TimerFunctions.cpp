@@ -20,6 +20,7 @@ int CameraFlip_Timer = 0;
 int CameraSpin_Timer = 0;
 int CameraSpin_Val = 0;
 int DrunkCamera_Timer = 0;
+int WaterPiller_Timer = 0;
 int DrunkCam = 0;
 int Direction = 0x50;
 int AirCraftSpawerFollow_Timer = 0;
@@ -413,6 +414,18 @@ void CartTimerCheck()
 		Cart_Timer = 0;
 	}
 }
+void WaterPillerTimerCheck()
+{
+	if (WaterPiller_Timer <= 420 && WaterPiller_Timer != 0)
+	{
+		WaterPiller_Timer--;
+	}
+	if (WaterPiller_Timer == 1)
+	{
+		WaterPillarOff();
+		WaterPiller_Timer = 0;
+	}
+}
 void CheckAllEffectsTimer()
 {
 	NoClipTimerCheck();
@@ -433,4 +446,5 @@ void CheckAllEffectsTimer()
 	AirCraftSpawnerTimerCheck();
 	BurgerSpinDeleteTimerCheck();
 	CartTimerCheck();
+	WaterPillerTimerCheck();
 }

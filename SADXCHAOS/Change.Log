@@ -246,6 +246,8 @@ Adjusted RandomControlDisable To not trigger while in cutscene (3/30/2022)
 Added One New TikalHint (3/30/2022)
 Sadly Had to move Dpad-Down Or Die Text to the far left of the screen (3/30/2022)
 Fixed DpadDown Or Die Text thanks to PKR (3/31/2022)
+Testing Using VS2022 (3/31/2022)
+Added RandomWaterPiller (3/31/2022) //temp.walker need to test more
 
 
 ---------TO-DO---------

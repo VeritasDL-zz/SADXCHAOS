@@ -102,8 +102,8 @@
       <ProgramDatabaseFile>$(OuTDir)$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy "C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.dll" "C:\Users\Veritas\Documents\Games\SadX\SADX\mods\ChaosMode"
-copy "C:\Users\Veritas\Documents\Visual Studio 2012\Projects\SADXCHAOS\Debug\SADXCHAOS.pdb" "C:\Users\Veritas\Documents\Games\SadX\SADX\mods\ChaosMode"</Command>
+      <Command>copy "C:\Users\Veritas\Documents\Visual Studio 2022\Projects\SADXCHAOS\Debug\SADXCHAOS.dll" "C:\Users\Veritas\Documents\Games\SadX\SADX\mods\ChaosMode"
+copy "C:\Users\Veritas\Documents\Visual Studio 2022\Projects\SADXCHAOS\Debug\SADXCHAOS.pdb" "C:\Users\Veritas\Documents\Games\SadX\SADX\mods\ChaosMode"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -184,6 +184,7 @@ copy "C:\Users\Veritas\Documents\Visual Studio 2022\Projects\SADXCHAOS\Release\S
     <ClInclude Include="TextureReset.h" />
     <ClInclude Include="TikalHints.h" />
     <ClInclude Include="TimerFunctions.h" />
+    <ClInclude Include="WaterPiller.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimalTextures.cpp" />
@@ -209,6 +210,7 @@ copy "C:\Users\Veritas\Documents\Visual Studio 2022\Projects\SADXCHAOS\Release\S
     <ClCompile Include="TikalHints.cpp" />
     <ClCompile Include="TimerFunctions.cpp" />
     <ClCompile Include="Trampoline.cpp" />
+    <ClCompile Include="WaterPiller.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Change.Log">
