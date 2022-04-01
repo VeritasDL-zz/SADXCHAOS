@@ -88,8 +88,14 @@ void RandomCart()
 		NewEffect();
 		return;
 	}
-	if (EggViperHandiCapCheck())//egg viper handicap check
+	if (CurrentLevel == LevelIDs_EggViper)
 	{
+		NewEffect();
+		return;
+	}
+	if (CurrentLevel == LevelIDs_Chaos4)
+	{
+		NewEffect();
 		return;
 	}
 	if (!ControlEnabled) //temp.walker need to test to make sure it isnt called when control is disabled

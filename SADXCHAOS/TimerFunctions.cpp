@@ -29,6 +29,8 @@ bool DebugEnabled = false;
 int SideWaysCamera_Timer = 0;
 int BurgerSpin_Timer = 0;
 int Cart_Timer = 0;
+int ScanLine_Timer = 0;
+int RandomBoot_Timer = 0;
 int Bl1ngBl0ng = 50;
 
 void ChaosTimer()
@@ -161,7 +163,7 @@ void DpadDownOrDieTimerCheck()
 		SetDebugFontColor(0xFFFF0000);
 		ScaleDebugFont(18);
 		int DebugRightPos = (int)((float)HorizontalResolution / DebugFontSize);
-		DisplayDebugStringFormatted(NJM_LOCATION(DebugRightPos - strlen(DPadMessage)-(15), 10), DPadMessage);//NEED TO TEST OTHER RESOLUTIONS?
+		DisplayDebugStringFormatted(NJM_LOCATION(DebugRightPos - strlen(DPadMessage), 10), DPadMessage);//NEED TO TEST OTHER RESOLUTIONS?
 		//DisplayDebugString(NJM_LOCATION(15, 0), "- PRESS DPAD DOWN OR DIE!!! -");
 		if (ControllerPointers[0]->HeldButtons & Buttons_Down) //Checks if dpad pressed down
 		{
@@ -426,6 +428,30 @@ void WaterPillerTimerCheck()
 		WaterPiller_Timer = 0;
 	}
 }
+void ScanLineTimerCheck()
+{
+	if (ScanLine_Timer <= 420 && ScanLine_Timer != 0)
+	{
+		ScanLine_Timer--;
+	}
+	if (ScanLine_Timer == 1)
+	{
+		deleteScanLine();
+		ScanLine_Timer = 0;
+	}
+}
+void RandomBootTimerCheck()
+{
+	if (RandomBoot_Timer <= 200 && RandomBoot_Timer != 0)
+	{
+		RandomBoot_Timer--;
+	}
+	if (RandomBoot_Timer == 1)
+	{
+		deleteBoot();
+		RandomBoot_Timer = 0;
+	}
+}
 void CheckAllEffectsTimer()
 {
 	NoClipTimerCheck();
@@ -447,4 +473,6 @@ void CheckAllEffectsTimer()
 	BurgerSpinDeleteTimerCheck();
 	CartTimerCheck();
 	WaterPillerTimerCheck();
+	ScanLineTimerCheck();
+	RandomBootTimerCheck();
 }

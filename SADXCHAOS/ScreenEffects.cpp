@@ -3,15 +3,9 @@ task* p_ScanLineTask;
 int base_pos;
 enum MODE
 {
-    MODE_WAIT
+    MODE_WAIT,
+    MODE_TEST
 };
-void __cdecl destTaskGeneric(task* tp)
-{
-    if (tp->twp->value.ptr)
-    {
-        FreeMemory(tp->twp->value.ptr);
-    }
-}
 void __cdecl deleteScanLine()
 {
     if (p_ScanLineTask)
@@ -58,7 +52,7 @@ void __cdecl dispScanLineTask(task* tp)
 {
     ScanLineWork* scanline;
     scanline = (ScanLineWork*)tp->twp->value.ptr;
-    if (MODE_WAIT)
+    if (MODE_TEST)
     {
         if (++base_pos == scanline->res)
         {
@@ -77,19 +71,35 @@ void __cdecl initScanLineTask(task* tp)
     tp->disp = dispScanLineTask;
     tp->dest = destTaskGeneric;
 }
+void RandomScanLine()
+{
+    createScanLine(128, 0, 80, 85, 5);
+}
 void __cdecl createScanLine(unsigned __int8 a, unsigned __int8 r, unsigned __int8 g, unsigned __int8 b, int res)
 {
+    if (!RandomScanLineEnabled)
+    {
+        NewEffect();
+        return;
+    }
+    if (ScanLine_Timer != 0)
+    {
+        NewEffect();
+        return;
+    }
+    strcpy_s(LastEffect, 128, "Random ScanLines");
     ScanLineWork* scanline;
     p_ScanLineTask = CreateElementalTask(2u, 5, initScanLineTask);
     scanline = (ScanLineWork*)MAlloc(8);
     p_ScanLineTask->twp->value.ptr = scanline;
-    p_ScanLineTask->twp->mode = MODE_WAIT;
+    p_ScanLineTask->twp->mode = MODE_TEST;
     p_ScanLineTask->twp->counter.l = 0;
     scanline->line_col.argb.a = a;
     scanline->line_col.argb.r = r;
     scanline->line_col.argb.g = g;
     scanline->line_col.argb.b = b;
     scanline->res = res;
+    ScanLine_Timer = 333;
 }
 //Boot
 task* p_BootTask;
@@ -204,8 +214,27 @@ void __cdecl initBootTask(task* p_task)
     p_task->disp = dispBootTask;
     p_task->dest = destTaskGeneric;
 }
+void RandomBoot()
+{
+    createBoot(10, 50, 60, 20);
+}
 void __cdecl createBoot(int wait_frame, int sstorm_frame, int poweron_frame, int adjust_frame)
 {
+    if (!RandomBootEnabled)
+    {
+        NewEffect();
+        return;
+    }
+    if (p_BootTask != 0)
+    {
+		NewEffect();
+		return;
+    }
+    if (RandomBoot_Timer != 0)
+    {
+		NewEffect();
+		return;
+    }
     BootWork* boot;
     p_BootTask = CreateElementalTask(2u, 5, initBootTask);
     boot = (BootWork*)MAlloc(24);
@@ -218,6 +247,7 @@ void __cdecl createBoot(int wait_frame, int sstorm_frame, int poweron_frame, int
     boot->sstorm_frame = sstorm_frame;
     boot->poweron_frame = poweron_frame;
     boot->adjust_frame = adjust_frame;
+    RandomBoot_Timer = 200;
 }
 void __cdecl CreateBootSleep()
 {

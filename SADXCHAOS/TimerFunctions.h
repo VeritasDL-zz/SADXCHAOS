@@ -29,6 +29,8 @@ extern int SideWaysCamera_Timer;
 extern int BurgerSpin_Timer;
 extern int Cart_Timer;
 extern int WaterPiller_Timer;
+extern int ScanLine_Timer;
+extern int RandomBoot_Timer;
 extern bool DebugEnabled;
 void NoClipTimerCheck();
 void InputInvertTimerCheck();

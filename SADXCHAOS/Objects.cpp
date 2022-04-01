@@ -163,6 +163,11 @@ void RandomSpeedPad(taskwk* p1)
 }
 void RandomFan(taskwk* p1)
 {
+	if (CurrentLevel == LevelIDs_Chaos4)
+	{
+		NewEffect();
+		return;
+	}
 	if (!FanTextLoader)
 	{
 		LoadPVM("OBJ_FINALEGG", &OBJ_FINALEGG_TEXLIST); 

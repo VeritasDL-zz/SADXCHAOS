@@ -23,6 +23,9 @@ bool SoundDisableEnabled = true;
 bool AndKnucklesEnabled = true;
 bool RandomSongEnabled = true;
 bool RandomVoiceEnabled = true;
+bool RandomBootEnabled = true;
+bool RandomScanLineEnabled = true;
+bool DpadDownOrDieEnabled = true;
 DWORD Aequitas = (0x000000000761CFC0+0x0000000003B0E9E0+0x0000000003B0EFE0-0x000000000B12C1A0);
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
 {
@@ -79,6 +82,9 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	AndKnucklesEnabled = config->getBool("Sound", "AndKnucklesEnabled", true);
 	RandomSongEnabled = config->getBool("Sound", "RandomSongEnabled", true);
 	RandomVoiceEnabled = config->getBool("Sound", "RandomVoiceEnabled", true);
+	RandomBootEnabled = config->getBool("General", "RandomBootEnabled", true);
+	RandomScanLineEnabled = config->getBool("General", "RandomScanLineEnabled", true);
+	DpadDownOrDieEnabled = config->getBool("General", "DpadDownOrDieEnabled", true);
 	delete config;
 	InitializeRandomCoordinates();
 	init_CartStuff(); //temp.walker need to test 3/26/2022 //sora credit

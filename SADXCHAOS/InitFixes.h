@@ -20,4 +20,7 @@ extern bool DetachCameraEnabled;
 extern bool AndKnucklesEnabled;
 extern bool RandomSongEnabled;
 extern bool RandomVoiceEnabled;
+extern bool RandomScanLineEnabled;
+extern bool RandomBootEnabled;
+extern bool DpadDownOrDieEnabled;
 void Init_Fixes(const char* path, const HelperFunctions& helperFunctions);

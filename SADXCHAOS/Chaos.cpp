@@ -20,9 +20,9 @@ extern "C"
 	{
 		Init_Fixes(path, helperFunctions);
 		init_FreeMovements();
-		strcpy_s(LastEffect, 128, "Chaos Edition 2.0 b 7");
+		strcpy_s(LastEffect, 128, "Chaos Edition 2.0 b 8");
 	}
-	ChaosS ChaosArray[119]
+	ChaosS ChaosArray[122]
 	{
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
@@ -72,6 +72,7 @@ extern "C"
 	{ RandomCannonS1, nullptr, nullptr },
 	{ RandomBarrel, nullptr, nullptr },
 	{ RandomKnuxRingSpring, nullptr, nullptr },
+	{ RandomWaterPiller, nullptr, nullptr },
 	{ nullptr, RandomVSpeed, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr },
 	{ nullptr, RandomHSpeed, nullptr },
@@ -142,7 +143,9 @@ extern "C"
 	{ nullptr, nullptr, RingAllergy },
 	{ nullptr, nullptr, NoGravity },
 	{ nullptr, nullptr, RandomControlDisable },
+	{ nullptr, nullptr, RandomBoot },
 	{ nullptr, nullptr, SideWaysCamera },
+	{ nullptr, nullptr, RandomScanLine },
 	};
 	size_t ChaosSize = LengthOfArray(ChaosArray);
 	__declspec(dllexport) void __cdecl OnFrame()
@@ -162,14 +165,12 @@ extern "C"
 		ChaosTimer();
 		CheckAllEffectsTimer();
 		DebugPrintOutCheck();
-
 	}
 	__declspec(dllexport) void __cdecl OnControl()
 	{
 		//Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomWaterPiller(0);
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
