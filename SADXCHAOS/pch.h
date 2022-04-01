@@ -26,4 +26,5 @@
 #include "FreeMovements.h"
 #include "Cart.h"
 #include "WaterPiller.h"
+#include "ScreenEffects.h"
 #endif //PCH_H

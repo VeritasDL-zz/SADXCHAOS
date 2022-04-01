@@ -180,6 +180,7 @@ copy "C:\Users\Veritas\Documents\Visual Studio 2022\Projects\SADXCHAOS\Release\S
     <ClInclude Include="pch.h" />
     <ClInclude Include="PowerUPS.h" />
     <ClInclude Include="RotateMa.h" />
+    <ClInclude Include="ScreenEffects.h" />
     <ClInclude Include="Teleport.h" />
     <ClInclude Include="TextureReset.h" />
     <ClInclude Include="TikalHints.h" />
@@ -205,6 +206,7 @@ copy "C:\Users\Veritas\Documents\Visual Studio 2022\Projects\SADXCHAOS\Release\S
     </ClCompile>
     <ClCompile Include="PowerUPS.cpp" />
     <ClCompile Include="RotateMa.cpp" />
+    <ClCompile Include="ScreenEffects.cpp" />
     <ClCompile Include="Teleport.cpp" />
     <ClCompile Include="TextureReset.cpp" />
     <ClCompile Include="TikalHints.cpp" />
