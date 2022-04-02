@@ -41,9 +41,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This mod doesn't change anything in any of the game's levels, it uses the SADX ModLoader
-which allows it to automatically activate and deactivate random codes at random times.
-This mod is made to challenge players to play through SADX while the random codes either impedes or helps with any progress through the game.
+This mod doesn't change anything in any of the game's levels, it uses the SADX ModLoader   
+which allows it to automatically activate and deactivate random codes at random times.   
+This mod was made to challenge players to play through SADX while the random effects either impede or help with any progress through the game.   
 
 ### Built With
 
@@ -125,8 +125,10 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random Set Ice - Freezes Sonic Or Knuckles in a ice block.
 - Random Conveyor Belt - Spawns in the moving Conveyor Belt from Final Egg With random Size and speed
 - Random Conveyor Spike - Spawns in the Conveyor Spike from Final Egg
-- Random Cart - Spawns in the TinklePark Cart and Forces the player in it for 2000 Frames
-
+- Random Cart - Spawns in the TinklePark Cart and Forces the player in it for 1000 Frames
+- Random Boot - Causes the Gamma Boot Up Screen Effect
+- Random ScanLine - Causes the Gamma Scanline Screen Effect
+- Random WaterPiller Spawns in a water pillar that Chaos uses to steal the last Chaos Emerald.
 
 
 
