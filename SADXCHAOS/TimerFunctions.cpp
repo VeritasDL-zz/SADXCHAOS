@@ -58,11 +58,11 @@ void ChaosTimer()
 }
 void NoClipTimerCheck()
 {
-	if (NoClip_Timer <= 800 && NoClip_Timer != 0)
+	if (NoClip_Timer > 0)//temp.walker need to test
 	{
 		NoClip_Timer--;
 	}
-	if (NoClip_Timer == 1 && NoClip_Timer != 0)
+	if (NoClip_Timer == 1)//temp.walker need to test (4/2/2022)
 	{
 		WalkThruWallsReset();
 		NoClip_Timer = 0;
@@ -72,11 +72,11 @@ void NoClipTimerCheck()
 }
 void InputInvertTimerCheck()
 {
-	if (InputInvert_Timer <= 420 && InputInvert_Timer != 0)
+	if (InputInvert_Timer > 0)
 	{
 		InputInvert_Timer--;
 	}
-	if (InputInvert_Timer == 1 && InputInvert_Timer != 0)
+	if (InputInvert_Timer == 1)
 	{
 		WriteData<1>((int*)0x40F2A2, 0xF0);
 		WriteData<1>((int*)0x40F2A1, 0x2B);
@@ -86,11 +86,11 @@ void InputInvertTimerCheck()
 }
 void CameraDeattchTimerCheck()
 {
-	if (Camera_Timer <= 100 && Camera_Timer != 0)
+	if (Camera_Timer > 0)
 	{
 		Camera_Timer--;
 	}
-	if (Camera_Timer == 1 && Camera_Timer != 0)
+	if (Camera_Timer == 1)
 	{
 		Camera_Data1->Action = 2;
 		Camera_Timer = 0;
@@ -99,27 +99,27 @@ void CameraDeattchTimerCheck()
 }
 void XYZGravityTimerCheck()
 {
-	if (XGravity_Timer <= 500 && XGravity_Timer != 0)
+	if (XGravity_Timer > 0)
 	{
 		XGravity_Timer--;
 	}
-	if (XGravity_Timer == 1 && XGravity_Timer != 0)
+	if (XGravity_Timer == 1)
 	{
 		ResetGravity();
 		XGravity_Timer = 0;
 		strcpy_s(LastEffect, 128, "X Gravity Reset");
 	}
-	if (YGravity_Timer <= 500 && YGravity_Timer != 0)
+	if (YGravity_Timer > 0)
 	{
 		YGravity_Timer--;
 	}
-	if (YGravity_Timer == 1 && YGravity_Timer != 0)
+	if (YGravity_Timer == 1)
 	{
 		ResetGravity();
 		YGravity_Timer = 0;
 		strcpy_s(LastEffect, 128, "Y Gravity Reset");
 	}
-	if (ZGravity_Timer <= 500 && ZGravity_Timer != 0)
+	if (ZGravity_Timer > 0)
 	{
 		ZGravity_Timer--;
 	}
@@ -132,11 +132,11 @@ void XYZGravityTimerCheck()
 }
 void NoGravityTimerCheck()
 {
-	if (NoGravityTimer <= 400 && NoGravityTimer != 0)
+	if (NoGravityTimer > 0)
 	{
 		NoGravityTimer--;
 	}
-	if (NoGravityTimer == 1 && NoGravityTimer != 0)
+	if (NoGravityTimer == 1)
 	{
 		ResetGravity();
 		strcpy_s(LastEffect, 128, "Gravity Restored");
@@ -144,11 +144,11 @@ void NoGravityTimerCheck()
 }
 void DisableControlTimerCheck()
 {
-	if (DisableControl_Timer <= 90 && DisableControl_Timer != 0)
+	if (DisableControl_Timer > 0)
 	{
 		DisableControl_Timer--;
 	}
-	if (DisableControl_Timer == 1 && DisableControl_Timer != 0)
+	if (DisableControl_Timer == 1)
 	{
 		ControlEnabled = 1;
 		DisableControl_Timer = 0;
@@ -158,7 +158,7 @@ const char* DPadMessage;
 void DpadDownOrDieTimerCheck()
 {
 	DPadMessage = "- PRESS DPAD DOWN OR DIE!!! -";
-	if (DPadDown_Timer <= 90 && DPadDown_Timer != 0)
+	if (DPadDown_Timer > 0)
 	{
 		SetDebugFontColor(0xFFFF0000);
 		ScaleDebugFont(18);
@@ -180,7 +180,7 @@ void DpadDownOrDieTimerCheck()
 }
 void ForcePauseTimerCheck()
 {
-	if (Pause_Timer <= 5 && Pause_Timer != 0)
+	if (Pause_Timer > 0)
 	{
 		GameState = 16;
 		Pause_Timer--;
@@ -189,11 +189,11 @@ void ForcePauseTimerCheck()
 }
 void SnowBoardTimerCheck()
 {
-	if (SnowboardTimer <= 500 && SnowboardTimer != 0)
+	if (SnowboardTimer > 0)
 	{
 		SnowboardTimer--;
 	}
-	if (SnowboardTimer == 1 && SnowboardTimer <= 2 && IssSowboarding == 1)
+	if (SnowboardTimer == 1 && IssSowboarding == 1)
 	{
 		strcpy_s(LastEffect, 128, "Snowboard Off");
 		SnowboardTimer = 0;
@@ -203,11 +203,11 @@ void SnowBoardTimerCheck()
 }
 void FastAccelTimerCheck()
 {
-	if (FastAccel_Timer <= 400 && FastAccel_Timer != 0)
+	if (FastAccel_Timer > 0)
 	{
 		FastAccel_Timer--;
 	}
-	if (FastAccel_Timer <= 2 && FastAccel_Timer != 0)
+	if (FastAccel_Timer == 1)
 	{
 		strcpy_s(LastEffect, 128, "Fast Accel Disabled");
 		playerpwp[0]->p.max_x_spd = OldMaxAccel;
@@ -218,11 +218,11 @@ void FastAccelTimerCheck()
 }
 void Nos0und__TimerCheck()
 {
-	if (s0und__Timer <= 222 && s0und__Timer != 0)
+	if (s0und__Timer > 0)
 	{
 		s0und__Timer--;
 	}
-	if (s0und__Timer == 1 && s0und__Timer != 0)
+	if (s0und__Timer == 1)
 	{
 		ResumeSound();
 		EnableBGM = 1;
@@ -256,7 +256,7 @@ void Nos0und__TimerCheck()
 }
 void RingAllergyTimerCheck()
 {
-	if (RingAllergy_Timer <= 250 && RingAllergy_Timer != 0)
+	if (RingAllergy_Timer > 0)
 	{
 		if (Rings != RingCount)
 		{
@@ -267,18 +267,18 @@ void RingAllergyTimerCheck()
 		}
 		RingAllergy_Timer--;
 	}
-	if (RingAllergy_Timer == 1 && RingAllergy_Timer != 0)
+	if (RingAllergy_Timer == 1)
 	{
 		RingAllergy_Timer = 0;
 	}
 }
 void PauseDisableTimerCheck()
 {
-	if (DisablePause_Timer <= 420 && DisablePause_Timer != 0)
+	if (DisablePause_Timer > 0)
 	{
 		DisablePause_Timer--;
 	}
-	if (DisablePause_Timer == 1 && DisablePause_Timer != 0)
+	if (DisablePause_Timer == 1)
 	{
 		strcpy_s(LastEffect, 128, "Pause Enabled");
 		PauseEnabled = true;
@@ -287,33 +287,33 @@ void PauseDisableTimerCheck()
 }
 void CustomCameraEffectsTimersCheck()
 {
-	if (CameraFlip_Timer <= 250 && CameraFlip_Timer != 0)
+	if (CameraFlip_Timer > 0)
 	{
 		CameraFlip_Timer--;//subtract timer
 		SetCameraMode_(0);//Force AutoCam
 		WriteData((int*)0x03B2C68C, (int)0x8000); //force upside down
 	}
-	if (CameraFlip_Timer == 1 && CameraFlip_Timer != 0)
+	if (CameraFlip_Timer == 1)
 	{
 		CameraReset();//resets camera ASM
 		CameraFlip_Timer = 0;//set timer to 0
 		WriteData((int*)0x03B2C68C, (int)0);
 	}
-	if (CameraSpin_Timer <= 240 && CameraSpin_Timer != 0)
+	if (CameraSpin_Timer > 0)
 	{
 		SetCameraMode_(0);//Force AutoCam
 		CameraSpin_Val += 0x300; //spins camera 
 		CameraSpin_Timer--;//subtract timer
 		WriteData((int*)0x03B2C68C, (int)CameraSpin_Val); //force camera spin
 	}
-	if (CameraSpin_Timer == 1 && CameraSpin_Timer != 0)
+	if (CameraSpin_Timer == 1)
 	{
 		CameraReset();//resets camera ASM
 		CameraSpin_Timer = 0;//set timer to 0 
 		CameraSpin_Val = 0;//set spin val to 0 
 		WriteData((int*)0x03B2C68C, (int)0);
 	}
-	if (DrunkCamera_Timer <= 275 && DrunkCamera_Timer != 0)
+	if (DrunkCamera_Timer > 0)
 	{
 		SetCameraMode_(0);//Force AutoCam
 		CameraNOP();
@@ -330,7 +330,7 @@ void CustomCameraEffectsTimersCheck()
 		WriteData((int*)0x03B2C68C, (int)DrunkCam); //force camera sway
 		DrunkCamera_Timer--;//subtract timer
 	}
-	if (DrunkCamera_Timer == 1 && DrunkCamera_Timer != 0)
+	if (DrunkCamera_Timer == 1)
 	{
 		CameraReset();//resets camera ASM
 		DrunkCamera_Timer = 0;//set timer to 0 
@@ -338,7 +338,7 @@ void CustomCameraEffectsTimersCheck()
 		Direction = 0x50;//resets direction 
 		WriteData((int*)0x03B2C68C, (int)0x0); //force camera reset
 	}
-	if (SideWaysCamera_Timer <= 240 && SideWaysCamera_Timer != 0)
+	if (SideWaysCamera_Timer > 0)
 	{
 		SetCameraMode_(0);//Force AutoCam
 		CameraNOP();
@@ -353,7 +353,7 @@ void CustomCameraEffectsTimersCheck()
 		}
 		SideWaysCamera_Timer--;//subtract timer
 	}
-	if (SideWaysCamera_Timer == 1 && SideWaysCamera_Timer != 0)
+	if (SideWaysCamera_Timer == 1)
 	{
 		CameraReset();//resets camera ASM
 		SideWaysCamera_Timer = 0;//set timer to 0 
@@ -362,11 +362,11 @@ void CustomCameraEffectsTimersCheck()
 }
 void DebugTimerCheck()
 {
-	if (Debug_Timer <= 333 && Debug_Timer != 0)
+	if (Debug_Timer > 0)
 	{
 		Debug_Timer--;
 	}
-	if (Debug_Timer <= 2 && Debug_Timer != 0)
+	if (Debug_Timer == 1)
 	{
 		strcpy_s(LastEffect, 128, "Debug Off");
 		playertwp[0]->mode = 1;
@@ -376,7 +376,7 @@ void DebugTimerCheck()
 }
 void AirCraftSpawnerTimerCheck()
 {
-	if (AirCraftSpawerFollow_Timer <= 350 && AirCraftSpawerFollow_Timer != 0)
+	if (AirCraftSpawerFollow_Timer > 0)
 	{
 		RandomSpawnAmount = rand() % 50;
 		if (RandomSpawnAmount == 0)
@@ -392,7 +392,7 @@ void AirCraftSpawnerTimerCheck()
 }
 void BurgerSpinDeleteTimerCheck() //need to fix
 {
-	if (BurgerSpin_Timer <= 420 && BurgerSpin_Timer != 0)
+	if (BurgerSpin_Timer > 0)
 	{
 		BurgerSpin_Timer--;
 	}
@@ -404,7 +404,7 @@ void BurgerSpinDeleteTimerCheck() //need to fix
 }
 void CartTimerCheck()
 {
-	if (Cart_Timer <= 1000 && Cart_Timer != 0)
+	if (Cart_Timer > 0)
 	{
 		Cart_Timer--;
 	}
@@ -418,7 +418,7 @@ void CartTimerCheck()
 }
 void WaterPillerTimerCheck()
 {
-	if (WaterPiller_Timer <= 420 && WaterPiller_Timer != 0)
+	if (WaterPiller_Timer > 0)
 	{
 		WaterPiller_Timer--;
 	}
@@ -430,7 +430,7 @@ void WaterPillerTimerCheck()
 }
 void ScanLineTimerCheck()
 {
-	if (ScanLine_Timer <= 420 && ScanLine_Timer != 0)
+	if (ScanLine_Timer > 0)
 	{
 		ScanLine_Timer--;
 	}
@@ -442,7 +442,7 @@ void ScanLineTimerCheck()
 }
 void RandomBootTimerCheck()
 {
-	if (RandomBoot_Timer <= 200 && RandomBoot_Timer != 0)
+	if (RandomBoot_Timer > 0)
 	{
 		RandomBoot_Timer--;
 	}

@@ -183,8 +183,8 @@ void RandomFan(taskwk* p1)
 		Fan->ocp = objCondition;
 		Fan->twp->pos = playertwp[0]->pos;
 		Fan->twp->pos.y = playertwp[0]->pos.y - 9.0f;
-		float CustomFanAcc = (float(rand()) / float((RAND_MAX)) * 0.99);
-		WriteData((float*)0x1AC4854, CustomFanAcc);
+		//float CustomFanAcc = (float(rand()) / float((RAND_MAX)) * 0.99);
+		//WriteData((float*)0x1AC4854, CustomFanAcc);
 	}
 	else
 	{

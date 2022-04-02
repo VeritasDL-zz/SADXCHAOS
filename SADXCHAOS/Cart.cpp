@@ -98,6 +98,16 @@ void RandomCart()
 		NewEffect();
 		return;
 	}
+	if (CurrentLevel == LevelIDs_PerfectChaos)
+	{
+		NewEffect();
+		return;
+	}
+	if (CurrentLevel == LevelIDs_Chaos2)
+	{
+		NewEffect();
+		return;
+	}
 	if (!ControlEnabled) //temp.walker need to test to make sure it isnt called when control is disabled
 	{
 		NewEffect();
@@ -178,11 +188,9 @@ void Load_Cart_R()
 			}
 			CurrentCart->field_30 = 59731468;
 			CurrentCart->Data1->Unknown = 10;
-			CurrentCart->DeleteSub = LevelItem_Delete; //TEST
-			//SetData is not initialized even if it's in the list, so we need to manually assign the cart to it.
+			CurrentCart->DeleteSub = LevelItem_Delete;
 			SETObjData* cartSETData = new SETObjData();
 			CurrentCart->SETData.SETData = cartSETData;
-			//Set the data used in Twinkle Park/Twinkle Circuit (should fixes bug hopefully.)
 			CurrentCart->SETData.SETData->LoadCount = 1;
 			CurrentCart->SETData.SETData->f1 = 0;
 			CurrentCart->SETData.SETData->Flags = 32767;

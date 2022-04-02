@@ -3,7 +3,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerCommand>C:\Users\Veritas\Documents\Games\SadX\SADX\sonic.exe</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>-c knuckles -l 9 -s 03</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>
+    </LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>..\..\..\..\Games\SadX\SADX</LocalDebuggerWorkingDirectory>
     <LocalDebuggerSQLDebugging>true</LocalDebuggerSQLDebugging>
   </PropertyGroup>

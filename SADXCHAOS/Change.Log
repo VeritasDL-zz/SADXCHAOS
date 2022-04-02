@@ -249,7 +249,8 @@ Fixed DpadDown Or Die Text thanks to PKR (3/31/2022)
 Testing Using VS2022 (3/31/2022)
 Added RandomWaterPiller (3/31/2022) //temp.walker need to test more
 In The Process of adding Boot,Scanline, //temp.walker need to test more (4/1/2022)
-
+Timer Refractor sorta (4/1/2022)
+"Fixed" a bug with RandomFan (4/1/2022)
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 
