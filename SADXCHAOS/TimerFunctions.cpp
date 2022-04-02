@@ -31,8 +31,68 @@ int BurgerSpin_Timer = 0;
 int Cart_Timer = 0;
 int ScanLine_Timer = 0;
 int RandomBoot_Timer = 0;
+int HAHA69_Timer = 0;
 int Bl1ngBl0ng = 50;
-
+int ColorsRandChance = 0;
+unsigned int Colors69[] =
+{
+0xFFbcdcb3,
+0xFF7647d0,
+0xFF78d747,
+0xFFcb48bf,
+0xFFd9dc3e,
+0xFF4b2d7e,
+0xFF65d88e,
+0xFFd64576,
+0xFF528737,
+0xFF667fd0,
+0xFFbdc65f,
+0xFFcc8bcf,
+0xFFd58f37,
+0xFF62ced2,
+0xFFd64c33,
+0xFF5d8d75,
+0xFF87416d,
+0xFFd2b48c,
+0xFF382137,
+0xFFb3b6d3,
+0xFF80342a,
+0xFF4f6882,
+0xFF9f7c38,
+0xFFc9c9e6,
+0xFFd839a9,
+0xFFaa49ea,
+0xFF42ad37,
+0xFFd05c58,
+0xFFda8696,
+0xFFe1c834,
+0xFF62baa1,
+0xFF91cfe3,
+0xFFe270d5,
+0xFF8fe683,
+0xFFdf3f8a,
+0xFFe56387,
+0xFF91b4e6,
+0xFFc5eaa1,
+0xFF6f7d36,
+0xFF7c7f6c,
+0xFFdb6233,
+0xFF4287e1,
+0xFFddb5b8,
+0xFFa0aa61,
+0xFFe39eec,
+0xFF61eabb,
+0xFF6c74b5,
+0xFF61a4e8,
+0xFF4e8866,
+0xFF658b83,
+0xFFdf7eb8,
+0xFFdf9252,
+0xFF787a14,
+0xFF727590,
+0xFFab5aa4,
+};
+_SC_NUMBERS(lol69);
 void ChaosTimer()
 {
 	if (Chaos_Timer < EffectMax)//30 seconds is 1800
@@ -452,6 +512,35 @@ void RandomBootTimerCheck()
 		RandomBoot_Timer = 0;
 	}
 }
+void Haha69TimerCheck()
+{
+	if (HAHA69_Timer > 0)
+	{
+		if (lol69.type != 9)
+		{
+			lol69.type = 9;
+			lol69.attr = 0x80;
+			lol69.rot = 0;
+			lol69.max = 69;
+			lol69.value = 69;
+			lol69.scl = 4.0;
+		}
+		if (ColorsRandChance == 0)
+		{
+			lol69.color = Colors69[rand() % LengthOfArray(Colors69)];
+			lol69.pos.x = playertwp[0]->pos.x + rand() % 400 + (-100);
+			lol69.pos.y = playertwp[0]->pos.y + rand() % 100 + (400);
+			lol69.pos.z = playertwp[0]->pos.z + rand() % 300 + (200);
+		}
+		ColorsRandChance = rand() % 8;
+		DrawSNumbers(&lol69);
+		HAHA69_Timer--;
+	}
+	if (HAHA69_Timer == 1)
+	{
+		HAHA69_Timer = 0;
+	}
+}
 void CheckAllEffectsTimer()
 {
 	NoClipTimerCheck();
@@ -475,4 +564,5 @@ void CheckAllEffectsTimer()
 	WaterPillerTimerCheck();
 	ScanLineTimerCheck();
 	RandomBootTimerCheck();
+	Haha69TimerCheck();
 }

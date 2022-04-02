@@ -744,7 +744,8 @@ FunctionPointer(SEQ_SECTIONTBL*, SeqGetSectionList, (int playerno), 0x44EAF0); /
 FunctionPointer(void, SeqSetTime, (Sint8 time), 0x412C00); // Set time of dat
 FunctionPointer(Sint8, SeqGetTime, (), 0x412C10); // Get time of day
 
-
-
-
+FunctionPointer(void, DrawSNumbers, (_SC_NUMBERS* pscn), 0x427BB0); // Draw a number on screen using the HUD font
+FunctionPointer(void, CharColliOn, (taskwk* twp), 0x4BD180); // Enable character collisions
+FunctionPointer(void, CharColliOff, (taskwk* twp), 0x4BD1B0); // Disable character collisions
+DataPointer(BOOL, boolLandCollision, 0x915460);
 #endif /* SADXMODLOADER_SADXFUNCTIONSNEW_H */

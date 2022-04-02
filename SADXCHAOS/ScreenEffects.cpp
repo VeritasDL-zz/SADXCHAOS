@@ -268,3 +268,13 @@ void __cdecl sandStorm(int frame, int alpha)
     boot->noise_frame = frame;
     boot->backGroundAlpha = alpha;
 }
+void HAHA69()
+{
+    if (HAHA69_Timer != 0)
+    {
+        NewEffect();
+        return;
+    }
+    strcpy_s(LastEffect, 128, "69");
+    HAHA69_Timer = 420;
+}

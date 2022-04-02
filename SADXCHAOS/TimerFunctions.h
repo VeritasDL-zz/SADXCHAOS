@@ -31,6 +31,7 @@ extern int Cart_Timer;
 extern int WaterPiller_Timer;
 extern int ScanLine_Timer;
 extern int RandomBoot_Timer;
+extern int HAHA69_Timer;
 extern bool DebugEnabled;
 void NoClipTimerCheck();
 void InputInvertTimerCheck();

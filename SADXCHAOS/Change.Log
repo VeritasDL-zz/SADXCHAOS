@@ -249,13 +249,20 @@ Fixed DpadDown Or Die Text thanks to PKR (3/31/2022)
 Testing Using VS2022 (3/31/2022)
 Added RandomWaterPiller (3/31/2022) //temp.walker need to test more
 In The Process of adding Boot,Scanline, //temp.walker need to test more (4/1/2022)
-Timer Refractor sorta (4/1/2022)
-"Fixed" a bug with RandomFan (4/1/2022)
+Timer Refractor sorta (4/2/2022)
+"Fixed" a bug with RandomFan (4/2/2022)
+Added 69 (4/2/2022)
+Added 69 to ChaosArray (4/2/2022)
+
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 
  Log Known Crashes
  
+Test CharColliOff, CharColliOn, DrawSNumbers, boolLandCollision(4/2/2022)
+look into FunctionPointer(int, GetHoldingItemIDP, (uint8_t pno), 0x442030); for SRM (4/2/2022)
+
+
  Convert Cart to Task LOL this sucks
  RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
  Add More Custom Tikal Hints

@@ -43,6 +43,18 @@ union _UNION_STATUS
 	_OBJ_SLEEPCON* pObjSleepCondition;
 };
 
+struct _SC_NUMBERS
+{
+	unsigned __int8 type;
+	unsigned __int8 attr;
+	__int16 rot;
+	unsigned int max;
+	unsigned int value;
+	NJS_POINT3 pos;
+	float scl;
+	unsigned int color;
+};
+
 struct _OBJ_EDITENTRY
 {
 	unsigned __int16 usID;

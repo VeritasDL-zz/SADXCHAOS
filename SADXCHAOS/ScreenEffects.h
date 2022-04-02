@@ -26,4 +26,5 @@ void __cdecl deleteBoot();
 void __cdecl createBoot(int wait_frame, int sstorm_frame, int poweron_frame, int adjust_frame);
 void RandomScanLine();
 void RandomBoot();
+void HAHA69();
 
