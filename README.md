@@ -121,15 +121,16 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random CannonS1 - Spawns in a Cannon from Sky Deck.
 - Random CannonS2 - Spawns in a Cannon from Sky Deck.
 - BurgerSpin - Spawns in 7 BurgerMen that spin around the player, Check out Her Github. https://github.com/SPEEPSHighway Or Her Meme Maker Mod. https://gamebanana.com/mods/49984
-- Random Dug Up Rings - Digs up Rings like Knuckles would
+- Random Dug Up Rings - Digs up Rings like Knuckles would.
 - Random Set Ice - Freezes Sonic Or Knuckles in a ice block.
-- Random Conveyor Belt - Spawns in the moving Conveyor Belt from Final Egg With random Size and speed
-- Random Conveyor Spike - Spawns in the Conveyor Spike from Final Egg
-- Random Cart - Spawns in the TinklePark Cart and Forces the player in it for 1000 Frames
-- Random Boot - Causes the Gamma Boot Up Screen Effect
-- Random ScanLine - Causes the Gamma Scanline Screen Effect
-- Random WaterPiller Spawns in a water pillar that Chaos uses to steal the last Chaos Emerald.
-
+- Random Conveyor Belt - Spawns in the moving Conveyor Belt from Final Egg With random Size and speed.
+- Random Conveyor Spike - Spawns in the Conveyor Spike from Final Egg.
+- Random Cart - Spawns in the TinklePark Cart and Forces the player in it for 1000 Frames.
+- Random Boot - Causes the Gamma Boot Up Screen Effect.
+- Random ScanLine - Causes the Gamma Scanline Screen Effect.
+- Random WaterPiller - Spawns in a water pillar that Chaos uses to steal the last Chaos Emerald.
+- Random 69 Text - Renders in "69" Randomly Changes Screen Position and Text Color.
+- Random Display Boss Name - Renders Funny Text on Screen.
 
 
 ## Special Thanks
