@@ -34,6 +34,7 @@ bool BurgerSpinTextLoader = false;
 bool ConveyorTextLoader = false;
 bool CartTextLoader = false;
 bool WaterPillerTextLoader = false;
+bool AsciiTextLoader = false;
 bool TextLoaded = false;
 bool WriteOnce = false;
 int FruitNumb = 0;
@@ -77,6 +78,7 @@ void ResetTextureBools()
 	ConveyorTextLoader = false;
 	CartTextLoader = false;
 	WaterPillerTextLoader = false;
+	AsciiTextLoader = false;
 	WriteOnce = false;
 	HatNumb = 0;
 	FruitNumb = 0;

@@ -1,6 +1,22 @@
 #include "pch.h"
+#include <string>
 task* p_ScanLineTask;
 int base_pos;
+std::string Ligmas[] =
+{
+    "Ligma Balls",
+	"Bofa Deez",
+	"Dragondese Deez",
+    "Candice",
+	"Maween",
+	"Tugunma",
+    "Bophides",
+    "Wilma",
+	"Saw Con",
+	"Toad Arc",
+	"SUPER FUCKING MARIO",
+	"Society",
+};
 enum MODE
 {
     MODE_WAIT,
@@ -277,4 +293,18 @@ void HAHA69()
     }
     strcpy_s(LastEffect, 128, "69");
     HAHA69_Timer = 420;
+}
+void LigmaBoss()
+{
+    if (!AsciiTextLoader)
+    {
+        LoadNoNamePVM(&b32ascii_TEXLIST);
+        AsciiTextLoader = true;
+        TextLoaded = true;
+    }
+    if (b32ascii_TEXLIST.textures->texaddr)
+    {
+        int RandomLigma = rand() % LengthOfArray(Ligmas);
+        SetDisplayBossName(Ligmas[RandomLigma].c_str(), -1, 240, 100);
+    }
 }

@@ -900,6 +900,7 @@ void RandomWaterPiller(taskwk* p1)
 		{
 			strcpy_s(LastEffect, 128, "Random Water Piller");
 			WaterPillarOn(playertwp[0]->pos.x, playertwp[0]->pos.y, playertwp[0]->pos.z, 1, Randomscale);
+			EnemyBounceThing(0, rand() % 5 + (1), rand() % 5 + (1), rand() % 5 + (1));
 			WaterPiller_Timer = 420;
 		}
 	}

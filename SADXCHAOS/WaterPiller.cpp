@@ -105,7 +105,6 @@ void __cdecl execWaveTask_WP(task* tp)
 	}
 	dispWaveTask_WP(tp);
 }
-
 void __cdecl initWaveTask_WP(task* tp)
 {
 	tp->exec = execWaveTask_WP;
@@ -141,9 +140,9 @@ void __cdecl dispPillarTask(task* tp)
 	njPushMatrix(0);
 	njTranslateV(0, &twp->pos);
 	njScale(0,
-		twp->scl.x * pillar->scl.x,
-		pillar->scl.y * twp->scl.y,
-		twp->scl.x * pillar->scl.z);
+	twp->scl.x * pillar->scl.x,
+	pillar->scl.y * twp->scl.y,
+	twp->scl.x * pillar->scl.z);
 	scaleX = twp->scl.x * pillar->scl.x;
 	scaleY = pillar->scl.y * twp->scl.y;
 	scaleZ = twp->scl.x * pillar->scl.z;

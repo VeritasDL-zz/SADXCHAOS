@@ -27,4 +27,4 @@ void __cdecl createBoot(int wait_frame, int sstorm_frame, int poweron_frame, int
 void RandomScanLine();
 void RandomBoot();
 void HAHA69();
-
+void LigmaBoss();

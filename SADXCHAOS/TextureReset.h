@@ -42,6 +42,7 @@ extern bool ConveyorTextLoader;
 extern bool CartTextLoader;
 extern bool WriteOnce;
 extern bool WaterPillerTextLoader;
+extern bool AsciiTextLoader;
 extern int FruitNumb;
 extern int HatNumb;
 void ResetTextureBools();

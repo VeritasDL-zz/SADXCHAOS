@@ -130,6 +130,11 @@ void RandomHat(taskwk* p1)
 }
 void RandomCheckPoint(taskwk* p1)
 {
+	if (CurrentLevel == LevelIDs_Chaos4)
+	{
+		NewEffect();
+		return;
+	}
 	strcpy_s(LastEffect, 128, "Random CheckPoint");
 	task* CheckPoint;
 	CheckPoint = (task*)LoadObject((LoadObj)15, 6, CheckPoint_Main);
