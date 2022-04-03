@@ -224,7 +224,7 @@ void RandomChaoo()
 		ChaoManager_Load();
 		ChaooManagerLoader = true;
 	}
-	int chaotype = rand() % 24;
+	int chaotype = rand() % 23;
 	ChaoData* chaodata = new ChaoData();
 	chaodata->data.Happiness = rand() % 99;
 	chaodata->data.Energy = rand() % 32767;
@@ -241,12 +241,12 @@ void RandomChaoo()
 	chaodata->data.SwimLevel = rand() % 99;
 	chaodata->data.UnknownLevel = rand() % 99;
 	chaodata->data.IntelligenceLevel = rand() % 99;
-	chaodata->data.FavoriteFruit = rand() % 7;
+	chaodata->data.FavoriteFruit = rand() % 6;
 	chaodata->data.Texture = rand() % 15;
-	int bodychangechance = rand() % 10;
+	int bodychangechance = rand() % 5;
 	if (bodychangechance == 1)
 	{
-		int bodyrand = rand() % 3;
+		int bodyrand = rand() % 2;
 		chaodata->data.BodyType = (SADXBodyType)bodyrand;
 	}
 	int shinychance = rand() % 4;
@@ -254,20 +254,20 @@ void RandomChaoo()
 	{
 		chaodata->data.Shiny = 1;
 	}
-	chaodata->data.MouthType = rand() % 14;
-	chaodata->data.EyeType = rand() % 12;
+	chaodata->data.MouthType = rand() % 13;
+	chaodata->data.EyeType = rand() % 11;
 	chaodata->data.BallType = rand() % 3;
-	chaodata->data.Alignment = rand() % 2 - 1; //test
+	chaodata->data.Alignment = rand() % 2; //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
 	strcpy_s(LastEffect, 128, "Spawned Random Chao");
 	ObjectMaster* Chao = CreateChao(chaodata, 0, 0, &playertwp[0]->pos, 0);
 	chaodata->data.Color = rand() % 14;
-	chaodata->data.Name[0] = rand() % 255;
-	chaodata->data.Name[1] = rand() % 255;
-	chaodata->data.Name[2] = rand() % 255;
-	chaodata->data.Name[3] = rand() % 255;
-	chaodata->data.Name[4] = rand() % 255;
-	chaodata->data.Name[5] = rand() % 255;
-	chaodata->data.Name[6] = rand() % 255;
+	chaodata->data.Name[0] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
+	chaodata->data.Name[1] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
+	chaodata->data.Name[2] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
+	chaodata->data.Name[3] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
+	chaodata->data.Name[4] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
+	chaodata->data.Name[5] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
+	chaodata->data.Name[6] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
 	chaodata->data.FlyGrade = rand() % 5;
 	chaodata->data.IntelligenceGrade = rand() % 5;
 	chaodata->data.LuckyGrade = rand() % 5;

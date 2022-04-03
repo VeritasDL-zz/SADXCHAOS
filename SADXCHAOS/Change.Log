@@ -250,16 +250,23 @@ Testing Using VS2022 (3/31/2022)
 Added RandomWaterPiller (3/31/2022) //temp.walker need to test more
 In The Process of adding Boot,Scanline, //temp.walker need to test more (4/1/2022)
 Timer Refractor sorta (4/2/2022)
-"Fixed" a bug with RandomFan (4/2/2022)
+Added Config Options for RandomBoot, RandomScanLine and DpadDownOrDie (4/2/2022)
+Adjusted RandomCart To not spawn during Chaos 4 and EggViper (4/2/2022)
+Adjusted RandomFan to not spawn during Chaos 4 (4/2/2022)
+Added Bouce to Watter Piller (4/2/2022)
 Added 69 (4/2/2022)
 Added 69 to ChaosArray (4/2/2022)
+Adjusted RandomCheckPoint to not spawn during chaos 4 (4/2/2022)
+Added RandomBossName (4/2/2022)
+Adjusted RandomChao Params, trying to fix a crash (4/3/2022)
+
 
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 
  Log Known Crashes
  
-Test CharColliOff, CharColliOn, DrawSNumbers, boolLandCollision(4/2/2022)
+Test CharColliOff, CharColliOn, boolLandCollision(4/2/2022)
 look into FunctionPointer(int, GetHoldingItemIDP, (uint8_t pno), 0x442030); for SRM (4/2/2022)
 
 
