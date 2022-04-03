@@ -257,17 +257,17 @@ void RandomChaoo()
 	chaodata->data.MouthType = rand() % 13;
 	chaodata->data.EyeType = rand() % 11;
 	chaodata->data.BallType = rand() % 3;
-	chaodata->data.Alignment = rand() % 2; //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
+	chaodata->data.Alignment = rand() % 2;
 	strcpy_s(LastEffect, 128, "Spawned Random Chao");
 	ObjectMaster* Chao = CreateChao(chaodata, 0, 0, &playertwp[0]->pos, 0);
 	chaodata->data.Color = rand() % 14;
-	chaodata->data.Name[0] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
-	chaodata->data.Name[1] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
-	chaodata->data.Name[2] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
-	chaodata->data.Name[3] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
-	chaodata->data.Name[4] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
-	chaodata->data.Name[5] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
-	chaodata->data.Name[6] = rand() % 164 + (1); //temp.walker 4/3/2022 need to test maybe it was getting -1 for Alignment??
+	chaodata->data.Name[0] = rand() % 164 + (1); 
+	chaodata->data.Name[1] = rand() % 164 + (1);
+	chaodata->data.Name[2] = rand() % 164 + (1);
+	chaodata->data.Name[3] = rand() % 164 + (1);
+	chaodata->data.Name[4] = rand() % 164 + (1);
+	chaodata->data.Name[5] = rand() % 164 + (1);
+	chaodata->data.Name[6] = rand() % 164 + (1);
 	chaodata->data.FlyGrade = rand() % 5;
 	chaodata->data.IntelligenceGrade = rand() % 5;
 	chaodata->data.LuckyGrade = rand() % 5;

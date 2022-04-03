@@ -108,12 +108,12 @@ void RandomCart()
 		NewEffect();
 		return;
 	}
-	if (!ControlEnabled) //temp.walker need to test to make sure it isnt called when control is disabled
+	if (!ControlEnabled)
 	{
 		NewEffect();
 		return;
 	}
-	if (Cart_Timer != 0)//temp.walker test to stop more carts from spawning while already in a cart?
+	if (Cart_Timer != 0)
 	{
 		NewEffect();
 		return;

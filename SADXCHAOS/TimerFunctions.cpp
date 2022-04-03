@@ -118,11 +118,11 @@ void ChaosTimer()
 }
 void NoClipTimerCheck()
 {
-	if (NoClip_Timer > 0)//temp.walker need to test
+	if (NoClip_Timer > 0)
 	{
 		NoClip_Timer--;
 	}
-	if (NoClip_Timer == 1)//temp.walker need to test (4/2/2022)
+	if (NoClip_Timer == 1)
 	{
 		WalkThruWallsReset();
 		NoClip_Timer = 0;
@@ -224,7 +224,6 @@ void DpadDownOrDieTimerCheck()
 		ScaleDebugFont(18);
 		int DebugRightPos = (int)((float)HorizontalResolution / DebugFontSize);
 		DisplayDebugStringFormatted(NJM_LOCATION(DebugRightPos - strlen(DPadMessage), 10), DPadMessage);//NEED TO TEST OTHER RESOLUTIONS?
-		//DisplayDebugString(NJM_LOCATION(15, 0), "- PRESS DPAD DOWN OR DIE!!! -");
 		if (ControllerPointers[0]->HeldButtons & Buttons_Down) //Checks if dpad pressed down
 		{
 			DpadDown = 1; //Sets dpadcheck to 1

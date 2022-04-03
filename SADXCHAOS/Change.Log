@@ -259,7 +259,8 @@ Added 69 to ChaosArray (4/2/2022)
 Adjusted RandomCheckPoint to not spawn during chaos 4 (4/2/2022)
 Added RandomBossName (4/2/2022)
 Adjusted RandomChao Params, trying to fix a crash (4/3/2022)
-
+Removed Temp.Walker (4/3/2022)
+Cleaned up Comments a little (4/3/2022)
 
 ---------TO-DO---------
  Test Stuff
