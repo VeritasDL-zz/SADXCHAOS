@@ -214,10 +214,9 @@ void DisableControlTimerCheck()
 		DisableControl_Timer = 0;
 	}
 }
-const char* DPadMessage;
+const char* DPadMessage = "- PRESS DPAD DOWN OR DIE!!! -";
 void DpadDownOrDieTimerCheck()
 {
-	DPadMessage = "- PRESS DPAD DOWN OR DIE!!! -";
 	if (DPadDown_Timer > 0)
 	{
 		SetDebugFontColor(0xFFFF0000);
@@ -401,7 +400,6 @@ void CustomCameraEffectsTimersCheck()
 	{
 		SetCameraMode_(0);//Force AutoCam
 		CameraNOP();
-		
 		if (CameraSide == 0)
 		{
 			WriteData((int*)0x03B2C68C, (int)-0x4000); //force camera sideways

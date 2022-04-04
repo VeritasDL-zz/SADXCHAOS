@@ -852,11 +852,19 @@ void Set_Sonic_Ice()
 		LoadNoNamePVM(&stx_ice0_TEXLIST);
 		TextLoaded = true;
 	}
-	strcpy_s(LastEffect, 128, "Froze Player");
-	DisableControl_Timer = 70;
-	ControlEnabled = 0;
-	ForcePlayerAction(0, 38); //forces frozen state for sonic/Knuckles
-	SetSonicIce(playertwp[0]->counter.b[0]);
+	if (stx_ice0_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Froze Player");
+		DisableControl_Timer = 70;
+		ControlEnabled = 0;
+		ForcePlayerAction(0, 38); //forces frozen state for sonic/Knuckles
+		SetSonicIce(playertwp[0]->counter.b[0]);
+	}
+	else
+	{
+		NewEffect();
+		return;
+	}	
 }
 void EmeraldShardMa()
 {
