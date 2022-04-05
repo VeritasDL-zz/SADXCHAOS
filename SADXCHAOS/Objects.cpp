@@ -494,3 +494,30 @@ void RandomConveyorStop(taskwk* p1)
 		return;
 	}
 }
+void RandomFountain(taskwk* p1)
+{
+	if (!FountainTextLoader)
+	{
+		LoadPVM("OBJ_HIGHWAY2", &OBJ_HIGHWAY2_TEXLIST);
+		FountainTextLoader = true;
+		TextLoaded = true;
+	}
+	if (OBJ_HIGHWAY2_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Fountain");
+		task* Fountain;
+		Fountain = (task*)LoadObject((LoadObj)10, 3, OFount);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Fountain->ocp = objCondition;
+		Fountain->twp->pos = playertwp[0]->pos;
+		Fountain->twp->pos.y = playertwp[0]->pos.y - 9.0f;
+		return;
+	}
+	else //new effect 
+	{
+		NewEffect();
+		return;
+	}
+	
+	//OFount
+}

@@ -22,7 +22,7 @@ extern "C"
 		init_FreeMovements();
 		strcpy_s(LastEffect, 128, "Chaos Edition 2.0 b 9");
 	}
-	ChaosS ChaosArray[124]
+	ChaosS ChaosArray[125]
 	{
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
@@ -42,6 +42,7 @@ extern "C"
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomBuyon, nullptr, nullptr },
 	{ RandomSpinnerC, nullptr, nullptr },
+	{ RandomFountain, nullptr, nullptr },
 	{ RandomFireBreath, nullptr, nullptr },
 	{ RandomTank, nullptr, nullptr },
 	{ RandomPowerUP, nullptr, nullptr },

@@ -17,3 +17,4 @@ void RandomBarrel(taskwk* p1);
 bool GrabAbleObjects();
 void RandomConveyorBelt(taskwk* p1);
 void RandomConveyorStop(taskwk* p1);
+void RandomFountain(taskwk* p1);

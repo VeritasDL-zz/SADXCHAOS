@@ -35,6 +35,7 @@ bool ConveyorTextLoader = false;
 bool CartTextLoader = false;
 bool WaterPillerTextLoader = false;
 bool AsciiTextLoader = false;
+bool FountainTextLoader = false;
 bool TextLoaded = false;
 bool WriteOnce = false;
 int FruitNumb = 0;
