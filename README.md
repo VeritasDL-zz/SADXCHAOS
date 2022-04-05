@@ -13,7 +13,7 @@
   </a>
 
   <h3 align="center">SADX Chaos Edition</h3>
-
+  <h3 align="center">Sonic Adventure Chaos Edition</h3>
   <p align="center">
     <br />
     <a href="https://github.com/VeritasDL/SADXCHAOS/issues">Report Bug</a>
