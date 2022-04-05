@@ -261,6 +261,10 @@ Added RandomBossName (4/2/2022)
 Adjusted RandomChao Params, trying to fix a crash (4/3/2022)
 Removed Temp.Walker (4/3/2022)
 Cleaned up Comments a little (4/3/2022)
+Removed Temp.Walker (4/4/2022)
+Added PerfectChaosCheck (4/5/2022)
+Disabled Ring Allergy During Perfect Chaos (4/5/2022)
+Disabled RandomSnowBoard During Perfect Chaos (4/5/2022)
 
 ---------TO-DO---------
  Test Stuff

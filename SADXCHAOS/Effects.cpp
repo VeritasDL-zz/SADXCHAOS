@@ -77,6 +77,15 @@ bool BigFishingCheck()
 	}
 	return false;
 }
+bool PerfectChaosCheck()
+{
+	if (CurrentLevel == LevelIDs_PerfectChaos)
+	{
+		NewEffect();
+		return true;
+	}
+	return false;
+}
 player_parameter PhyData[38]  //credits to MainMemory For this data, https://github.com/MainMemory/SADXPhysicsSwapMod
 {
 	60,2,16,16,3,0.6,1.66,3,0.23,0.46,1.39,2.3,3.7,5.09,0.076,0.05,0.031,-0.06,-0.18,-0.17,-0.028,-0.008,-0.01,-0.4,-0.1,-0.6,-0.2825,0.3,4,10,0.08,7,5.4,
@@ -644,6 +653,10 @@ void RingAllergy()
 		return;
 	}
 	if (EggViperHandiCapCheck())
+	{
+		return;
+	}
+	if (PerfectChaosCheck())
 	{
 		return;
 	}

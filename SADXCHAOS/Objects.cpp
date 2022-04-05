@@ -260,6 +260,10 @@ void RandomSnowboard()
 		NewEffect();
 		return;
 	}
+	if (PerfectChaosCheck())
+	{
+		return;
+	}
 	if (IssSowboarding == 0)
 	{
 		SnowboardTimer = 500;

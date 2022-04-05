@@ -98,9 +98,8 @@ void RandomCart()
 		NewEffect();
 		return;
 	}
-	if (CurrentLevel == LevelIDs_PerfectChaos)
+	if (PerfectChaosCheck())
 	{
-		NewEffect();
 		return;
 	}
 	if (CurrentLevel == LevelIDs_Chaos2)

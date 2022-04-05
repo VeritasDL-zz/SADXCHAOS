@@ -10,6 +10,7 @@ extern int RandomSpawnAmount;
 extern int RingCount;
 extern int EVHandyCap;
 extern bool BigFishingCheck();
+extern bool PerfectChaosCheck();
 void DisablePausee();
 void RandomPhysics();
 void Nos0und_ForYou();
