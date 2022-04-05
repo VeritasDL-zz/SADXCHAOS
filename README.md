@@ -128,7 +128,7 @@ RinoTank, ChameLeon, Kiki, Falling SpikeBall, SpinnerA, Spinner B, Eletric Spinn
 - Random Cart - Spawns in the TinklePark Cart and Forces the player in it for 1000 Frames.
 - Random Boot - Causes the Gamma Boot Up Screen Effect.
 - Random ScanLine - Causes the Gamma Scanline Screen Effect.
-- Random WaterPiller - Spawns in a water pillar that Chaos uses to steal the last Chaos Emerald.
+- Random WaterPiller - Spawns in a water pillar that Chaos uses to steal the last Chaos Emerald, also pushes the player away from it.
 - Random 69 Text - Renders in "69" Randomly Changes Screen Position and Text Color.
 - Random Display Boss Name - Renders Funny Text on Screen.
 
