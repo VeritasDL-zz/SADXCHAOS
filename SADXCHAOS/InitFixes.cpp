@@ -121,4 +121,5 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	//WriteData<1>((int*)0x4F6D60, 0xC3); //EC ACT 0 Stuff from sora for testing
 	//WriteData<1>((int*)0x44AE80, 0xC3); //EC ACT 0 Stuff from sora for testing
 	srand((unsigned)time(nullptr));
+	helperFunctions.ReplaceFile("system\\AVA_GTITLE0_E.PVM", "system\\textures\\AVA_GTITLE0_E.PVM"); //replace title screen
 }

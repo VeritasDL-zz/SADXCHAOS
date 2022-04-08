@@ -79,6 +79,7 @@ void ResetTextureBools()
 	ConveyorTextLoader = false;
 	CartTextLoader = false;
 	WaterPillerTextLoader = false;
+	FountainTextLoader = false;
 	AsciiTextLoader = false;
 	WriteOnce = false;
 	HatNumb = 0;

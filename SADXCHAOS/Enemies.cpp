@@ -704,7 +704,7 @@ void RandomEGacha(taskwk* p1)
 	if (!EGachaTextLoader)
 	{
 		CheckAnimalTexture();
-		LoadPVM("OBJ_FEgg", &OBJ_FINALEGG_TEXLIST);
+		//LoadPVM("OBJ_FEgg", &OBJ_FINALEGG_TEXLIST); //temp.walker disabled on 4/7/2022 
 		LoadPVM("GACHAPON", &GACHAPON_TEXLIST);
 		EGachaTextLoader = true;
 		TextLoaded = true;
@@ -743,10 +743,10 @@ void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this
 	{
 		return;
 	}
-	if (AdventureCheck())
-	{
-		return;
-	}
+	//if (AdventureCheck())
+	//{
+	//	return;
+	//} //temp.walker disabled on 4/7/2022
 	if (EggViperCheck())
 	{
 		return;

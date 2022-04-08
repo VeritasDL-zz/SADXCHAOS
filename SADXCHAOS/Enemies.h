@@ -18,3 +18,4 @@ void RandomAirCraft(taskwk* p1);
 void RandomFireBreath(taskwk* p1);
 void RandomCannonS1(taskwk* p1);
 void RandomCannonS2(taskwk* p1);
+extern bool E101RCheck();

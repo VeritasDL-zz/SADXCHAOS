@@ -117,6 +117,10 @@ void RandomCart()
 		NewEffect();
 		return;
 	}
+	if (E101RCheck())
+	{
+		return;
+	}
 	Load_Cart_R();
 }
 void Load_Cart_R()
