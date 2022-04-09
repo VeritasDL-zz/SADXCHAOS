@@ -87,7 +87,7 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	DpadDownOrDieEnabled = config->getBool("General", "DpadDownOrDieEnabled", true);
 	delete config;
 	InitializeRandomCoordinates();
-	init_CartStuff();//sora credit
+	init_CartStuff();//Thanks to Sora_yx for this
 	WriteCall((void*)0x4E9423, LoadSnowboardObject);//fix for snowboard texture
 	WriteCall((void*)0x4E967E, LoadSnowboardObject);//fix for snowboard texture
 	WriteCall((void*)0x4E9698, LoadSnowboardObject);//fix for snowboard texture
@@ -99,27 +99,27 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	WriteCall((void*)0x5BD271, LoadFETexObj);//fix for Conveyor Stop Texture
 	WriteCall((void*)0x5F1A52, LoadSDTexObj);//fix for AirCraft Texture
 	WriteCall((void*)0x5F1A78, LoadSDTexObj);//fix for AirCraft Texture
-	WriteCall((void*)0x6F4BD5, OverRideEmeraldShardObj);//attempt to fix EmeraldShard Texture
-	WriteCall((void*)0x6F4D81, OverRideEmeraldShardObj);//attempt to fix EmeraldShard Texture
-	WriteCall((void*)0x6F4EE0, OverRideEmeraldShardObj);//attempt to fix EmeraldShard Texture
+	//WriteCall((void*)0x6F4BD5, OverRideEmeraldShardObj);//attempt to fix EmeraldShard Texture
+	//WriteCall((void*)0x6F4D81, OverRideEmeraldShardObj);//attempt to fix EmeraldShard Texture
+	//WriteCall((void*)0x6F4EE0, OverRideEmeraldShardObj);//attempt to fix EmeraldShard Texture
 	WriteCall((void*)0x624047, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
 	WriteCall((void*)0x623CD1, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
 	WriteCall((void*)0x623D88, OverRideTPBarrelObj);//fix for Twinkle Park Barrel
 	WriteData<1>((int*)0x624150, 0x25);//TwinklePark Barrel Timer Hack
 	WriteData<1>((int*)0x624151, 0x00);//TwinklePark Barrel Timer Hack
 	WriteJump(Snowboard_Delete, Snowboard_Delete_r);//fix for snowboard texture delete
-	WriteData((char*)0x4EE7BB, (char)4);//Big ice rock pickup ability
+	WriteData((char*)0x4EE7BB, (char)4);//Big ice rock pickup ability fix
 	WriteData((int*)0x17D0A2C, (int)0xC7C35000);//Stops the amy key block from exploding 
 	WriteData((int*)0x17D0A38, (int)0xC7C35000);//Stops the amy key block from exploding
 	WriteData((int*)0x17D0A44, (int)0xC7C35000);//Stops the amy key block from exploding
 	WriteData((int*)0x17D0A50, (int)0xC7C35000);//Stops the amy key block from exploding
-	WriteData<5>((int*)0x4B4924, 0x90);//EmblemCollected_Load ControlDisable Nop
-	WriteData<5>((int*)0x4B46C5, 0x90);//EmblemCollected_Main ControlDisable Nop
-	WriteData<5>((int*)0x4B4924, 0x90);//InitGGMessage CameraSetEventCameraFunc Nop
-	WriteData<5>((int*)0x61B7BE, 0x90);//Fountain Rotation Set Nop,
+	WriteData<5>((int*)0x4B4924, 0x90);//EmblemCollected_Load ControlDisable NOP
+	WriteData<5>((int*)0x4B46C5, 0x90);//EmblemCollected_Main ControlDisable NOP
+	WriteData<5>((int*)0x4B4924, 0x90);//InitGGMessage CameraSetEventCameraFunc NOP
+	WriteData<5>((int*)0x61B7BE, 0x90);//Fountain Rotation Set NOP
 	//WriteData((int*)0x80F060, (int)0x47C35000);//FinalEgg Fan Set Accend Height Max Bypass
 	//WriteData<1>((int*)0x4F6D60, 0xC3); //EC ACT 0 Stuff from sora for testing
 	//WriteData<1>((int*)0x44AE80, 0xC3); //EC ACT 0 Stuff from sora for testing
 	srand((unsigned)time(nullptr));
-	helperFunctions.ReplaceFile("system\\AVA_GTITLE0_E.PVM", "system\\textures\\AVA_GTITLE0_E.PVM"); //replace title screen
+	helperFunctions.ReplaceFile("system\\AVA_GTITLE0_E.PVM", "system\\textures\\AVA_GTITLE0_E.PVM"); //Replace DX Title Screen
 }
