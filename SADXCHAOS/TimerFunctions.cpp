@@ -525,9 +525,9 @@ void Haha69TimerCheck()
 		if (ColorsRandChance == 0)
 		{
 			lol69.color = Colors69[rand() % LengthOfArray(Colors69)];
-			lol69.pos.x = playertwp[0]->pos.x + rand() % 400 + (-100);
-			lol69.pos.y = playertwp[0]->pos.y + rand() % 100 + (400);
-			lol69.pos.z = playertwp[0]->pos.z + rand() % 300 + (200);
+			lol69.pos.x = rand() % 300 + (+100);
+			lol69.pos.y = rand() % 100 + (400);
+			lol69.pos.z = rand() % 300 + (200);
 		}
 		ColorsRandChance = rand() % 8;
 		DrawSNumbers(&lol69);

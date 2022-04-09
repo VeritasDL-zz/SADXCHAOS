@@ -218,19 +218,10 @@ void RandomChaoo()
 {
 	if (!ChaooManagerLoader)
 	{
-		//ChaoMain_Constructor();
-		FreeChaoTextures();
-		ResetModules();
-		LoadChaoTexlist("AL_DX_PARTS_TEX", &texlist_al_dx_parts_tex, 0);
-		LoadChaoTexlist("AL_BODY", ChaoTexLists, 0);
-		LoadChaoTexlist("AL_jewel", &ChaoTexLists[4], 0);
-		LoadChaoTexlist("AL_ICON", &ChaoTexLists[3], 0);
-		LoadChaoTexlist("AL_EYE", &ChaoTexLists[2], 0);
-		LoadChaoTexlist("AL_MOUTH", &ChaoTexLists[5], 0);
-		LoadChaoPVPs();
-		//al_confirmload_load(); //maybe disable? not sure
-		LoadPVM("AL_TEX_COMMON", &ChaoTexLists[1]); //from al_confirmload_load
+		ChaoMain_Constructor();
+		al_confirmload_load();
 		ChaoManager_Load();
+		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
 		ChaooManagerLoader = true;
 	}
 	int chaotype = rand() % 23;

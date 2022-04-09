@@ -94,16 +94,7 @@ void RandomHat(taskwk* p1)
 	if (!ChaoHatTextLoader)
 	{
 		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
-		//ChaoMain_Constructor();
-		FreeChaoTextures();
-		ResetModules();
-		LoadChaoTexlist("AL_DX_PARTS_TEX", &texlist_al_dx_parts_tex, 0);
-		LoadChaoTexlist("AL_BODY", ChaoTexLists, 0);
-		LoadChaoTexlist("AL_jewel", &ChaoTexLists[4], 0);
-		LoadChaoTexlist("AL_ICON", &ChaoTexLists[3], 0);
-		LoadChaoTexlist("AL_EYE", &ChaoTexLists[2], 0);
-		LoadChaoTexlist("AL_MOUTH", &ChaoTexLists[5], 0);
-		LoadChaoPVPs();
+		ChaoMain_Constructor();
 		TextLoaded = true;
 		ChaoHatTextLoader = true;
 	}
@@ -518,6 +509,4 @@ void RandomFountain(taskwk* p1)
 		NewEffect();
 		return;
 	}
-	
-	//OFount
 }
