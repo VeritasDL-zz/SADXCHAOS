@@ -97,6 +97,8 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	WriteCall((void*)0x5B7581, LoadFETexObj);//fix for Fan Texture
 	WriteCall((void*)0x5BD65B, LoadFETexObj);//fix for Conveyor Texture
 	WriteCall((void*)0x5BD271, LoadFETexObj);//fix for Conveyor Stop Texture
+	WriteCall((void*)0x5B6339, LoadFETexObj);//fix for Sonic Target Texture
+	WriteCall((void*)0x5B63E2, LoadFETexObj);//fix for PopUp Target Texture
 	WriteCall((void*)0x5F1A52, LoadSDTexObj);//fix for AirCraft Texture
 	WriteCall((void*)0x5F1A78, LoadSDTexObj);//fix for AirCraft Texture
 	//WriteCall((void*)0x6F4BD5, OverRideEmeraldShardObj);//attempt to fix EmeraldShard Texture

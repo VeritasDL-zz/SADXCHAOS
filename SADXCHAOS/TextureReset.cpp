@@ -102,4 +102,6 @@ void ResetTextureBools()
 	g_RotaryEmerald_p = 0;
 	burgerManSpawned = 0;
 	FreeChaoTexlists();
+	WriteData((int*)0x5B56D2, (int)0xE5FE69E8); //target_man_exec_nop LoadLevelResults Reset Nopped ASM 
+	WriteData((int*)0x5B56D6, (int)0x43E857FF); //target_man_exec_nop LoadLevelResults Reset Nopped ASM 
 }

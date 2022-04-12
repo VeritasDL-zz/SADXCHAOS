@@ -1616,6 +1616,7 @@ ObjectFunc(OSideLamp, 0x5B5550);
 ObjectFunc(OUpTarget2, 0x5B5E70);
 ObjectFunc(OUpTarget1, 0x5B6590);
 ObjectFunc(OTarget, 0x5B66E0);
+ObjectFunc(dummytarget_init, 0x5B60D0);
 ObjectFunc(FinalEggLevel2IsolationWalls, 0x5B6B30);
 ObjectFunc(OHallGate, 0x5B6C20);
 ObjectFunc(OElevator1, 0x5B7210);

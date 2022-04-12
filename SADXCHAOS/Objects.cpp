@@ -510,3 +510,63 @@ void RandomFountain(taskwk* p1)
 		return;
 	}
 }
+void RandomTarget()
+{
+	if (!ConveyorTextLoader)
+	{
+		LoadPVM("Obj_finalegg", &OBJ_FINALEGG_TEXLIST);
+		ConveyorTextLoader = true;
+		TextLoaded = true;
+	}
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Sonic Target");
+		task* Target;
+		Target = (task*)LoadObject((LoadObj)2, 3, OTarget);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Target->ocp = objCondition;
+		Target->twp->pos = playertwp[0]->pos;
+		Target->twp->pos.y = playertwp[0]->pos.y - 9.0f;
+		Target->twp->scl.x = rand() % 200; //Distance Target Moves Back and Forth
+		WriteData<5>((int*)0x5B56D2, 0x90);//target_man_exec_nop LoadLevelResults NOP
+		return;
+	}
+	else //new effect 
+	{
+		NewEffect();
+		return;
+	}
+}
+void RandomPopUpTarget()
+{
+	if (!ConveyorTextLoader)
+	{
+		LoadPVM("Obj_finalegg", &OBJ_FINALEGG_TEXLIST);
+		ConveyorTextLoader = true;
+		TextLoaded = true;
+	}
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Target");
+		task* Target;
+		int RandomTargetObj = rand() % 1;
+		if (RandomTargetObj == 0)
+		{
+			Target = (task*)LoadObject((LoadObj)2, 3, OUpTarget1);
+		}
+		else
+		{
+			Target = (task*)LoadObject((LoadObj)2, 3, OUpTarget2);
+		}
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Target->ocp = objCondition;
+		Target->twp->pos = playertwp[0]->pos;
+		Target->twp->pos.y = playertwp[0]->pos.y - 8.0f;
+		return;
+	}
+	else //new effect 
+	{
+		NewEffect();
+		return;
+	}
+}
