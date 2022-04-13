@@ -44,6 +44,7 @@ extern bool WriteOnce;
 extern bool WaterPillerTextLoader;
 extern bool AsciiTextLoader;
 extern bool FountainTextLoader;
+extern bool TargetTextLoader;
 extern int FruitNumb;
 extern int HatNumb;
 void ResetTextureBools();

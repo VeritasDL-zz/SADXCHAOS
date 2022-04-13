@@ -36,6 +36,7 @@ bool CartTextLoader = false;
 bool WaterPillerTextLoader = false;
 bool AsciiTextLoader = false;
 bool FountainTextLoader = false;
+bool TargetTextLoader = false;
 bool TextLoaded = false;
 bool WriteOnce = false;
 int FruitNumb = 0;
@@ -81,6 +82,7 @@ void ResetTextureBools()
 	WaterPillerTextLoader = false;
 	FountainTextLoader = false;
 	AsciiTextLoader = false;
+	TargetTextLoader = false;
 	WriteOnce = false;
 	HatNumb = 0;
 	FruitNumb = 0;

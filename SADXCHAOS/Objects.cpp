@@ -510,12 +510,12 @@ void RandomFountain(taskwk* p1)
 		return;
 	}
 }
-void RandomTarget()
+void RandomTarget(taskwk* p1)
 {
-	if (!ConveyorTextLoader)
+	if (!TargetTextLoader)
 	{
 		LoadPVM("Obj_finalegg", &OBJ_FINALEGG_TEXLIST);
-		ConveyorTextLoader = true;
+		TargetTextLoader = true;
 		TextLoaded = true;
 	}
 	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
@@ -528,7 +528,10 @@ void RandomTarget()
 		Target->twp->pos = playertwp[0]->pos;
 		Target->twp->pos.y = playertwp[0]->pos.y - 9.0f;
 		Target->twp->scl.x = rand() % 200; //Distance Target Moves Back and Forth
-		WriteData<5>((int*)0x5B56D2, 0x90);//target_man_exec_nop LoadLevelResults NOP
+		if (CurrentCharacter != Characters_Gamma && CurrentLevel != LevelIDs_FinalEgg)
+		{
+			WriteData<5>((int*)0x5B56D2, 0x90);//target_man_exec_nop LoadLevelResults NOP
+		}
 		return;
 	}
 	else //new effect 
@@ -537,31 +540,24 @@ void RandomTarget()
 		return;
 	}
 }
-void RandomPopUpTarget()
+void RandomPopUpTarget(taskwk* p1)
 {
-	if (!ConveyorTextLoader)
+	if (!TargetTextLoader)
 	{
 		LoadPVM("Obj_finalegg", &OBJ_FINALEGG_TEXLIST);
-		ConveyorTextLoader = true;
+		TargetTextLoader = true;
 		TextLoaded = true;
 	}
 	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
 	{
 		strcpy_s(LastEffect, 128, "Random Target");
 		task* Target;
-		int RandomTargetObj = rand() % 1;
-		if (RandomTargetObj == 0)
-		{
-			Target = (task*)LoadObject((LoadObj)2, 3, OUpTarget1);
-		}
-		else
-		{
-			Target = (task*)LoadObject((LoadObj)2, 3, OUpTarget2);
-		}
+		Target = (task*)LoadObject((LoadObj)2, 3, OUpTarget1);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Target->ocp = objCondition;
 		Target->twp->pos = playertwp[0]->pos;
 		Target->twp->pos.y = playertwp[0]->pos.y - 8.0f;
+		Target->twp->scl.y = 0; //0 = random, 1 = sonic, 2 = knux, 3 = tails
 		return;
 	}
 	else //new effect 
