@@ -26,6 +26,7 @@ bool RandomVoiceEnabled = true;
 bool RandomBootEnabled = true;
 bool RandomScanLineEnabled = true;
 bool DpadDownOrDieEnabled = true;
+bool FallingSpikeBallEnabled = true;
 DWORD Aequitas = (0x000000000761CFC0+0x0000000003B0E9E0+0x0000000003B0EFE0-0x000000000B12C1A0);
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
 {
@@ -85,6 +86,7 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	RandomBootEnabled = config->getBool("General", "RandomBootEnabled", true);
 	RandomScanLineEnabled = config->getBool("General", "RandomScanLineEnabled", true);
 	DpadDownOrDieEnabled = config->getBool("General", "DpadDownOrDieEnabled", true);
+	FallingSpikeBallEnabled = config->getBool("General", "FallingSpikeBallEnabled", true);
 	delete config;
 	InitializeRandomCoordinates();
 	init_CartStuff();//Thanks to Sora_yx for this

@@ -1794,7 +1794,6 @@ DataArray(NJS_VECTOR, Chao_MRChaoSpawnPoints, 0x33A0C78, 16);
 DataArray(ChaoTreeSpawn, ChaoTreeSpawns, 0x33A0D78, 3);
 DataPointer(char **, AL_PVPs, 0x33A0F28);
 DataArray(NJS_TEXLIST, ChaoTexLists, 0x33A1038, 7);
-DataArray(NJS_TEXLIST, texlist_al_dx_parts_tex, 0x33A1340, 129);
 DataArray(NJS_TEXNAME, AL_OBJECT_TEXNAME, 0x33A1070, 32);
 DataPointer(NJS_TEXLIST, AL_OBJECT_TEXLIST, 0x33A11F0);
 DataPointer(NJS_TEXLIST, AL_TOY_TEXLIST, 0x33A11F8);
@@ -2683,13 +2682,5 @@ DataPointer(D3DMATRIX, ProjectionMatrix, 0x3D129C0);
 DataPointer(float*, OtherFogTableA, 0x3D12A00);
 DataPointer(float*, OtherFogTableB, 0x3D12C00);
 DataArray(Float, _nj_current_matrix_no_view_, 0x3D12E00, 16);
-DataPointer(taskwk*, Big_Fish_Ptr, 0x03C524F8);
-FunctionPointer(ObjectMaster*, LoadChaoFruit, (int type, NJS_VECTOR* position, Angle angle, NJS_VECTOR* vector, void* savedata), 0x722DE0);
-FunctionPointer(ObjectMaster*, LoadChaoHat, (int type, NJS_VECTOR* position, Angle angle, NJS_VECTOR* vector, void* savedata), 0x7236F0);
-VoidFunc(PauseSound, 0x40D060);
-FunctionPointer(void, KillPlayer, (uint8_t ID), 0x440CD0);
-DataArray(taskwk*, PlayerTaskPtr, 0x3B42E10, 8);
-VoidFunc(ResumeSound, 0x40D0A0);
-FunctionPointer(ObjectMaster*, LoadAutoHint, (const HintText_Text* texts, int voice), 0x7A1BE0);
 
 #endif /* SADXMODLOADER_SADXVARS_H */

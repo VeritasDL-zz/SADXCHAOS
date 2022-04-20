@@ -524,7 +524,7 @@ FunctionPointer(void, PositionPlayer, (Uint8 charIndex, float x, float y, float 
 FunctionPointer(int, IsPlayerInsideSphere, (NJS_VECTOR *x_1, float radius), 0x441840);
 FunctionPointer(int, GetCharacterID, (char index), 0x441970);
 FunctionPointer(Bool, GetBufferedPositionAndRotation, (unsigned __int8 CharIndex, char a2, NJS_VECTOR *out_position, Rotation3 *out_rotation), 0x4419C0);
-FunctionPointer(ObjectMaster*, GetCharacterObject, (unsigned __int8 character), 0x441AC0);
+FunctionPointer(ObjectMaster *, GetCharacterObject, (unsigned __int8 character), 0x441AC0);
 FunctionPointer(CharObj2 *, GetCharObj2, (char index), 0x441B00);
 FunctionPointer(int, GetPlayerCount, (), 0x441B10);
 FunctionPointer(Sint32, GetTargetableCharacter, (unsigned __int8 pnum), 0x441BF0);
@@ -722,7 +722,6 @@ ObjectFunc(Leon_Display_A, 0x4A83B0);
 ObjectFunc(Leon_Main, 0x4A83D0);
 ObjectFunc(Leon_Load, 0x4A85C0);
 ObjectFunc(EAclift, 0x4AA620);
-ObjectFunc(EnemyAir, 0x4AA340);
 ObjectFunc(Kiki_Display, 0x4AB2B0);
 ObjectFunc(Kiki_Main, 0x4ACF80);
 ObjectFunc(Kiki_Load, 0x4AD140);
@@ -1616,7 +1615,6 @@ ObjectFunc(OSideLamp, 0x5B5550);
 ObjectFunc(OUpTarget2, 0x5B5E70);
 ObjectFunc(OUpTarget1, 0x5B6590);
 ObjectFunc(OTarget, 0x5B66E0);
-ObjectFunc(dummytarget_init, 0x5B60D0);
 ObjectFunc(FinalEggLevel2IsolationWalls, 0x5B6B30);
 ObjectFunc(OHallGate, 0x5B6C20);
 ObjectFunc(OElevator1, 0x5B7210);
@@ -2224,7 +2222,6 @@ ObjectFunc(OBall_0, 0x623BB0);
 ObjectFunc(OBarrel_Display, 0x623CC0);
 ObjectFunc(OBarrel_Delete, 0x623D70);
 ObjectFunc(OBarrel, 0x624020);
-
 ObjectFunc(OShutter, 0x624380);
 ObjectFunc(OMonitor, 0x6247C0);
 ObjectFunc(Obj_HedgehogHammer, 0x624A70);
@@ -3003,14 +3000,6 @@ VoidFunc(InitEC0NPCData, 0x7D2720);
 VoidFunc(InitEC3NPCData, 0x7D2CF0);
 VoidFunc(InitSSNPCData, 0x7D5810);
 VoidFunc(al_xy_init, 0x7DAE80);
-DataPointer(NJS_TEXLIST, ev_effect_list19, 0x2C49740);
-DataPointer(NJS_MOTION**, SS_PEOPLE_MOTIONS, 0x38F6EA4);
-FunctionPointer(void, SetSonicIce, (int a1), 0x4A2550);
-ObjectFunc(EggCannon, 0x523E60);
-FunctionPointer(void, EmeraldShard_Create, (int num), 0x6F53B0);
-ObjectFunc(KnuEffectRingSpring, 0x4C1FC0);
-ObjectFunc(AlrConfetti_Main, 0x733860);
-FunctionPointer(void, CreateLineRing, (NJS_POINT3 *pos, taskwk *twp, int num), 0x79B140);
 
 // Bool __usercall@<eax>(NJS_TEXLIST *a1@<eax>)
 static const void *const VerifyTexListPtr = (void*)0x403250;

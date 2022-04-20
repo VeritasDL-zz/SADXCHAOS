@@ -275,6 +275,10 @@ Adjusted RandomChao, RandomChaoFruit & RandomChaoHat (4/9/2022)
 Started Working on RandomPopUpTarget and RandomTarget (4/11/2022)
 Finished Working on RandomPopUpTarget and RandomTarget (4/12/2022)
 Added RandomPopUpTarget & RandomTarget to Chaos Array (4/12/2022)
+Added config for RandomFallingSpikeBall (4/19/2022)
+Updated Modloader Programming files (4/20/2022)
+temp moved my custom stuff into main .cpp files, will move to own .h file soon 
+
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 

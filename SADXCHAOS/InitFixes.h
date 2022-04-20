@@ -23,4 +23,5 @@ extern bool RandomVoiceEnabled;
 extern bool RandomScanLineEnabled;
 extern bool RandomBootEnabled;
 extern bool DpadDownOrDieEnabled;
+extern bool FallingSpikeBallEnabled;
 void Init_Fixes(const char* path, const HelperFunctions& helperFunctions);

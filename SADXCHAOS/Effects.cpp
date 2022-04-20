@@ -844,6 +844,7 @@ void SideWaysCamera()
 	SideWaysCamera_Timer = 240;
 	return;
 }
+FunctionPointer(void, SetSonicIce, (int a1), 0x4A2550);
 void Set_Sonic_Ice()
 {
 	if (CurrentCharacter != Characters_Sonic && CurrentCharacter != Characters_Knuckles)
@@ -870,12 +871,14 @@ void Set_Sonic_Ice()
 		return;
 	}	
 }
+FunctionPointer(void, EmeraldShard_Create, (int num), 0x6F53B0);
 void EmeraldShardMa()
 {
 	LoadPVM("Obj_ruin", &OBJ_RUIN_TEXLIST); //test for shard texture loading or not
 	EmeraldShard_Create(20);
 	WriteData<4>((int*)0x3C851D0, 0x00); //3C851D0 needs to be 0 to spawn more
 }
+ObjectFunc(KnuEffectRingSpring, 0x4C1FC0);
 void RandomKnuxRingSpring(taskwk* p1)
 {
 	if (!KnuxEffTextLoader)

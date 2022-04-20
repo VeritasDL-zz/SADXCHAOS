@@ -165,6 +165,7 @@ void __cdecl CreateRotaryEmerald(float pos_x, float pos_y, float pos_z, float r,
 	eme_task_p[6] = eme7_task_p;
 	createRotaryEmeraldTask(pos_x, pos_y, pos_z, eme_task_p);
 }
+DataPointer(NJS_MOTION**, SS_PEOPLE_MOTIONS, 0x38F6EA4);
 void BurgerManSpin()
 {
 	if (!BurgerSpinTextLoader)

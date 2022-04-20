@@ -478,6 +478,11 @@ void RandomKiki(taskwk* p1)
 }
 void RandomFallingSpikeBall(taskwk* p1)
 {
+	if (!FallingSpikeBallEnabled)
+	{
+		NewEffect();
+		return;
+	}
 	if (!FSBTextLoader)
 	{
 		LoadPVM("TOGEBALL_TOGEBALL", &TOGEBALL_TOGEBALL_TEXLIST);
@@ -737,6 +742,7 @@ void RandomEGacha(taskwk* p1)
 		return;
 	}
 }
+ObjectFunc(EnemyAir, 0x4AA340);
 void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this took 5 days to figure out. 
 {
 	if (!EnemyCheck())
