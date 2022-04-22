@@ -742,17 +742,12 @@ void RandomEGacha(taskwk* p1)
 		return;
 	}
 }
-ObjectFunc(EnemyAir, 0x4AA340);
 void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this took 5 days to figure out. 
 {
 	if (!EnemyCheck())
 	{
 		return;
 	}
-	//if (AdventureCheck())
-	//{
-	//	return;
-	//} //temp.walker disabled on 4/7/2022
 	if (EggViperCheck())
 	{
 		return;

@@ -278,14 +278,18 @@ Added RandomPopUpTarget & RandomTarget to Chaos Array (4/12/2022)
 Added config for RandomFallingSpikeBall (4/19/2022)
 Updated Modloader Programming files (4/20/2022)
 temp moved my custom stuff into main .cpp files, will move to own .h file soon 
+Moved Custon Functions ECT to its own .h file (4/21/2022)
+Stoped WaterPiller From spawning when in cart (4/21/2022)
 
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 
  Log Known Crashes
  
-Test CharColliOff, CharColliOn, boolLandCollision(4/2/2022)
+Test boolLandCollision(4/2/2022)
 look into FunctionPointer(int, GetHoldingItemIDP, (uint8_t pno), 0x442030); for SRM (4/2/2022)
+CreateBomb?
+Disable Fountain while in cart
 
 
  Convert Cart to Task LOL this sucks

@@ -72,6 +72,9 @@
     <ClInclude Include="ScreenEffects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CustomChaosSADXFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -139,5 +142,15 @@
     <Text Include="Change.Log">
       <Filter>Source Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mod.ini">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="configschema.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

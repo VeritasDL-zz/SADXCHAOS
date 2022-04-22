@@ -102,7 +102,7 @@ void RandomHat(taskwk* p1)
 	{
 		if (HatNumb < 10)
 		{
-			int HatType = rand() % 83 + 1;//chao hat 0-84 rng,
+			int HatType = rand() % 80 + 1;//chao hat 0-84 rng, idk changed it to 0-81 for now (4/21/2022)
 			strcpy_s(LastEffect, 128, "Spawned Chao Hat");
 			LoadChaoHat(HatType, &playertwp[0]->pos, 0, nullptr, nullptr);
 			HatNumb++;

@@ -388,3 +388,5 @@ FodyWeavers.xsd
 
 ScrappedCodeBackup.txt
 !Change.Log
+/SADXCHAOS/configschema.xml
+/SADXCHAOS/mod.ini

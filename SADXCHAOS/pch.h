@@ -27,4 +27,5 @@
 #include "Cart.h"
 #include "WaterPiller.h"
 #include "ScreenEffects.h"
+#include "CustomChaosSADXFunctions.h"
 #endif //PCH_H

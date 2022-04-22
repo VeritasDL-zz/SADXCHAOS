@@ -169,6 +169,7 @@ copy "C:\Users\Veritas\Documents\Visual Studio 2022\Projects\SADXCHAOS\Release\S
   <ItemGroup>
     <ClInclude Include="AnimalTexture.h" />
     <ClInclude Include="Cart.h" />
+    <ClInclude Include="CustomChaosSADXFunctions.h" />
     <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Effects.h" />
     <ClInclude Include="Enemies.h" />
@@ -218,6 +219,12 @@ copy "C:\Users\Veritas\Documents\Visual Studio 2022\Projects\SADXCHAOS\Release\S
     <Text Include="Change.Log">
       <DeploymentContent>true</DeploymentContent>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mod.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="configschema.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

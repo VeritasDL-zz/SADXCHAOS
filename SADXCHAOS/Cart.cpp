@@ -117,6 +117,11 @@ void RandomCart()
 		NewEffect();
 		return;
 	}
+	if (CurrentLevel == LevelIDs_TwinklePark && CurrentAct == 00)
+	{
+		NewEffect();
+		return;
+	}
 	if (E101RCheck())
 	{
 		return;

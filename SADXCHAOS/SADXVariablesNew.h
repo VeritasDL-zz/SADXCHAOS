@@ -360,25 +360,4 @@ DataPointer(NJS_TEXLIST, texlist_beach01, 0xF812AC); // BEACH01 texlist
 DataPointer(NJS_TEXLIST, texlist_beach02, 0xEF553C); // BEACH02 texlist
 DataPointer(NJS_TEXLIST, texlist_beach03, 0xE9A4CC); // BEACH03 texlist
 
-
-
-
-
-
-
-
-
-
-FunctionPointer(ObjectMaster*, LoadChaoFruit, (int type, NJS_VECTOR* position, Angle angle, NJS_VECTOR* vector, void* savedata), 0x722DE0);
-FunctionPointer(ObjectMaster*, LoadChaoHat, (int type, NJS_VECTOR* position, Angle angle, NJS_VECTOR* vector, void* savedata), 0x7236F0);
-VoidFunc(PauseSound, 0x40D060);
-FunctionPointer(void, KillPlayer, (uint8_t ID), 0x440CD0);
-DataArray(taskwk*, PlayerTaskPtr, 0x3B42E10, 8);
-VoidFunc(ResumeSound, 0x40D0A0);
-FunctionPointer(ObjectMaster*, LoadAutoHint, (const HintText_Text* texts, int voice), 0x7A1BE0);
-
-
-
-
-
 #endif /* SADXMODLOADER_SADXVARSNEW_H */

@@ -221,7 +221,10 @@ void RandomChaoo()
 		ChaoMain_Constructor();
 		al_confirmload_load();
 		ChaoManager_Load();
-		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
+		if (!AL_OBJECT_TEXLIST.textures->texaddr)
+		{
+			LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
+		}
 		ChaooManagerLoader = true;
 	}
 	int chaotype = rand() % 23;
@@ -242,7 +245,7 @@ void RandomChaoo()
 	chaodata->data.UnknownLevel = rand() % 99;
 	chaodata->data.IntelligenceLevel = rand() % 99;
 	chaodata->data.FavoriteFruit = rand() % 6;
-	chaodata->data.Texture = rand() % 15;
+	chaodata->data.Texture = rand() % 12;
 	int bodychangechance = rand() % 5;
 	if (bodychangechance == 1)
 	{
@@ -871,14 +874,12 @@ void Set_Sonic_Ice()
 		return;
 	}	
 }
-FunctionPointer(void, EmeraldShard_Create, (int num), 0x6F53B0);
 void EmeraldShardMa()
 {
 	LoadPVM("Obj_ruin", &OBJ_RUIN_TEXLIST); //test for shard texture loading or not
 	EmeraldShard_Create(20);
 	WriteData<4>((int*)0x3C851D0, 0x00); //3C851D0 needs to be 0 to spawn more
 }
-ObjectFunc(KnuEffectRingSpring, 0x4C1FC0);
 void RandomKnuxRingSpring(taskwk* p1)
 {
 	if (!KnuxEffTextLoader)
@@ -902,6 +903,15 @@ void RandomKnuxRingSpring(taskwk* p1)
 }
 void RandomWaterPiller(taskwk* p1)
 {
+	if (Cart_Timer != 0)
+	{
+
+	}
+	if (CurrentLevel == LevelIDs_TwinkleCircuit)
+	{
+		NewEffect();
+		return;
+	}
 	float Randomscale = rand() % 3 + 1;
 	if (!WaterPillerTextLoader)
 	{

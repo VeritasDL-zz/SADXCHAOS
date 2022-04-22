@@ -17,10 +17,6 @@ NJS_ACTION burgerRing{};
 float g_RotaryCircleR = 50.0f;
 const int g_EmeraldDTheta[7] = { 0, 0x2492, 0x4924, 0x6DB6, 0x9249, 0xB6DB, 0xDB6D };
 int g_EmeraldRotSpd = 0x56;
-FunctionPointer(void, effect_create2, (task* obj, int ef_num, float ef_x, float ef_y, float ef_z, NJS_TEXLIST* ef_name), 0x6ED770);
-FunctionPointer(void, effect_scl, (int ef_num, float sx, float sy), 0x6ED8E0);
-FunctionPointer(void, effect_color, (__int16 ef_num, float col_a, float col_r, float col_g, float col_b), 0x6ED910);
-FunctionPointer(void, effect_delete, (__int16 ef_num), 0x6ED490);
 void __cdecl SetEffectRotaryEmerald(int eme_num, NJS_TEXLIST* ef_name, float scale, float col_a, float col_r, float col_g, float col_b)
 {
 	task* obj;
@@ -165,7 +161,6 @@ void __cdecl CreateRotaryEmerald(float pos_x, float pos_y, float pos_z, float r,
 	eme_task_p[6] = eme7_task_p;
 	createRotaryEmeraldTask(pos_x, pos_y, pos_z, eme_task_p);
 }
-DataPointer(NJS_MOTION**, SS_PEOPLE_MOTIONS, 0x38F6EA4);
 void BurgerManSpin()
 {
 	if (!BurgerSpinTextLoader)
