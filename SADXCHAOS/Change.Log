@@ -281,6 +281,8 @@ temp moved my custom stuff into main .cpp files, will move to own .h file soon
 Moved Custon Functions ECT to its own .h file (4/21/2022)
 Stoped WaterPiller From spawning when in cart (4/21/2022)
 Added Config Options for Random Chao Fruit Random Chao Hat & Random Chao (4/21/2022)
+Added Custom Window Title (4/22/2022)
+
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 
@@ -289,14 +291,13 @@ Added Config Options for Random Chao Fruit Random Chao Hat & Random Chao (4/21/2
 Test boolLandCollision(4/2/2022)
 look into FunctionPointer(int, GetHoldingItemIDP, (uint8_t pno), 0x442030); for SRM (4/2/2022)
 CreateBomb?
-Disable Fountain while in cart
 Ugandan Knuckles
 
  Convert Cart to Task LOL this sucks
  RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
  Add More Custom Tikal Hints
  Add More Random Teleport Locations
-
+ Add Support for CWE?
  Todo 
  Beat has bad texture
 

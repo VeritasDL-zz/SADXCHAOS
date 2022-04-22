@@ -127,6 +127,7 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	WriteData<5>((int*)0x4B46C5, 0x90);//EmblemCollected_Main ControlDisable NOP
 	WriteData<5>((int*)0x4B4924, 0x90);//InitGGMessage CameraSetEventCameraFunc NOP
 	WriteData<5>((int*)0x61B7BE, 0x90);//Fountain Rotation Set NOP
+	helperFunctions.SetWindowTitle("Sonic Adventure Chaos Edition V2");
 	//WriteData((int*)0x80F060, (int)0x47C35000);//FinalEgg Fan Set Accend Height Max Bypass
 	//WriteData<1>((int*)0x4F6D60, 0xC3); //EC ACT 0 Stuff from sora for testing
 	//WriteData<1>((int*)0x44AE80, 0xC3); //EC ACT 0 Stuff from sora for testing
