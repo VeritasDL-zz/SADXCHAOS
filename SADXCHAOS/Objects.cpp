@@ -58,6 +58,11 @@ void RandomFruit(taskwk* p1)
 	{
 		return;
 	}
+	if (!ChaoFruitEnabled)
+	{
+		NewEffect();
+		return;
+	}
 	if (!ChaoFruitTextLoader)
 	{
 		LoadPVM("AL_OBJECT", &AL_OBJECT_TEXLIST);
@@ -89,6 +94,11 @@ void RandomHat(taskwk* p1)
 {
 	if (!GrabAbleObjects())
 	{
+		return;
+	}
+	if (!ChaoHatEnabled)
+	{
+		NewEffect();
 		return;
 	}
 	if (!ChaoHatTextLoader)

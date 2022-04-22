@@ -216,6 +216,11 @@ void RandomChaooAnimal()
 }
 void RandomChaoo()
 {
+	if (!ChaoSpawnEnabled)
+	{
+		NewEffect();
+		return;
+	}
 	if (!ChaooManagerLoader)
 	{
 		ChaoMain_Constructor();

@@ -24,4 +24,7 @@ extern bool RandomScanLineEnabled;
 extern bool RandomBootEnabled;
 extern bool DpadDownOrDieEnabled;
 extern bool FallingSpikeBallEnabled;
+extern bool ChaoSpawnEnabled;
+extern bool ChaoHatEnabled;
+extern bool ChaoFruitEnabled;
 void Init_Fixes(const char* path, const HelperFunctions& helperFunctions);

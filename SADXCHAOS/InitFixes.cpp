@@ -27,6 +27,9 @@ bool RandomBootEnabled = true;
 bool RandomScanLineEnabled = true;
 bool DpadDownOrDieEnabled = true;
 bool FallingSpikeBallEnabled = true;
+bool ChaoSpawnEnabled = true;
+bool ChaoHatEnabled = true;
+bool ChaoFruitEnabled = true;
 DWORD Aequitas = (0x000000000761CFC0+0x0000000003B0E9E0+0x0000000003B0EFE0-0x000000000B12C1A0);
 ObjectMaster* LoadSnowboardObject(LoadObj flags, char index, ObjectFuncPtr loadSub)
 {
@@ -87,6 +90,9 @@ void Init_Fixes(const char* path, const HelperFunctions& helperFunctions)
 	RandomScanLineEnabled = config->getBool("General", "RandomScanLineEnabled", true);
 	DpadDownOrDieEnabled = config->getBool("General", "DpadDownOrDieEnabled", true);
 	FallingSpikeBallEnabled = config->getBool("General", "FallingSpikeBallEnabled", true);
+	ChaoSpawnEnabled = config->getBool("Chao", "ChaoSpawnEnabled", true);
+	ChaoHatEnabled = config->getBool("Chao", "ChaoHatEnabled", true);
+	ChaoFruitEnabled = config->getBool("Chao", "ChaoFruitEnabled", true);
 	delete config;
 	InitializeRandomCoordinates();
 	init_CartStuff();//Thanks to Sora_yx for this
