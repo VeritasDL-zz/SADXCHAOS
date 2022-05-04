@@ -26,6 +26,17 @@ bool EggViperHandiCapCheck()
 	}
 	return false;
 }
+void PanelNOP()
+{
+	WriteData<6>((int*)0x5E9300, 0x90);//NOP jz loc_5E93CE 
+	return;
+}
+void PanelRestore()
+{
+	WriteData((int*)0x5E9300, (int)0x00C8840F);
+	WriteData((int*)0x5E9304, (int)0x8B530000);
+	return;
+}
 void BigRock(taskwk* p1)
 {
 	if (!GrabAbleObjects())
@@ -568,6 +579,37 @@ void RandomPopUpTarget(taskwk* p1)
 		Target->twp->pos = playertwp[0]->pos;
 		Target->twp->pos.y = playertwp[0]->pos.y - 8.0f;
 		Target->twp->scl.y = 0; //0 = random, 1 = sonic, 2 = knux, 3 = tails
+		return;
+	}
+	else //new effect 
+	{
+		NewEffect();
+		return;
+	}
+}
+void RandomGravityWall(taskwk* p1)
+{
+	if (CurrentLevel == LevelIDs_LostWorld)
+	{
+		NewEffect();
+		return;
+	}
+	PanelNOP();
+	if (!GravityTextLoader)
+	{
+		LoadPVM("Obj_Ruin2", &OBJ_RUIN2_TEXLIST);
+		GravityTextLoader = true;
+		TextLoaded = true;
+	}
+	if (OBJ_RUIN2_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Gravity Wall");
+		task* GravityWall;
+		GravityWall = (task*)LoadObject((LoadObj)6, 3, OTpanel);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		GravityWall->ocp = objCondition;
+		GravityWall->twp->pos = playertwp[0]->pos;
+		GravityWall->twp->ang = { rand() % 0x8000, rand() % 0x8000, rand() % 0x8000 };
 		return;
 	}
 	else //new effect 

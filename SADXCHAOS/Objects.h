@@ -20,3 +20,6 @@ void RandomConveyorStop(taskwk* p1);
 void RandomFountain(taskwk* p1);
 void RandomTarget(taskwk* p1);
 void RandomPopUpTarget(taskwk* p1);
+void RandomGravityWall(taskwk* p1);
+void PanelNOP();
+void PanelRestore();

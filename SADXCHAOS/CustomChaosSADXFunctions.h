@@ -13,8 +13,9 @@ FunctionPointer(ObjectMaster*, LoadChaoFruit, (int type, NJS_VECTOR* position, A
 FunctionPointer(ObjectMaster*, LoadChaoHat, (int type, NJS_VECTOR* position, Angle angle, NJS_VECTOR* vector, void* savedata), 0x7236F0);
 VoidFunc(PauseSound, 0x40D060);
 FunctionPointer(void, KillPlayer, (uint8_t ID), 0x440CD0);
-DataArray(taskwk*, PlayerTaskPtr, 0x3B42E10, 8);
 VoidFunc(ResumeSound, 0x40D0A0);
 FunctionPointer(ObjectMaster*, LoadAutoHint, (const HintText_Text* texts, int voice), 0x7A1BE0);
 ObjectFunc(dummytarget_init, 0x5B60D0);
 DataPointer(NJS_TEXLIST, ev_effect_list19, 0x2C49740);
+//01FF86C4     texlist_tate_chg
+DataPointer(NJS_TEXLIST, texlist_tate_chg, 0x01FF86C4);

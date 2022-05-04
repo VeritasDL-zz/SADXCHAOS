@@ -37,6 +37,7 @@ bool WaterPillerTextLoader = false;
 bool AsciiTextLoader = false;
 bool FountainTextLoader = false;
 bool TargetTextLoader = false;
+bool GravityTextLoader = false;
 bool TextLoaded = false;
 bool WriteOnce = false;
 int FruitNumb = 0;
@@ -83,6 +84,7 @@ void ResetTextureBools()
 	FountainTextLoader = false;
 	AsciiTextLoader = false;
 	TargetTextLoader = false;
+	GravityTextLoader = false;
 	WriteOnce = false;
 	HatNumb = 0;
 	FruitNumb = 0;
@@ -104,6 +106,7 @@ void ResetTextureBools()
 	g_RotaryEmerald_p = 0;
 	burgerManSpawned = 0;
 	FreeChaoTexlists();
+	PanelRestore(); 
 	WriteData((int*)0x5B56D2, (int)0xE5FE69E8); //target_man_exec_nop LoadLevelResults Reset Nopped ASM 
 	WriteData((int*)0x5B56D6, (int)0x43E857FF); //target_man_exec_nop LoadLevelResults Reset Nopped ASM 
 }

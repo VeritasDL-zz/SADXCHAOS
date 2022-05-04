@@ -282,7 +282,8 @@ Moved Custon Functions ECT to its own .h file (4/21/2022)
 Stoped WaterPiller From spawning when in cart (4/21/2022)
 Added Config Options for Random Chao Fruit Random Chao Hat & Random Chao (4/21/2022)
 Added Custom Window Title (4/22/2022)
-
+Added RandomGravityWall (5/4/2022)
+Added RandomGravityWall to Chaos Array (5/4/2022)
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 
