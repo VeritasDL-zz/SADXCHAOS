@@ -2238,12 +2238,71 @@ struct CUSTOM_OBJ
 	void(__cdecl* exad)(NJS_OBJECT*);
 };
 
-struct RotaryEmeraldWork
+// Chaos bubble effect
+
+struct BUBBLE
 {
-	task* eme_task_p[7];
-	NJS_POINT3 eme_pos[7];
-	NJS_POINT3 eme_spd[7];
-	int eme_theta[7];
-	int base_theta;
+	char mode;
+	char flag;
+	char id;
+	char timer;
+	char posnum;
+	float size;
+	float scale_x;
+	float swing;
+	int spiral;
+	int spiral_add;
+	NJS_POINT3* spline;
+	float t;
+	float tadd;
+	float tmax;
 };
+
+struct BUBBLE_LIST
+{
+	__int16 id;
+	char num;
+	NJS_POINT3* pos;
+};
+
+struct BUBBLE_TABLE
+{
+	unsigned __int16 objnum;
+	NJS_POINT3 pos;
+	int ang[3];
+};
+
+struct BUBBLE_DATA
+{
+	char object_num;
+	char spline_num;
+	BUBBLE_LIST* list;
+	BUBBLE_TABLE* tbl;
+	float scl;
+};
+
+// Title screen worker
+
+struct __declspec(align(4)) TitleNewWk
+{
+	AdvaStatEnum Stat;
+	AdvaModeEnum PrevMode;
+	AdvaModeEnum NextMode;
+	float BaseZ;
+	float T;
+	unsigned int BaseCol;
+	TitleNewSbMdEnum SubMode;
+	ObjectMaster* AlertTsk;
+	char VMStatAll;
+	int titletimer;
+	unsigned int titleblinktimer;
+	ObjectMaster* CamTskPtr;
+	unsigned int wavetimer;
+	unsigned int logotimer;
+	int bBgmEnabled;
+	unsigned int movetimer;
+	float kumotimer;
+	char kumoindex;
+};
+
 #endif /* SADXMODLOADER_SADXSTRUCTSNEW_H */

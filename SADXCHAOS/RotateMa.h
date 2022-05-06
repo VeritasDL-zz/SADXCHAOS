@@ -12,3 +12,11 @@ extern task* BURGER4;
 extern task* BURGER5;
 extern task* BURGER6;
 extern task* BURGER7;
+struct RotaryEmeraldWork
+{
+	task* eme_task_p[7];
+	NJS_POINT3 eme_pos[7];
+	NJS_POINT3 eme_spd[7];
+	int eme_theta[7];
+	int base_theta;
+};
