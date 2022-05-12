@@ -192,6 +192,7 @@ copy "C:\Users\Veritas\Documents\Visual Studio 2022\Projects\SADXCHAOS\Release\S
     <ClCompile Include="AnimalTextures.cpp" />
     <ClCompile Include="Cart.cpp" />
     <ClCompile Include="Chaos.cpp" />
+    <ClCompile Include="CustomChaosSADXFunctions.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Effects.cpp" />

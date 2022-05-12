@@ -1,6 +1,7 @@
 #pragma once
 extern bool EggViperHandiCapCheck();
-extern uint32_t IlDuce;
+extern uint32_t IlDuce; 
+extern bool PanelNopped;
 void BigRock(taskwk* p1);
 void RandomFruit(taskwk* p1);
 void RandomHat(taskwk* p1);

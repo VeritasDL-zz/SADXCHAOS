@@ -19,3 +19,6 @@ ObjectFunc(dummytarget_init, 0x5B60D0);
 DataPointer(NJS_TEXLIST, ev_effect_list19, 0x2C49740);
 //01FF86C4     texlist_tate_chg
 DataPointer(NJS_TEXLIST, texlist_tate_chg, 0x01FF86C4);
+void PlaceInFront();
+extern Float PlaceX;
+extern Float PlaceZ;

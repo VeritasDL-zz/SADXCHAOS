@@ -284,13 +284,17 @@ Added Config Options for Random Chao Fruit Random Chao Hat & Random Chao (4/21/2
 Added Custom Window Title (4/22/2022)
 Added RandomGravityWall (5/4/2022)
 Added RandomGravityWall to Chaos Array (5/4/2022)
+Fixed bug with GravityWall Code Nop/Restore (5/11/2022)
+Working on Fixing RandomGravityWall being rotated and placed properly (5/11/2022)
+Moved PlaceInFront to its own .cpp file (5/12/2022)
+
+
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 
  Log Known Crashes
- 
+ Change DrawDebugRectangle values to fit the new effect names 
 Test boolLandCollision(4/2/2022)
-look into FunctionPointer(int, GetHoldingItemIDP, (uint8_t pno), 0x442030); for SRM (4/2/2022)
 CreateBomb?
 Ugandan Knuckles
 
@@ -298,7 +302,7 @@ Ugandan Knuckles
  RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
  Add More Custom Tikal Hints
  Add More Random Teleport Locations
- Add Support for CWE?
+ Add Support for CWE? (i wouldnt even know how to do this)
  Todo 
  Beat has bad texture
 

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include <cmath>
+bool PanelNopped = false;
 uint32_t IlDuce = (0x0000000000183A88+0x00000000000C1F44+0x00000000000C2544-0x00000000002461CC);
 bool GrabAbleObjects()
 {
@@ -29,12 +30,14 @@ bool EggViperHandiCapCheck()
 void PanelNOP()
 {
 	WriteData<6>((int*)0x5E9300, 0x90);//NOP jz loc_5E93CE 
+	PanelNopped = true;
 	return;
 }
 void PanelRestore()
 {
 	WriteData((int*)0x5E9300, (int)0x00C8840F);
 	WriteData((int*)0x5E9304, (int)0x8B530000);
+	PanelNopped = false;
 	return;
 }
 void BigRock(taskwk* p1)
@@ -587,29 +590,6 @@ void RandomPopUpTarget(taskwk* p1)
 		return;
 	}
 }
-void LookAt(NJS_VECTOR* from, NJS_VECTOR* to, Angle* outx, Angle* outy) //credits to kell for this thanks to sora for sending me it
-{
-	if (!from || !to)
-		return;
-	NJS_VECTOR unit = *to;
-	njSubVector(&unit, from);
-	if (outy)
-	{
-		*outy = static_cast<Angle>(atan2f(unit.x, unit.z) * 65536.0f * 0.1591549762031479f);
-	}
-	if (outx)
-	{
-		if (from->y == to->y)
-		{
-			*outx = 0;
-		}
-		else
-		{
-			Float len = 1.0f / squareroot(unit.z * unit.z + unit.x * unit.x + unit.y * unit.y);
-			*outx = static_cast<Angle>((acos(len * 3.3499999f) * 65536.0f * 0.1591549762031479f) - (acos(-(len * unit.y)) * 65536.0f * 0.1591549762031479f));
-		}
-	}
-}
 void RandomGravityWall(taskwk* p1)
 {
 	if (CurrentLevel == LevelIDs_LostWorld)
@@ -617,7 +597,10 @@ void RandomGravityWall(taskwk* p1)
 		NewEffect();
 		return;
 	}
-	PanelNOP();
+	if (!PanelNopped)
+	{
+		PanelNOP();
+	}
 	if (!GravityTextLoader)
 	{
 		LoadPVM("Obj_Ruin2", &OBJ_RUIN2_TEXLIST);
@@ -632,8 +615,16 @@ void RandomGravityWall(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		GravityWall->ocp = objCondition;
 		GravityWall->twp->pos = playertwp[0]->pos;
-		Angle angle = (int)GravityWall->twp->ang.y;
-		LookAt(&GravityWall->twp->pos, &playertwp[0]->pos, nullptr, &angle);
+		PlaceX = GravityWall->twp->pos.x;
+		PlaceZ = GravityWall->twp->pos.z;
+		PlaceInFront();
+		GravityWall->twp->pos.x = PlaceX;
+		GravityWall->twp->pos.z = PlaceZ;
+		GravityWall->twp->ang.y = (playertwp[0]->ang.y + 0x4000) & 0xFFFF;
+		
+		//double PosOffset = 25; //place in front offset
+		//GravityWall->twp->pos.x += PosOffset * sin(-2 * M_PI * ((playertwp[0]->ang.y - 0x4000) & 0xffff) / 65536.0); //Place In Front X
+		//GravityWall->twp->pos.z += PosOffset * sin(2 * M_PI * ((playertwp[0]->ang.y) & 0xffff) / 65536.0); //Place In Front Z
 		return;
 	}
 	else //new effect 
