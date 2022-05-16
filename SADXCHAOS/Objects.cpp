@@ -58,6 +58,11 @@ void BigRock(taskwk* p1)
 		task* BigRock;
 		BigRock = (task*)LoadObject((LoadObj)3, 3, OBiciwa);
 		BigRock->twp->pos = playertwp[0]->pos;
+		PlaceX = BigRock->twp->pos.x;
+		PlaceZ = BigRock->twp->pos.z;
+		PlaceInFront();
+		BigRock->twp->pos.x = PlaceX;
+		BigRock->twp->pos.z = PlaceZ;
 		return;
 	}
 	else //new effect dueo texlist not being loaded
@@ -202,6 +207,11 @@ void RandomFan(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Fan->ocp = objCondition;
 		Fan->twp->pos = playertwp[0]->pos;
+		PlaceX = Fan->twp->pos.x;
+		PlaceZ = Fan->twp->pos.z;
+		PlaceInFront();
+		Fan->twp->pos.x = PlaceX;
+		Fan->twp->pos.z = PlaceZ;
 		Fan->twp->pos.y = playertwp[0]->pos.y - 9.0f;
 		//float CustomFanAcc = (float(rand()) / float((RAND_MAX)) * 0.99);
 		//WriteData((float*)0x1AC4854, CustomFanAcc);
@@ -440,6 +450,15 @@ void RandomBarrel(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Barrel->ocp = objCondition;
 		Barrel->twp->pos = playertwp[0]->pos;
+		PlaceX = Barrel->twp->pos.x;
+		PlaceZ = Barrel->twp->pos.z;
+		PlaceInFront();
+		Barrel->twp->pos.x = PlaceX;
+		Barrel->twp->pos.z = PlaceZ;
+		FaceX = Barrel->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = Barrel->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		Barrel->twp->ang.y = FaceAng;
 		return;
 	}
 	else //new effect dueo texlist not being loaded
@@ -466,8 +485,15 @@ void RandomConveyorBelt(taskwk* p1)
 		Conveyor->twp->pos = playertwp[0]->pos;
 		Conveyor->twp->pos.y = playertwp[0]->pos.y - 1;
 		Conveyor->twp->scl.z = (float(rand()) / float((RAND_MAX)) * 1.3);
-		Conveyor->twp->ang = playertwp[0]->ang;
-		Conveyor->twp->ang.x = rand() % 119 + (-59);
+		PlaceX = Conveyor->twp->pos.x;
+		PlaceZ = Conveyor->twp->pos.z;
+		PlaceInFront();
+		Conveyor->twp->pos.x = PlaceX;
+		Conveyor->twp->pos.z = PlaceZ;
+		FaceX = Conveyor->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = Conveyor->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		Conveyor->twp->ang.y = FaceAng;
 		return;
 	}
 	else //new effect dueo texlist not being loaded
@@ -484,7 +510,7 @@ void RandomConveyorStop(taskwk* p1)
 		ConveyorTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr) //temp.walker need to test 5/16/2022
 	{
 		strcpy_s(LastEffect, 128, "Spawned Spike");
 		task* ConveyorStop;
@@ -492,15 +518,16 @@ void RandomConveyorStop(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		ConveyorStop->ocp = objCondition;
 		ConveyorStop->twp->pos = playertwp[0]->pos;
-		ConveyorStop->twp->pos.x =+ playertwp[0]->pos.x + 69;
-		ConveyorStop->twp->pos.z =+ playertwp[0]->pos.z + 69;
 		ConveyorStop->twp->pos.y =- playertwp[0]->pos.y - 30;
-		double gradientZ = (ConveyorStop->twp->pos.z - playertwp[0]->pos.z);
-		double gradientX = (ConveyorStop->twp->pos.x - playertwp[0]->pos.x);
-		double angle = round((M_PI / 2 - atan2(gradientZ, gradientX)) * 10430.378);
-		if (playertwp[0]->pos.z < ConveyorStop->twp->pos.z)
-			angle += 32768;
-		ConveyorStop->twp->ang.y = angle;
+		PlaceX = ConveyorStop->twp->pos.x;
+		PlaceZ = ConveyorStop->twp->pos.z;
+		PlaceInFront();
+		ConveyorStop->twp->pos.x = PlaceX;
+		ConveyorStop->twp->pos.z = PlaceZ;
+		FaceX = ConveyorStop->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = ConveyorStop->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		ConveyorStop->twp->ang.y = FaceAng;
 		return;
 	}
 	else //new effect dueo texlist not being loaded
@@ -517,7 +544,7 @@ void RandomFountain(taskwk* p1)
 		FountainTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_HIGHWAY2_TEXLIST.textures->texaddr)
+	if (OBJ_HIGHWAY2_TEXLIST.textures->texaddr)  //temp.walker need to test 5/16/2022
 	{
 		strcpy_s(LastEffect, 128, "Random Fountain");
 		task* Fountain;
@@ -525,7 +552,16 @@ void RandomFountain(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Fountain->ocp = objCondition;
 		Fountain->twp->pos = playertwp[0]->pos;
+		PlaceX = Fountain->twp->pos.x;
+		PlaceZ = Fountain->twp->pos.z;
+		PlaceInFront();
+		Fountain->twp->pos.x = PlaceX;
+		Fountain->twp->pos.z = PlaceZ;
 		Fountain->twp->pos.y = playertwp[0]->pos.y - 9.0f;
+		FaceX = Fountain->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = Fountain->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		Fountain->twp->ang.y = FaceAng;
 		return;
 	}
 	else //new effect 
@@ -542,7 +578,7 @@ void RandomTarget(taskwk* p1)
 		TargetTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)  //temp.walker need to test 5/16/2022
 	{
 		strcpy_s(LastEffect, 128, "Random Sonic Target");
 		task* Target;
@@ -550,7 +586,16 @@ void RandomTarget(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Target->ocp = objCondition;
 		Target->twp->pos = playertwp[0]->pos;
-		Target->twp->pos.y = playertwp[0]->pos.y - 9.0f;
+		PlaceX = Target->twp->pos.x;
+		PlaceZ = Target->twp->pos.z;
+		PlaceInFront();
+		Target->twp->pos.x = PlaceX;
+		Target->twp->pos.z = PlaceZ;
+		Target->twp->pos.y = playertwp[0]->pos.y - 9.0f; //temp.walker need to test
+		FaceX = Target->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = Target->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		Target->twp->ang.y = FaceAng;
 		Target->twp->scl.x = rand() % 200; //Distance Target Moves Back and Forth
 		if (CurrentCharacter != Characters_Gamma && CurrentLevel != LevelIDs_FinalEgg)
 		{
@@ -572,7 +617,7 @@ void RandomPopUpTarget(taskwk* p1)
 		TargetTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)  //temp.walker need to test 5/16/2022
 	{
 		strcpy_s(LastEffect, 128, "Random Target");
 		task* Target;
@@ -580,7 +625,16 @@ void RandomPopUpTarget(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Target->ocp = objCondition;
 		Target->twp->pos = playertwp[0]->pos;
-		Target->twp->pos.y = playertwp[0]->pos.y - 8.0f;
+		PlaceX = Target->twp->pos.x;
+		PlaceZ = Target->twp->pos.z;
+		PlaceInFront();
+		Target->twp->pos.x = PlaceX;
+		Target->twp->pos.z = PlaceZ;
+		Target->twp->pos.y = playertwp[0]->pos.y - 8.0f; //temp.walker need to test
+		FaceX = Target->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = Target->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		Target->twp->ang.y = FaceAng;
 		Target->twp->scl.y = 0; //0 = random, 1 = sonic, 2 = knux, 3 = tails
 		return;
 	}
@@ -620,11 +674,10 @@ void RandomGravityWall(taskwk* p1)
 		PlaceInFront();
 		GravityWall->twp->pos.x = PlaceX;
 		GravityWall->twp->pos.z = PlaceZ;
-		GravityWall->twp->ang.y = (playertwp[0]->ang.y + 0x4000) & 0xFFFF;
-		
-		//double PosOffset = 25; //place in front offset
-		//GravityWall->twp->pos.x += PosOffset * sin(-2 * M_PI * ((playertwp[0]->ang.y - 0x4000) & 0xffff) / 65536.0); //Place In Front X
-		//GravityWall->twp->pos.z += PosOffset * sin(2 * M_PI * ((playertwp[0]->ang.y) & 0xffff) / 65536.0); //Place In Front Z
+		FaceX = GravityWall->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = GravityWall->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		GravityWall->twp->ang.y = FaceAng;
 		return;
 	}
 	else //new effect 

@@ -287,7 +287,9 @@ Added RandomGravityWall to Chaos Array (5/4/2022)
 Fixed bug with GravityWall Code Nop/Restore (5/11/2022)
 Working on Fixing RandomGravityWall being rotated and placed properly (5/11/2022)
 Moved PlaceInFront to its own .cpp file (5/12/2022)
-
+added PlaceInFront to some Objects (5/15/2022)
+Added FacePlayer thanks to, Skoob, Dan, Kell and MainMemory (5/16/2022)
+Added FacePlayer to some stuff (5/16/2022)
 
 ---------TO-DO---------
  Test Stuff

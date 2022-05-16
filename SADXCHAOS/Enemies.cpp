@@ -831,8 +831,15 @@ void RandomFireBreath(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		FireBreath->ocp = objCondition;
 		FireBreath->twp->pos = playertwp[0]->pos;
-		FireBreath->twp->pos.x = playertwp[0]->pos.x - 10;
-		FireBreath->twp->ang = playertwp[0]->ang;
+		PlaceX = FireBreath->twp->pos.x;
+		PlaceZ = FireBreath->twp->pos.z;
+		PlaceInFront();
+		FireBreath->twp->pos.x = PlaceX;
+		FireBreath->twp->pos.z = PlaceZ;
+		FaceX = FireBreath->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = FireBreath->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		FireBreath->twp->ang.y = FaceAng;
 	}
 	else //new effect dueo texlist not being loaded
 	{
@@ -874,7 +881,15 @@ void RandomCannonS1(taskwk* p1)
 		CannonS1->ocp = objCondition;
 		CannonS1->twp->pos = playertwp[0]->pos;
 		CannonS1->twp->pos.x = playertwp[0]->pos.x - 10;
-		CannonS1->twp->ang = playertwp[0]->ang;
+		PlaceX = CannonS1->twp->pos.x;
+		PlaceZ = CannonS1->twp->pos.z;
+		PlaceInFront();
+		CannonS1->twp->pos.x = PlaceX;
+		CannonS1->twp->pos.z = PlaceZ;
+		FaceX = CannonS1->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = CannonS1->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		CannonS1->twp->ang.y = FaceAng;
 	}
 	else //new effect dueo texlist not being loaded
 	{
@@ -915,8 +930,16 @@ void RandomCannonS2(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		CannonS2->ocp = objCondition;
 		CannonS2->twp->pos = playertwp[0]->pos;
-		CannonS2->twp->pos.x = playertwp[0]->pos.x - 10;
+		PlaceX = CannonS2->twp->pos.x;
+		PlaceZ = CannonS2->twp->pos.z;
+		PlaceInFront();
+		CannonS2->twp->pos.x = PlaceX;
+		CannonS2->twp->pos.z = PlaceZ;
 		CannonS2->twp->ang = playertwp[0]->ang;
+		FaceX = CannonS2->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = CannonS2->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		CannonS2->twp->ang.y = FaceAng;
 	}
 	else //new effect dueo texlist not being loaded
 	{

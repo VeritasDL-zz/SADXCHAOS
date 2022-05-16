@@ -852,7 +852,6 @@ void SideWaysCamera()
 	SideWaysCamera_Timer = 240;
 	return;
 }
-FunctionPointer(void, SetSonicIce, (int a1), 0x4A2550);
 void Set_Sonic_Ice()
 {
 	if (CurrentCharacter != Characters_Sonic && CurrentCharacter != Characters_Knuckles)
