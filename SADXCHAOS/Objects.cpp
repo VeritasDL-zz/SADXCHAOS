@@ -60,7 +60,7 @@ void BigRock(taskwk* p1)
 		BigRock->twp->pos = playertwp[0]->pos;
 		PlaceX = BigRock->twp->pos.x;
 		PlaceZ = BigRock->twp->pos.z;
-		PosOffset = 25; //tempwalker need to test
+		PosOffset = 25;
 		PlaceInFront();
 		BigRock->twp->pos.x = PlaceX;
 		BigRock->twp->pos.z = PlaceZ;
@@ -210,7 +210,7 @@ void RandomFan(taskwk* p1)
 		Fan->twp->pos = playertwp[0]->pos;
 		PlaceX = Fan->twp->pos.x;
 		PlaceZ = Fan->twp->pos.z;
-		PosOffset = 25; //tempwalker need to test
+		PosOffset = 25;
 		PlaceInFront();
 		Fan->twp->pos.x = PlaceX;
 		Fan->twp->pos.z = PlaceZ;
@@ -454,7 +454,7 @@ void RandomBarrel(taskwk* p1)
 		Barrel->twp->pos = playertwp[0]->pos;
 		PlaceX = Barrel->twp->pos.x;
 		PlaceZ = Barrel->twp->pos.z;
-		PosOffset = 25; //tempwalker need to test
+		PosOffset = 41;
 		PlaceInFront();
 		Barrel->twp->pos.x = PlaceX;
 		Barrel->twp->pos.z = PlaceZ;
@@ -480,7 +480,7 @@ void RandomConveyorBelt(taskwk* p1)
 	}
 	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
 	{
-		strcpy_s(LastEffect, 128, "Random Conveyor Belt"); //tempwalker need to test
+		strcpy_s(LastEffect, 128, "Random Conveyor Belt");
 		task* Conveyor;
 		Conveyor = (task*)LoadObject((LoadObj)6, 3, OConv_belt);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
@@ -490,14 +490,13 @@ void RandomConveyorBelt(taskwk* p1)
 		Conveyor->twp->scl.z = (float(rand()) / float((RAND_MAX)) * 1.3);
 		PlaceX = Conveyor->twp->pos.x;
 		PlaceZ = Conveyor->twp->pos.z;
-		PosOffset = 0; //tempwalker testma
-		PlaceInFront();
-		Conveyor->twp->pos.x = PlaceX;
-		Conveyor->twp->pos.z = PlaceZ;
+		PosOffset = 0;
 		FaceX = Conveyor->twp->pos.x - playertwp[0]->pos.x;
 		FaceZ = Conveyor->twp->pos.z - playertwp[0]->pos.z;
 		FacePlayer();
-		Conveyor->twp->ang.y = FaceAng;
+		Conveyor->twp->ang.y = FaceAng; //might need to rework 5/18/2022
+		Conveyor->twp->ang.x = rand() % 119 + (-59);
+		
 		return;
 	}
 	else //new effect dueo texlist not being loaded
@@ -514,7 +513,7 @@ void RandomConveyorStop(taskwk* p1)
 		ConveyorTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr) //temp.walker need to test 5/16/2022
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
 	{
 		strcpy_s(LastEffect, 128, "Spawned Spike");
 		task* ConveyorStop;
@@ -525,7 +524,7 @@ void RandomConveyorStop(taskwk* p1)
 		ConveyorStop->twp->pos.y =- playertwp[0]->pos.y - 30;
 		PlaceX = ConveyorStop->twp->pos.x;
 		PlaceZ = ConveyorStop->twp->pos.z;
-		PosOffset = 0; //tempwalker testma
+		PosOffset = 96; //might need to adjust this
 		PlaceInFront();
 		ConveyorStop->twp->pos.x = PlaceX;
 		ConveyorStop->twp->pos.z = PlaceZ;
@@ -549,7 +548,7 @@ void RandomFountain(taskwk* p1)
 		FountainTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_HIGHWAY2_TEXLIST.textures->texaddr)  //temp.walker need to test 5/16/2022
+	if (OBJ_HIGHWAY2_TEXLIST.textures->texaddr)
 	{
 		strcpy_s(LastEffect, 128, "Random Fountain");
 		task* Fountain;
@@ -559,7 +558,7 @@ void RandomFountain(taskwk* p1)
 		Fountain->twp->pos = playertwp[0]->pos;
 		PlaceX = Fountain->twp->pos.x;
 		PlaceZ = Fountain->twp->pos.z;
-		PosOffset = rand() % 10 + (59); //59-69?
+		PosOffset = rand() % 10 + (59);
 		PlaceInFront();
 		Fountain->twp->pos.x = PlaceX;
 		Fountain->twp->pos.z = PlaceZ;
@@ -584,7 +583,7 @@ void RandomTarget(taskwk* p1)
 		TargetTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)  //temp.walker need to test 5/16/2022
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
 	{
 		strcpy_s(LastEffect, 128, "Random Sonic Target");
 		task* Target;
@@ -598,7 +597,7 @@ void RandomTarget(taskwk* p1)
 		PlaceInFront();
 		Target->twp->pos.x = PlaceX;
 		Target->twp->pos.z = PlaceZ;
-		Target->twp->pos.y = playertwp[0]->pos.y - 9.0f; //temp.walker need to test
+		Target->twp->pos.y = playertwp[0]->pos.y + 10.0f;
 		FaceX = Target->twp->pos.x - playertwp[0]->pos.x;
 		FaceZ = Target->twp->pos.z - playertwp[0]->pos.z;
 		FacePlayer();
@@ -624,7 +623,7 @@ void RandomPopUpTarget(taskwk* p1)
 		TargetTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)  //temp.walker need to test 5/16/2022
+	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
 	{
 		strcpy_s(LastEffect, 128, "Random Target");
 		task* Target;
@@ -638,7 +637,7 @@ void RandomPopUpTarget(taskwk* p1)
 		PlaceInFront();
 		Target->twp->pos.x = PlaceX;
 		Target->twp->pos.z = PlaceZ;
-		Target->twp->pos.y = playertwp[0]->pos.y - 8.0f; //temp.walker need to test
+		Target->twp->pos.y = playertwp[0]->pos.y - 8.0f;
 		FaceX = Target->twp->pos.x - playertwp[0]->pos.x;
 		FaceZ = Target->twp->pos.z - playertwp[0]->pos.z;
 		FacePlayer();
@@ -679,7 +678,7 @@ void RandomGravityWall(taskwk* p1)
 		GravityWall->twp->pos = playertwp[0]->pos;
 		PlaceX = GravityWall->twp->pos.x;
 		PlaceZ = GravityWall->twp->pos.z;
-		PosOffset = 25; //tempwalker need to test
+		PosOffset = 25;
 		PlaceInFront();
 		GravityWall->twp->pos.x = PlaceX;
 		GravityWall->twp->pos.z = PlaceZ;

@@ -709,7 +709,7 @@ void RandomEGacha(taskwk* p1)
 	if (!EGachaTextLoader)
 	{
 		CheckAnimalTexture();
-		//LoadPVM("OBJ_FEgg", &OBJ_FINALEGG_TEXLIST); //temp.walker disabled on 4/7/2022 
+		//LoadPVM("OBJ_FEgg", &OBJ_FINALEGG_TEXLIST); //disabled on 4/7/2022 
 		LoadPVM("GACHAPON", &GACHAPON_TEXLIST);
 		EGachaTextLoader = true;
 		TextLoaded = true;

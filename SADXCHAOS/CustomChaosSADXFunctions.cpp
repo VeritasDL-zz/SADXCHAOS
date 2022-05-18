@@ -14,7 +14,6 @@ double PosOffset;
 //Set TASK->twp->pos.z to PlaceZ; (replace "TASK" with task's name)
 void PlaceInFront() //credits to Skoob For this, you the GOAT
 {
-	//double PosOffset = PosOffsetSet; //rand() % 25 + (25); //place in front offset rand from 25 to 50 //temp.walker need to test
 	PlaceX += PosOffset * sin(-2 * M_PI * ((playertwp[0]->ang.y - 0x4000) & 0xffff) / 65536.0); //Place In Front X
 	PlaceZ += PosOffset * sin(2 * M_PI * ((playertwp[0]->ang.y) & 0xffff) / 65536.0); //Place In Front Y
 }
