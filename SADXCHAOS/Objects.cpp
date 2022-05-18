@@ -60,6 +60,7 @@ void BigRock(taskwk* p1)
 		BigRock->twp->pos = playertwp[0]->pos;
 		PlaceX = BigRock->twp->pos.x;
 		PlaceZ = BigRock->twp->pos.z;
+		PosOffset = 25; //tempwalker need to test
 		PlaceInFront();
 		BigRock->twp->pos.x = PlaceX;
 		BigRock->twp->pos.z = PlaceZ;
@@ -209,6 +210,7 @@ void RandomFan(taskwk* p1)
 		Fan->twp->pos = playertwp[0]->pos;
 		PlaceX = Fan->twp->pos.x;
 		PlaceZ = Fan->twp->pos.z;
+		PosOffset = 25; //tempwalker need to test
 		PlaceInFront();
 		Fan->twp->pos.x = PlaceX;
 		Fan->twp->pos.z = PlaceZ;
@@ -452,6 +454,7 @@ void RandomBarrel(taskwk* p1)
 		Barrel->twp->pos = playertwp[0]->pos;
 		PlaceX = Barrel->twp->pos.x;
 		PlaceZ = Barrel->twp->pos.z;
+		PosOffset = 25; //tempwalker need to test
 		PlaceInFront();
 		Barrel->twp->pos.x = PlaceX;
 		Barrel->twp->pos.z = PlaceZ;
@@ -477,7 +480,7 @@ void RandomConveyorBelt(taskwk* p1)
 	}
 	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
 	{
-		strcpy_s(LastEffect, 128, "Random Conveyor Belt");
+		strcpy_s(LastEffect, 128, "Random Conveyor Belt"); //tempwalker need to test
 		task* Conveyor;
 		Conveyor = (task*)LoadObject((LoadObj)6, 3, OConv_belt);
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
@@ -487,6 +490,7 @@ void RandomConveyorBelt(taskwk* p1)
 		Conveyor->twp->scl.z = (float(rand()) / float((RAND_MAX)) * 1.3);
 		PlaceX = Conveyor->twp->pos.x;
 		PlaceZ = Conveyor->twp->pos.z;
+		PosOffset = 0; //tempwalker testma
 		PlaceInFront();
 		Conveyor->twp->pos.x = PlaceX;
 		Conveyor->twp->pos.z = PlaceZ;
@@ -521,6 +525,7 @@ void RandomConveyorStop(taskwk* p1)
 		ConveyorStop->twp->pos.y =- playertwp[0]->pos.y - 30;
 		PlaceX = ConveyorStop->twp->pos.x;
 		PlaceZ = ConveyorStop->twp->pos.z;
+		PosOffset = 0; //tempwalker testma
 		PlaceInFront();
 		ConveyorStop->twp->pos.x = PlaceX;
 		ConveyorStop->twp->pos.z = PlaceZ;
@@ -554,6 +559,7 @@ void RandomFountain(taskwk* p1)
 		Fountain->twp->pos = playertwp[0]->pos;
 		PlaceX = Fountain->twp->pos.x;
 		PlaceZ = Fountain->twp->pos.z;
+		PosOffset = rand() % 10 + (59); //59-69?
 		PlaceInFront();
 		Fountain->twp->pos.x = PlaceX;
 		Fountain->twp->pos.z = PlaceZ;
@@ -588,6 +594,7 @@ void RandomTarget(taskwk* p1)
 		Target->twp->pos = playertwp[0]->pos;
 		PlaceX = Target->twp->pos.x;
 		PlaceZ = Target->twp->pos.z;
+		PosOffset = rand() % 10 + (59); //59-69?
 		PlaceInFront();
 		Target->twp->pos.x = PlaceX;
 		Target->twp->pos.z = PlaceZ;
@@ -627,6 +634,7 @@ void RandomPopUpTarget(taskwk* p1)
 		Target->twp->pos = playertwp[0]->pos;
 		PlaceX = Target->twp->pos.x;
 		PlaceZ = Target->twp->pos.z;
+		PosOffset = rand() % 10 + (59); //59-69?
 		PlaceInFront();
 		Target->twp->pos.x = PlaceX;
 		Target->twp->pos.z = PlaceZ;
@@ -671,6 +679,7 @@ void RandomGravityWall(taskwk* p1)
 		GravityWall->twp->pos = playertwp[0]->pos;
 		PlaceX = GravityWall->twp->pos.x;
 		PlaceZ = GravityWall->twp->pos.z;
+		PosOffset = 25; //tempwalker need to test
 		PlaceInFront();
 		GravityWall->twp->pos.x = PlaceX;
 		GravityWall->twp->pos.z = PlaceZ;

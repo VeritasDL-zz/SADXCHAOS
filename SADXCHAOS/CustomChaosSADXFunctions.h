@@ -27,3 +27,4 @@ extern float PlaceZ;
 extern float FaceX;
 extern float FaceZ;
 extern float FaceAng;
+extern double PosOffset;

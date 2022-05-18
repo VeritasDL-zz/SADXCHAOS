@@ -831,8 +831,9 @@ void RandomFireBreath(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		FireBreath->ocp = objCondition;
 		FireBreath->twp->pos = playertwp[0]->pos;
-		PlaceX = FireBreath->twp->pos.x;
-		PlaceZ = FireBreath->twp->pos.z;
+		PlaceX = FireBreath->twp->pos.x + (rand() % 30);
+		PlaceZ = FireBreath->twp->pos.z + (rand() % 30);
+		PosOffset = rand() % 10 + (59); //59-69?
 		PlaceInFront();
 		FireBreath->twp->pos.x = PlaceX;
 		FireBreath->twp->pos.z = PlaceZ;
@@ -883,6 +884,7 @@ void RandomCannonS1(taskwk* p1)
 		CannonS1->twp->pos.x = playertwp[0]->pos.x - 10;
 		PlaceX = CannonS1->twp->pos.x;
 		PlaceZ = CannonS1->twp->pos.z;
+		PosOffset = rand() % 10 + (59); //59-69?
 		PlaceInFront();
 		CannonS1->twp->pos.x = PlaceX;
 		CannonS1->twp->pos.z = PlaceZ;
@@ -932,6 +934,7 @@ void RandomCannonS2(taskwk* p1)
 		CannonS2->twp->pos = playertwp[0]->pos;
 		PlaceX = CannonS2->twp->pos.x;
 		PlaceZ = CannonS2->twp->pos.z;
+		PosOffset = rand() % 10 + (59); //59-69?
 		PlaceInFront();
 		CannonS2->twp->pos.x = PlaceX;
 		CannonS2->twp->pos.z = PlaceZ;
