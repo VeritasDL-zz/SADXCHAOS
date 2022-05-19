@@ -294,6 +294,8 @@ Added FacePlayer to some stuff (5/16/2022)
 Some Changes to Stuff, Future me will have to write out changes get fucked (5/18/2022)
 Adjusted Changes (5/18/2022)
 Removed Temp.Walker (5/18/2022)
+Fixed a bug due to curRand being a char (5/19/2022)
+
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 

@@ -100,8 +100,8 @@ void ChaosTimer()
 		Chaos_Timer++;
 	}
 	if (Chaos_Timer >= EffectMax)
-	{
-		char curRand = 0;
+	{ 
+		int curRand = 0;
 		do {
 			curRand = rand() % ChaosSize;
 		} while (oldRand == curRand);
