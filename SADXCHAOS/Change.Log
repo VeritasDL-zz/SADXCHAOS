@@ -297,6 +297,7 @@ Removed Temp.Walker (5/18/2022)
 Fixed a bug due to curRand being a char (5/19/2022)
 Fixed a bug with RandomEGacha (5/24/2022)
 Attempting to fix the whole "Check if texture is loaded before doing this" doesnt work yet (5/24/2022)
+Might need to only call ResetLoadedTexListAddr when level changed? (5/24/2022)
 
 ---------TO-DO---------
  Test Stuff
@@ -307,7 +308,6 @@ Attempting to fix the whole "Check if texture is loaded before doing this" doesn
  Test boolLandCollision(4/2/2022)
  CreateBomb?
  Ugandan Knuckles hint/voicefile
-
  Convert Cart to Task LOL this sucks
  RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
  Add More Custom Tikal Hints
@@ -315,6 +315,4 @@ Attempting to fix the whole "Check if texture is loaded before doing this" doesn
  Add Support for CWE? (i wouldnt even know how to do this)
  Todo 
  Beat has bad texture
-
-
  Random Info Storage

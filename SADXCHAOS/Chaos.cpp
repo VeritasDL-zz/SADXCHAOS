@@ -161,7 +161,7 @@ extern "C"
 		if (GameState != 15 && GameState != 16 && TextLoaded)
 		{
 			ResetTextureBools();
-			//ResetLoadedTexListAddr(); //doesnt work for some reason 5/24/2022
+			ResetLoadedTexListAddr(); //doesnt work for some reason 5/24/2022
 		}
 		if (GameState != 15 && GameState != 16 && g_RotaryEmerald_p != 0)
 		{
