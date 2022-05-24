@@ -161,6 +161,7 @@ extern "C"
 		if (GameState != 15 && GameState != 16 && TextLoaded)
 		{
 			ResetTextureBools();
+			//ResetLoadedTexListAddr(); //doesnt work for some reason 5/24/2022
 		}
 		if (GameState != 15 && GameState != 16 && g_RotaryEmerald_p != 0)
 		{
@@ -178,7 +179,7 @@ extern "C"
 		//Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomGravityWall(0);
+			RandomEGacha(0);
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

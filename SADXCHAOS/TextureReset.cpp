@@ -113,3 +113,37 @@ void ResetTextureBools()
 	WriteData((int*)0x5B56D2, (int)0xE5FE69E8); //target_man_exec_nop LoadLevelResults Reset Nopped ASM 
 	WriteData((int*)0x5B56D6, (int)0x43E857FF); //target_man_exec_nop LoadLevelResults Reset Nopped ASM 
 }
+void ResetLoadedTexListAddr()
+{
+	//Enemy's
+	E_SAI_TEXLIST.textures->texaddr = 0;
+	E_BUYON_TEXLIST.textures->texaddr = 0;
+	UNI_A_UNIBODY_TEXLIST.textures->texaddr = 0;
+	UNI_C_UNIBODY_TEXLIST.textures->texaddr = 0;
+	TOGEBALL_TOGEBALL_TEXLIST.textures->texaddr = 0;
+	E_AMENBO_TEXLIST.textures->texaddr = 0;
+	NISEPAT_TEXLIST.textures->texaddr = 0;
+	E_SNAKE_TEXLIST.textures->texaddr = 0;
+	E_ROBO_TEXLIST.textures->texaddr = 0;
+	E_LEON_TEXLIST.textures->texaddr = 0;
+	E_SARU_TEXLIST.textures->texaddr = 0;
+	E_BOMB_TEXLIST.textures->texaddr = 0;
+	TOGEBALL_TOGEBALL_TEXLIST.textures->texaddr = 0;
+	SUPI_SUPI_TEXLIST.textures->texaddr = 0;
+	E_SNOWMAN_TEXLIST.textures->texaddr = 0;
+	stx_ice0_TEXLIST.textures->texaddr = 0;
+	GACHAPON_TEXLIST.textures->texaddr = 0;
+	E_AIRCRAFT_TEXLIST.textures->texaddr = 0;
+	AIR_SIGNAL_TEXLIST.textures->texaddr = 0;
+	OBJ_SKYDECK_TEXLIST.textures->texaddr = 0;
+	OBJ_MOUNTAIN_TEXLIST.textures->texaddr = 0;
+	//Objects
+	OBJ_ICECAP_TEXLIST.textures->texaddr = 0;
+	AL_OBJECT_TEXLIST.textures->texaddr = 0;
+	OBJ_FINALEGG_TEXLIST.textures->texaddr = 0;
+	OBJ_HIGHWAY2_TEXLIST.textures->texaddr = 0;
+	OBJ_RUIN2_TEXLIST.textures->texaddr = 0;
+	//Effects
+	KNU_EFF_TEXLIST.textures->texaddr = 0;
+	texlist_l_sibuki.textures->texaddr = 0;
+}

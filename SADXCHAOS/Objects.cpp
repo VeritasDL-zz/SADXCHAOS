@@ -69,6 +69,7 @@ void BigRock(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		BigRockTextLoader = false;
 		return;
 	}
 }
@@ -107,6 +108,7 @@ void RandomFruit(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		ChaoFruitTextLoader = false;
 		return;
 	}
 }
@@ -146,6 +148,7 @@ void RandomHat(taskwk* p1)
 	else
 	{
 		NewEffect();
+		ChaoHatTextLoader = false;
 		return;
 	}
 }
@@ -221,6 +224,7 @@ void RandomFan(taskwk* p1)
 	else
 	{
 		NewEffect();
+		FanTextLoader = false;
 		return;
 	}
 }
@@ -268,6 +272,7 @@ void RandomKeyBlock(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		KeyBlockTextLoader = false;
 		return;
 	}
 }
@@ -433,6 +438,7 @@ void RandomEmblem(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		EmblemTextLoader = false;
 		return;
 	}
 }
@@ -467,6 +473,7 @@ void RandomBarrel(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		BarrelTextLoader = false;
 		return;
 	}
 }
@@ -496,12 +503,12 @@ void RandomConveyorBelt(taskwk* p1)
 		FacePlayer();
 		Conveyor->twp->ang.y = FaceAng; //might need to rework 5/18/2022
 		Conveyor->twp->ang.x = rand() % 119 + (-59);
-		
 		return;
 	}
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		ConveyorTextLoader = false;
 		return;
 	}
 }
@@ -537,6 +544,7 @@ void RandomConveyorStop(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		ConveyorTextLoader = false;
 		return;
 	}
 }
@@ -572,6 +580,7 @@ void RandomFountain(taskwk* p1)
 	else //new effect 
 	{
 		NewEffect();
+		FountainTextLoader = false;
 		return;
 	}
 }
@@ -612,6 +621,7 @@ void RandomTarget(taskwk* p1)
 	else //new effect 
 	{
 		NewEffect();
+		TargetTextLoader = false;
 		return;
 	}
 }
@@ -648,6 +658,7 @@ void RandomPopUpTarget(taskwk* p1)
 	else //new effect 
 	{
 		NewEffect();
+		TargetTextLoader = false;
 		return;
 	}
 }
@@ -691,6 +702,7 @@ void RandomGravityWall(taskwk* p1)
 	else //new effect 
 	{
 		NewEffect();
+		GravityTextLoader = false;
 		return;
 	}
 }

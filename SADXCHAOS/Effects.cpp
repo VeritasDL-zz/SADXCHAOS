@@ -862,6 +862,7 @@ void Set_Sonic_Ice()
 	if (!IceTextLoader)
 	{
 		LoadNoNamePVM(&stx_ice0_TEXLIST);
+		IceTextLoader = true;
 		TextLoaded = true;
 	}
 	if (stx_ice0_TEXLIST.textures->texaddr)
@@ -875,6 +876,7 @@ void Set_Sonic_Ice()
 	else
 	{
 		NewEffect();
+		IceTextLoader = false;
 		return;
 	}	
 }
@@ -902,6 +904,7 @@ void RandomKnuxRingSpring(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		KnuxEffTextLoader = false;
 		return;
 	}
 }
@@ -936,6 +939,7 @@ void RandomWaterPiller(taskwk* p1)
 	else
 	{
 		NewEffect();
+		WaterPillerTextLoader = false;
 		return;
 	}
 }

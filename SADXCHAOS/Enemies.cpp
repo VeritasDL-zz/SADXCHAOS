@@ -91,6 +91,7 @@ void RandomTank(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		RinoTextLoader = false;
 		return;
 	}
 }
@@ -138,6 +139,7 @@ void RandomBuyon(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		BuyonTextLoader = false;
 		return;
 	}
 }
@@ -187,6 +189,7 @@ void RandomUnidus(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		UnidusTextLoader = false;
 		return;
 	}
 }
@@ -234,6 +237,7 @@ void RandomAmebot(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		AmebotTextLoader = false;
 		return;
 	}
 }
@@ -281,6 +285,7 @@ void RandomPolice(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		PoliceTextLoader = false;
 		return;
 	}
 }
@@ -328,6 +333,7 @@ void RandomSnake(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		SnakeTextLoader = false;
 		return;
 	}
 }
@@ -376,6 +382,7 @@ void RandomRobo(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		RoboTextLoader = false;
 		return;
 	}
 }
@@ -423,6 +430,7 @@ void RandomLeon(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		LeonTextLoader = false;
 		return;
 	}
 }
@@ -473,6 +481,7 @@ void RandomKiki(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		KikiTextLoader = false;
 		return;
 	}
 }
@@ -515,6 +524,7 @@ void RandomFallingSpikeBall(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		FSBTextLoader = false;
 		return;
 	}
 }
@@ -560,6 +570,7 @@ void RandomSpinnerA(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		SpinnerTextLoader = false;
 		return;
 	}
 }
@@ -605,6 +616,7 @@ void RandomSpinnerB(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		SpinnerTextLoader = false;
 		return;
 	}
 }
@@ -650,6 +662,7 @@ void RandomSpinnerC(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		SpinnerTextLoader = false;
 		return;
 	}
 }
@@ -693,6 +706,7 @@ void RandomSman(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		SmanTextLoader = false;
 		return;
 	}
 }
@@ -714,7 +728,7 @@ void RandomEGacha(taskwk* p1)
 		EGachaTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr && GACHAPON_TEXLIST.textures->texaddr)
+	if (GACHAPON_TEXLIST.textures->texaddr)
 	{
 		strcpy_s(LastEffect, 128, "Spawned Beat");
 		int number = rand() % 2;
@@ -723,8 +737,8 @@ void RandomEGacha(taskwk* p1)
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		GACHAPON->ocp = objCondition;
 		GACHAPON->twp->pos = playertwp[0]->pos;
-		GACHAPON->twp->pos.z += rand() % 10 + 1 * 9;
-		GACHAPON->twp->pos.y += rand() % 10 + 1 * 9;
+		GACHAPON->twp->pos.z += rand() % 10 + 2 * 9;
+		GACHAPON->twp->pos.y += rand() % 10 + 2 * 9;
 		if (number)
 		{
 			GACHAPON = (task*)LoadObject((LoadObj)2, 3, OEGacha);
@@ -739,6 +753,7 @@ void RandomEGacha(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		EGachaTextLoader = false;
 		return;
 	}
 }
@@ -795,6 +810,7 @@ void RandomAirCraft(taskwk* p1) //if you use this please give me credits as this
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		AirCraftTextLoader = false;
 		return;
 	}
 }
@@ -845,6 +861,7 @@ void RandomFireBreath(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		FireBreathTextLoader = false;
 		return;
 	}
 }
@@ -896,6 +913,7 @@ void RandomCannonS1(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		CannonS1TextLoader = false;
 		return;
 	}
 }
@@ -947,6 +965,7 @@ void RandomCannonS2(taskwk* p1)
 	else //new effect dueo texlist not being loaded
 	{
 		NewEffect();
+		CannonS2TextLoader = false;
 		return;
 	}
 }

@@ -295,15 +295,18 @@ Some Changes to Stuff, Future me will have to write out changes get fucked (5/18
 Adjusted Changes (5/18/2022)
 Removed Temp.Walker (5/18/2022)
 Fixed a bug due to curRand being a char (5/19/2022)
+Fixed a bug with RandomEGacha (5/24/2022)
+Attempting to fix the whole "Check if texture is loaded before doing this" doesnt work yet (5/24/2022)
 
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 
  Log Known Crashes
- Change DrawDebugRectangle values to fit the new effect names 
-Test boolLandCollision(4/2/2022)
-CreateBomb?
-Ugandan Knuckles
+ Need to either Fix the whole "Check if texture is loaded before doing this" thing cuz it only works if the texture's never been loaded before
+ it doesnt reset when it should (5/24/2022)
+ Test boolLandCollision(4/2/2022)
+ CreateBomb?
+ Ugandan Knuckles hint/voicefile
 
  Convert Cart to Task LOL this sucks
  RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
