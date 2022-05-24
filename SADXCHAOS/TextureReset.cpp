@@ -116,7 +116,6 @@ void ResetTextureBools()
 void ResetLoadedTexListAddr()
 {
 	//Enemy's
-	
 	E_SAI_TEXLIST.textures->texaddr = 0;
 	E_BUYON_TEXLIST.textures->texaddr = 0;
 	UNI_A_UNIBODY_TEXLIST.textures->texaddr = 0;

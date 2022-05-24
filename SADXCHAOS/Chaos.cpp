@@ -179,7 +179,7 @@ extern "C"
 		//Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			RandomEGacha(0);
+			RandomEGacha(0); //temp testing for textadder resetting
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.
