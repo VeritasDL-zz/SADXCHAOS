@@ -46,6 +46,8 @@ extern bool AsciiTextLoader;
 extern bool FountainTextLoader;
 extern bool TargetTextLoader;
 extern bool GravityTextLoader;
+extern bool Bumper1TextLoader;
+extern bool FlipperTextLoader;
 extern int FruitNumb;
 extern int HatNumb;
 void ResetTextureBools();

@@ -38,6 +38,8 @@ bool AsciiTextLoader = false;
 bool FountainTextLoader = false;
 bool TargetTextLoader = false;
 bool GravityTextLoader = false;
+bool Bumper1TextLoader = false;
+bool FlipperTextLoader = false;
 bool TextLoaded = false;
 bool WriteOnce = false;
 int FruitNumb = 0;
@@ -85,6 +87,8 @@ void ResetTextureBools()
 	AsciiTextLoader = false;
 	TargetTextLoader = false;
 	GravityTextLoader = false;
+	Bumper1TextLoader = false;
+	FlipperTextLoader = false;
 	WriteOnce = false;
 	HatNumb = 0;
 	FruitNumb = 0;
@@ -143,6 +147,8 @@ void ResetLoadedTexListAddr()
 	OBJ_FINALEGG_TEXLIST.textures->texaddr = 0;
 	OBJ_HIGHWAY2_TEXLIST.textures->texaddr = 0;
 	OBJ_RUIN2_TEXLIST.textures->texaddr = 0;
+	OBJ_CASINO_TEXLIST.textures->texaddr = 0;
+	//Bumper1TextLoader 
 	//Effects
 	KNU_EFF_TEXLIST.textures->texaddr = 0;
 	texlist_l_sibuki.textures->texaddr = 0;

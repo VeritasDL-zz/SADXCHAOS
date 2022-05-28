@@ -298,13 +298,14 @@ Fixed a bug due to curRand being a char (5/19/2022)
 Fixed a bug with RandomEGacha (5/24/2022)
 Attempting to fix the whole "Check if texture is loaded before doing this" doesnt work yet (5/24/2022)
 Might need to only call ResetLoadedTexListAddr when level changed/died only???? (5/24/2022)
-
+Added FlipperL and Bumper1 (5/28/2022)
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 
  Log Known Crashes
  Need to either Fix the whole "Check if texture is loaded before doing this" thing cuz it only works if the texture's never been loaded before
  it doesnt reset when it should (5/24/2022)
+ Pinball Stuff? FlipperL,FlipperR, SlingL, SlingR, Bumper1, StarNeon? StoperR, StoperL, ? 
  Test boolLandCollision(4/2/2022)
  CreateBomb?
  Ugandan Knuckles hint/voicefile

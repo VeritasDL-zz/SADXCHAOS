@@ -706,3 +706,74 @@ void RandomGravityWall(taskwk* p1)
 		return;
 	}
 }
+void RandomBumper1(taskwk* p1)
+{
+	if (!Bumper1TextLoader)
+	{
+		//LoadPVM("OBJ_CASINO9", &OBJ_CASINO9_TEXLIST);
+		LoadPVM("OBJ_CASINO_E", &OBJ_CASINO_TEXLIST);
+		Bumper1TextLoader = true;
+		TextLoaded = true;
+	}
+	if (OBJ_CASINO_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Bumper");
+		task* Bumper;
+		Bumper = (task*)LoadObject((LoadObj)2, 3, Bumper1);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Bumper->ocp = objCondition;
+		Bumper->twp->pos = playertwp[0]->pos;
+		PlaceX = Bumper->twp->pos.x;
+		PlaceZ = Bumper->twp->pos.z;
+		PosOffset = 25;
+		PlaceInFront();
+		Bumper->twp->pos.x = PlaceX;
+		Bumper->twp->pos.z = PlaceZ;
+		FaceX = Bumper->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = Bumper->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		Bumper->twp->ang.y = FaceAng;
+		return;
+	}
+	else
+	{
+		NewEffect();
+		Bumper1TextLoader = false;
+		return;
+	}
+}
+void RandomFlipper(taskwk* p1)
+{
+	if (!FlipperTextLoader)
+	{
+		LoadPVM("OBJ_CASINO_E", &OBJ_CASINO_TEXLIST);
+		FlipperTextLoader = true;
+		TextLoaded = true;
+	}
+	if (OBJ_CASINO_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Flipper");
+		task* Flipper;
+		Flipper = (task*)LoadObject((LoadObj)6, 3, Flipperl);
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Flipper->ocp = objCondition;
+		Flipper->twp->pos = playertwp[0]->pos;
+		PlaceX = Flipper->twp->pos.x;
+		PlaceZ = Flipper->twp->pos.z;
+		PosOffset = 1;
+		PlaceInFront();
+		Flipper->twp->pos.x = PlaceX;
+		Flipper->twp->pos.z = PlaceZ;
+		FaceX = Flipper->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = Flipper->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		Flipper->twp->ang.y = FaceAng;
+		return;
+	}
+	else
+	{
+		NewEffect();
+		FlipperTextLoader = false;
+		return;
+	}
+}

@@ -24,3 +24,5 @@ void RandomPopUpTarget(taskwk* p1);
 void RandomGravityWall(taskwk* p1);
 void PanelNOP();
 void PanelRestore();
+void RandomBumper1(taskwk* p1);
+void RandomFlipper(taskwk* p1);
