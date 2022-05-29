@@ -20,9 +20,9 @@ extern "C"
 	{
 		Init_Fixes(path, helperFunctions);
 		init_FreeMovements();
-		strcpy_s(LastEffect, 128, "Chaos Edition 2.0 b C");
+		strcpy_s(LastEffect, 128, "Chaos Edition 2.0b - D");
 	}
-	ChaosS ChaosArray[129]
+	ChaosS ChaosArray[131]
 	{
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
@@ -78,6 +78,8 @@ extern "C"
 	{ RandomGravityWall, nullptr, nullptr },
 	{ RandomKnuxRingSpring, nullptr, nullptr },
 	{ RandomWaterPiller, nullptr, nullptr },
+	{ RandomBumper1, nullptr, nullptr },
+	{ RandomFlipper, nullptr, nullptr },
 	{ nullptr, RandomVSpeed, nullptr },
 	{ nullptr, RandomKillMomentum, nullptr },
 	{ nullptr, RandomHSpeed, nullptr },

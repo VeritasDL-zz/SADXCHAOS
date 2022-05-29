@@ -295,10 +295,12 @@ Some Changes to Stuff, Future me will have to write out changes get fucked (5/18
 Adjusted Changes (5/18/2022)
 Removed Temp.Walker (5/18/2022)
 Fixed a bug due to curRand being a char (5/19/2022)
+De-Compressed 66666.wav and 133769.wav due to Audio Quality concerns (5/19/2022)
 Fixed a bug with RandomEGacha (5/24/2022)
 Attempting to fix the whole "Check if texture is loaded before doing this" doesnt work yet (5/24/2022)
 Might need to only call ResetLoadedTexListAddr when level changed/died only???? (5/24/2022)
 Added FlipperL and Bumper1 (5/28/2022)
+
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 

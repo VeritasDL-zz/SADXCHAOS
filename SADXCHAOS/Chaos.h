@@ -15,4 +15,4 @@ struct ChaosS
 	ChaosCharObj func2;
 	ChaosNull func3;
 };
-extern ChaosS ChaosArray[129];
+extern ChaosS ChaosArray[131];

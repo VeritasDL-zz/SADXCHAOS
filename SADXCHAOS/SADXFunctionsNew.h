@@ -51,7 +51,8 @@ VoidFunc(SleepTimer, 0x426040);
 VoidFunc(AdvanceTime, 0x426075);
 FunctionPointer(void, SetViewAngle, (int new_view_angle), 0x437240);
 FunctionPointer(void, LandChangeStage, (char Gap), 0x43A460); // Release landtable and request act change
-FunctionPointer(void, AddCameraStage, (__int16 Gap), 0x434680); // Release cameras and request act chang
+FunctionPointer(void, AddCameraStage, (__int16 Gap), 0x434680); // Release cameras and request act change
+FunctionPointer(void, LandChangeLandTable, (_OBJ_LANDTABLE* pOLT), 0x43A4C0); // Set Chao landtable
 VoidFunc(InitFreeCamera, 0x434870);
 FunctionPointer(int, AdjustAngle, (__int16 ang0, unsigned __int16 ang1, int dang), 0x438350); // Slowly adjust ang0 to ang1 at dang speed
 FunctionPointer(int, SubAngle, (int ang0, int ang1), 0x4383B0); // Difference
@@ -131,12 +132,12 @@ VoidFunc(ghDefaultBlendingMode, 0x433170);
 
 // Lighting
 FunctionPointer(void, late_SetFunc, (void(__cdecl* func)(void*), void* data, float depth, int late_flags), 0x404840); // DrawModelCallback_Queue
-FunctionPointer(void, lig_setLight, (NJS_POINT3* v, double r, double g, double b, double spe, double dif, double amb), 0x412740); // Converts legacy NJS_LIGHT data to palette generation data
+FunctionPointer(void, lig_setLight, (NJS_POINT3* v, float r, float g, float b, float spe, float dif, float amb), 0x412740); // Converts legacy NJS_LIGHT data to palette generation data
 FastcallFunctionPointer(void, lig_calcPalette, (int no), 0x411F50); // Generates palettes for a specified light type
 FunctionPointer(void, lig_fillOffsetPalette, (int no, unsigned int spe, int num), 0x412180); // Fills the current specular palette with a specicied color
 FunctionPointer(void, lig_cpyPalette, (int dstNo, int srcNo), 0x412210); // Copies one palette to another
-FunctionPointer(void, lig_supplementPalette, (int no, int src1, int src2, double fmix1), 0x412280); // Mixes two palettes
-FunctionPointer(void, lig_convHalfBrightPalette, (int no, double rate), 0x4123C0); // Multiplies the palette's colors by a given value (definition may be wrong)
+FunctionPointer(void, lig_supplementPalette, (int no, int src1, int src2, float fmix1), 0x412280); // Mixes two palettes
+FunctionPointer(void, lig_convHalfBrightPalette, (int no, float rate), 0x4123C0); // Multiplies the palette's colors by a given value (definition may be wrong)
 FunctionPointer(void, dsScaleLight, (float a), 0x411E90); // Normal scaling for some objects
 FunctionPointer(void, dsReScaleLight, (), 0x411EF0); // Restore scaled normals
 FunctionPointer(void, lig_setGjPaletteNo___, (int no), 0x412160);
@@ -339,7 +340,7 @@ FunctionPointer(void, BJoinVertexes, (taskwk* twp, bosswk* bwp), 0x4BDC50);
 FunctionPointer(void, SetDisplayBossName, (const char* str, int xpos, int ypos, int time), 0x4B36D0);
 FunctionPointer(void, LoadLifeGauge, (signed int w, signed int h, signed int health), 0x4B3CC0);
 FunctionPointer(BOOL, ChkE104ColliLandXZ, (NJS_POINT3* pPos, float fDistChk, float* pfGroundY, NJS_POINT3* pVec), 0x568AF0); // Ground collision logic for E104
-FunctionPointer(void, SetCircleLimit, (NJS_POINT3* pos, NJS_POINT3* center, float radius), 0x7AF3E0); // Creates an object that limits a position into a circle
+FunctionPointer(task*, SetCircleLimit, (NJS_POINT3* pos, NJS_POINT3* center, float radius), 0x7AF3E0); // Creates an object that limits a position into a circle
 
 static const void* const BSetMotion_NextPtr = (void*)0x4BE170;
 static inline void BSetMotion_Next(bosswk* bwp, int patno)
@@ -409,6 +410,24 @@ static inline void RdMountainInit(task* tp)
 	}
 }
 
+// Miren functions (utilities)
+FunctionPointer(void, MirenInitTask, (task* task_p, const TaskInfo* info_p, void* param_p), 0x796B30); // Create a task with information from TaskInfo
+FunctionPointer(void, MirenSetTask, (int level, const TaskInfo* info_p, void* param_p), 0x796B90); // Edit a task with information from TaskInfo
+FunctionPointer(void, MirenSetChildTask, (task* parent_p, const TaskInfo* info_p, void* param_p), 0x7796BD0); // Creates a child task with information from TaskInfo
+FunctionPointer(void, MirenGameChangeAct, (int actDiff, int bgmId), 0x796C10); // Draw collisions of a colliwk (debug)
+FunctionPointer(void, MirenObjInitCharColli, (task* task_p, const ObjectInfo* objInfo_p, const ObjCmnInfo* cmnInfo_p), 0x79E510); // A wrapper for CCL_Init
+FunctionPointer(void, MirenObjClearForceWork, (forcewk* forceWk_p), 0x79E540); // Clears a forcewk
+FunctionPointer(void, MirenObjEntryMobileLandObject, (task* task_p, obj* obj_p, int attr, float scale), 0x79E580); // Sets unknown collision flags based on model radius * scale then calls RegisterCollisionEntry
+FunctionPointer(bool, MirenObjCheckCollisionP, (taskwk* taskWk_p, float dist), 0x79E600); // Set 0x100 flag if player in range, enables/disables mobile land collision
+FunctionPointer(void, MirenObjFreeMobileLandObject, (task* task_p, NJS_OBJECT* obj_p), 0x79E630); // Removes a mobile land collision.
+FunctionPointer(void, MirenObjFreeFall, (NJS_POINT3* pos_p, NJS_POINT3* spd_p, float yOfs, const NJS_POINT3* slowRate_p), 0x79E650);
+FunctionPointer(void, MirenObjDrawCharColliObjectNoScale, (NJS_OBJECT* obj_p, taskwk* taskWk_p, NJS_TEXLIST* texList_p), 0x79E820);
+FunctionPointer(NJS_OBJECT*, MirenObjAllocMobileLandObject, (const NJS_OBJECT* orgObj_p), 0x79E8B0); // Gets mobile land object entry (with GetMobileLandObject) and copy information from orgObj
+FunctionPointer(void, MirenObjSetObjectMatrix, (NJS_OBJECT* obj_p, const taskwk* taskWk_p, float scale), 0x79E8F0); // Copy position, rotation and scale to obj_p
+FunctionPointer(void, MirenObjDrawMobileLandObject, (NJS_OBJECT* obj_p, taskwk* taskWk_p, float scale, NJS_TEXLIST* texList_p), 0x79E930);
+FunctionPointer(void, MirenObjEditDrawCollisionInfo, (const CCL_INFO* info_p, const taskwk* taskWk_p), 0x79F450);
+FunctionPointer(void, MirenObjEditDrawCollision, (const colliwk* colliWk_p), 0x79F4D0); // Draw collisions of a colliwk (debug)
+
 // Object
 FunctionPointer(BOOL, dsCheckViewV, (NJS_POINT3* ft, float radius), 0x403330); // IsVisible
 FunctionPointer(BOOL, SetRegularTexture, (), 0x420F90); // Set regular object texlist
@@ -440,6 +459,7 @@ TaskFunc(ObjectGCollision, 0x49E170); // Same as ObjectNormal but with geometry 
 TaskFunc(ObjectScaleDisplay, 0x49D220); // Same as ObjectNormalDisplay with different D3D Z Func
 TaskFunc(ObjectNormalDisplay_LE, 0x49D24B); // Same as ObjectNormalDisplay with different D3D Z Func
 TaskFunc(ObjectNormalDisplay, 0x49DDF0); // Display task that draws an object in twp->counter using regular pos/ang values
+TaskFunc(ObjectNormalExit, 0x49D050); // Red Mountain and other level objects delete function
 FunctionPointer(float, GetShadowPos, (float x, float y, float z, Angle3* ang), 0x49E920); // Get Y position and angle of ground below
 FunctionPointer(float, GetShadowPosOnWalter, (float x, float y, float z, Angle3* ang), 0x49EAD0); // Get Y position and angle of ground and water below
 FunctionPointer(BOOL, GetShadowPosXYZ, (xyyzzxsdwstr* answer), 0x49F450);
@@ -462,8 +482,6 @@ FunctionPointer(void, ef_muteki, (taskwk* twp), 0x4D6D80);
 FunctionPointer(void, ef_baria, (taskwk* twp), 0x4D6DC0);
 FunctionPointer(void, ef_explosion, (taskwk* twp), 0x4D6E00);
 FunctionPointer(void, ef_th_baria, (taskwk* twp), 0x4D6E40);
-FunctionPointer(void, MirenInitTask, (task* task_p, const TaskInfo* info_p, void* param_p), 0x796B30); // Create a task with information from TaskInfo
-FunctionPointer(void, MirenSetTask, (int level, const TaskInfo* info_p, void* param_p), 0x796B90); // Edit a task with information from TaskInfo
 FunctionPointer(void, DrawCustomObject, (NJS_OBJECT* top_object, CUSTOM_OBJ* custom), 0x4BA5D0);
 FunctionPointer(void, DrawCustomObject_wz, (NJS_OBJECT* top_object, CUSTOM_OBJ* custom), 0x4BA710);
 
@@ -727,14 +745,22 @@ static inline void CameraSetView(taskwk* twp) // Apply camera perspective
 	}
 }
 
-// Ninja draw function
+// NJD_CONTROL_3D functions
+VoidFunc(SaveControl3D, 0x4395C0); // Backs up NJD_CONTROL_3D flags
+VoidFunc(LoadControl3D, 0x4395D0); // Restores NJD_CONTROL_3D flags
+FunctionPointer(void, OnControl3D, (NJD_CONTROL_3D flag), 0x4395E0); // Adds an NJD_CONTROL_3D flag
+FunctionPointer(void, OffControl3D, (NJD_CONTROL_3D flag), 0x439600); // Removes an NJD_CONTROL_3D flag
+
+// Ninja draw functions
 FunctionPointer(void, njDrawModel_, (NJS_MODEL_SADX* mdl), 0x784AE0); // Offloads to polybuff drawing functions
 FunctionPointer(void, njDirectDrawModel, (NJS_MODEL_SADX* mdl), 0x77EDA0);
+FunctionPointer(void, njDrawPolygon2D, (NJS_POINT2COL* p, int count, float pri, NJD_DRAW attr), 0x4010D0);
 FunctionPointer(void, njDrawPolygon3D, (NJS_POINT3COL* p, int n, int atr), 0x77EAD0);
-FunctionPointer(void, njDrawSprite2D, (NJS_SPRITE* sp, int n, NJD_SPRITE attr), 0x77E390);
+FunctionPointer(void, njDrawSprite2D, (NJS_SPRITE* sp, int n, float pri, NJD_SPRITE attr), 0x77E050);
+FunctionPointer(void, njDrawSprite3D, (NJS_SPRITE* sp, int n, NJD_SPRITE attr), 0x77E390);
 FunctionPointer(void, njDrawLine3D, (NJS_POINT3COL* p, int n, NJD_DRAW attr), 0x77E820);
 FunctionPointer(void, njDrawLine2D, (NJS_POINT2COL* p, int n, float pri, NJD_DRAW attr), 0x77DF40);
-FunctionPointer(void, njDrawPolygon2D, (NJS_POINT2COL* p, int count, float pri, NJD_DRAW attr), 0x4010D0);
+FunctionPointer(void, njDrawTriangle3D, (NJS_POINT3COL* p, int n, NJD_DRAW atr), 0x77EBA0);
 FunctionPointer(void, njDrawTexture, (NJS_TEXTURE_VTX* a1, Int count, Uint32 gbix, Int flag), 0x77DC70);
 
 // Direct draw functions
@@ -762,21 +788,24 @@ FunctionPointer(void, dsActionLink, (NJS_ACTION_LINK* actionLink, float frame), 
 FunctionPointer(void, ds_ActionClip, (NJS_ACTION* action, float frame, float clipScl), 0x405450);
 FunctionPointer(void, dsDrawShapeMotion, (NJS_OBJECT* object, NJS_MOTION* motion, NJS_MOTION* shape, float frame), 0x406030);
 FunctionPointer(void, ds_DrawBoxFill2D, (float left, float top, float right, float bottom, float pri, unsigned int argb), 0x4071C0);
+FunctionPointer(void, dsDrawSprite2D, (NJS_SPRITE* sp, int n, float pri, NJD_SPRITE attr), 0x4070A0);
+FunctionPointer(void, dsDrawSprite3D, (NJS_SPRITE* sp, int n, NJD_SPRITE attr), 0x407130);
+FunctionPointer(void, put3Dsprite, (NJS_SPRITE* sp, Int n, NJD_SPRITE attr), 0x527930); // Draws Hedgehog Hammer score
 
 // Regular draw functions
 FunctionPointer(void, __DrawModel, (NJS_MODEL_SADX* mdl), 0x403470);
 FunctionPointer(int, DrawObject, (NJS_OBJECT* model), 0x4034B0);
 FunctionPointer(void, DrawObjectClip, (NJS_OBJECT* object, float clipScl), 0x4037F0);
-FunctionPointer(void, DrawModelEx, (NJS_MODEL_SADX* mdl, int flgs), 0x407BB0);
-FunctionPointer(void, DrawObjectClipEx, (NJS_OBJECT* object, int flgs, float clipScl), 0x409080);
-FunctionPointer(void, DrawModelMS, (NJS_MODEL_SADX* mdl, int flgs), 0x407CF0);
-FunctionPointer(void, DrawModelMesh, (NJS_MODEL_SADX* mdl, int flgs), 0x407FC0);
-FunctionPointer(void, DrawObjectMS, (NJS_OBJECT* object, int flgs, float clipScl), 0x409550);
-FunctionPointer(void, DrawObjectClipMesh, (NJS_OBJECT* object, int flgs, float clipScl), 0x409A20);
+FunctionPointer(void, DrawModelEx, (NJS_MODEL_SADX* mdl, LATE flgs), 0x407BB0);
+FunctionPointer(void, DrawObjectClipEx, (NJS_OBJECT* object, LATE flgs, float clipScl), 0x409080);
+FunctionPointer(void, DrawModelMS, (NJS_MODEL_SADX* mdl, LATE flgs), 0x407CF0);
+FunctionPointer(void, DrawModelMesh, (NJS_MODEL_SADX* mdl, LATE flgs), 0x407FC0);
+FunctionPointer(void, DrawObjectMS, (NJS_OBJECT* object, LATE flgs, float clipScl), 0x409550);
+FunctionPointer(void, DrawObjectClipMesh, (NJS_OBJECT* object, LATE flgs, float clipScl), 0x409A20);
 
-// void __usercall(NJS_ACTION* action@<eax>, float frame, int flgs, float clpScl, void* drwMdlFnc)
+// void __usercall(NJS_ACTION* action@<eax>, float frame, LATE flgs, float clpScl, void* drwMdlFnc)
 static const void* const DrawActionPtr = (void*)0x4053D0;
-static inline void DrawAction(NJS_ACTION* action, float frame, int flgs, float clpScl, void* drwMdlFnc)
+static inline void DrawAction(NJS_ACTION* action, float frame, LATE flgs, float clpScl, void* drwMdlFnc)
 {
 	__asm
 	{
@@ -790,9 +819,9 @@ static inline void DrawAction(NJS_ACTION* action, float frame, int flgs, float c
 	}
 }
 
-// void __usercall(obj *object@<edi>, NJS_MOTION *motion@<eax>, float frame, int flgs, float clpScl, void *drwMdlFnc)
+// void __usercall(obj *object@<edi>, NJS_MOTION *motion@<eax>, float frame, LATE flgs, float clpScl, void *drwMdlFnc)
 static const void* const DrawMotionPtr = (void*)0x4052F0;
-static inline void DrawMotion(NJS_OBJECT* object, NJS_MOTION* motion, float frame, int flgs, float clpScl, void* drwMdlFnc)
+static inline void DrawMotion(NJS_OBJECT* object, NJS_MOTION* motion, float frame, LATE flgs, float clpScl, void* drwMdlFnc)
 {
 	__asm
 	{
@@ -807,9 +836,9 @@ static inline void DrawMotion(NJS_OBJECT* object, NJS_MOTION* motion, float fram
 	}
 }
 
-// void __usercall(obj *object, NJS_MOTION_LINK *motionlink@<eax>, float frame, int flgs, float clpScl, void *drwMdlFnc)
+// void __usercall(obj *object, NJS_MOTION_LINK *motionlink@<eax>, float frame, LATE flgs, float clpScl, void *drwMdlFnc)
 static const void* const DrawMotionLinkPtr = (void*)0x4069A0;
-static inline void DrawMotionLink(NJS_OBJECT* object, NJS_MOTION_LINK* motionlink, float frame, int flgs, float clpScl, void* drwMdlFnc)
+static inline void DrawMotionLink(NJS_OBJECT* object, NJS_MOTION_LINK* motionlink, float frame, LATE flgs, float clpScl, void* drwMdlFnc)
 {
 	__asm
 	{
@@ -824,9 +853,9 @@ static inline void DrawMotionLink(NJS_OBJECT* object, NJS_MOTION_LINK* motionlin
 	}
 }
 
-// void __usercall(obj *object, NJS_MOTION *motion@<eax>, NJS_MOTION *shape@<edi>, float frame, int flgs, float clpScl, void *drawModel)
+// void __usercall(obj *object, NJS_MOTION *motion@<eax>, NJS_MOTION *shape@<edi>, float frame, LATE flgs, float clpScl, void *drawModel)
 static const void* const DrawShapeMotionPtr = (void*)0x405EF0;
-static inline void DrawShapeMotion(NJS_OBJECT* object, NJS_MOTION* motion, NJS_MOTION* shape, float frame, int flgs, float clpScl, void* drawModel)
+static inline void DrawShapeMotion(NJS_OBJECT* object, NJS_MOTION* motion, NJS_MOTION* shape, float frame, LATE flgs, float clpScl, void* drawModel)
 {
 	__asm
 	{
@@ -843,62 +872,70 @@ static inline void DrawShapeMotion(NJS_OBJECT* object, NJS_MOTION* motion, NJS_M
 }
 
 // Variable draw functions (picks between Simple and Late)
-FunctionPointer(void, lateDrawModel, (NJS_MODEL_SADX* mdl, int flgs), 0x4048E0);
-FunctionPointer(void, lateDrawObject, (NJS_OBJECT* object, int flgs, float clipScl), 0x4074A0);
-FunctionPointer(void, late_Action, (NJS_ACTION* action, float frame, int flgs, float clipScl), 0x405490);
+FunctionPointer(void, lateDrawModel, (NJS_MODEL_SADX* mdl, LATE flgs), 0x4048E0);
+FunctionPointer(void, lateDrawObject, (NJS_OBJECT* object, LATE flgs, float clipScl), 0x4074A0);
 
 // Late draw functions: Model
-FunctionPointer(void, late_DrawModel, (NJS_MODEL_SADX* mdl, int flgs), 0x4078F0);
-FunctionPointer(void, late_DrawModelClip, (NJS_MODEL_SADX* mdl, int flgs, float clipScl), 0x407870);
-FunctionPointer(void, late_DrawModelEx, (NJS_MODEL_SADX* mdl, int flgs), 0x409450);
-FunctionPointer(void, late_DrawModelClipEx, (NJS_MODEL_SADX* mdl, int flgs, float clipScl), 0x4094D0);
-FunctionPointer(void, late_DrawModelMS, (NJS_MODEL_SADX* mdl, int flgs), 0x409920);
-FunctionPointer(void, late_DrawModelClipMS, (NJS_MODEL_SADX* mdl, int flgs, float clipScl), 0x4099A0);
-FunctionPointer(void, late_DrawModelMesh, (NJS_MODEL_SADX* mdl, int flgs), 0x409DF0);
-FunctionPointer(void, late_DrawModelClipMesh, (NJS_MODEL_SADX* mdl, int flgs, float clipScl), 0x409E70);
+FunctionPointer(void, late_DrawModel, (NJS_MODEL_SADX* mdl, LATE flgs), 0x4078F0);
+FunctionPointer(void, late_DrawModelClip, (NJS_MODEL_SADX* mdl, LATE flgs, float clipScl), 0x407870);
+FunctionPointer(void, late_DrawModelEx, (NJS_MODEL_SADX* mdl, LATE flgs), 0x409450);
+FunctionPointer(void, late_DrawModelClipEx, (NJS_MODEL_SADX* mdl, LATE flgs, float clipScl), 0x4094D0);
+FunctionPointer(void, late_DrawModelMS, (NJS_MODEL_SADX* mdl, LATE flgs), 0x409920);
+FunctionPointer(void, late_DrawModelClipMS, (NJS_MODEL_SADX* mdl, LATE flgs, float clipScl), 0x4099A0);
+FunctionPointer(void, late_DrawModelMesh, (NJS_MODEL_SADX* mdl, LATE flgs), 0x409DF0);
+FunctionPointer(void, late_DrawModelClipMesh, (NJS_MODEL_SADX* mdl, LATE flgs, float clipScl), 0x409E70);
 FunctionPointer(void, late_DrawShadowModel, (NJS_MODEL_SADX* mdl, float clipScl), 0x407B00);
 
 // Late draw functions: Object
-FunctionPointer(void, late_DrawObject, (NJS_OBJECT* object, int flgs), 0x407B70);
-FunctionPointer(void, late_DrawObjectClip, (NJS_OBJECT* object, int flgs, float clipScl), 0x407B40);
-FunctionPointer(void, late_DrawObjectClipEx, (NJS_OBJECT* object, int flgs, float clipScl), 0x40A170);
-FunctionPointer(void, late_DrawObjectEx, (NJS_OBJECT* object, int flgs), 0x40A1A0);
-FunctionPointer(void, late_DrawObjectClipMS, (NJS_OBJECT* object, int flgs, float clipScl), 0x40A1E0);
-FunctionPointer(void, late_DrawObjectMesh, (NJS_OBJECT* object, int flgs), 0x40A210);
-FunctionPointer(void, late_DrawObjectClipMesh, (NJS_OBJECT* object, int flgs, float clipScl), 0x40A250);
+FunctionPointer(void, late_DrawObject, (NJS_OBJECT* object, LATE flgs), 0x407B70);
+FunctionPointer(void, late_DrawObjectClip, (NJS_OBJECT* object, LATE flgs, float clipScl), 0x407B40);
+FunctionPointer(void, late_DrawObjectEx, (NJS_OBJECT* object, LATE flgs), 0x40A1A0);
+FunctionPointer(void, late_DrawObjectClipEx, (NJS_OBJECT* object, LATE flgs, float clipScl), 0x40A170);
+// late_DrawObjectMS does not exist
+FunctionPointer(void, late_DrawObjectClipMS, (NJS_OBJECT* object, LATE flgs, float clipScl), 0x40A1E0);
+FunctionPointer(void, late_DrawObjectMesh, (NJS_OBJECT* object, LATE flgs), 0x40A210);
+FunctionPointer(void, late_DrawObjectClipMesh, (NJS_OBJECT* object, LATE flgs, float clipScl), 0x40A250);
 FunctionPointer(void, late_DrawShadowObject, (NJS_OBJECT* object, float clipScl), 0x408690);
 
 // Late draw functions: Motion
-FunctionPointer(void, late_DrawMotionClip, (NJS_OBJECT* object, NJS_MOTION* motion, float frame, int flgs, float clipScl), 0x4053A0);
-FunctionPointer(void, late_DrawMotionClipEx, (NJS_OBJECT* object, NJS_MOTION* motion, float frame, int flgs, float clipScl), 0x4082D0);
-FunctionPointer(void, late_DrawMotionClipMesh, (NJS_OBJECT* object, NJS_MOTION* motion, float frame, int flgs, float clipScl), 0x408300);
+FunctionPointer(void, late_DrawMotionClip, (NJS_OBJECT* object, NJS_MOTION* motion, float frame, LATE flgs, float clipScl), 0x4053A0);
+FunctionPointer(void, late_DrawMotionClipEx, (NJS_OBJECT* object, NJS_MOTION* motion, float frame, LATE flgs, float clipScl), 0x4082D0);
+FunctionPointer(void, late_DrawMotionClipMesh, (NJS_OBJECT* object, NJS_MOTION* motion, float frame, LATE flgs, float clipScl), 0x408300);
 
 // Late draw functions: Action
-FunctionPointer(void, late_ActionEx, (NJS_ACTION* action, float frame, int flgs), 0x408330);
-FunctionPointer(void, late_ActionClipEx, (NJS_ACTION* action, float frame, int flgs, float clipScl), 0x408350);
-FunctionPointer(void, late_ActionMS, (NJS_ACTION* action, float frame, int flgs), 0x408380);
-FunctionPointer(void, late_ActionClipMS, (NJS_ACTION* action, float frame, int flgs, float clipScl), 0x4083A0);
-FunctionPointer(void, late_ActionMesh, (NJS_ACTION* action, float frame, int flgs), 0x4083D0);
-FunctionPointer(void, late_ActionClipMesh, (NJS_ACTION* action, float frame, int flgs, float clipScl), 0x4083F0);
+FunctionPointer(void, late_Action, (NJS_ACTION* action, float frame, LATE flgs), 0x405470);
+FunctionPointer(void, late_ActionClip, (NJS_ACTION* action, float frame, LATE flgs, float clipScl), 0x405490);
+FunctionPointer(void, late_ActionEx, (NJS_ACTION* action, float frame, LATE flgs), 0x408330);	
+FunctionPointer(void, late_ActionClipEx, (NJS_ACTION* action, float frame, LATE flgs, float clipScl), 0x408350);
+FunctionPointer(void, late_ActionMS, (NJS_ACTION* action, float frame, LATE flgs), 0x408380);
+FunctionPointer(void, late_ActionClipMS, (NJS_ACTION* action, float frame, LATE flgs, float clipScl), 0x4083A0);
+FunctionPointer(void, late_ActionMesh, (NJS_ACTION* action, float frame, LATE flgs), 0x4083D0);
+FunctionPointer(void, late_ActionClipMesh, (NJS_ACTION* action, float frame, LATE flgs, float clipScl), 0x4083F0);
 
 // Late draw functions: ActionLink
-FunctionPointer(void, late_ActionLink, (NJS_ACTION_LINK* actionLink, float frame, int flgs), 0x406EF5);
-FunctionPointer(void, late_ActionLinkEx, (NJS_ACTION_LINK* actionLink, float frame, int flgs), 0x4084B0);
-FunctionPointer(void, late_ActionLinkMesh, (NJS_ACTION_LINK* actionLink, float frame, int flgs), 0x4084D0);
+FunctionPointer(void, late_ActionLink, (NJS_ACTION_LINK* actionLink, float frame, LATE flgs), 0x406EF5);
+FunctionPointer(void, late_ActionLinkEx, (NJS_ACTION_LINK* actionLink, float frame, LATE flgs), 0x4084B0);
+FunctionPointer(void, late_ActionLinkMesh, (NJS_ACTION_LINK* actionLink, float frame, LATE flgs), 0x4084D0);
 
 // Late draw functions: MotionLink
-FunctionPointer(void, late_DrawMotionLinkEx, (NJS_OBJECT* object, NJS_MOTION_LINK* motionLink, float frame, int flgs), 0x408480);
+FunctionPointer(void, late_DrawMotionLinkEx, (NJS_OBJECT* object, NJS_MOTION_LINK* motionLink, float frame, LATE flgs), 0x408480);
 
 // Late draw functions: Shape motion
-FunctionPointer(void, late_DrawShapeMotionEx, (NJS_OBJECT* object, NJS_MOTION* motion, NJS_MOTION* shape, float frame, int flgs), 0x408420);
-FunctionPointer(void, late_DrawShapeMotionMesh, (NJS_OBJECT* object, NJS_MOTION* motion, NJS_MOTION* shape, float frame, int flgs), 0x408450);
+FunctionPointer(void, late_DrawShapeMotionEx, (NJS_OBJECT* object, NJS_MOTION* motion, NJS_MOTION* shape, float frame, LATE flgs), 0x408420);
+FunctionPointer(void, late_DrawShapeMotionMesh, (NJS_OBJECT* object, NJS_MOTION* motion, NJS_MOTION* shape, float frame, LATE flgs), 0x408450);
 
 // Late draw functions: Other functions
-FunctionPointer(void, late_DrawTriangle3D, (NJS_POINT3COL* p, int n, unsigned int atr, int flgs), 0x4043D0);
-FunctionPointer(void, late_DrawPolygon2D, (NJS_POINT2COL* p, int n, int count, float depth, unsigned int atr, int flgs, double pri), 0x404490);
-FunctionPointer(void, late_DrawPolygon3D, (NJS_POINT3COL* p, int n, unsigned int atr, int flgs), 0x4045A0);
-FunctionPointer(void, late_DrawLine3D, (NJS_POINT3COL* p, int n, NJD_DRAW attr, int flags), 0x404310);
-FunctionPointer(void, late_DrawBoxFill2D, (float x, float y, float x2, float y2, float pri, int argb, int flgs), 0x4073B0);
+FunctionPointer(void, late_DrawTriangle3D, (NJS_POINT3COL* p, int n, NJD_DRAW atr, LATE flgs), 0x4043D0);
+FunctionPointer(void, late_DrawPolygon2D, (NJS_POINT2COL* p, int n, float depth, NJD_DRAW atr, LATE flgs), 0x404490);
+FunctionPointer(void, late_DrawPolygon3D, (NJS_POINT3COL* p, int n, NJD_DRAW atr, LATE flgs), 0x4045A0);
+FunctionPointer(void, late_DrawLine3D, (NJS_POINT3COL* p, int n, NJD_DRAW attr, LATE flags), 0x404310);
+FunctionPointer(void, late_DrawBoxFill2D, (float x, float y, float x2, float y2, float pri, int argb, LATE flgs), 0x4073B0);
+FunctionPointer(void, late_DrawSprite2D, (NJS_SPRITE* sp, int n, float pri, NJD_SPRITE atr, LATE flgs), 0x404660);
+FunctionPointer(void, late_DrawSprite3D, (NJS_SPRITE* sp, int n, NJD_SPRITE atr, LATE flgs), 0x404760);
+FunctionPointer(void, ___njDrawSprite3D, (NJS_SPRITE* _sp, Int n, NJD_SPRITE attr), 0x407070); // Uses late_DrawSprite3D, disables Z write with NJD_SPRITE_ALPHA
+FunctionPointer(void, saDrawSprite3D, (NJS_SPRITE* _sp, Int n, NJD_SPRITE attr), 0x4072F0); // No Z write, uses sa_s3_z_ofs for depth
+FunctionPointer(void, ___SAnjDrawPolygon2D, (NJS_POINT2COL* p, int n, float pri, unsigned int attr), 0x4010D0);
+FunctionPointer(void, __njDrawPolygon2D, (NJS_POINT2COL* p, int n, float pri, NJD_DRAW atr), 0x403C60);
 
 // Chaos draw functions
 FunctionPointer(void, CHAOS_DrawModel, (NJS_MODEL_SADX* mdl), 0x409EF0);
