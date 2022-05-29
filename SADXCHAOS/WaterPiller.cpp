@@ -79,7 +79,7 @@ void __cdecl dispWaveTask_WP(task* tp)
 	njPushMatrix(0);
 	njTranslateV(0, &twp->pos);
 	njScaleV(0, &twp->scl);
-	late_ActionClipEx(&action_l_circle, twp->counter.f, 0, VectorMaxAbs(&twp->scl));
+	late_ActionClipEx(&action_l_circle, twp->counter.f, LATE_MAT, VectorMaxAbs(&twp->scl));
 	njPopMatrix(1);
 }
 void __cdecl execWaveTask_WP(task* tp)
@@ -158,7 +158,7 @@ void __cdecl dispPillarTask(task* tp)
 	{
 		clipScl = (float)fabs(scaleZ);
 	}
-	late_DrawObjectClipMesh(&objPillar, 0, (float)fabs(clipScl));
+	late_DrawObjectClipMesh(&objPillar, LATE_MAT, (float)fabs(clipScl));
 	njPopMatrix(1);
 	SetMaterial(0.0f, 0.0f, 0.0f, 0.0f);
 }

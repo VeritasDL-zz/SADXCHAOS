@@ -300,7 +300,8 @@ Fixed a bug with RandomEGacha (5/24/2022)
 Attempting to fix the whole "Check if texture is loaded before doing this" doesnt work yet (5/24/2022)
 Might need to only call ResetLoadedTexListAddr when level changed/died only???? (5/24/2022)
 Added FlipperL and Bumper1 (5/28/2022)
-
+Updated ModLoader Programming Files (5/29/2022)
+Fixed use of late_DrawObjectClipMesh late_DrawBoxFill2D and late_ActionClipEx in WaterPiller.cpp and ScreenEffects.cpp to reflect the added LATE enum (5/29/2022)
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 

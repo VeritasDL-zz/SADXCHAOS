@@ -135,11 +135,11 @@ void __cdecl dispSandStorm(task* tp) {
     float y;
     BootWork* boot;
     boot = (BootWork*)tp->twp->value.ptr;
-    late_DrawBoxFill2D(0.0f, 0.0f, ScreenRaitoX * 640.0f, ScreenRaitoY * 480.0f, 22046.801f, boot->backGroundAlpha << 24, 4);
+    late_DrawBoxFill2D(0.0f, 0.0f, ScreenRaitoX * 640.0f, ScreenRaitoY * 480.0f, 22046.801f, boot->backGroundAlpha << 24, LATE_LIG);
     for (int i = 0; i < 1000; i++) {
         x = (float)(rand() * 0.000030517578f * (ScreenRaitoX * 640.0f));
         y = (float)(rand() * 0.000030517578f * (ScreenRaitoY * 480.0f));
-        late_DrawBoxFill2D(x, y, x + 1.0f, y + 1.0f, 22047.0f, (boot->backGroundAlpha << 24) | 0xFFFFFF, 4);
+        late_DrawBoxFill2D(x, y, x + 1.0f, y + 1.0f, 22047.0f, (boot->backGroundAlpha << 24) | 0xFFFFFF, LATE_LIG);
     }
 }
 void __cdecl dispBootTask(task* tp)
@@ -150,7 +150,7 @@ void __cdecl dispBootTask(task* tp)
     switch (twp->mode)
     {
     case 0:
-        late_DrawBoxFill2D(0.0f, 0.0f, ScreenRaitoX * 640.0f, ScreenRaitoY * 480.0f, 22046.801f, 0xFF000000, 4);
+        late_DrawBoxFill2D(0.0f, 0.0f, ScreenRaitoX * 640.0f, ScreenRaitoY * 480.0f, 22046.801f, 0xFF000000, LATE_LIG);
         break;
     case 1:
         timer = twp->counter.l % 60u;
@@ -159,7 +159,7 @@ void __cdecl dispBootTask(task* tp)
             dispSandStorm(tp);
             return;
         }
-        late_DrawBoxFill2D(0.0f, 0.0f, ScreenRaitoX * 640.0f, ScreenRaitoY * 480.0f, 22046.801f, 0xFF000000, 4);
+        late_DrawBoxFill2D(0.0f, 0.0f, ScreenRaitoX * 640.0f, ScreenRaitoY * 480.0f, 22046.801f, 0xFF000000, LATE_LIG);
         break;
     case 2:
     case 3:
