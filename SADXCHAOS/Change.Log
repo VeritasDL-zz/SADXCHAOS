@@ -302,13 +302,17 @@ Might need to only call ResetLoadedTexListAddr when level changed/died only???? 
 Added FlipperL and Bumper1 (5/28/2022)
 Updated ModLoader Programming Files (5/29/2022)
 Fixed use of late_DrawObjectClipMesh late_DrawBoxFill2D and late_ActionClipEx in WaterPiller.cpp and ScreenEffects.cpp to reflect the added LATE enum (5/29/2022)
+Changed RandomFlipper to Pick From FlipperL and FlipperR (5/29/2022)
+Changed RandomBumper to Pick From Bumper1 and Bumper2 (5/29/2022)
+Added RandomSling (5/29/2022)
+Changed RandomSling to Pick From Slingl and Slingr (5/29/2022)
 ---------TO-DO---------
  Test Stuff
  test new stuff fully 
  Log Known Crashes
  Need to either Fix the whole "Check if texture is loaded before doing this" thing cuz it only works if the texture's never been loaded before
  it doesnt reset when it should (5/24/2022)
- Pinball Stuff? FlipperL,FlipperR, SlingL, SlingR, Bumper1, StarNeon? StoperR, StoperL, ? 
+ Pinball Stuff? SlingL, SlingR,
  Test boolLandCollision(4/2/2022)
  CreateBomb?
  Ugandan Knuckles hint/voicefile

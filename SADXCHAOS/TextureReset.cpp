@@ -40,6 +40,7 @@ bool TargetTextLoader = false;
 bool GravityTextLoader = false;
 bool Bumper1TextLoader = false;
 bool FlipperTextLoader = false;
+bool SlingTextLoader = false;
 bool TextLoaded = false;
 bool WriteOnce = false;
 int FruitNumb = 0;
@@ -89,6 +90,7 @@ void ResetTextureBools()
 	GravityTextLoader = false;
 	Bumper1TextLoader = false;
 	FlipperTextLoader = false;
+	SlingTextLoader = false;
 	WriteOnce = false;
 	HatNumb = 0;
 	FruitNumb = 0;

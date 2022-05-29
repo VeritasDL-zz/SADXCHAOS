@@ -719,13 +719,21 @@ void RandomBumper1(taskwk* p1)
 	{
 		strcpy_s(LastEffect, 128, "Random Bumper");
 		task* Bumper;
-		Bumper = (task*)LoadObject((LoadObj)2, 3, Bumper1);
+		int BumperType = rand() % 2;
+		if (BumperType == 0)
+		{
+			Bumper = (task*)LoadObject((LoadObj)6, 3, Bumper1);
+		}
+		else
+		{
+			Bumper = (task*)LoadObject((LoadObj)6, 3, Bumper2);
+		}
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Bumper->ocp = objCondition;
 		Bumper->twp->pos = playertwp[0]->pos;
 		PlaceX = Bumper->twp->pos.x;
 		PlaceZ = Bumper->twp->pos.z;
-		PosOffset = 25;
+		PosOffset = 10;
 		PlaceInFront();
 		Bumper->twp->pos.x = PlaceX;
 		Bumper->twp->pos.z = PlaceZ;
@@ -754,7 +762,15 @@ void RandomFlipper(taskwk* p1)
 	{
 		strcpy_s(LastEffect, 128, "Random Flipper");
 		task* Flipper;
-		Flipper = (task*)LoadObject((LoadObj)6, 3, Flipperl);
+		int Flippertype = rand() % 2;
+		if (Flippertype == 0)
+		{
+			Flipper = (task*)LoadObject((LoadObj)6, 3, Flipperl);
+		}
+		else
+		{
+			Flipper = (task*)LoadObject((LoadObj)6, 3, Flipperrr);
+		}
 		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
 		Flipper->ocp = objCondition;
 		Flipper->twp->pos = playertwp[0]->pos;
@@ -774,6 +790,49 @@ void RandomFlipper(taskwk* p1)
 	{
 		NewEffect();
 		FlipperTextLoader = false;
+		return;
+	}
+}
+void RandomSling(taskwk* p1)
+{
+	if (!SlingTextLoader)
+	{
+		LoadPVM("OBJ_CASINO_E", &OBJ_CASINO_TEXLIST);
+		SlingTextLoader = true;
+		TextLoaded = true;
+	}
+	if (OBJ_CASINO_TEXLIST.textures->texaddr)
+	{
+		strcpy_s(LastEffect, 128, "Random Sling");
+		task* Sling;
+		int Slingtype = rand() % 2;
+		if (Slingtype == 0)
+		{
+			Sling = (task*)LoadObject((LoadObj)6, 3, Slingl);
+		}
+		else
+		{
+			Sling = (task*)LoadObject((LoadObj)6, 3, Slingr);
+		}
+		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+		Sling->ocp = objCondition;
+		Sling->twp->pos = playertwp[0]->pos;
+		PlaceX = Sling->twp->pos.x;
+		PlaceZ = Sling->twp->pos.z;
+		PosOffset = 45;
+		PlaceInFront();
+		Sling->twp->pos.x = PlaceX;
+		Sling->twp->pos.z = PlaceZ;
+		FaceX = Sling->twp->pos.x - playertwp[0]->pos.x;
+		FaceZ = Sling->twp->pos.z - playertwp[0]->pos.z;
+		FacePlayer();
+		Sling->twp->ang.y = FaceAng;
+		return;
+	}
+	else
+	{
+		NewEffect();
+		SlingTextLoader = false;
 		return;
 	}
 }
