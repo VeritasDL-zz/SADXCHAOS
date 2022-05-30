@@ -306,21 +306,23 @@ Changed RandomFlipper to Pick From FlipperL and FlipperR (5/29/2022)
 Changed RandomBumper to Pick From Bumper1 and Bumper2 (5/29/2022)
 Added RandomSling (5/29/2022)
 Changed RandomSling to Pick From Slingl and Slingr (5/29/2022)
+Added ExplodeMa (5/29/2022)
+
+
+
+
 ---------TO-DO---------
  Test Stuff
- test new stuff fully 
+ test new stuff fully
  Log Known Crashes
  Need to either Fix the whole "Check if texture is loaded before doing this" thing cuz it only works if the texture's never been loaded before
  it doesnt reset when it should (5/24/2022)
- Pinball Stuff? SlingL, SlingR,
- Test boolLandCollision(4/2/2022)
- CreateBomb?
  Ugandan Knuckles hint/voicefile
  Convert Cart to Task LOL this sucks
  RELEASE VIDEO? NEW PICTURES FOR GB, UPDATE README
  Add More Custom Tikal Hints
  Add More Random Teleport Locations
  Add Support for CWE? (i wouldnt even know how to do this)
- Todo 
+ Todo
  Beat has bad texture
  Random Info Storage

@@ -27,3 +27,4 @@ void RandomScanLine();
 void RandomBoot();
 void HAHA69();
 void LigmaBoss(); 
+void ExplodeMa();

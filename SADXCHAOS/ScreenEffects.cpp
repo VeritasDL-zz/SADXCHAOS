@@ -309,5 +309,11 @@ void LigmaBoss()
     {
         int RandomLigma = rand() % LengthOfArray(Ligmas);
         SetDisplayBossName(Ligmas[RandomLigma].c_str(), -1, 240, 100);
+        strcpy_s(LastEffect, 128, "Random Boss Text");
     }
+}
+void ExplodeMa()
+{
+    strcpy_s(LastEffect, 128, "Random Bomb Effect");
+    CreateBomb(&playertwp[0]->pos, rand() % 2 +(1));
 }
