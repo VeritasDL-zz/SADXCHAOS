@@ -305,12 +305,9 @@ void LigmaBoss()
         AsciiTextLoader = true;
         TextLoaded = true;
     }
-    if (b32ascii_TEXLIST.textures->texaddr)
-    {
-        int RandomLigma = rand() % LengthOfArray(Ligmas);
-        SetDisplayBossName(Ligmas[RandomLigma].c_str(), -1, 240, 100);
-        strcpy_s(LastEffect, 128, "Random Boss Text");
-    }
+    int RandomLigma = rand() % LengthOfArray(Ligmas);
+    SetDisplayBossName(Ligmas[RandomLigma].c_str(), -1, 240, 100);
+    strcpy_s(LastEffect, 128, "Random Boss Text");
 }
 void ExplodeMa()
 {

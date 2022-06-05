@@ -52,4 +52,3 @@ extern bool SlingTextLoader;
 extern int FruitNumb;
 extern int HatNumb;
 void ResetTextureBools();
-void ResetLoadedTexListAddr();

@@ -865,20 +865,12 @@ void Set_Sonic_Ice()
 		IceTextLoader = true;
 		TextLoaded = true;
 	}
-	if (stx_ice0_TEXLIST.textures->texaddr)
-	{
 		strcpy_s(LastEffect, 128, "Froze Player");
 		DisableControl_Timer = 70;
 		ControlEnabled = 0;
 		ForcePlayerAction(0, 38); //forces frozen state for sonic/Knuckles
 		SetSonicIce(playertwp[0]->counter.b[0]);
-	}
-	else
-	{
-		NewEffect();
-		IceTextLoader = false;
 		return;
-	}	
 }
 void EmeraldShardMa()
 {
@@ -894,19 +886,11 @@ void RandomKnuxRingSpring(taskwk* p1)
 		KnuxEffTextLoader = true;
 		TextLoaded = true;
 	}
-	if (KNU_EFF_TEXLIST.textures->texaddr)
-	{
 		strcpy_s(LastEffect, 128, "Dug Up Rings");
 		task* KnuxRingSpring;
 		KnuxRingSpring = (task*)LoadObject((LoadObj)2, 6, KnuEffectRingSpring);
 		KnuxRingSpring->twp->pos = playertwp[0]->pos;
-	}
-	else //new effect dueo texlist not being loaded
-	{
-		NewEffect();
-		KnuxEffTextLoader = false;
 		return;
-	}
 }
 void RandomWaterPiller(taskwk* p1)
 {
@@ -926,20 +910,12 @@ void RandomWaterPiller(taskwk* p1)
 		WaterPillerTextLoader = true;
 		TextLoaded = true;
 	}
-	if (texlist_l_sibuki.textures->texaddr)
+	if (!p_WaterPillarTask)
 	{
-		if (!p_WaterPillarTask)
-		{
-			strcpy_s(LastEffect, 128, "Random Water Piller");
-			WaterPillarOn(playertwp[0]->pos.x, playertwp[0]->pos.y, playertwp[0]->pos.z, 1, Randomscale);
-			EnemyBounceThing(0, rand() % 5 + (1), rand() % 5 + (1), rand() % 5 + (1));
-			WaterPiller_Timer = 420;
-		}
+		strcpy_s(LastEffect, 128, "Random Water Piller");
+		WaterPillarOn(playertwp[0]->pos.x, playertwp[0]->pos.y, playertwp[0]->pos.z, 1, Randomscale);
+		EnemyBounceThing(0, rand() % 5 + (1), rand() % 5 + (1), rand() % 5 + (1));
+		WaterPiller_Timer = 420;
 	}
-	else
-	{
-		NewEffect();
-		WaterPillerTextLoader = false;
-		return;
-	}
+	return;
 }

@@ -52,8 +52,6 @@ void BigRock(taskwk* p1)
 		BigRockTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_ICECAP_TEXLIST.textures->texaddr)
-	{
 		strcpy_s(LastEffect, 128, "Spawned Big Rock");
 		task* BigRock;
 		BigRock = (task*)LoadObject((LoadObj)3, 3, OBiciwa);
@@ -65,13 +63,6 @@ void BigRock(taskwk* p1)
 		BigRock->twp->pos.x = PlaceX;
 		BigRock->twp->pos.z = PlaceZ;
 		return;
-	}
-	else //new effect dueo texlist not being loaded
-	{
-		NewEffect();
-		BigRockTextLoader = false;
-		return;
-	}
 }
 void RandomFruit(taskwk* p1)
 {
@@ -90,27 +81,19 @@ void RandomFruit(taskwk* p1)
 		TextLoaded = true;
 		ChaoFruitTextLoader = true;
 	}
-	if (AL_OBJECT_TEXLIST.textures->texaddr)
+	if (FruitNumb < 10)
 	{
-		if (FruitNumb < 10)
-		{
-			Int FruitType = (rand() % (12 + 1 - 3)) + 3;
-			strcpy_s(LastEffect, 128, "Spawned Chao Fruit");
-			LoadChaoFruit(FruitType, &playertwp[0]->pos, 0, nullptr, nullptr);
-			FruitNumb++;
-		}
-		if (FruitNumb >= 10)
-		{
-			NewEffect();
-			return;
-		}
+		Int FruitType = (rand() % (12 + 1 - 3)) + 3;
+		strcpy_s(LastEffect, 128, "Spawned Chao Fruit");
+		LoadChaoFruit(FruitType, &playertwp[0]->pos, 0, nullptr, nullptr);
+		FruitNumb++;
 	}
-	else //new effect dueo texlist not being loaded
+	if (FruitNumb >= 10)
 	{
 		NewEffect();
-		ChaoFruitTextLoader = false;
 		return;
 	}
+	return;
 }
 void RandomHat(taskwk* p1)
 {
@@ -130,27 +113,19 @@ void RandomHat(taskwk* p1)
 		TextLoaded = true;
 		ChaoHatTextLoader = true;
 	}
-	if (AL_OBJECT_TEXLIST.textures->texaddr)
+	if (HatNumb < 10)
 	{
-		if (HatNumb < 10)
-		{
-			int HatType = rand() % 80 + 1;//chao hat 0-84 rng, idk changed it to 0-81 for now (4/21/2022)
-			strcpy_s(LastEffect, 128, "Spawned Chao Hat");
-			LoadChaoHat(HatType, &playertwp[0]->pos, 0, nullptr, nullptr);
-			HatNumb++;
-		}
-		if (HatNumb >= 10)
-		{
-			NewEffect();
-			return;
-		}
+		int HatType = rand() % 80 + 1;//chao hat 0-84 rng, idk changed it to 0-81 for now (4/21/2022)
+		strcpy_s(LastEffect, 128, "Spawned Chao Hat");
+		LoadChaoHat(HatType, &playertwp[0]->pos, 0, nullptr, nullptr);
+		HatNumb++;
 	}
-	else
+	if (HatNumb >= 10)
 	{
 		NewEffect();
-		ChaoHatTextLoader = false;
 		return;
 	}
+	return;
 }
 void RandomCheckPoint(taskwk* p1)
 {
@@ -199,34 +174,26 @@ void RandomFan(taskwk* p1)
 	}
 	if (!FanTextLoader)
 	{
-		LoadPVM("OBJ_FINALEGG", &OBJ_FINALEGG_TEXLIST); 
+		LoadPVM("OBJ_FINALEGG", &OBJ_FINALEGG_TEXLIST);
 		FanTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
-	{
-		strcpy_s(LastEffect, 128, "Random Fan");
-		task* Fan;
-		Fan = (task*)LoadObject((LoadObj)2, 4, OFun);
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		Fan->ocp = objCondition;
-		Fan->twp->pos = playertwp[0]->pos;
-		PlaceX = Fan->twp->pos.x;
-		PlaceZ = Fan->twp->pos.z;
-		PosOffset = 25;
-		PlaceInFront();
-		Fan->twp->pos.x = PlaceX;
-		Fan->twp->pos.z = PlaceZ;
-		Fan->twp->pos.y = playertwp[0]->pos.y - 9.0f;
-		//float CustomFanAcc = (float(rand()) / float((RAND_MAX)) * 0.99);
-		//WriteData((float*)0x1AC4854, CustomFanAcc);
-	}
-	else
-	{
-		NewEffect();
-		FanTextLoader = false;
-		return;
-	}
+	strcpy_s(LastEffect, 128, "Random Fan");
+	task* Fan;
+	Fan = (task*)LoadObject((LoadObj)2, 4, OFun);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Fan->ocp = objCondition;
+	Fan->twp->pos = playertwp[0]->pos;
+	PlaceX = Fan->twp->pos.x;
+	PlaceZ = Fan->twp->pos.z;
+	PosOffset = 25;
+	PlaceInFront();
+	Fan->twp->pos.x = PlaceX;
+	Fan->twp->pos.z = PlaceZ;
+	Fan->twp->pos.y = playertwp[0]->pos.y - 9.0f;
+	//float CustomFanAcc = (float(rand()) / float((RAND_MAX)) * 0.99);
+	//WriteData((float*)0x1AC4854, CustomFanAcc);
+	return;
 }
 void RandomBurgerMan(taskwk* p1)
 {
@@ -260,21 +227,12 @@ void RandomKeyBlock(taskwk* p1)
 		KeyBlockTextLoader = true;
 		TextLoaded = true;
 	}
-	if (HOTSHELTER2_TEXLIST.textures->texaddr)
-	{
-		strcpy_s(LastEffect, 128, "Spawned KeyBlock");
-		task* KeyBlock;
-		KeyBlock = (task*)LoadObject((LoadObj)3, 3, OBoxSwitch);
-		KeyBlock->twp->pos = playertwp[0]->pos;
-		KeyBlock->twp->scl.x = rand() % 3;
-		return;
-	}
-	else //new effect dueo texlist not being loaded
-	{
-		NewEffect();
-		KeyBlockTextLoader = false;
-		return;
-	}
+	strcpy_s(LastEffect, 128, "Spawned KeyBlock");
+	task* KeyBlock;
+	KeyBlock = (task*)LoadObject((LoadObj)3, 3, OBoxSwitch);
+	KeyBlock->twp->pos = playertwp[0]->pos;
+	KeyBlock->twp->scl.x = rand() % 3;
+	return;
 }
 void RandomSnowboard()
 {
@@ -421,26 +379,17 @@ void RandomEmblem(taskwk* p1)
 		EmblemTextLoader = true;
 		TextLoaded = true;
 	}
-	if (EMBLEM_TEXLIST.textures->texaddr)
-	{
-		strcpy_s(LastEffect, 128, "Random Emblem");
-		task* Emblem;
-		Emblem = (task*)LoadObject((LoadObj)2, 3, Emblem_Main);
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		Emblem->ocp = objCondition;
-		Emblem->twp->pos = playertwp[0]->pos;
-		Emblem->twp->pos.y += rand() % 5 + 3;
-		Emblem->twp->pos.z += rand() % 100 + 1 * 9;
-		Emblem->twp->ang.x = rand() % 500 * 1.6969f; //speed it rotates at
-		Emblem->twp->value.l = 129; //Emblem ID, holy jesus 
-		return;
-	}
-	else //new effect dueo texlist not being loaded
-	{
-		NewEffect();
-		EmblemTextLoader = false;
-		return;
-	}
+	strcpy_s(LastEffect, 128, "Random Emblem");
+	task* Emblem;
+	Emblem = (task*)LoadObject((LoadObj)2, 3, Emblem_Main);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Emblem->ocp = objCondition;
+	Emblem->twp->pos = playertwp[0]->pos;
+	Emblem->twp->pos.y += rand() % 5 + 3;
+	Emblem->twp->pos.z += rand() % 100 + 1 * 9;
+	Emblem->twp->ang.x = rand() % 500 * 1.6969f; //speed it rotates at
+	Emblem->twp->value.l = 129; //Emblem ID, holy jesus 
+	return;
 }
 void RandomBarrel(taskwk* p1)
 {
@@ -450,32 +399,23 @@ void RandomBarrel(taskwk* p1)
 		BarrelTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_TWINKLE_TEXLIST.textures->texaddr)
-	{
-		strcpy_s(LastEffect, 128, "Random Barrel");
-		task* Barrel;
-		Barrel = (task*)LoadObject((LoadObj)3, 3, OBarrel);
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		Barrel->ocp = objCondition;
-		Barrel->twp->pos = playertwp[0]->pos;
-		PlaceX = Barrel->twp->pos.x;
-		PlaceZ = Barrel->twp->pos.z;
-		PosOffset = 41;
-		PlaceInFront();
-		Barrel->twp->pos.x = PlaceX;
-		Barrel->twp->pos.z = PlaceZ;
-		FaceX = Barrel->twp->pos.x - playertwp[0]->pos.x;
-		FaceZ = Barrel->twp->pos.z - playertwp[0]->pos.z;
-		FacePlayer();
-		Barrel->twp->ang.y = FaceAng;
-		return;
-	}
-	else //new effect dueo texlist not being loaded
-	{
-		NewEffect();
-		BarrelTextLoader = false;
-		return;
-	}
+	strcpy_s(LastEffect, 128, "Random Barrel");
+	task* Barrel;
+	Barrel = (task*)LoadObject((LoadObj)3, 3, OBarrel);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Barrel->ocp = objCondition;
+	Barrel->twp->pos = playertwp[0]->pos;
+	PlaceX = Barrel->twp->pos.x;
+	PlaceZ = Barrel->twp->pos.z;
+	PosOffset = 41;
+	PlaceInFront();
+	Barrel->twp->pos.x = PlaceX;
+	Barrel->twp->pos.z = PlaceZ;
+	FaceX = Barrel->twp->pos.x - playertwp[0]->pos.x;
+	FaceZ = Barrel->twp->pos.z - playertwp[0]->pos.z;
+	FacePlayer();
+	Barrel->twp->ang.y = FaceAng;
+	return;
 }
 void RandomConveyorBelt(taskwk* p1)
 {
@@ -485,32 +425,23 @@ void RandomConveyorBelt(taskwk* p1)
 		ConveyorTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
-	{
-		strcpy_s(LastEffect, 128, "Random Conveyor Belt");
-		task* Conveyor;
-		Conveyor = (task*)LoadObject((LoadObj)6, 3, OConv_belt);
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		Conveyor->ocp = objCondition;
-		Conveyor->twp->pos = playertwp[0]->pos;
-		Conveyor->twp->pos.y = playertwp[0]->pos.y - 1;
-		Conveyor->twp->scl.z = (float(rand()) / float((RAND_MAX)) * 1.3);
-		PlaceX = Conveyor->twp->pos.x;
-		PlaceZ = Conveyor->twp->pos.z;
-		PosOffset = 0;
-		FaceX = Conveyor->twp->pos.x - playertwp[0]->pos.x;
-		FaceZ = Conveyor->twp->pos.z - playertwp[0]->pos.z;
-		FacePlayer();
-		Conveyor->twp->ang.y = FaceAng; //might need to rework 5/18/2022
-		Conveyor->twp->ang.x = rand() % 119 + (-59);
-		return;
-	}
-	else //new effect dueo texlist not being loaded
-	{
-		NewEffect();
-		ConveyorTextLoader = false;
-		return;
-	}
+	strcpy_s(LastEffect, 128, "Random Conveyor Belt");
+	task* Conveyor;
+	Conveyor = (task*)LoadObject((LoadObj)6, 3, OConv_belt);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Conveyor->ocp = objCondition;
+	Conveyor->twp->pos = playertwp[0]->pos;
+	Conveyor->twp->pos.y = playertwp[0]->pos.y - 1;
+	Conveyor->twp->scl.z = (float(rand()) / float((RAND_MAX)) * 1.3);
+	PlaceX = Conveyor->twp->pos.x;
+	PlaceZ = Conveyor->twp->pos.z;
+	PosOffset = 0;
+	FaceX = Conveyor->twp->pos.x - playertwp[0]->pos.x;
+	FaceZ = Conveyor->twp->pos.z - playertwp[0]->pos.z;
+	FacePlayer();
+	Conveyor->twp->ang.y = FaceAng; //might need to rework 5/18/2022
+	Conveyor->twp->ang.x = rand() % 119 + (-59);
+	return;
 }
 void RandomConveyorStop(taskwk* p1)
 {
@@ -520,33 +451,24 @@ void RandomConveyorStop(taskwk* p1)
 		ConveyorTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
-	{
-		strcpy_s(LastEffect, 128, "Spawned Spike");
-		task* ConveyorStop;
-		ConveyorStop = (task*)LoadObject((LoadObj)3, 3, OConv_stop);
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		ConveyorStop->ocp = objCondition;
-		ConveyorStop->twp->pos = playertwp[0]->pos;
-		ConveyorStop->twp->pos.y =- playertwp[0]->pos.y - 30;
-		PlaceX = ConveyorStop->twp->pos.x;
-		PlaceZ = ConveyorStop->twp->pos.z;
-		PosOffset = 96; //might need to adjust this
-		PlaceInFront();
-		ConveyorStop->twp->pos.x = PlaceX;
-		ConveyorStop->twp->pos.z = PlaceZ;
-		FaceX = ConveyorStop->twp->pos.x - playertwp[0]->pos.x;
-		FaceZ = ConveyorStop->twp->pos.z - playertwp[0]->pos.z;
-		FacePlayer();
-		ConveyorStop->twp->ang.y = FaceAng;
-		return;
-	}
-	else //new effect dueo texlist not being loaded
-	{
-		NewEffect();
-		ConveyorTextLoader = false;
-		return;
-	}
+	strcpy_s(LastEffect, 128, "Spawned Spike");
+	task* ConveyorStop;
+	ConveyorStop = (task*)LoadObject((LoadObj)3, 3, OConv_stop);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	ConveyorStop->ocp = objCondition;
+	ConveyorStop->twp->pos = playertwp[0]->pos;
+	ConveyorStop->twp->pos.y = -playertwp[0]->pos.y - 30;
+	PlaceX = ConveyorStop->twp->pos.x;
+	PlaceZ = ConveyorStop->twp->pos.z;
+	PosOffset = 96; //might need to adjust this
+	PlaceInFront();
+	ConveyorStop->twp->pos.x = PlaceX;
+	ConveyorStop->twp->pos.z = PlaceZ;
+	FaceX = ConveyorStop->twp->pos.x - playertwp[0]->pos.x;
+	FaceZ = ConveyorStop->twp->pos.z - playertwp[0]->pos.z;
+	FacePlayer();
+	ConveyorStop->twp->ang.y = FaceAng;
+	return;
 }
 void RandomFountain(taskwk* p1)
 {
@@ -556,33 +478,24 @@ void RandomFountain(taskwk* p1)
 		FountainTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_HIGHWAY2_TEXLIST.textures->texaddr)
-	{
-		strcpy_s(LastEffect, 128, "Random Fountain");
-		task* Fountain;
-		Fountain = (task*)LoadObject((LoadObj)10, 3, OFount);
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		Fountain->ocp = objCondition;
-		Fountain->twp->pos = playertwp[0]->pos;
-		PlaceX = Fountain->twp->pos.x;
-		PlaceZ = Fountain->twp->pos.z;
-		PosOffset = rand() % 10 + (59);
-		PlaceInFront();
-		Fountain->twp->pos.x = PlaceX;
-		Fountain->twp->pos.z = PlaceZ;
-		Fountain->twp->pos.y = playertwp[0]->pos.y - 9.0f;
-		FaceX = Fountain->twp->pos.x - playertwp[0]->pos.x;
-		FaceZ = Fountain->twp->pos.z - playertwp[0]->pos.z;
-		FacePlayer();
-		Fountain->twp->ang.y = FaceAng;
-		return;
-	}
-	else //new effect 
-	{
-		NewEffect();
-		FountainTextLoader = false;
-		return;
-	}
+	strcpy_s(LastEffect, 128, "Random Fountain");
+	task* Fountain;
+	Fountain = (task*)LoadObject((LoadObj)10, 3, OFount);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Fountain->ocp = objCondition;
+	Fountain->twp->pos = playertwp[0]->pos;
+	PlaceX = Fountain->twp->pos.x;
+	PlaceZ = Fountain->twp->pos.z;
+	PosOffset = rand() % 10 + (59);
+	PlaceInFront();
+	Fountain->twp->pos.x = PlaceX;
+	Fountain->twp->pos.z = PlaceZ;
+	Fountain->twp->pos.y = playertwp[0]->pos.y - 9.0f;
+	FaceX = Fountain->twp->pos.x - playertwp[0]->pos.x;
+	FaceZ = Fountain->twp->pos.z - playertwp[0]->pos.z;
+	FacePlayer();
+	Fountain->twp->ang.y = FaceAng;
+	return;
 }
 void RandomTarget(taskwk* p1)
 {
@@ -592,38 +505,29 @@ void RandomTarget(taskwk* p1)
 		TargetTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
+	strcpy_s(LastEffect, 128, "Random Sonic Target");
+	task* Target;
+	Target = (task*)LoadObject((LoadObj)2, 3, OTarget);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Target->ocp = objCondition;
+	Target->twp->pos = playertwp[0]->pos;
+	PlaceX = Target->twp->pos.x;
+	PlaceZ = Target->twp->pos.z;
+	PosOffset = rand() % 10 + (59); //59-69?
+	PlaceInFront();
+	Target->twp->pos.x = PlaceX;
+	Target->twp->pos.z = PlaceZ;
+	Target->twp->pos.y = playertwp[0]->pos.y + 10.0f;
+	FaceX = Target->twp->pos.x - playertwp[0]->pos.x;
+	FaceZ = Target->twp->pos.z - playertwp[0]->pos.z;
+	FacePlayer();
+	Target->twp->ang.y = FaceAng;
+	Target->twp->scl.x = rand() % 200; //Distance Target Moves Back and Forth
+	if (CurrentCharacter != Characters_Gamma && CurrentLevel != LevelIDs_FinalEgg)
 	{
-		strcpy_s(LastEffect, 128, "Random Sonic Target");
-		task* Target;
-		Target = (task*)LoadObject((LoadObj)2, 3, OTarget);
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		Target->ocp = objCondition;
-		Target->twp->pos = playertwp[0]->pos;
-		PlaceX = Target->twp->pos.x;
-		PlaceZ = Target->twp->pos.z;
-		PosOffset = rand() % 10 + (59); //59-69?
-		PlaceInFront();
-		Target->twp->pos.x = PlaceX;
-		Target->twp->pos.z = PlaceZ;
-		Target->twp->pos.y = playertwp[0]->pos.y + 10.0f;
-		FaceX = Target->twp->pos.x - playertwp[0]->pos.x;
-		FaceZ = Target->twp->pos.z - playertwp[0]->pos.z;
-		FacePlayer();
-		Target->twp->ang.y = FaceAng;
-		Target->twp->scl.x = rand() % 200; //Distance Target Moves Back and Forth
-		if (CurrentCharacter != Characters_Gamma && CurrentLevel != LevelIDs_FinalEgg)
-		{
-			WriteData<5>((int*)0x5B56D2, 0x90);//target_man_exec_nop LoadLevelResults NOP
-		}
-		return;
+		WriteData<5>((int*)0x5B56D2, 0x90);//target_man_exec_nop LoadLevelResults NOP
 	}
-	else //new effect 
-	{
-		NewEffect();
-		TargetTextLoader = false;
-		return;
-	}
+	return;
 }
 void RandomPopUpTarget(taskwk* p1)
 {
@@ -633,34 +537,25 @@ void RandomPopUpTarget(taskwk* p1)
 		TargetTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_FINALEGG_TEXLIST.textures->texaddr)
-	{
-		strcpy_s(LastEffect, 128, "Random Target");
-		task* Target;
-		Target = (task*)LoadObject((LoadObj)2, 3, OUpTarget1);
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		Target->ocp = objCondition;
-		Target->twp->pos = playertwp[0]->pos;
-		PlaceX = Target->twp->pos.x;
-		PlaceZ = Target->twp->pos.z;
-		PosOffset = rand() % 10 + (59); //59-69?
-		PlaceInFront();
-		Target->twp->pos.x = PlaceX;
-		Target->twp->pos.z = PlaceZ;
-		Target->twp->pos.y = playertwp[0]->pos.y - 8.0f;
-		FaceX = Target->twp->pos.x - playertwp[0]->pos.x;
-		FaceZ = Target->twp->pos.z - playertwp[0]->pos.z;
-		FacePlayer();
-		Target->twp->ang.y = FaceAng;
-		Target->twp->scl.y = 0; //0 = random, 1 = sonic, 2 = knux, 3 = tails
-		return;
-	}
-	else //new effect 
-	{
-		NewEffect();
-		TargetTextLoader = false;
-		return;
-	}
+	strcpy_s(LastEffect, 128, "Random Target");
+	task* Target;
+	Target = (task*)LoadObject((LoadObj)2, 3, OUpTarget1);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Target->ocp = objCondition;
+	Target->twp->pos = playertwp[0]->pos;
+	PlaceX = Target->twp->pos.x;
+	PlaceZ = Target->twp->pos.z;
+	PosOffset = rand() % 10 + (59); //59-69?
+	PlaceInFront();
+	Target->twp->pos.x = PlaceX;
+	Target->twp->pos.z = PlaceZ;
+	Target->twp->pos.y = playertwp[0]->pos.y - 8.0f;
+	FaceX = Target->twp->pos.x - playertwp[0]->pos.x;
+	FaceZ = Target->twp->pos.z - playertwp[0]->pos.z;
+	FacePlayer();
+	Target->twp->ang.y = FaceAng;
+	Target->twp->scl.y = 0; //0 = random, 1 = sonic, 2 = knux, 3 = tails
+	return;
 }
 void RandomGravityWall(taskwk* p1)
 {
@@ -679,32 +574,23 @@ void RandomGravityWall(taskwk* p1)
 		GravityTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_RUIN2_TEXLIST.textures->texaddr)
-	{
-		strcpy_s(LastEffect, 128, "Random Gravity Wall");
-		task* GravityWall;
-		GravityWall = (task*)LoadObject((LoadObj)6, 3, OTpanel);
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		GravityWall->ocp = objCondition;
-		GravityWall->twp->pos = playertwp[0]->pos;
-		PlaceX = GravityWall->twp->pos.x;
-		PlaceZ = GravityWall->twp->pos.z;
-		PosOffset = 25;
-		PlaceInFront();
-		GravityWall->twp->pos.x = PlaceX;
-		GravityWall->twp->pos.z = PlaceZ;
-		FaceX = GravityWall->twp->pos.x - playertwp[0]->pos.x;
-		FaceZ = GravityWall->twp->pos.z - playertwp[0]->pos.z;
-		FacePlayer();
-		GravityWall->twp->ang.y = FaceAng;
-		return;
-	}
-	else //new effect 
-	{
-		NewEffect();
-		GravityTextLoader = false;
-		return;
-	}
+	strcpy_s(LastEffect, 128, "Random Gravity Wall");
+	task* GravityWall;
+	GravityWall = (task*)LoadObject((LoadObj)6, 3, OTpanel);
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	GravityWall->ocp = objCondition;
+	GravityWall->twp->pos = playertwp[0]->pos;
+	PlaceX = GravityWall->twp->pos.x;
+	PlaceZ = GravityWall->twp->pos.z;
+	PosOffset = 25;
+	PlaceInFront();
+	GravityWall->twp->pos.x = PlaceX;
+	GravityWall->twp->pos.z = PlaceZ;
+	FaceX = GravityWall->twp->pos.x - playertwp[0]->pos.x;
+	FaceZ = GravityWall->twp->pos.z - playertwp[0]->pos.z;
+	FacePlayer();
+	GravityWall->twp->ang.y = FaceAng;
+	return;
 }
 void RandomBumper1(taskwk* p1)
 {
@@ -715,40 +601,31 @@ void RandomBumper1(taskwk* p1)
 		Bumper1TextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_CASINO_TEXLIST.textures->texaddr)
+	strcpy_s(LastEffect, 128, "Random Bumper");
+	task* Bumper;
+	int BumperType = rand() % 2;
+	if (BumperType == 0)
 	{
-		strcpy_s(LastEffect, 128, "Random Bumper");
-		task* Bumper;
-		int BumperType = rand() % 2;
-		if (BumperType == 0)
-		{
-			Bumper = (task*)LoadObject((LoadObj)6, 3, Bumper1);
-		}
-		else
-		{
-			Bumper = (task*)LoadObject((LoadObj)6, 3, Bumper2);
-		}
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		Bumper->ocp = objCondition;
-		Bumper->twp->pos = playertwp[0]->pos;
-		PlaceX = Bumper->twp->pos.x;
-		PlaceZ = Bumper->twp->pos.z;
-		PosOffset = 10;
-		PlaceInFront();
-		Bumper->twp->pos.x = PlaceX;
-		Bumper->twp->pos.z = PlaceZ;
-		FaceX = Bumper->twp->pos.x - playertwp[0]->pos.x;
-		FaceZ = Bumper->twp->pos.z - playertwp[0]->pos.z;
-		FacePlayer();
-		Bumper->twp->ang.y = FaceAng;
-		return;
+		Bumper = (task*)LoadObject((LoadObj)6, 3, Bumper1);
 	}
 	else
 	{
-		NewEffect();
-		Bumper1TextLoader = false;
-		return;
+		Bumper = (task*)LoadObject((LoadObj)6, 3, Bumper2);
 	}
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Bumper->ocp = objCondition;
+	Bumper->twp->pos = playertwp[0]->pos;
+	PlaceX = Bumper->twp->pos.x;
+	PlaceZ = Bumper->twp->pos.z;
+	PosOffset = 10;
+	PlaceInFront();
+	Bumper->twp->pos.x = PlaceX;
+	Bumper->twp->pos.z = PlaceZ;
+	FaceX = Bumper->twp->pos.x - playertwp[0]->pos.x;
+	FaceZ = Bumper->twp->pos.z - playertwp[0]->pos.z;
+	FacePlayer();
+	Bumper->twp->ang.y = FaceAng;
+	return;
 }
 void RandomFlipper(taskwk* p1)
 {
@@ -758,40 +635,31 @@ void RandomFlipper(taskwk* p1)
 		FlipperTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_CASINO_TEXLIST.textures->texaddr)
+	strcpy_s(LastEffect, 128, "Random Flipper");
+	task* Flipper;
+	int Flippertype = rand() % 2;
+	if (Flippertype == 0)
 	{
-		strcpy_s(LastEffect, 128, "Random Flipper");
-		task* Flipper;
-		int Flippertype = rand() % 2;
-		if (Flippertype == 0)
-		{
-			Flipper = (task*)LoadObject((LoadObj)6, 3, Flipperl);
-		}
-		else
-		{
-			Flipper = (task*)LoadObject((LoadObj)6, 3, Flipperrr);
-		}
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		Flipper->ocp = objCondition;
-		Flipper->twp->pos = playertwp[0]->pos;
-		PlaceX = Flipper->twp->pos.x;
-		PlaceZ = Flipper->twp->pos.z;
-		PosOffset = 1;
-		PlaceInFront();
-		Flipper->twp->pos.x = PlaceX;
-		Flipper->twp->pos.z = PlaceZ;
-		FaceX = Flipper->twp->pos.x - playertwp[0]->pos.x;
-		FaceZ = Flipper->twp->pos.z - playertwp[0]->pos.z;
-		FacePlayer();
-		Flipper->twp->ang.y = FaceAng;
-		return;
+		Flipper = (task*)LoadObject((LoadObj)6, 3, Flipperl);
 	}
 	else
 	{
-		NewEffect();
-		FlipperTextLoader = false;
-		return;
+		Flipper = (task*)LoadObject((LoadObj)6, 3, Flipperrr);
 	}
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Flipper->ocp = objCondition;
+	Flipper->twp->pos = playertwp[0]->pos;
+	PlaceX = Flipper->twp->pos.x;
+	PlaceZ = Flipper->twp->pos.z;
+	PosOffset = 1;
+	PlaceInFront();
+	Flipper->twp->pos.x = PlaceX;
+	Flipper->twp->pos.z = PlaceZ;
+	FaceX = Flipper->twp->pos.x - playertwp[0]->pos.x;
+	FaceZ = Flipper->twp->pos.z - playertwp[0]->pos.z;
+	FacePlayer();
+	Flipper->twp->ang.y = FaceAng;
+	return;
 }
 void RandomSling(taskwk* p1)
 {
@@ -801,38 +669,29 @@ void RandomSling(taskwk* p1)
 		SlingTextLoader = true;
 		TextLoaded = true;
 	}
-	if (OBJ_CASINO_TEXLIST.textures->texaddr)
+	strcpy_s(LastEffect, 128, "Random Sling");
+	task* Sling;
+	int Slingtype = rand() % 2;
+	if (Slingtype == 0)
 	{
-		strcpy_s(LastEffect, 128, "Random Sling");
-		task* Sling;
-		int Slingtype = rand() % 2;
-		if (Slingtype == 0)
-		{
-			Sling = (task*)LoadObject((LoadObj)6, 3, Slingl);
-		}
-		else
-		{
-			Sling = (task*)LoadObject((LoadObj)6, 3, Slingr);
-		}
-		OBJ_CONDITION* objCondition = new OBJ_CONDITION();
-		Sling->ocp = objCondition;
-		Sling->twp->pos = playertwp[0]->pos;
-		PlaceX = Sling->twp->pos.x;
-		PlaceZ = Sling->twp->pos.z;
-		PosOffset = 45;
-		PlaceInFront();
-		Sling->twp->pos.x = PlaceX;
-		Sling->twp->pos.z = PlaceZ;
-		FaceX = Sling->twp->pos.x - playertwp[0]->pos.x;
-		FaceZ = Sling->twp->pos.z - playertwp[0]->pos.z;
-		FacePlayer();
-		Sling->twp->ang.y = FaceAng;
-		return;
+		Sling = (task*)LoadObject((LoadObj)6, 3, Slingl);
 	}
 	else
 	{
-		NewEffect();
-		SlingTextLoader = false;
-		return;
+		Sling = (task*)LoadObject((LoadObj)6, 3, Slingr);
 	}
+	OBJ_CONDITION* objCondition = new OBJ_CONDITION();
+	Sling->ocp = objCondition;
+	Sling->twp->pos = playertwp[0]->pos;
+	PlaceX = Sling->twp->pos.x;
+	PlaceZ = Sling->twp->pos.z;
+	PosOffset = 45;
+	PlaceInFront();
+	Sling->twp->pos.x = PlaceX;
+	Sling->twp->pos.z = PlaceZ;
+	FaceX = Sling->twp->pos.x - playertwp[0]->pos.x;
+	FaceZ = Sling->twp->pos.z - playertwp[0]->pos.z;
+	FacePlayer();
+	Sling->twp->ang.y = FaceAng;
+	return;
 }
