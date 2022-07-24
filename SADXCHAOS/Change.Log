@@ -307,9 +307,10 @@ Changed RandomBumper to Pick From Bumper1 and Bumper2 (5/29/2022)
 Added RandomSling (5/29/2022)
 Changed RandomSling to Pick From Slingl and Slingr (5/29/2022)
 Added ExplodeMa (5/29/2022)
-Removed "Check if texture is loaded before doing this" code in prep for a new fix being added to the modloader (6/5/2022)
 Cleaned up unfinished code (6/5/2022)
-
+Added SlapMa (7/24/2022)
+Fixed Bug with RandomWaterPiller (7/24/2022)
+Updated Modloader Programming (7/24/2022)
 
 ---------TO-DO---------
  Test Stuff

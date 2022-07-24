@@ -61,3 +61,4 @@ void Set_Sonic_Ice();
 void EmeraldShardMa();
 void RandomKnuxRingSpring(taskwk* p1);
 void RandomWaterPiller(taskwk* p1);
+void SlapMa(taskwk* p1);

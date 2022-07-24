@@ -129,6 +129,26 @@ struct colliwk
 	colliwk* hit_cwp;
 };
 
+struct thread
+{
+	thread* next;
+	thread* prev;
+	thread* parent;
+	thread* child;
+	void* sp;
+	void* spbase;
+	void(__cdecl* dest)();
+	int control;
+	int status;
+};
+
+struct EVINFO2
+{
+	void(__cdecl* func)(int);
+	thread* tp;
+	int no;
+};
+
 struct eventwk_look
 {
 	char mode;
@@ -2317,5 +2337,24 @@ struct ObjCmnInfo
 	unsigned __int8 id;
 	unsigned __int8 copy;
 };
+
+// Texture animation used in Casinopolis
+struct TEXANIMINFO
+{
+	NJS_MATERIAL* pmat;
+	unsigned int newtexid;
+	unsigned int orgtexid;
+};
+
+// UV animation used by Casinopolis objects
+struct __declspec(align(4)) TEXPATINFO
+{
+	int patpitch;
+	int texcnt;
+	TEXANIMINFO* texaniminfo;
+	char* patinfo;
+	char nowpatnum;
+};
+
 
 #endif /* SADXMODLOADER_SADXSTRUCTSNEW_H */

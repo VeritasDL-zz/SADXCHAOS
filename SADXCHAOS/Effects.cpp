@@ -896,7 +896,8 @@ void RandomWaterPiller(taskwk* p1)
 {
 	if (Cart_Timer != 0)
 	{
-
+		NewEffect();
+		return;
 	}
 	if (CurrentLevel == LevelIDs_TwinkleCircuit)
 	{
@@ -918,4 +919,9 @@ void RandomWaterPiller(taskwk* p1)
 		WaterPiller_Timer = 420;
 	}
 	return;
+}
+void SlapMa(taskwk* p1)
+{
+	strcpy_s(LastEffect, 128, "Slapped");
+	EnemyBounceThing(0, rand() % 3 + (rand() % 3), rand() % 3 + (rand() % 3), rand() % 3 + (rand() % 3));
 }
