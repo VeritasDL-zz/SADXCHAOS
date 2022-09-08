@@ -7,30 +7,36 @@
 #ifndef SEGA_NINJA_H
 #define SEGA_NINJA_H
 
-// Chopped up by MainMemory for your convenience.
+#ifdef __cplusplus
+#include <cstdint>
+#else
+#include <stdint.h>
+#endif
+
+/* Chopped up by MainMemory for your convenience. */
 #ifndef _TYPEDEF_Uint8
 #define _TYPEDEF_Uint8
-typedef unsigned char     Uint8;        /*  unsigned 1 byte integer     */
+typedef uint8_t     Uint8;        /*  unsigned 1 byte integer     */
 #endif
 #ifndef _TYPEDEF_Sint8
 #define _TYPEDEF_Sint8
-typedef signed char     Sint8;          /*  signed 1 byte integer       */
+typedef int8_t     Sint8;          /*  signed 1 byte integer       */
 #endif
 #ifndef _TYPEDEF_Uint16
 #define _TYPEDEF_Uint16
-typedef unsigned short  Uint16;         /*  unsigned 2 byte integer     */
+typedef uint16_t  Uint16;         /*  unsigned 2 byte integer     */
 #endif
 #ifndef _TYPEDEF_Sint16
 #define _TYPEDEF_Sint16
-typedef signed short    Sint16;         /*  signed 2 byte integer       */
+typedef int16_t    Sint16;         /*  signed 2 byte integer       */
 #endif
 #ifndef _TYPEDEF_Uint32
 #define _TYPEDEF_Uint32
-typedef unsigned long   Uint32;         /*  unsigned 4 byte integer     */
+typedef uint32_t   Uint32;         /*  unsigned 4 byte integer     */
 #endif
 #ifndef _TYPEDEF_Sint32
 #define _TYPEDEF_Sint32
-typedef signed long     Sint32;         /*  signed 4 byte integer       */
+typedef int32_t     Sint32;         /*  signed 4 byte integer       */
 #endif
 #ifndef _TYPEDEF_Float32
 #define _TYPEDEF_Float32
@@ -924,7 +930,7 @@ typedef	struct {
 
 typedef union {
 	Uint32  color;
-	//NJS_TEX tex;
+	/*NJS_TEX tex;*/
 	NJS_BGRA argb;
 } NJS_COLOR;
 
@@ -1094,8 +1100,8 @@ typedef struct {
 
 typedef struct {
 	Uint16          type_matId; /* meshset type and attr index
-								   14-15 : meshset type bits
-									0-13 : material id(0-4095)  */
+	                               14-15 : meshset type bits
+	                                0-13 : material id(0-4095)  */
 	Uint16          nbMesh;     /* mesh count                   */
 	Sint16          *meshes;    /* mesh array                   */
 	Uint32          *attrs;     /* attribure                    */
@@ -1106,17 +1112,17 @@ typedef struct {
 
 typedef struct {
 	Uint16          type_matId; /* meshset type and attr index
-								   14-15 : meshset type bits
-									0-13 : material id(0-4095)  */
+	                               14-15 : meshset type bits
+	                                0-13 : material id(0-4095)  */
 	Uint16          nbMesh;     /* mesh count                   */
 	Sint16          *meshes;    /* mesh array                   */
 	Uint32          *attrs;     /* attribure                    */
 	NJS_VECTOR      *normals;   /* mesh normal list             */
 	NJS_COLOR       *vertcolor; /* polygon vertex color list    */
 	NJS_TEX         *vertuv;    /* polygon vertex uv list       */
-	// A pointer to MeshSetBuffer. See definition in direct3d.h.
-	void            *buffer;
+	void            *buffer;    /* A pointer to MeshSetBuffer. See definition in direct3d.h. */
 } NJS_MESHSET_SADX;
+
 typedef struct {
 	NJS_POINT3      *points;    /* vertex list                  */
 	NJS_VECTOR      *normals;   /* vertex normal list           */
@@ -1178,6 +1184,7 @@ typedef struct obj {
 	struct obj      *child;     /* child object                 */
 	struct obj      *sibling;   /* sibling object               */
 
+#ifdef __cplusplus
 	NJS_MODEL       *getbasicmodel() const { return (NJS_MODEL*)model; }
 	void            putbasicmodel(NJS_MODEL *value) { model = value; }
 	NJS_MODEL_SADX  *getbasicdxmodel() const { return (NJS_MODEL_SADX*)model; }
@@ -1188,7 +1195,7 @@ typedef struct obj {
 	void            putsa2bmodel(SA2B_Model *value) { model = value; }
 
 #ifdef _MSC_VER
-	// MSVC-specific property emulation.
+	/* MSVC-specific property emulation. */
 	__declspec(property(get = getbasicmodel, put = putbasicmodel))
 	NJS_MODEL       *basicmodel;
 	__declspec(property(get = getbasicdxmodel, put = putbasicdxmodel))
@@ -1218,6 +1225,8 @@ typedef struct obj {
 			result += sibling->countmorph();
 		return result;
 	}
+#endif /* __cplusplus */
+
 } NJS_OBJECT, NJS_CNK_OBJECT;
 
 /*
@@ -2255,6 +2264,37 @@ typedef struct {
 } NJS_DIRECT_COMPILE_LIGHT;
 
 #endif /* _NINJA_DIR_H_ */
+
+#ifndef _NINJA_API_H_
+#define _NINJA_API_H_
+
+#define njAbs(n)         ((Float)fabsf   ((Float)(n)))
+#define njArcCos(n)      ((Angle)NJM_RAD_ANG(acosf  ((Float)(n)) ))
+#define njArcCosec(n)    ((Angle)NJM_RAD_ANG(asinf  (1.0f/(Float)(n)) ))
+#define njArcCot(n)      ((Angle)NJM_RAD_ANG(atanf  (1.0f/(Float)(n)) ))
+#define njArcSec(n)      ((Angle)NJM_RAD_ANG(acosf  (1.0f/(Float)(n)) ))
+#define njArcSin(n)      ((Angle)NJM_RAD_ANG(asinf  ((Float)(n)) ))
+#define njArcTan(n)      ((Angle)NJM_RAD_ANG(atanf  ((Float)(n)) ))
+#define njArcTan2(y,x)   ((Angle)NJM_RAD_ANG(atan2f ((Float)(y),(Float)(x)) ))
+
+#define njCeil(n)        ((Float)ceilf   ((Float)(n)))
+#define njCosech(n)      ((Float)( 1.0f / sinhf((Float)NJM_ANG_RAD(n)) ))
+#define njCosh(n)        ((Float)coshf   ((Float)NJM_ANG_RAD(n)))
+#define njCoth(n)        ((Float)( 1.0f / tanhf((Float)NJM_ANG_RAD(n)) ))
+#define njExp(x)         ((Float)expf((x)))
+#define njFloor(n)       ((Float)floorf  ((Float)(n)))
+#define njHypot(x,y)     ((Float)njSqrt  ( (x)*(x) + (y)*(y) ))
+#define njLog(n)         ((Float)logf    ((Float)(n)))
+#define njLog10(n)       ((Float)log10f  ((Float)(n)))
+#define njLog2(n)        ((Float)( njLog((n)) / njLog(2.f) ))
+#define njPow(n1,n2)     ((Float)powf    ((Float)(n1),(Float)(n2)))
+#define njSech(n)        ((Float)( 1.0 / coshf((Float)NJM_ANG_RAD(n)) ))
+#define njSinh(n)        ((Float)sinhf   ((Float)NJM_ANG_RAD(n)))
+#define njTanh(n)        ((Float)tanhf   ((Float)NJM_ANG_RAD(n)))
+#define njRandom()       ((Float)((Float)rand()/(Float)(RAND_MAX+1)))
+#define njRandomSeed(n)  (srand((Uint32)(n)))
+
+#endif /* _NINJA_API_H_ */
 
 static inline Sint16 *NextChunk(Sint16 *chunk)
 {

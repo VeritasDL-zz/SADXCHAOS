@@ -462,6 +462,15 @@ struct PDS_MOUSE_BUTTON
 	char reserved[2];
 };
 
+struct _m_file
+{
+	char* fname;
+	int sfade;
+	int efade;
+	__int16 s16W;
+	__int16 s16H;
+};
+
 union taskwork_subs
 {
 	char b[4];
@@ -600,6 +609,38 @@ struct _OBJ_CAMERAADJUST {
 	CamAdjustPtr fnAdjust;
 };
 
+struct _OBJ_CAMERAENTRY
+{
+	char scMode;
+	char scPriority;
+	unsigned __int8 ucAdjType;
+	char scColType;
+	unsigned __int16 xColAng;
+	unsigned __int16 yColAng;
+	float xColPos;
+	float yColPos;
+	float zColPos;
+	float xColScl;
+	float yColScl;
+	float zColScl;
+	unsigned __int16 xCamAng;
+	unsigned __int16 yCamAng;
+	float xDirPos;
+	float yDirPos;
+	float zDirPos;
+	float xCamPos;
+	float yCamPos;
+	float zCamPos;
+	float fDistance;
+};
+
+struct _OBJ_CAMERAENTRYTABLE
+{
+	__int16 ssCount;
+	__int16 ssAttribute;
+	_OBJ_CAMERAENTRY* pObjCameraEntry;
+};
+
 struct _CameraSystemWork
 {
 	int G_boolSwitched;
@@ -618,7 +659,7 @@ struct _CameraSystemWork
 	char G_scRestoreAttribute[6];
 	CamFuncPtr G_pfnRestoreCamera[6];
 	CamAdjustPtr G_pfnRestoreAdjust[6];
-	void* G_pCameraEntry;
+	_OBJ_CAMERAENTRY* G_pCameraEntry;
 	char G_scRestoreCameraMode[6];
 	char G_scRestoreCameraAdjust[6];
 	char G_scRestoreCameraDirect[6];
@@ -656,31 +697,6 @@ struct _camcontwk
 	float xacc;
 	float yacc;
 	float zacc;
-};
-
-struct _OBJ_CAMERAENTRY
-{
-	char scMode;
-	char scPriority;
-	unsigned __int8 ucAdjType;
-	char scColType;
-	unsigned __int16 xColAng;
-	unsigned __int16 yColAng;
-	float xColPos;
-	float yColPos;
-	float zColPos;
-	float xColScl;
-	float yColScl;
-	float zColScl;
-	unsigned __int16 xCamAng;
-	unsigned __int16 yCamAng;
-	float xDirPos;
-	float yDirPos;
-	float zDirPos;
-	float xCamPos;
-	float yCamPos;
-	float zCamPos;
-	float fDistance;
 };
 
 // Free Camera information
@@ -781,6 +797,33 @@ struct bosswk
 	NJS_ACTION* actwkptr;
 };
 
+struct MPOSANG
+{
+	int at_angle[2];
+	NJS_POINT3 gpos;
+};
+
+struct MOBJ
+{
+	__int16 level;
+	NJS_OBJECT* obj;
+	NJS_POINT3* pm;
+	MPOSANG* pos_ang;
+	NJS_POINT3* points_ptr_org;
+};
+
+struct MORPHWK
+{
+	char mode;
+	__int16 objNum;
+	float t;
+	MOBJ* objlist;
+	float puru_a0;
+	float puru_dec0;
+	Rotation3 puru_ang0;
+	Rotation3 puru_angadd0;
+};
+
 struct chaoswk
 {
 	bosswk bwk;
@@ -813,6 +856,46 @@ struct chaoswk
 	void* morph_wp;
 	float param;
 	unsigned int old_texaddr;
+};
+
+struct CHAOS_PARAM
+{
+	char hitpoint;
+	float height;
+	float leg_len;
+	float walk_spd;
+	int turn_spd;
+	NJS_POINT3 c_initpos;
+	float alpha_obj;
+	float morph_xsp;
+	float morph_ysp;
+	float limit_r;
+	float limit_r_sprate;
+	float arm_strtch_spd;
+	__int16 atc_tame_time;
+	__int16 model_alpha;
+	float puncheff_scl;
+	float arm_len;
+	NJS_POINT3 field_center_pos;
+	float sphere_scale;
+	__int16 attack_time_base;
+	__int16 attack_time_ofs;
+	float chaoseme_radius;
+	float chaoseme_yofs;
+};
+
+struct CHAOS_OBJPVTBL
+{
+	char objno;
+	char vecno;
+	NJS_POINT3 ofs_pos;
+};
+
+struct CHAOS_OBJPV
+{
+	NJS_POINT3 pos;
+	NJS_POINT3 oldpos;
+	NJS_POINT3 vec;
 };
 
 struct Chaos0Work
@@ -884,6 +967,34 @@ struct Chaos4Work
 	float manju_alpha;
 	float manju_dalpha;
 	int manju_anim_cnt;
+};
+
+struct C4PunchParam
+{
+	Angle3 joint_angle[5];
+	Angle3 joint_speed[5];
+	float joint_scale;
+	float joint_spring_k;
+	float joint_spring_f;
+	__int16 joint_timer;
+	__int16 joint_now;
+	Angle3 tmp;
+};
+
+struct Chaos4work
+{
+	Angle3 angle_speed;
+	Angle3 angle_target;
+	NJS_POINT3 speed;
+	__int16 timer;
+	unsigned __int8 movemode;
+	unsigned __int8 headmode;
+	Angle3 tmp_ang;
+	C4PunchParam punchparam;
+	unsigned __int8 dispmode;
+	char action_cnt;
+	NJS_POINT3 eme_pos[4];
+	char up_cnt;
 };
 
 struct pathinfo
@@ -1583,7 +1694,7 @@ struct ___stcClip
 	float f32Far;
 };
 
-struct __declspec(align(4)) ___stcFog
+struct ___stcFog
 {
 	float f32StartZ;
 	float f32EndZ;
@@ -2301,6 +2412,16 @@ struct BUBBLE_DATA
 	float scl;
 };
 
+struct bubble_data
+{
+	float radius_min;
+	float radius_max;
+	int yuragi_angspd;
+	float yuragi_min;
+	float yuragi_max;
+	float y_spd_min;
+	float y_spd_max;
+};
 // Title screen worker
 
 struct __declspec(align(4)) TitleNewWk
@@ -2347,7 +2468,7 @@ struct TEXANIMINFO
 };
 
 // UV animation used by Casinopolis objects
-struct __declspec(align(4)) TEXPATINFO
+struct TEXPATINFO
 {
 	int patpitch;
 	int texcnt;
@@ -2356,5 +2477,335 @@ struct __declspec(align(4)) TEXPATINFO
 	char nowpatnum;
 };
 
+// Volume information for MirenSoundPlayOneShotSE
+struct VolumeInfo
+{
+	__int16 nearVolOfs;
+	__int16 farVolOfs;
+	float nearDist;
+	float farDist;
+};
+
+// Data for each item box hud item
+struct ITEM_MANAGER_DATA
+{
+	int item_list;
+	float item_pos;
+	float scale;
+	int random_ring;
+};
+
+// Data for item box hud
+struct ITEM_MANAGER
+{
+	int mode;
+	int current_list;
+	unsigned int counter;
+	ITEM_MANAGER_DATA itemdata[20];
+};
+
+// Additional data for air item box
+struct OBJECT_ITEMBOX_AIR_DATA
+{
+	int flag;
+	int item;
+	NJS_POINT3 position;
+	int panel_ang;
+	float scale;
+	float timer;
+};
+
+// Parabola data (see MakeParabolaInitSpeed, ChkParabolaEnd)
+struct sParabola
+{
+	NJS_POINT3 pos_start;
+	NJS_POINT3 pos_end;
+	float gravity;
+	int time;
+	NJS_POINT3 speed;
+};
+
+// Key information for Amy's locked doors
+struct KeyInfo
+{
+	int LastKey;
+	int Buff[4];
+	int Point;
+	int RightCount;
+	int LeftCount;
+};
+
+// Handle information for Amy's handles
+struct amyhndlstr
+{
+	int hndlmode;
+	int touchflag;
+	int turnang;
+	int hndlangy;
+	NJS_POINT3 hndlpos;
+};
+
+struct Big_ydata
+{
+	int attr;
+	int angx;
+	int angz;
+	float ypos;
+};
+
+// Lure height information set by calcFishingLureY
+struct Big_ypos
+{
+	Big_ydata top;
+	Big_ydata bottom;
+	Big_ydata water;
+};
+
+struct MOTIONDATA_INFO
+{
+	void* mdata;
+	void** key;
+	unsigned int* nbkeys;
+	float frame;
+	unsigned int nbframes;
+	unsigned int cnt;
+	unsigned int type;
+	NJS_MATRIX mtrx;
+};
+
+//Eggman worker
+
+//Egg Hornet
+struct Eggmoble1Work
+{
+	NJS_POINT3 direction;
+	NJS_POINT3 velocity;
+	NJS_POINT3 accel;
+	NJS_POINT3 tar_pos;
+	NJS_POINT3 src_pos;
+	Angle3 dang;
+	int frame;
+	int role_ang;
+	float speed;
+};
+
+struct Egm1BakuWk
+{
+	NJS_POINT3* Posp;
+	unsigned int Cnt;
+	Egm1BakuCmdEnum Cmd;
+};
+
+struct Egm1BarriPrmT
+{
+	task* BossTp;
+	float OfsAlpha;
+	float GenFrame;
+	float Progress;
+	int TexChgFrame;
+	int TexChgFrameMax;
+	unsigned int PatNum;
+	unsigned __int8 Stat;
+	unsigned __int8 Req;
+};
+
+struct Egm1JetPrmT
+{
+	task* BossTp;
+};
+
+struct Egm1BgmWk
+{
+	int Cnt;
+};
+
+struct Egm1ClayManWk
+{
+	NJS_POINT3 Pos;
+	int Frame;
+	unsigned __int8 Mode;
+};
+
+struct Egm1CrushPrm
+{
+	NJS_TEXLIST* TexListPtr;
+	obj* Obj;
+	NJS_POINT3* PosPtr;
+	Angle3* AngPtr;
+	void(__cdecl* ExeFnc)(NJS_POINT3*, int);
+	int AngSpdRenge;
+	float BaseSpd;
+	unsigned __int16 DropFrameInterval;
+};
+
+struct Egm1JetWk
+{
+	int TexChgFrame[5];
+	int TexChgFrameMax[5];
+	unsigned int TexPatNum[5];
+	int BTexChgFrame[3];
+	int BTexChgFrameMax[3];
+	__int16 BTexPatNum[3];
+	NJS_POINT3* Egm1JetPntSt[5];
+	NJS_POINT3* Egm1JetPntEd[5];
+	unsigned int Egm1JetPntNum[5];
+	task* BossTp;
+	float Scale;
+	float JetStat;
+	unsigned int PassFrame;
+	Egm1JetCmdEnum Cmd;
+};
+
+struct Egm1MissileWk
+{
+	NJS_POINT3 Pnt3p[3];
+	NJS_POINT3* DstPosPtr;
+	float MslT;
+	float DeltaT;
+	unsigned __int16 SmokeTime;
+	unsigned __int16 HomingTime;
+};
+
+struct Egm1MissilesPrm
+{
+	taskwk* Parent_twp;
+	NJS_POINT3* DstPosPtr;
+	unsigned __int16 FireInterval;
+	unsigned __int16 HomingInterval;
+	unsigned __int16 MissileNum;
+};
+
+struct Egm1MissilesT
+{
+	Egm1MissilesPrm Prm;
+	unsigned __int16 Frame;
+	unsigned __int16 FireNum;
+};
+
+struct Egm1OneClayPrm
+{
+	obj* Obj;
+	NJS_TEXLIST* TexListPtr;
+	NJS_POINT3* Posp;
+	NJS_POINT3* Spdp;
+	float Scale;
+	int AngSpdRange;
+};
+
+struct Egm1OneClayWk
+{
+	obj* Obj;
+	NJS_TEXLIST* TexListPtr;
+	NJS_POINT3 Spd;
+	Angle3 AngSpd;
+	float Scale;
+};
+
+struct Egm1SmokeManWk
+{
+	NJS_POINT3 Pos;
+	unsigned __int8 Mode;
+};
+
+
+struct Egm1SpdDivTblT
+{
+	float t;
+	float div;
+};
+
+//Egg hornet worker
+struct bossextwk
+{
+	bosswk bwk;
+	int Fmode;
+	Egm1LocEnum AimArea;
+	Egm1LocEnum OldArea;
+	NJS_POINT3 FlyRoute[3];
+	float LasSpd;
+	float FlyT;
+	float FlyDeltaT;
+	float BasePosY;
+	int UdFrq;
+	int BaseAngX;
+	int KeepAngX;
+	int KeepAngY;
+	float RotRBase;
+	int RotAngOld;
+	int RotAng;
+	int RotAngSpd;
+	int FuriTotalOneSin;
+	int FuriSin;
+	int FuriAngX;
+	int BankZ;
+	int NowBankZ;
+	Egm1BarriPrmT BariPrm;
+	int ForceBreakTime;
+	__int16 WaitTime;
+	char ShotNum;
+	char NowShotsNum;
+	char ShotsNum;
+	char DispMode;
+	char LoopSndFlg;
+	char HitPoint;
+	char DropDieFlg;
+	char TikalFlg;
+};
+
+struct STAGENAME_WORK
+{
+	unsigned __int8 mode;
+	unsigned __int8 timer;
+	unsigned __int8 StageNo;
+	unsigned __int8 StageType;
+	unsigned __int16 DispTime;
+	NJS_TEXLIST* texlist;
+};
+
+struct __HPPOS
+{
+	NJS_POINT3 pos;
+	int hp;
+};
+
+union STAFF_DATA_FLAG
+{
+	unsigned __int8 SnapShotNo;
+	unsigned __int8 pvrindex;
+	unsigned __int8 interval;
+};
+
+struct __declspec(align(4)) STAFF_DATA
+{
+	unsigned __int8 StaffType;
+	STAFF_DATA_FLAG flag;
+	char* str;
+};
+
+struct STAFFROLL_DATA
+{
+	STAFF_DATA* StaffTbl;
+	int nbStaff;
+};
+
+struct standlight_taskwk
+{
+	char free0;
+	char free1;
+	unsigned __int8 id;
+	unsigned __int8 free2;
+	__int16 flag;
+	unsigned __int16 free3;
+	int rot_x_angle;
+	NJS_MODEL* beam_model_p;
+	void* free6;
+	Angle3 ang;
+	NJS_POINT3 pos;
+	float rot_x;
+	float length;
+	float width;
+	colliwk* cwp;
+	eventwk* ewp;
+};
 
 #endif /* SADXMODLOADER_SADXSTRUCTSNEW_H */

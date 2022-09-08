@@ -28,4 +28,5 @@
 #include "WaterPiller.h"
 #include "ScreenEffects.h"
 #include "CustomChaosSADXFunctions.h"
+#include "MemAccess.h"
 #endif //PCH_H

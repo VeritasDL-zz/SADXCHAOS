@@ -33,20 +33,20 @@ enum registers
 	noret
 };
 
-inline void writebytes(char* dst, int& dstoff, char a1, char a2)
+inline void writebytes(uint8_t* dst, int& dstoff, uint8_t a1, uint8_t a2)
 {
 	dst[dstoff++] = a1;
 	dst[dstoff++] = a2;
 }
 
-inline void writebytes(char* dst, int& dstoff, char a1, char a2, char a3)
+inline void writebytes(uint8_t* dst, int& dstoff, uint8_t a1, uint8_t a2, uint8_t a3)
 {
 	dst[dstoff++] = a1;
 	dst[dstoff++] = a2;
 	dst[dstoff++] = a3;
 }
 
-inline void writebytes(char* dst, int& dstoff, char a1, char a2, char a3, char a4)
+inline void writebytes(uint8_t* dst, int& dstoff, uint8_t a1, uint8_t a2, uint8_t a3, uint8_t a4)
 {
 	dst[dstoff++] = a1;
 	dst[dstoff++] = a2;
@@ -54,7 +54,7 @@ inline void writebytes(char* dst, int& dstoff, char a1, char a2, char a3, char a
 	dst[dstoff++] = a4;
 }
 
-inline void writebytes(char* dst, int& dstoff, char a1, char a2, char a3, char a4, char a5)
+inline void writebytes(uint8_t* dst, int& dstoff, uint8_t a1, uint8_t a2, uint8_t a3, uint8_t a4, uint8_t a5)
 {
 	dst[dstoff++] = a1;
 	dst[dstoff++] = a2;
@@ -63,7 +63,7 @@ inline void writebytes(char* dst, int& dstoff, char a1, char a2, char a3, char a
 	dst[dstoff++] = a5;
 }
 
-inline void writebytes(char* dst, int& dstoff, char a1, char a2, char a3, char a4, char a5, char a6)
+inline void writebytes(uint8_t* dst, int& dstoff, uint8_t a1, uint8_t a2, uint8_t a3, uint8_t a4, uint8_t a5, uint8_t a6)
 {
 	dst[dstoff++] = a1;
 	dst[dstoff++] = a2;
@@ -73,7 +73,7 @@ inline void writebytes(char* dst, int& dstoff, char a1, char a2, char a3, char a
 	dst[dstoff++] = a6;
 }
 
-inline void writebytes(char* dst, int& dstoff, char a1, char a2, char a3, char a4, char a5, char a6, char a7, char a8)
+inline void writebytes(uint8_t* dst, int& dstoff, uint8_t a1, uint8_t a2, uint8_t a3, uint8_t a4, uint8_t a5, uint8_t a6, uint8_t a7, uint8_t a8)
 {
 	dst[dstoff++] = a1;
 	dst[dstoff++] = a2;
@@ -85,10 +85,10 @@ inline void writebytes(char* dst, int& dstoff, char a1, char a2, char a3, char a
 	dst[dstoff++] = a8;
 }
 
-static char* curpg = nullptr;
+static uint8_t* curpg = nullptr;
 static int pgoff = 0;
 static int pgsz = -1;
-static char* AllocateCode(int sz)
+static uint8_t* AllocateCode(int sz)
 {
 	if (pgsz == -1)
 	{
@@ -98,10 +98,10 @@ static char* AllocateCode(int sz)
 	}
 	if (curpg == nullptr || (pgoff + sz) > pgsz)
 	{
-		curpg = (char*)VirtualAlloc(nullptr, pgsz, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+		curpg = (uint8_t*)VirtualAlloc(nullptr, pgsz, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 		pgoff = 0;
 	}
-	char* result = &curpg[pgoff];
+	uint8_t* result = &curpg[pgoff];
 	pgoff += sz;
 	if (pgoff % 0x10 != 0)
 		pgoff += 0x10 - (pgoff % 0x10);
@@ -199,7 +199,7 @@ constexpr T const GenerateUsercallWrapper(int ret, intptr_t address, TArgs... ar
 	++memsz; // retn
 	auto codeData = AllocateCode(memsz);
 	int cdoff = 0;
-	char stackoff = 4;
+	uint8_t stackoff = 4;
 	for (size_t i = 0; i < argc; ++i)
 	{
 		switch (argarray[i])
@@ -319,7 +319,7 @@ constexpr T const GenerateUsercallWrapper(int ret, intptr_t address, TArgs... ar
 	WriteCall(&codeData[cdoff], (void*)address);
 	cdoff += 5;
 	if (stackcnt > 0)
-		writebytes(codeData, cdoff, 0x83, 0xC4, (char)(stackcnt * 4));
+		writebytes(codeData, cdoff, 0x83, 0xC4, (uint8_t)(stackcnt * 4));
 	for (int i = argc - 1; i >= 0; --i)
 	{
 		switch (argarray[i])
@@ -532,7 +532,7 @@ constexpr void const GenerateUsercallHook(T func, int ret, intptr_t address, TAr
 	++memsz; // retn
 	auto codeData = AllocateCode(memsz);
 	int cdoff = 0;
-	char stackoff = stackcnt * 4;
+	uint8_t stackoff = stackcnt * 4;
 	for (int i = argc - 1; i >= 0; --i)
 	{
 		switch (argarray[i])
@@ -670,11 +670,152 @@ constexpr void const GenerateUsercallHook(T func, int ret, intptr_t address, TAr
 			}
 	}
 	if (stackcnt > 0)
-		writebytes(codeData, cdoff, 0x83, 0xC4, (char)(stackcnt * 4));
+		writebytes(codeData, cdoff, 0x83, 0xC4, (uint8_t)(stackcnt * 4));
 	codeData[cdoff++] = 0xC3;
 	assert(cdoff == memsz);
-	if (*(char*)address == 0xE8)
+	if (*(uint8_t*)address == 0xE8)
 		WriteCall((void*)address, codeData);
 	else
 		WriteJump((void*)address, codeData);
 }
+
+#define UsercallFunc(RETURN_TYPE, NAME, ARGS, ARGNAMES, ADDRESS, RETURN_LOC, ...) \
+class _##NAME##_t \
+{ \
+public: \
+	typedef RETURN_TYPE(*PointerType)ARGS; \
+ \
+	~_##NAME##_t() \
+	{ \
+		if (ishooked) \
+			Unhook(); \
+	} \
+ \
+	RETURN_TYPE operator()ARGS \
+	{ \
+		return wrapper##ARGNAMES; \
+	} \
+ \
+	PointerType operator&() \
+	{ \
+		return wrapper; \
+	} \
+ \
+	operator PointerType() \
+	{ \
+		return wrapper; \
+	} \
+ \
+	void Hook(PointerType hookfunc) \
+	{ \
+		if (ishooked) \
+			throw new std::exception("Attempted to hook already hooked function!"); \
+		memcpy(origdata, getptr(), 5); \
+		GenerateUsercallHook<PointerType>(hookfunc, RETURN_LOC, ADDRESS, __VA_ARGS__); \
+		ishooked = true; \
+	} \
+ \
+	void Unhook() \
+	{ \
+		if (!ishooked) \
+			throw new std::exception("Attempted to unhook function that wasn't hooked!"); \
+		WriteData(getptr(), origdata, 5); \
+		ishooked = false; \
+	} \
+ \
+	RETURN_TYPE Original##ARGS \
+	{ \
+		if (ishooked) \
+		{ \
+			uint8_t hookdata[5]; \
+			memcpy(hookdata, getptr(), 5); \
+			WriteData(getptr(), origdata, 5); \
+			RETURN_TYPE retval = wrapper##ARGNAMES; \
+			WriteData(getptr(), hookdata, 5); \
+			return retval; \
+		} \
+		else \
+			return wrapper##ARGNAMES; \
+	} \
+ \
+private: \
+	bool ishooked = false; \
+	uint8_t origdata[5]{}; \
+	const PointerType wrapper = GenerateUsercallWrapper<PointerType>(RETURN_LOC, ADDRESS, __VA_ARGS__); \
+ \
+	constexpr PointerType getptr() \
+	{ \
+		return reinterpret_cast<PointerType>(ADDRESS); \
+	} \
+}; \
+static _##NAME##_t NAME
+
+#define UsercallFuncVoid(NAME, ARGS, ARGNAMES, ADDRESS, ...) \
+class _##NAME##_t \
+{ \
+public: \
+	typedef void (*PointerType)ARGS; \
+ \
+	~_##NAME##_t() \
+	{ \
+		if (ishooked) \
+			Unhook(); \
+	} \
+ \
+	void operator()ARGS \
+	{ \
+		wrapper##ARGNAMES; \
+	} \
+ \
+	PointerType operator&() \
+	{ \
+		return wrapper; \
+	} \
+ \
+	operator PointerType() \
+	{ \
+		return wrapper; \
+	} \
+ \
+	void Hook(PointerType hookfunc) \
+	{ \
+		if (ishooked) \
+			throw new std::exception("Attempted to hook already hooked function!"); \
+		memcpy(origdata, getptr(), 5); \
+		GenerateUsercallHook<PointerType>(hookfunc, noret, ADDRESS, __VA_ARGS__); \
+		ishooked = true; \
+	} \
+ \
+	void Unhook() \
+	{ \
+		if (!ishooked) \
+			throw new std::exception("Attempted to unhook function that wasn't hooked!"); \
+		WriteData(getptr(), origdata, 5); \
+		ishooked = false; \
+	} \
+ \
+	void Original##ARGS \
+	{ \
+		if (ishooked) \
+		{ \
+			uint8_t hookdata[5]; \
+			memcpy(hookdata, getptr(), 5); \
+			WriteData(getptr(), origdata, 5); \
+			wrapper##ARGNAMES; \
+			WriteData(getptr(), hookdata, 5); \
+		} \
+		else \
+			wrapper##ARGNAMES; \
+	} \
+ \
+private: \
+	bool ishooked = false; \
+	uint8_t origdata[5]{}; \
+	const PointerType wrapper = GenerateUsercallWrapper<PointerType>(noret, ADDRESS, __VA_ARGS__); \
+ \
+	constexpr PointerType getptr() \
+	{ \
+		return reinterpret_cast<PointerType>(ADDRESS); \
+	} \
+}; \
+static _##NAME##_t NAME

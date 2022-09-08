@@ -1,8 +1,6 @@
 #pragma once
 //ScanLine
 FunctionPointer(void, ___njColorBlendingMode, (int, int), 0x004030D0);
-DataPointer(float, ScreenRaitoY, 0x8928C4);
-DataPointer(float, ScreenRaitoX, 0x8928C0);
 struct ScanLineWork
 {
 	NJS_COLOR line_col;

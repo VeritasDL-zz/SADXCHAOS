@@ -17,6 +17,8 @@ FunctionPointer(void, KillPlayer, (uint8_t ID), 0x440CD0);
 VoidFunc(ResumeSound, 0x40D0A0);
 FunctionPointer(ObjectMaster*, LoadAutoHint, (const HintText_Text* texts, int voice), 0x7A1BE0);
 ObjectFunc(dummytarget_init, 0x5B60D0);
+FunctionPointer(void, SetCameraMode_, (int a1), 0x4348F0);
+FunctionPointer(Uint32, GetCameraMode_, (), 0x434930);
 DataPointer(NJS_TEXLIST, ev_effect_list19, 0x2C49740);
 //01FF86C4     texlist_tate_chg
 DataPointer(NJS_TEXLIST, texlist_tate_chg, 0x01FF86C4);
