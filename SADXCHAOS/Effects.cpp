@@ -925,3 +925,8 @@ void SlapMa(taskwk* p1)
 	strcpy_s(LastEffect, 128, "Slapped");
 	EnemyBounceThing(0, rand() % 3 + (rand() % 3), rand() % 3 + (rand() % 3), rand() % 3 + (rand() % 3));
 }
+void SplashMa()
+{
+	strcpy_s(LastEffect, 128, "Splash");
+	PSetSplashEffect(playertwp[0]);
+}

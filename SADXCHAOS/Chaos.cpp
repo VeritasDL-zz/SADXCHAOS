@@ -22,7 +22,7 @@ extern "C"
 		init_FreeMovements();
 		strcpy_s(LastEffect, 128, "Chaos Edition 2.0b - D");
 	}
-	ChaosS ChaosArray[134]
+	ChaosS ChaosArray[135]
 	{
 	{ RandomSpring, nullptr, nullptr },
 	{ RandomSpinnerA, nullptr, nullptr },
@@ -158,6 +158,7 @@ extern "C"
 	{ nullptr, nullptr, SideWaysCamera },
 	{ nullptr, nullptr, RandomScanLine },
 	{ nullptr, nullptr, ExplodeMa },
+	{ nullptr, nullptr, SplashMa },
 	};
 	size_t ChaosSize = LengthOfArray(ChaosArray);
 	__declspec(dllexport) void __cdecl OnFrame()
@@ -183,7 +184,7 @@ extern "C"
 		//Executed when the game processes input
 		if (Controllers[0].PressedButtons & Buttons_Y) //Debug Testing
 		{
-			SlapMa(0);
+			
 		}
 	}
 	__declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer }; // This is needed for the Mod Loader to recognize the DLL.

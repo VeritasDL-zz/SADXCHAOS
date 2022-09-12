@@ -62,3 +62,4 @@ void EmeraldShardMa();
 void RandomKnuxRingSpring(taskwk* p1);
 void RandomWaterPiller(taskwk* p1);
 void SlapMa(taskwk* p1);
+void SplashMa();

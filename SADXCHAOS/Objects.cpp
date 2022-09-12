@@ -66,6 +66,9 @@ void BigRock(taskwk* p1)
 }
 void RandomFruit(taskwk* p1)
 {
+	//disabled for SHC2022 due to crashma?
+	NewEffect();
+	return;
 	if (!GrabAbleObjects())
 	{
 		return;
@@ -97,6 +100,9 @@ void RandomFruit(taskwk* p1)
 }
 void RandomHat(taskwk* p1)
 {
+	//disabled for SHC2022 due to crashma?
+	NewEffect();
+	return;
 	if (!GrabAbleObjects())
 	{
 		return;
