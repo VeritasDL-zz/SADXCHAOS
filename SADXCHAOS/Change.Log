@@ -316,6 +316,15 @@ Updated Modloader Programming again and fixed errors due to it (9/7/2022)
 Added SplashMa (spawns in the water splash effect but does nothing else(for now?)) (9/10/2022) (TEMP.WALKER NEED TO TEST MORE)
 
 ---------TO-DO---------
+10/11/2022 
+Need to fix sonic target when in Final Egg as amy/sonic (killing the target will finish the level like if playing as gamma)
+Need to fix Random Boss Text (It crashed once, and displayed "DragonDeez XXXX" for some reason) (XXXX is placeholder as i dont remember what else it said)
+Need a way to make Casino with Sonic beat-able with-out doing the speedrun skip (maybe give player a lot of rings randomly? idk yet)
+WaterFountain has some funny flashing texture for some reason idk never happend to me (yet)
+fix spinma
+
+
+
  Test Stuff
  test new stuff fully
  Log Known Crashes

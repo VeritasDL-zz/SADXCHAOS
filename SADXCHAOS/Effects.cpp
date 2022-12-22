@@ -216,6 +216,9 @@ void RandomChaooAnimal()
 }
 void RandomChaoo()
 {
+	NewEffect();
+	return;
+	//diabled due to bugs idk man
 	if (!ChaoSpawnEnabled)
 	{
 		NewEffect();

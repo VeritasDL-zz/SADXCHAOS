@@ -25,7 +25,6 @@ typedef bool _BOOL1;
 
 // SADX Functions
 #define ObjectFunc(NAME, ADDRESS) FunctionPointer(void,NAME,(ObjectMaster *obj),ADDRESS)
-
 FunctionPointer(void, PrintDebug, (const char *Format, ...), 0x401000);
 FunctionPointer(void, CopyToGlobalSprite_ScalePosition, (NJS_SPRITE *sprite), 0x401030);
 FunctionPointer(void, CopyToGlobalSprite_NativeToCurrent, (NJS_SPRITE *sprite), 0x401070);

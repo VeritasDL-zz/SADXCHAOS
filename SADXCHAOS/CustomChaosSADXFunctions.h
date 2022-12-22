@@ -19,6 +19,7 @@ FunctionPointer(ObjectMaster*, LoadAutoHint, (const HintText_Text* texts, int vo
 ObjectFunc(dummytarget_init, 0x5B60D0);
 FunctionPointer(void, SetCameraMode_, (int a1), 0x4348F0);
 FunctionPointer(Uint32, GetCameraMode_, (), 0x434930);
+FunctionPointer(void, EffBarrierPosSet, (task* twp, taskwk* ptwp), 0x4B9CE0);
 DataPointer(NJS_TEXLIST, ev_effect_list19, 0x2C49740);
 //01FF86C4     texlist_tate_chg
 DataPointer(NJS_TEXLIST, texlist_tate_chg, 0x01FF86C4);
@@ -30,3 +31,4 @@ extern float FaceX;
 extern float FaceZ;
 extern float FaceAng;
 extern double PosOffset;
+//FunctionPointer(ObjectMaster *, LoadChildObject, (LoadObj a1, void (__cdecl *address)(ObjectMaster *), ObjectMaster *parent), 0x40B940);

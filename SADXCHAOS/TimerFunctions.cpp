@@ -34,6 +34,7 @@ int RandomBoot_Timer = 0;
 int HAHA69_Timer = 0;
 int Bl1ngBl0ng = 50;
 int ColorsRandChance = 0;
+int SpinMa_Timer = 0;
 unsigned int Colors69[] =
 {
 0xFFbcdcb3,
@@ -538,6 +539,18 @@ void Haha69TimerCheck()
 		HAHA69_Timer = 0;
 	}
 }
+void SpinMaTimerCheck()
+{
+	if (SpinMa_Timer > 0)
+	{
+		SpinMa_Timer--;
+		SpinMa();
+	}
+	if (SpinMa_Timer == 1)
+	{
+		SpinMa_Timer = 0;
+	}
+}
 void CheckAllEffectsTimer()
 {
 	NoClipTimerCheck();
@@ -562,4 +575,5 @@ void CheckAllEffectsTimer()
 	ScanLineTimerCheck();
 	RandomBootTimerCheck();
 	Haha69TimerCheck();
+	SpinMaTimerCheck();
 }

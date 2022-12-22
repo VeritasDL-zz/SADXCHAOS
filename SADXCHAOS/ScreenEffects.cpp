@@ -314,3 +314,27 @@ void ExplodeMa()
     strcpy_s(LastEffect, 128, "Random Bomb Effect");
     CreateBomb(&playertwp[0]->pos, rand() % 2 +(1));
 }
+
+void SpinMa()
+{
+    if (!CurrentLandTable)
+        return;
+
+    if ((CurrentLandTable->Attrs & (LandTableFlags_TextureName | LandTableFlags_TextureList)) != 0)
+    {
+        for (int j = 0; j < (__int16)DynamicCOLCount_A; ++j)
+        {
+            COL* v1 = ColList[j];
+            auto v2 = v1->Model;
+            int e = rand() % 2;
+            v2->ang[e] -= 400;
+            //v2->ang[2] -= 400;
+            //ang[0-2]
+            //0 = X
+            //1 = Y
+            //2 = Z
+            //400 = speed
+
+        }
+    }
+}
